@@ -15,6 +15,18 @@ author_profile: true
   
   
 # About Me
+I am a postdoctoral researcher at [Korea University](https://www.korea.ac.kr/). 
+I received my Ph.D. from [Software Analysis Laboratory](http://prl.korea.ac.kr/) at [Korea University](https://www.korea.ac.kr/) under the supervision of [Prof. Hakjoo Oh](http://prl.korea.ac.kr/). 
+<!-- My research aims to  -->
+
+# Research Interests
+I am interested in programming languages with applications to software engineering and machine learning:
++ **Static Analysis:** static program analysis for automatically detecting software bugs and vulnerabilities.
++ **Software Testing:** automatically generating effective test inputs for detecting software bugs.
++ **Machine Learning:** programming language-based machine learning for accurate, interpretable, and explainable AI.
+
+
+
 
 
 # Educational Background
@@ -24,19 +36,15 @@ author_profile: true
 
 
 # Employed Positions 
-+ 2023.02 ~ Present - Postdoctral Researcher, [Software Analysis Laboratory](http://prl.korea.ac.kr/), Korea University
++ 2023.02 ~ Present - Postdoctoral Researcher, [Software Analysis Laboratory](http://prl.korea.ac.kr/), Korea University
 
-# Research Interests
-I am interested in programming languages with applications to software engineering and machine learning:
-+ **Static Analysis:** static program analysis for automatically detecting software bugs and vulnerabilities.
-+ **Software Testing:** automatically generating effective test inputs for detecting software bugs.
-+ **Machine Learning:** programming language-based machine learning for accurate, interpretable, and explainable AI.
+
 
 
 # Publications 
 + **Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics**  
   Jinkook Kim, <u>Minseok Jeon</u>, Sejeong Jang, and Hakjoo Oh  
-  [**ICST 2023** : International Conference on Software Testing, Verification and Validation (Industry Track)](https://conf.researchr.org/track/icst-2023/icst-2023-industry?)  
+  [**ICST 2023** : International Conference on Software Testing, Verification and Validation](https://conf.researchr.org/track/icst-2023/icst-2023-industry?) (Industry Track)  
   [[pdf](/papers/ARES.pdf)]
 + **Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs**  
   <u>Minseok Jeon</u> and Hakjoo Oh  
@@ -66,7 +74,7 @@ I am interested in programming languages with applications to software engineeri
 &nbsp;  
   
 # Academic Activities
-#### Program Committee (PC) members
+## Program Committee (PC) members
 + [OOPSLA 2024](https://2024.splashcon.org/track/splash-2024-oopsla): ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications
 
   
@@ -87,7 +95,7 @@ I am interested in programming languages with applications to software engineeri
   
   
 # Trip
-+ ICSE 2023, Melbourne, Austrailia. 2023/May/13 - 2023/May/23. 
++ ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23. 
 + POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23. 
 + OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. 
 + OOPSLA 2018, Boston, USA. 2018/Nov/4 - 2018/Nov/11. [[photos](https://photos.google.com/share/AF1QipP7fy5Ns5z4Sy1TYTuPEp77spDsrG6wZPjp2LxGqDA2WKlmwOmFHuG4uRxETTGpFw?key=WGhVOWtPRkpLS0xpWEpKVEthNWczZXpxV0ZvNUlR)] 
