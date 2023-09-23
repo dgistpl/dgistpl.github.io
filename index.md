@@ -17,10 +17,20 @@ author_profile: true
 # About Me
 
 
-# Education
+# Educational Background
++ 2017.03 ~ 2023.02, Integrated M.S. & Ph.D. in Computer Science and Engineering. Korea University
+    * Advisor: [Hakjoo Oh](http://prl.korea.ac.kr/)
++ 2011.03 ~ 2017.02, B.S. Dept. of Computer Science, Korea University
 
+
+# Employed Positions 
++ 2023.02 ~ Present - Postdoctral Researcher, [Software Analysis Laboratory](http://prl.korea.ac.kr/), Korea University
 
 # Research Interests
+I am interested in programming languages with applications to software engineering and machine learning:
++ **Static Analysis:** static program analysis for automatically detecting software bugs and vulnerabilities.
++ **Software Testing:** automatically generating effective test inputs for detecting software bugs.
++ **Machine Learning:** programming language-based machine learning for accurate, interpretable, and explainable AI.
 
 
 # Publications 
@@ -77,8 +87,8 @@ author_profile: true
   
   
 # Trip
-+ ICSE 2023, Melbourne, Austrailia. 2023/May/13 - 2023/May/23. [photos] [[report (Korean)](/tripReports/icse23_minseok.pdf)]
-+ POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23. [photos] [[report (Korean)](/tripReports/popl22_minseok.pdf)]
-+ OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. [photos] [[report (Korean)](/tripReports/oopsla18_minseok.pdf)]
-+ OOPSLA 2018, Boston, USA. 2018/Nov/4 - 2018/Nov/11. [[photos](https://photos.google.com/share/AF1QipP7fy5Ns5z4Sy1TYTuPEp77spDsrG6wZPjp2LxGqDA2WKlmwOmFHuG4uRxETTGpFw?key=WGhVOWtPRkpLS0xpWEpKVEthNWczZXpxV0ZvNUlR)] [[report (Korean)](/tripReports/oopsla18_minseok.pdf)]
-+ OOPSLA 2017, Vancouver, Canada. 2017/Oct/23 - 2017/Oct/27. [[photos](https://photos.google.com/share/AF1QipMzIt3Jd4yTlwBg-at0ocKlGelQ08QT3M13hP6b79Xo4IE8xGLBvwxzMlmL8gYXYw?key=Z0tQOFV3RDFsRXNfc1ExQ2haWDRJTFlBZkZHQkFR)] [[report (Korean)](/tripReports/splash2017report.pdf)]
++ ICSE 2023, Melbourne, Austrailia. 2023/May/13 - 2023/May/23. 
++ POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23. 
++ OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. 
++ OOPSLA 2018, Boston, USA. 2018/Nov/4 - 2018/Nov/11. [[photos](https://photos.google.com/share/AF1QipP7fy5Ns5z4Sy1TYTuPEp77spDsrG6wZPjp2LxGqDA2WKlmwOmFHuG4uRxETTGpFw?key=WGhVOWtPRkpLS0xpWEpKVEthNWczZXpxV0ZvNUlR)] 
++ OOPSLA 2017, Vancouver, Canada. 2017/Oct/23 - 2017/Oct/27. [[photos](https://photos.google.com/share/AF1QipMzIt3Jd4yTlwBg-at0ocKlGelQ08QT3M13hP6b79Xo4IE8xGLBvwxzMlmL8gYXYw?key=Z0tQOFV3RDFsRXNfc1ExQ2haWDRJTFlBZkZHQkFR)] 
