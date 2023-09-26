@@ -17,7 +17,12 @@ author_profile: true
 # About Me
 I am a postdoctoral researcher at [Korea University](https://www.korea.ac.kr/). 
 I received my Ph.D. from [Software Analysis Laboratory](http://prl.korea.ac.kr/) at [Korea University](https://www.korea.ac.kr/) under the supervision of [Prof. Hakjoo Oh](http://prl.korea.ac.kr/). 
-<!-- My research aims to  -->
+
+My research areas include programming languages, software engineering, and machine learning. 
+Specifically, I am developing machine learning methodologies for cost-effective (static and dynamic) program analysis (ML4PL & ML4SE).
+In addition, my research is dedicated to developing advanced programming language techniques for inherently explainable machine learning methods (PL4ML).
+
+
 
 # Research Interests
 I am interested in programming languages with applications to software engineering and machine learning:
@@ -36,7 +41,7 @@ I am interested in programming languages with applications to software engineeri
 
 
 # Employed Positions 
-+ 2023.02 ~ Present - Postdoctoral Researcher, [Software Analysis Laboratory](http://prl.korea.ac.kr/), Korea University
++ 2023.02 ~ Present - Postdoctoral Researcher, [Software Analysis Laboratory](http://prl.korea.ac.kr/), [Korea University](https://www.korea.ac.kr/)
 
 
 
