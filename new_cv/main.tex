@@ -23,6 +23,7 @@
 \setlength{\multicolsep}{-3.0pt}
 \setlength{\columnsep}{-1pt}
 \input{glyphtounicode}
+\usepackage{multirow}
 
 
 %----------FONT OPTIONS----------
@@ -141,20 +142,34 @@
 \end{center}
 
 \section{Research Interests}
+I am broadly interested in programming languages. 
+In particular, my focus is on designing domain-specific languages (DSLs) and synthesis algorithms for
+addressing challenges in programming language and software engineering.
 
-I am interested in static program analysis, with a focus on pointer analysis, 
-which is a key component in compiler optimization and various other software engineering techniques.
-I am also interested in software testing to find bugs in system software. 
-
-\begin{itemize}[itemsep=-1pt, parsep=3pt]
-  \item\small \textbf{Static Program Analysis}, focusing on pointer analysis, for compiler optimizations and automatic detection of software bugs and vulnerabilities.
-
-  \item\small \textbf{Software testing} for automatically generating effective test inputs to detect bugs in system software.
-
-  \item\small \textbf{Program Synthesis} for automatically generating programs from domain-specific programming languages.
+\begin{itemize}
+  \item \textbf{Domain-specific language (DSL) design} to tackle challenges in programming languages and software engineering. \vspace{-4pt}
+  \item \textbf{Program Synthesis} aimed at automatically generating solutions (programs) in DSLs.
 \end{itemize}
 
-To address the research problems, I have designed domain-specific programming languages (DSLs) tailored to the problems and developed program synthesis algorithms that automatically generate programs (solutions) in the DSLs.
+I am interested in designing DSLs and synthesis algorithms for developing effective pointer analysis, which is a key ingredient in compiler optimization and various software engineering techniques. 
+I also interested in developing DSLs for software testing, specifically to find effective test cases for system software testing
+
+
+
+
+% I am interested in static program analysis, with a focus on pointer analysis, 
+% which is a key component in compiler optimization and various other software engineering techniques.
+% I am also interested in software testing to find bugs in system software. 
+
+% \begin{itemize}[itemsep=-1pt, parsep=3pt]
+%   \item\small \textbf{Static Program Analysis}, focusing on pointer analysis, for compiler optimizations and automatic detection of software bugs and vulnerabilities.
+
+%   \item\small \textbf{Software testing} for automatically generating effective test inputs to detect bugs in system software.
+
+%   \item\small \textbf{Program Synthesis} for automatically generating programs from domain-specific programming languages.
+% \end{itemize}
+
+% To address the research problems, I have designed domain-specific programming languages (DSLs) tailored to the problems and developed program synthesis algorithms that automatically generate programs (solutions) in the DSLs.
 
 
 %-----------EDUCATION-----------
@@ -183,12 +198,12 @@ To address the research problems, I have designed domain-specific programming la
 \section{Publications}
 Published papers on programming languages in premier conferences
 (POPL 2022, OOPSLA 2020, OOPSLA 2018, and OOPSLA 2017) and
-journal (TOPLAS 2019).
+journal (TOPLAS 2019). \emph{POPL paper}
 \begin{enumerate}
-  \item {
-    \underline{Minseok Jeon}, Jihyeok Park, and Hakjoo Oh.\\
-    \textit{PL4XGL: A Programming Language Approach to Explainable Graph Learning.}\\ November 2023 (Submitted)
-  }
+  % \item {
+  %   \underline{Minseok Jeon}, Jihyeok Park, and Hakjoo Oh.\\
+  %   \textit{PL4XGL: A Programming Language Approach to Explainable Graph Learning.}\\ November 2023 (Submitted)
+  % }
   \item {
     Jinkook Kim, \underline{Minseok Jeon}, Sejeong Jang, and Hakjoo Oh.\\
     \textit{Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics.}\\
@@ -226,30 +241,30 @@ journal (TOPLAS 2019).
 \end{enumerate}
 
 
-%------Ongoing Projects-------
-\section{Ongoing Projects}
-Ongoing research projects with students.
-\begin{enumerate}
-  \item {%Donguk Kim and Minseok Jeon\\
-    \textit{Project-Aware Fault Localization via Synthesizing Suspiciousness Score Updating Rules}\\
-    with Donguk Kim (undergraduate student)
-    }
-  \item {
-    \textit{Programming Language-based Automated Feature Engineering for Graph Neural Networks}\\
-    with Seunghyun Park (undergraduate student)
-    }
-  \item {%Seokhyun Lee and Minseok Jeon\\
-    \textit{Automatically Classifying Minor Revisions in Programming Assignments}\\
-    with Seokhyun Lee (Ph.D. student)
-    }  
-\end{enumerate}
+% %------Ongoing Projects-------
+% \section{Ongoing Projects}
+% Ongoing research projects with students.
+% \begin{enumerate}
+%   \item {%Donguk Kim and Minseok Jeon\\
+%     \textit{Project-Aware Fault Localization via Synthesizing Suspiciousness Score Updating Rules}\\
+%     with Donguk Kim (undergraduate student)
+%     }
+%   \item {
+%     \textit{Programming Language-based Automated Feature Engineering for Graph Neural Networks}\\
+%     with Seunghyun Park (undergraduate student)
+%     }
+%   \item {%Seokhyun Lee and Minseok Jeon\\
+%     \textit{Automatically Classifying Minor Revisions in Programming Assignments}\\
+%     with Seokhyun Lee (Ph.D. student)
+%     }  
+% \end{enumerate}
   
-My ongoing projects.
-\begin{enumerate}
-  \item {\textit{Learning Tunneling Hueristics for JavaScript Static Analysis}}
-  \item {\textit{Learning Cominations of Selective Context Sensitivity and Context Tunneling for Java Pointer Analysis}}
-  \item {\textit{Understanding Context Tunneling in Java Pointer Analysis}}
-\end{enumerate}
+% My ongoing projects.
+% \begin{enumerate}
+%   \item {\textit{Learning Tunneling Hueristics for JavaScript Static Analysis}}
+%   \item {\textit{Learning Cominations of Selective Context Sensitivity and Context Tunneling for Java Pointer Analysis}}
+%   \item {\textit{Understanding Context Tunneling in Java Pointer Analysis}}
+% \end{enumerate}
 
 
 %------Service-------
@@ -280,6 +295,8 @@ Program committee (PC) members:
   \item{Data-Driven Context-Sensitivity for Points-to Analysis, KCSE 2018. Pyeongchang, Korea.}
 \end{enumerate}
 
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
 
 
 \end{document}
