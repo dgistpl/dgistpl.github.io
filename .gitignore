@@ -1,6 +1,10 @@
 *.log
 *.aux
 *.out
+*.fdb_latexmk
+*.fls
+*.gz
+
 # Vim
 *~
 *.sw[p_]
