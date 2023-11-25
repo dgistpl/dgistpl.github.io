@@ -9,7 +9,7 @@ author_profile: true
 &nbsp;&nbsp;&nbsp; [Software Analysis Laboratory](http://prl.korea.ac.kr/),  
 &nbsp;&nbsp;&nbsp; [Dept. of Computer Science and Engineering](https://cs.korea.ac.kr/cs/index.do),    
 &nbsp;&nbsp;&nbsp; [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://korea.ac.kr/mbshome/mbs/university/index.do),    
-&nbsp;&nbsp;&nbsp; [[Curriculum Vitae (CV)](cv/cv.pdf)]  
+&nbsp;&nbsp;&nbsp; [[Curriculum Vitae (CV)](new_cv/cv.pdf)]  
   
   
   
@@ -17,19 +17,28 @@ author_profile: true
 # About Me
 I am a postdoctoral researcher at [Korea University](https://www.korea.ac.kr/). 
 I received my Ph.D. from [Software Analysis Laboratory](http://prl.korea.ac.kr/) at [Korea University](https://www.korea.ac.kr/) under the supervision of [Prof. Hakjoo Oh](http://prl.korea.ac.kr/). 
-
-My research areas include programming languages, software engineering, and machine learning. 
+I enjoy developing domain-specific languages (DSLs) (along with DSL program synthesis algorithms) to address various challenges in programming languages and software engineering. 
+I have developed DSLs for developing effective pointer analysis and software testing. 
+<!-- My research areas include programming languages, software engineering, and machine learning. 
 Specifically, I am developing machine learning methodologies for cost-effective (static and dynamic) program analysis (ML4PL & ML4SE).
-In addition, my research is dedicated to developing advanced programming language techniques for inherently explainable machine learning methods (PL4ML).
+In addition, my research is dedicated to developing advanced programming language techniques for inherently explainable machine learning methods (PL4ML).-->
 
 
 
 # Research Interests
-I am interested in programming languages with applications to software engineering and machine learning:
-+ **Static Analysis:** static program analysis for automatically detecting software bugs and vulnerabilities.
-+ **Software Testing:** automatically generating effective test inputs for detecting software bugs.
-+ **Machine Learning:** programming language-based machine learning for accurate, interpretable, and explainable AI.
+ I am broadly interested in programming languages.
+ In particular, my focus is on designing domain-specific languages (DSLs) and synthesis algorithms for
+ addressing challenges in programming languages and software engineering.
 
++ **Domain-specific language (DSL) design** to tackle challenges in programming languages and software engineering. 
++ **Program Synthesis** aimed at automatically generating solutions (programs) in DSLs.
+
+
+ I am interested in designing DSLs and synthesis algorithms for
+ developing effective pointer analysis, which is a key ingredient in
+ compiler optimization and various software engineering techniques.
+ I am also interested in developing DSLs to find effective test cases in
+ system software testing.
 
 
 
@@ -87,7 +96,7 @@ I am interested in programming languages with applications to software engineeri
 # Talks
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. STAAR Workshop. Jeju. Feb 11 2022 [[slides](/papers/CFA_slides.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. Philadelphia, USA. Jan 19 2022 [[slides](/papers/POPL22_slides.pdf)]
-+ Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features. Paper presentation at OOPLSA 2020, Online Nov. 20 2020. [[slides](/papers/oopsla20_slides.pdf)] 
++ Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features. Paper presentation at OOPLSA 2020, Online Nov. 20 2020. [[slides](/papers/oopsla2020_slide.pdf)] 
 + Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling. Paper presentation at OOPSLA2018. BOSTON, USA. NOV 8 2018 [[slides](/papers/oopsla18_slides.pdf)]
 + Data-Driven Context-Sensitivity for Points-to Analysis. KCSE2018. Jan 2018 [[slides](/papers/KCSESlide.pdf)]
   
