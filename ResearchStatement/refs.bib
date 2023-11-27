@@ -2826,6 +2826,30 @@ series = {PLDI '13}
 
 
 
+@article{IST2021,
+	abstract = {Context:
+The precision and cost of static analysis are determined by abstraction heuristics (e.g., strategies for abstracting calling contexts, heap locations, etc.), but manually designing effective abstraction heuristics requires a huge amount of engineering effort and domain knowledge. Recently, data-driven static analysis has emerged to address this challenge by learning such heuristics automatically from a set of training programs.
+Objective:
+We present a practical algorithm for learning disjunctive abstraction heuristics in data-driven static analysis. We build on a recently proposed approach that can learn nontrivial program properties by disjunctive boolean functions. However, the existing approach is practically limited as it assumes that the most precise abstraction is cheap for the training programs; the algorithm is inapplicable if the most precise abstraction is not scalable. The objective of this paper is to mitigate this limitation.
+Method:
+Our algorithm overcomes the limitation with two new ideas. It systematically decomposes the learning problem into feasible subproblems, and it can search through the abstraction space from the coarse- to fine-grained abstractions. With this approach, our algorithm is able to learn heuristics when static analysis with the most precise abstraction is not scalable over the training programs.
+Results:
+We show our approach is effective and generally applicable. We applied our approach to a context-sensitive points-to analysis for Java and a flow-sensitive interval analysis for C. Experimental results show that our algorithm is efficient. For example, our algorithm can learn heuristics for 3-object-sensitive analysis for which the existing learning algorithm is too expensive to learn any useful heuristics.
+Conclusion:
+Our algorithm makes a state-of-the-art technique for data-driven static analysis more practical.},
+	author = {Donghoon Jeon and Minseok Jeon and Hakjoo Oh},
+	doi = {https://doi.org/10.1016/j.infsof.2021.106564},
+	issn = {0950-5849},
+	journal = {Information and Software Technology},
+	keywords = {Data-driven static analysis, Learning algorithm},
+	pages = {106564},
+	title = {A practical algorithm for learning disjunctive abstraction heuristics in static program analysis},
+	url = {https://www.sciencedirect.com/science/article/pii/S0950584921000471},
+	volume = {135},
+	year = {2021},
+	bdsk-url-1 = {https://www.sciencedirect.com/science/article/pii/S0950584921000471},
+	bdsk-url-2 = {https://doi.org/10.1016/j.infsof.2021.106564}}
+
 
 
 
