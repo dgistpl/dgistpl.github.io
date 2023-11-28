@@ -29,7 +29,7 @@ In addition, my research is dedicated to developing advanced programming languag
  I am interested in designing domain-specific programming languages (DSLs) and developing program synthesis algorithms to address problems in programming languages and software engineering.
  More specifically, my research aims to design domain-specific programming languages (DSLs) that can describe solutions for given programming problems in languages or software engineering, and develop program synthesis algorithms to automatically find these solutions in the DSLs.
 
-+ **textbf{Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages and software engineering.
++ **Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages and software engineering.
 + **Developing program synthesis algorithms** for automatically generating programs (solutions) in DSLs.
 
 In particular, my focus is on designing DSLs and synthesis algorithms for effective pointer analysis, a key component in compiler optimization.
