@@ -26,19 +26,14 @@ In addition, my research is dedicated to developing advanced programming languag
 
 
 # Research Interests
- I am broadly interested in programming languages.
- In particular, my focus is on designing domain-specific languages (DSLs) and synthesis algorithms for
- addressing challenges in programming languages and software engineering.
+ I am interested in designing domain-specific programming languages (DSLs) and developing program synthesis algorithms to address problems in programming languages and software engineering.
+ More specifically, my research aims to design domain-specific programming languages (DSLs) that can describe solutions for given programming problems in languages or software engineering, and develop program synthesis algorithms to automatically find these solutions in the DSLs.
 
-+ **Domain-specific language (DSL) design** to tackle challenges in programming languages and software engineering. 
-+ **Program Synthesis** aimed at automatically generating solutions (programs) in DSLs.
++ **textbf{Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages and software engineering.
++ **Developing program synthesis algorithms** for automatically generating programs (solutions) in DSLs.
 
-
- I am interested in designing DSLs and synthesis algorithms for
- developing effective pointer analysis, which is a key ingredient in
- compiler optimization and various software engineering techniques.
- I am also interested in developing DSLs to find effective test cases in
- system software testing.
+In particular, my focus is on designing DSLs and synthesis algorithms for effective pointer analysis, a key component in compiler optimization.
+Additionally, I am interested in developing DSLs tailored to identify effective test cases in system software testing.
 
 
 
