@@ -160,7 +160,7 @@ To remove this burden, I designed a framework \textsc{Graphick} that automatical
 %
 To this end, I designed a domain-specific language, called \FeatureLanguage, that describes various features.
 %
-Subsequently, I developed a synthesis algorithm that automatically generates qualified features from \FeatureLanguage.
+Subsequently, I developed a synthesis algorithm that automatically generates qualified features from the DSL.
 %
 The experimental results demonstrate that our approach successfully generates high-quality features, enabling the learning of effective analysis heuristics without user-provided features.
 
@@ -169,7 +169,7 @@ The experimental results demonstrate that our approach successfully generates hi
 
 \section{DSL \& Synthesis Algorithms for Software Testing}
 %
-In system software testing, designing test cases has also been done manually by domain experts; it faces the same challenges.
+In system software testing like write endurance tests, designing test cases has also been done manually by domain experts; it faces the same challenges.
 %.
 It requires laborious efforts, and the manually crafted test cases often yield suboptimal results.
 %
@@ -198,7 +198,7 @@ The experimental results show that the DSL-based approach successfully generates
 \section{Future Research Plan}
 I believe that my DSL-based approaches are promising and have a lot of opportunities for improvement, with the potential to extend their applicability to various other domains.
 %
-In my future work, I will address the existing challenges and limitations in the current methods. I will also expand the use of the DSL-based approach to other domains.
+In my future work, I will address the existing challenges and limitations in the current methods, and I will also expand the use of the DSL-based approach to other domains.
 
 
 \subsection{Improving the DSL-based Approaches}
@@ -246,16 +246,16 @@ Additionally, this simplification process may lead to the generalization of the 
 \subsection{Generalizing the DSL-based Approaches to Other Domains}
 I am currently working on extending my DSL-based approach to other domains.
 %
-Currently, I am applying my DSL-based approach to fault localization and explainable graph machine learning.
+Specifically, I am trying to apply my DSL-based approach to fault localization and explainable graph machine learning.
 
 \myparagraph{Generalization to Fault Localization}
 The goal of fault localization is to identify the locations of faults in programs that produce errors.
 %
 Currently, \textit{Spectrum-Based Fault Localization} (SBFL), which localizes buggy lines using test cases execution information, is the dominant fault localization technique because of its outstanding efficiency.
 %
-SBFL, however, has a severe limitation in accuracy; it often fails to identify the locations of faults.
+SBFL, however, has a severe limitation in accuracy; it often fails to accurately identify the locations of faults.
 %
-To address this problem, I am developing a DSL-based approach to improve the accuracy of SBFL.
+To address this problem, Idevelop a DSL-based approach to improve the accuracy of SBFL.
 
 
 Our approach is based on an observation that similar faults have redundantly appeared in the same projects; faults in a previous version of a project are likely to occur again in subsequent versions.
@@ -281,13 +281,13 @@ However, the dominant neural-network based graph machine learning models (i.e., 
 %
 Various GNN explanation techniques have been proposed, but they fall short in providing satisfactory explanations because explaining the black-box models is fundamentally challenging.
 %
-To address this problem, I developed a new inherently explainable machine learning method by designing a domain-specific language, called \GDL, and synthesis algorithms that learn models from training data.
+To address this problem, I developed a new inherently explainable machine learning method by designing a domain-specific language, called \GDL, and synthesis algorithms that learn models from training graph data.
 %
-The experimental results show that our DSL-based approach successfully generates inherently explainable graph machine learning models that have comparable accuracy to the existing neural network-based models but provide significantly better explanations for the predictions.
+The experimental results show that our DSL-based approach successfully generates inherently explainable graph machine learning models that show competitive accuracy compared to the existing dominant neural network-based models but provide significantly better explanations for the predictions.
 %
 Recently, I submitted a paper with the preliminary results.
 %
-Based on this work, I will lead DSL-based machine learning for explainable AI.
+Based on this work, I will lead DSL-based explainable machine learning.
 
 
 
