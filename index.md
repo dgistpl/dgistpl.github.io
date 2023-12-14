@@ -68,7 +68,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   [**OOPSLA 2020:** ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications](https://2020.splashcon.org/track/splash-2020-OOPSLA)  
   [[pdf](/papers/Graphick.pdf)][[slides](/papers/oopsla2020_slide.pdf)][[artifact](https://github.com/kupl/Graphick)]
 + **A Machine-Learning Algorithm with Disjunctive Model for Data-Driven Program Analysis**   
-  <u>Minseok Jeon*</u>, Sehun Jeong\*, Sungdeok Cha, and Hakjoo Oh (\*co-first author)  
+  <u>Minseok Jeon*</u>, Sehun Jeong\*, Sungdeok Cha, and Hakjoo Oh (\*co-first authors)  
   [**TOPLAS 2019:** ACM Transactions on Programming Languages and Systems](https://dl.acm.org/doi/10.1145/3293607)  
   [[pdf](/papers/TOPLAS19.pdf)]
 + **Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling**  
@@ -76,7 +76,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   [**OOPSLA 2018:** ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications](https://2018.splashcon.org/track/splash-2018-OOPSLA)  
   [[pdf](/papers/oopsla18_paper.pdf)][[slides](/papers/oopsla18_slides.pdf)]
 + **Data-Driven Context-Sensitivity for Points-to Analysis**  
-  Sehun Jeong\*, <u>Minseok Jeon*</u>, Sungdeok Cha, and Hakjoo Oh (\*co-first author)  
+  Sehun Jeong\*, <u>Minseok Jeon*</u>, Sungdeok Cha, and Hakjoo Oh (\*co-first authors)  
   [**OOPSLA 2017:** ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications](https://2017.splashcon.org/track/splash-2017-OOPSLA)    
   [[pdf](/papers/oopsla17a.pdf)][[slides](/papers/oopsla17_slides_jeong_jeon.pdf)]
   
