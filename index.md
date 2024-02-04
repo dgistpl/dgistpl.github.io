@@ -16,13 +16,9 @@ author_profile: true
   
 # About Me
 I am a postdoctoral researcher at [Korea University](https://www.korea.ac.kr/). 
-I received my Ph.D. from [Software Analysis Laboratory](http://prl.korea.ac.kr/) at [Korea University](https://www.korea.ac.kr/) under the supervision of [Prof. Hakjoo Oh](http://prl.korea.ac.kr/). 
+I received my Ph.D. from [Software Analysis Laboratory](https://prl.korea.ac.kr/) at [Korea University](https://www.korea.ac.kr/) under the supervision of [Prof. Hakjoo Oh](https://prl.korea.ac.kr/members/hakjoo-oh/). 
 I enjoy developing domain-specific languages (DSLs) (along with DSL program synthesis algorithms) to address various challenges in programming languages and software engineering. 
 I have developed DSLs for developing effective pointer analysis and software testing. 
-<!-- My research areas include programming languages, software engineering, and machine learning. 
-Specifically, I am developing machine learning methodologies for cost-effective (static and dynamic) program analysis (ML4PL & ML4SE).
-In addition, my research is dedicated to developing advanced programming language techniques for inherently explainable machine learning methods (PL4ML).-->
-
 
 
 # Research Interests
@@ -32,7 +28,7 @@ In addition, my research is dedicated to developing advanced programming languag
 + **Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages and software engineering.
 + **Developing program synthesis algorithms** for automatically generating programs (solutions) in DSLs.
 
-In particular, my focus is on designing DSLs and synthesis algorithms for effective pointer analysis, a key component in compiler optimization.
+In particular, my focus is on designing DSLs and synthesis algorithms for effective pointer analysis.
 Additionally, I am interested in developing DSLs tailored to identify effective test cases in system software testing.
 
 
@@ -40,7 +36,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
 
 # Educational Background
 + 2017.03 ~ 2023.02, Integrated M.S. & Ph.D. in Computer Science and Engineering. Korea University
-    * Advisor: [Hakjoo Oh](http://prl.korea.ac.kr/)
+    * Advisor: [Hakjoo Oh](https://prl.korea.ac.kr/members/hakjoo-oh/)
 + 2011.03 ~ 2017.02, B.S. Dept. of Computer Science, Korea University
 
 
@@ -103,9 +99,13 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
 &nbsp;  
   
   
-# Trip
+# Trips
 + ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23. 
 + POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23. 
 + OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. 
 + OOPSLA 2018, Boston, USA. 2018/Nov/4 - 2018/Nov/11. [[photos](https://photos.google.com/share/AF1QipP7fy5Ns5z4Sy1TYTuPEp77spDsrG6wZPjp2LxGqDA2WKlmwOmFHuG4uRxETTGpFw?key=WGhVOWtPRkpLS0xpWEpKVEthNWczZXpxV0ZvNUlR)] 
 + OOPSLA 2017, Vancouver, Canada. 2017/Oct/23 - 2017/Oct/27. [[photos](https://photos.google.com/share/AF1QipMzIt3Jd4yTlwBg-at0ocKlGelQ08QT3M13hP6b79Xo4IE8xGLBvwxzMlmL8gYXYw?key=Z0tQOFV3RDFsRXNfc1ExQ2haWDRJTFlBZkZHQkFR)] 
+  
+  
+  
+

@@ -1,3 +1,6 @@
+*.sty
+*.blg
+*.bbl
 *.log
 *.aux
 *.out
