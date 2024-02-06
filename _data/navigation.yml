@@ -1,4 +1,4 @@
 # main links
-#main:
-#  - title: "연구 이야기"
-#    url: /tags/ 
+main:
+  - title: "연구 이야기"
+    url: /tags/ 
