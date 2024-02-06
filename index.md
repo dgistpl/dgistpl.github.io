@@ -3,7 +3,7 @@ layout: archive
 author_profile: true
 ---
 
-<img src="images/me.png" alt="me" width="145" style="float: left"/>
+<img src="images/me.png" alt="me" width="160" style="float: left"/>
 # &nbsp;&nbsp;&nbsp;Minseok Jeon (전민석)  
 &nbsp;&nbsp;&nbsp; Postdoctoral Researcher  
 &nbsp;&nbsp;&nbsp; [Software Analysis Laboratory](http://prl.korea.ac.kr/),  
