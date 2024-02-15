@@ -1,17 +1,17 @@
 ---
 layout: archive
-author_profile: true
+author_profile: false 
 ---
-
-<img src="images/me.png" alt="me" width="160" style="float: left"/>
-# &nbsp;&nbsp;&nbsp;Minseok Jeon (전민석)  
-&nbsp;&nbsp;&nbsp; Postdoctoral Researcher  
-&nbsp;&nbsp;&nbsp; [Software Analysis Laboratory](http://prl.korea.ac.kr/),  
-&nbsp;&nbsp;&nbsp; [Dept. of Computer Science and Engineering](https://cs.korea.ac.kr/cs/index.do),    
-&nbsp;&nbsp;&nbsp; [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://korea.ac.kr/mbshome/mbs/university/index.do),    
-&nbsp;&nbsp;&nbsp; [[Curriculum Vitae (CV)](new_cv/cv.pdf)]  
-  
-  
+<div class="me-3">
+  <img src="images/me.png" alt="me" width="150" style="margin-right: 1rem; float: left"/>
+</div>
+<!--img src="images/me.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
+# Minseok Jeon (전민석)  
+Postdoctoral Researcher  
+[Software Analysis Laboratory](http://prl.korea.ac.kr/),  
+[Dept. of Computer Science and Engineering](https://cs.korea.ac.kr/cs/index.do),    
+[College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://korea.ac.kr/mbshome/mbs/university/index.do),    
+[[Curriculum Vitae (CV)](new_cv/cv.pdf)]  
   
   
 # About Me
