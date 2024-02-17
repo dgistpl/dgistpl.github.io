@@ -2,7 +2,7 @@
 layout: archive
 author_profile: false 
 ---
-<div class="me-3">
+<div>
   <img src="images/me.png" alt="me" width="150" style="margin-right: 1rem; float: left"/>
 </div>
 <!--img src="images/me.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
@@ -85,6 +85,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   
 &nbsp;  
 # Talks
++ 그래프 패턴 언어를 활용하여 다양한 분야의 핵심 문제 접근하기. STAAR Workshop. KAIST. Jan 30 2024 [[slides](/papers/ERC_2024_KAIST.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. STAAR Workshop. Jeju. Feb 11 2022 [[slides](/papers/CFA_slides.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. Philadelphia, USA. Jan 19 2022 [[slides](/papers/POPL22_slides.pdf)]
 + Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features. Paper presentation at OOPLSA 2020, Online Nov. 20 2020. [[slides](/papers/oopsla2020_slide.pdf)] 
@@ -100,8 +101,8 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   
   
 # Trips
-+ ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23. 
-+ POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23. 
++ ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23.[[photos](https://photos.app.goo.gl/uj58LVXgQwAFspe26)] 
++ POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23.[[photos](https://photos.app.goo.gl/mPP1bNUytRND3Qxt5)] 
 + OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. 
 + OOPSLA 2018, Boston, USA. 2018/Nov/4 - 2018/Nov/11. [[photos](https://photos.google.com/share/AF1QipP7fy5Ns5z4Sy1TYTuPEp77spDsrG6wZPjp2LxGqDA2WKlmwOmFHuG4uRxETTGpFw?key=WGhVOWtPRkpLS0xpWEpKVEthNWczZXpxV0ZvNUlR)] 
 + OOPSLA 2017, Vancouver, Canada. 2017/Oct/23 - 2017/Oct/27. [[photos](https://photos.google.com/share/AF1QipMzIt3Jd4yTlwBg-at0ocKlGelQ08QT3M13hP6b79Xo4IE8xGLBvwxzMlmL8gYXYw?key=Z0tQOFV3RDFsRXNfc1ExQ2haWDRJTFlBZkZHQkFR)] 
