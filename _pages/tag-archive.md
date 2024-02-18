@@ -1,7 +1,7 @@
 ---
 title: "연구 이야기"
-permalink: /tags/
-layout: tags 
+permalink: /posts/
+layout: posts 
 author: Minseok Jeon
 kor_author: 전민석
 author_profile: true
