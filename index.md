@@ -62,7 +62,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   [[pdf](/papers/POPL22_Obj2CFA.pdf)][[slides](/papers/POPL22_slides.pdf)][[artifact](https://github.com/kupl/Obj2CFA)]
 + **A Practical Algorithm for Learning Disjunctive Abstraction Heuristics in Static Program Analysis**  
   Donghoon Jeon, <u>Minseok Jeon</u>, and Hakjoo Oh  
-  **Information and Software Technology (IST)**, Volume 135, July 2021  
+  **[IST 2021: Information and Software Technology](https://www.sciencedirect.com/journal/information-and-software-technology)**, Volume 135, July 2021  
   [[link](https://www.sciencedirect.com/science/article/abs/pii/S0950584921000471?dgcid=coauthor)]
 + **Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features**  
   <u>Minseok Jeon</u>, Myungho Lee, and Hakjoo Oh   
@@ -70,7 +70,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   [[pdf](/papers/Graphick.pdf)][[slides](/papers/oopsla2020_slide.pdf)][[artifact](https://github.com/kupl/Graphick)]
 + **A Machine-Learning Algorithm with Disjunctive Model for Data-Driven Program Analysis**   
   <u>Minseok Jeon*</u>, Sehun Jeong\*, Sungdeok Cha, and Hakjoo Oh (\*co-first authors)  
-  [**TOPLAS 2019:** ACM Transactions on Programming Languages and Systems](https://dl.acm.org/doi/10.1145/3293607)  
+  [**TOPLAS 2019:** ACM Transactions on Programming Languages and Systems](https://dl.acm.org/journal/toplas)  
   [[pdf](/papers/TOPLAS19.pdf)]
 + **Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling**  
   <u>Minseok Jeon</u>, Sehun Jeong, and Hakjoo Oh  
