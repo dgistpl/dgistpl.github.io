@@ -52,7 +52,6 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   <u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh  
   [**PLDI 2024** : ACM SIGPLAN Conference on Programming Language Design and Implementation](https://pldi24.sigplan.org/)  
   [pdf]
-
 + **Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics**  
   Jinkook Kim, <u>Minseok Jeon</u>, Sejeong Jang, and Hakjoo Oh  
   [**ICST 2023** : International Conference on Software Testing, Verification and Validation](https://conf.researchr.org/track/icst-2023/icst-2023-industry?) (Industry Track)  
