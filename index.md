@@ -1,17 +1,17 @@
 ---
 layout: archive
-author_profile: true
+author_profile: false 
 ---
-
-<img src="images/me.png" alt="me" width="160" style="float: left"/>
-# &nbsp;&nbsp;&nbsp;Minseok Jeon (전민석)  
-&nbsp;&nbsp;&nbsp; Postdoctoral Researcher  
-&nbsp;&nbsp;&nbsp; [Software Analysis Laboratory](http://prl.korea.ac.kr/),  
-&nbsp;&nbsp;&nbsp; [Dept. of Computer Science and Engineering](https://cs.korea.ac.kr/cs/index.do),    
-&nbsp;&nbsp;&nbsp; [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://korea.ac.kr/mbshome/mbs/university/index.do),    
-&nbsp;&nbsp;&nbsp; [[Curriculum Vitae (CV)](new_cv/cv.pdf)]  
-  
-  
+<div>
+  <img src="images/me.png" alt="me" width="150" style="margin-right: 1rem; float: left"/>
+</div>
+<!--img src="images/me.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
+# Minseok Jeon (전민석)  
+Postdoctoral Researcher  
+[Software Analysis Laboratory](http://prl.korea.ac.kr/),  
+[Dept. of Computer Science and Engineering](https://cs.korea.ac.kr/cs/index.do),    
+[College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://korea.ac.kr/mbshome/mbs/university/index.do),    
+[[Curriculum Vitae (CV)](new_cv/cv.pdf)]  
   
   
 # About Me
@@ -47,6 +47,11 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
 
 
 # Publications 
+
++ **PL4XGL: A Programming Language Approach to Explainable Graph Learning** (Conditionally Accepted)   
+  <u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh  
+  [**PLDI 2024** : ACM SIGPLAN Conference on Programming Language Design and Implementation](https://pldi24.sigplan.org/)  
+  [pdf]
 + **Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics**  
   Jinkook Kim, <u>Minseok Jeon</u>, Sejeong Jang, and Hakjoo Oh  
   [**ICST 2023** : International Conference on Software Testing, Verification and Validation](https://conf.researchr.org/track/icst-2023/icst-2023-industry?) (Industry Track)  
@@ -57,7 +62,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   [[pdf](/papers/POPL22_Obj2CFA.pdf)][[slides](/papers/POPL22_slides.pdf)][[artifact](https://github.com/kupl/Obj2CFA)]
 + **A Practical Algorithm for Learning Disjunctive Abstraction Heuristics in Static Program Analysis**  
   Donghoon Jeon, <u>Minseok Jeon</u>, and Hakjoo Oh  
-  **Information and Software Technology (IST)**, Volume 135, July 2021  
+  **[IST 2021: Information and Software Technology](https://www.sciencedirect.com/journal/information-and-software-technology)**, Volume 135, July 2021  
   [[link](https://www.sciencedirect.com/science/article/abs/pii/S0950584921000471?dgcid=coauthor)]
 + **Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features**  
   <u>Minseok Jeon</u>, Myungho Lee, and Hakjoo Oh   
@@ -65,7 +70,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   [[pdf](/papers/Graphick.pdf)][[slides](/papers/oopsla2020_slide.pdf)][[artifact](https://github.com/kupl/Graphick)]
 + **A Machine-Learning Algorithm with Disjunctive Model for Data-Driven Program Analysis**   
   <u>Minseok Jeon*</u>, Sehun Jeong\*, Sungdeok Cha, and Hakjoo Oh (\*co-first authors)  
-  [**TOPLAS 2019:** ACM Transactions on Programming Languages and Systems](https://dl.acm.org/doi/10.1145/3293607)  
+  [**TOPLAS 2019:** ACM Transactions on Programming Languages and Systems](https://dl.acm.org/journal/toplas)  
   [[pdf](/papers/TOPLAS19.pdf)]
 + **Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling**  
   <u>Minseok Jeon</u>, Sehun Jeong, and Hakjoo Oh  
@@ -85,6 +90,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   
 &nbsp;  
 # Talks
++ 그래프 패턴 언어를 활용하여 다양한 분야의 핵심 문제 접근하기. STAAR Workshop. KAIST. Jan 30 2024 [[slides](/papers/ERC_2024_KAIST.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. STAAR Workshop. Jeju. Feb 11 2022 [[slides](/papers/CFA_slides.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. Philadelphia, USA. Jan 19 2022 [[slides](/papers/POPL22_slides.pdf)]
 + Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features. Paper presentation at OOPLSA 2020, Online Nov. 20 2020. [[slides](/papers/oopsla2020_slide.pdf)] 
@@ -100,8 +106,8 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   
   
 # Trips
-+ ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23. 
-+ POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23. 
++ ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23.[[photos](https://photos.app.goo.gl/uj58LVXgQwAFspe26)] 
++ POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23.[[photos](https://photos.app.goo.gl/mPP1bNUytRND3Qxt5)] 
 + OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. 
 + OOPSLA 2018, Boston, USA. 2018/Nov/4 - 2018/Nov/11. [[photos](https://photos.google.com/share/AF1QipP7fy5Ns5z4Sy1TYTuPEp77spDsrG6wZPjp2LxGqDA2WKlmwOmFHuG4uRxETTGpFw?key=WGhVOWtPRkpLS0xpWEpKVEthNWczZXpxV0ZvNUlR)] 
 + OOPSLA 2017, Vancouver, Canada. 2017/Oct/23 - 2017/Oct/27. [[photos](https://photos.google.com/share/AF1QipMzIt3Jd4yTlwBg-at0ocKlGelQ08QT3M13hP6b79Xo4IE8xGLBvwxzMlmL8gYXYw?key=Z0tQOFV3RDFsRXNfc1ExQ2haWDRJTFlBZkZHQkFR)] 
