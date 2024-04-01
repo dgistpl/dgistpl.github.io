@@ -48,7 +48,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
 
 # Publications 
 
-+ **PL4XGL: A Programming Language Approach to Explainable Graph Learning** (Conditionally Accepted)   
++ **PL4XGL: A Programming Language Approach to Explainable Graph Learning**    
   <u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh  
   [**PLDI 2024** : ACM SIGPLAN Conference on Programming Language Design and Implementation](https://pldi24.sigplan.org/)  
   [pdf]
