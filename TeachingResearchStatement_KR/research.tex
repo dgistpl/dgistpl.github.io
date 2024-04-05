@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 
-
+\usepackage{setspace}
 \usepackage{kotex}
 \usepackage{url}
 \usepackage{color}
@@ -32,273 +32,63 @@
 
 \newcommand{\AbstractRelativeWritePattern}{\textsc{Abstract Relative Write Pattern}}
 
+
+
+
+
 \maketitle 
+\begin{spacing}{1.145}
 
-My research aims to design domain-specific programming languages (DSLs) and program synthesis algorithms to address challenges in programming language and software engineering domains. 
+교육과 연구는 거대한 순환관계를 형성한다. 
 %
-In my DSL-based approach, I design a DSL expressive enough to describe solutions of the target problem and develop a corresponding program synthesis algorithm that effectively searches the solutions by leveraging the properties of the DSL.
+교육은 연구의 결과물들을 학생들에게 전달하고, 학생들은 이를 소화하여 자신의 문제를 해결하는 능력을 키우고 새로운 문제에 도전하며 이 과정에서 연구를 통해 새로운 지식을 창출한다. 새로이 창출된 지식은 다시 교육에 반영되어 새로운 학생들에게 전달된다.
 %
-In programming language domain, I have developed DSLs and program synthesis algorithms for generating powerful analysis heuristics in pointer analysis, a key ingredient in compiler optimization.
-%
-In software engineering, I have designed DSLs for generating effective test cases for firmware (system software) endurance tests.
-%
-My research has demonstrated that DSL-based approaches are effective in addressing problems and outperform existing state-of-the-art techniques.
-%
-I believe my DSL-based approach has just started, and there are many challenges and opportunities for improvement. 
-%
-I am planning to address these challenges and expand the applicability of the DSL-based approach to various other domains in my future work.
-%
-% It can also be applicable to address problems in other domains.
-%
-% My future work will be dedicated to addressing these challenges and applying the DSL-based approaches to address problems in other domains.
-% More specifically, my research aims to design domain-specific programming languages (DSLs) that would describe solutions for target programming language or software engineering problems, along with program synthesis algorithms that automatically find these solutions within the DSLs.
+나 또한 새롭고 가치 있는 순환을 일으키는 것을 목표로 하고 있다.
 
 
 
-
-\section{DSLs \& Synthesis Algorithms for Effective Static Analysis}
+새롭고 가치있는 연구와 교육의 순환을 만들어내기 위해선 문제의 본질을 꿰뚫어볼 수 있는 능력을 길러야 한다.
 %
-The goal of pointer analysis is to approximate the set of memory locations that each variable may point to during the program executions.
+연구는 문제를 풀어내는 과정이지만, 문제의 본질을 이해하는 과정이기도 하다. 
 %
-Pointer analysis is a key ingredient in compiler optimization, and it is also widely used in many other software engineering techniques, including bug detection, security analysis, and program repair.
+주어진 문제를 제대로 해결하기 위해서는 현재 문제가 발생한 본질적인 원인이 무엇인지, 왜 이것이 본질적인 원인인지 이해하며, 이를 근본적으로 해결하기 위한 방법이 무었인지를 고민해야 한다.
 %
-The success of pointer analyzers heavily depends on the quality of their underlying analysis heuristics.
+사람마다 문제의 본질에 대한 고민과 이해가 제각기 다르기 때문에, 제각기 다른 해결책이 제시되고, 이를 통해 기존의 지식이 발전되기도 하고 뒤집어지기도 하며 교육과 연구의 건강한 순환을 일으킨다.
 %
-Without high-quality analysis heuristics, the analysis becomes imprecise or expensive.
-%
-Before my research, those heuristics had been manually designed by domain experts. 
-%
-However, manually designing analysis heuristics requires time-consuming and laborious tasks.
-%
-Even worse, the manually crafted heuristics have shown suboptimal performance.
-%
-To address this problem, I have designed domain-specific languages that are expressive enough to describe high-quality analysis heuristics and program synthesis algorithms that effectively search  high-quality analysis heuristics in the DSLs.
+반면, 문제의 본질을 스스로 고민하지 않은 채 다른이들이 내놓은 연구들을 따라 문제에 접근하는 것은 제대로된 해결책을 내놓을 수 없을 뿐더러 교육과 연구의 건강한 순환을 만들어낼 수 없다.
 
 
 
-\myparagraph{Disjunctive Model $\&$ Synthesis Algorithms~\cite{JeJeChOh17,Jeon2019,IST2021}}
-%
-Context sensitivity is one of the most impactful factors in pointer analysis that improves the precision by distinguishing variables and objects in different calling contexts.
-%
-Applying context sensitivity to all methods, however, is too expensive in practice.
-%
-Selective context sensitivity aims to address this problem by selectively applying context sensitivity to methods.
-%
-That is, selective context sensitivity applies context sensitivity to only a subset of methods that are likely to benefit from context sensitivity, while applying context insensitivity to the remaining methods.
-%
-To effectively apply selective context sensitivity, however, qualified analysis heuristics are required to accurately determine whether each method should be analyzed with context sensitivity.
-
-
-
-
-To address this problem, I designed a domain-specific language, called \DisjunctiveModel, that describes various selective context sensitivity heuristics.
-%
-A heuristic in the DSL is a sequence of disjunctive normal form (DNF) formulas consist of user-provided features describing methods that will be analyzed context sensitively.
-%
-Simultaneously, I designed program synthesis algorithms that automatically generates qualified selective context sensitivity heuristics from the DSL.
-%
-The experimental results show that the DSL-based approach automatically generates outstanding analysis heuristics that outperform the existing state-of-the-art manually crafted heuristics.
-%
-
-
-
-%\myparagraph{Synthesis Algorithm for Generating Context Tunneling Heuristics~\cite{JeJeOh18}}
-\myparagraph{Context Tunneling~\cite{JeJeOh18}}
-%
-In static analysis, context abstraction is essential as it is impractical to keep all the concrete contexts, and the dominant context abstraction method is $k$-limited context sensitivity, which keeps only the last $k$ context elements.
-%
-However, I found the last-$k$ context abstraction has a severe limitation. 
-%
-This approach removes key context elements if they fall outside the last $k$ context elements, significantly degrading the precision of the analysis.
-
-
-
-
-To address this problem, I present context tunneling which enables the $k$-limited context sensitivity to keep the most important $k$-context elements instead of the last-$k$ context elements.
-%
-To apply context tunneling, however, context tunneling heuristics are required to check whether each context element is important.
-%
-To this end, I adapted the \DisjunctiveModel~and the synthesis algorithm~\cite{JeJeChOh17} to learn high-quality context tunneling heuristics.
-%
-The experimental results show that the produced context tunneling heuristics significantly improved the effectiveness of the $k$-limited context-sensitive analyses.
-
-
-
-% \myparagraph{Synthesis Algorithm for Transforming a Given Object Sensitivity into a More Precise Call-Site Sensitivity~\cite{JeOh22}}
-
-\myparagraph{Obj2CFA~\cite{JeOh22}}
-%
-In OOP (Object-Oriented Programming) program analysis, object sensitivity has been established as the dominant context flavor.
-%
-The superiority of object sensitivity over other context flavors has been reinforced by extensive research.
-%
-On the other hand, call-site sensitivity has been consistently dismissed because it has shown poor performance in both precision and scalability.
-%
-However, I found that this superiority of object sensitivity over call-site sensitivity does not hold when context tunneling~\cite{JeJeOh18} is included.
-
-
-In this work, I challenged the commonly accepted knowledge by developing a synthesis algorithm, called \textsc{Obj2CFA}, which transforms a given object sensitivity into a more precise call-site sensitivity.
-%
-The synthesis algorithm takes a tunneling heuristic of an object sensitivity and produces a corresponding tunneling heuristic for call-site sensitivity.
-%
-The experimental results show that the transformed call-site sensitivity is significantly more precise and scalable than the given object sensitivity.
-
-
-
-
-%\myparagraph{DSL $\&$ Synthesis Algorithm for Automatically Generating Features~\cite{Jeon20}}
-\myparagraph{Graphick~\cite{Jeon20}}
-%
-This work addresses a key burden of the previous DSL-based approach. 
-%
-\DisjunctiveModel~combines user-provided features to describe analysis heuristics; the success of \DisjunctiveModel~heavily depends on the quality of user-provided features.
-%
-However, designing high-quality features is a nontrivial and laborious task for the users.
-%
-To remove this burden, I designed a framework \textsc{Graphick} that automatically generates high-quality features.
-%
-To this end, I designed a domain-specific language, called \FeatureLanguage, that describes various features.
-%
-Subsequently, I developed a synthesis algorithm that automatically generates qualified features from the DSL.
-%
-The experimental results demonstrate that our approach successfully generates high-quality features, enabling the learning of effective analysis heuristics without user-provided features.
-
-
-
-
-\section{DSL \& Synthesis Algorithms for Software Testing}
-%
-In system software testing like write endurance tests, designing test cases has also been done manually by domain experts; it faces the same challenges.
-%.
-It requires laborious efforts, and the manually crafted test cases often yield suboptimal results.
-%
-To address this problem, I also applied my DSL-based approach to automatically generate effective test cases in system software testing.
-
-
-
-
-%\myparagraph{DSL $\&$ Synthesis Algorithm for Generating Effective Test Cases in Endurance Test for Flash-based Storage Devices~\cite{ARES23}}
-\myparagraph{ARES~\cite{ARES23}}
-%
-Flash-based storage devices are widely used in practice, including mobile devices, automotives, and PC. 
-%
-However, flash-based storage devices have a finite limit in processing data write requests.
-%
-Therefore, it is important for manufacturers to rigorously test and accurately provide the maximum data write capacity that their products can reliably endure.
-%
-To automate the generation of effective test cases for the endurance test, I designed a domain-specific language named \AbstractRelativeWritePattern, which effectively reduces the search space of test cases.
-%
-Then, I developed a synthesis algorithm that automatically generates qualified test cases using the DSL.
-%
-The experimental results show that the DSL-based approach successfully generates qualified test cases that outperform the existing manually designed test cases used in practice.
-
-
-
-\section{DSL \& Synthesis Algorithms for Explainable Machine Learning}
-%
-Our approach can also be generalized to develop inherently explainable machine learning methods. 
-%
-
-\myparagraph{PL4XGL}
-Many significant real-world problems can be modeled as graph machine learning problems, including fraud detection, program repair, and drug discovery.
-%
-In such decision-critical applications, it is important to understand why the models made each prediction.
-%
-However, the dominant neural-network based graph machine learning models (i.e., graph neural networks) are black-box models that do not explain why they made each prediction.
-%
-Various GNN explanation techniques have been proposed, but they fall short in providing satisfactory explanations because explaining the black-box models is fundamentally challenging.
-%
-To address this problem, I developed a new inherently explainable machine learning method {\PLXGL}.
-%
-The key idea of \PLXGL~is to generate inherently explainable graph machine learning models by designing a domain-specific language, called \GDL, and synthesis algorithms that learn models from training graph data.
-%
-The experimental results show that our DSL-based approach successfully generates inherently explainable graph machine learning models that show competitive accuracy compared to the existing dominant neural network-based models but provide significantly better explanations for the predictions.
-%
-Based on this work, I will lead DSL-based explainable machine learning.
-
-
-
-\section{Future Research Plan}
-I believe that my DSL-based approaches are promising and have a lot of opportunities for improvement, with the potential to extend their applicability to various other domains.
-%
-In my future work, I will address the existing challenges and limitations in the current methods, and I will also expand the use of the DSL-based approach to other domains.
-
-
-\subsection{Improving the DSL-based Approaches in Static Analysis}
-
-The current DSL-based techniques for pointer analysis have several limitations, and I plan to address these limitations.
-
-\myparagraph{Generating Combinations of Analysis Heuristics}
-Practical static analyzers use combinations of various analysis heuristics.
-%
-This necessitates heuristic design processes to consider the interactions among these heuristics.
-%
-However, my previous approaches lack consideration of the combinations.
-%
-They have focused on generating a single analysis heuristic without considering interactions with other heuristics.
-%
-Recently, I observed that blindly combining the analysis heuristics results in suboptimal performance.
-%
-To address this problem, I will improve my DSL-based approach to generate combinations of analysis heuristics.
-%
-To achieve this, I will identify and clarify the properties and relationships between different analysis heuristics.
+문제의 본질을 꿰뚫어보기 위한 나의 방법은 문제에 적합한 특화 프로그래밍 언어 디자인 (domain-specific programming language design) 및 특화 언어 프로그램 합성 알고리즘 개발이다.
 % 
-Then, I will design DSLs and synthesis algorithms based on these properties and relationships.
-
-
-
-
-\myparagraph{Understanding the Principles Behind the Generated Heuristics}
-Though effective, the analysis heuristics produced from the DSL-based approaches are currently considered as black-box heuristics that do not explain why they are effective in pointer analysis.
+문제에 대한 본질적인 해결책을 찾기 위해서는 본질적인 해결책을 표현할 수 있는 언어가 필수적이다.
+% 
+특화 프로그래밍 언어 디자인이란 문제의 정답을 하나의 프로그램으로써 표현할 수 있는 언어를 디자인하는 것이고, 특화 언어 프로그램 합성 알고리즘 개발이란 특화 프로그래밍 언어로 표현된 공간 안에서 문제의 해답이 되는 정답 프로그램을 자동으로 찾아내는 알고리즘을 개발하는 것이다.
+% 
+문제의 정답을 표현할 수 있는 언어를 디자인하는 과정속에서 문제의 본질에 대한 고민을 하게 되고, 정답 프로그램을 합성하는 알고리즘을 개발하는 과정에서 문제의 성질을 이해하게 된다.
 %
-% Unlike neural network-based approaches, our DSL-based approaches are interpretable as they are described using symbols (e.g., DNF formulas); Understanding the symbols in the learned heuristics can lead to an understanding of the principles behind the learned heuristics.
-%
-Understanding the principles behind the learned heuristics, however, is important as it provides key insights when designing analysis heuristics.
-% I would like to note that understanding the principles behind the learned heuristics is valuable as it will provide key insights when designing analysis heuristics.
-%
-Currently, the learned analysis heuristics consist of complex DNF formulas, and this complexity poses a significant challenge in understanding the essence of the learned heuristics.
-%
-To understand the principle behind the learned heuristics, I plan to design a framework that transform a given heuristic into a simplified one while maintaining its effectiveness.
-%
-The simplified heuristics will help the understanding of the learned principles.
-%
-Additionally, this simplification process may lead to the generalization of the learned heuristics, potentially enhancing their performance.
-
-
-
-\subsection{Generalizing the DSL-based Approaches to Other Domains}
-I am currently working on extending my DSL-based approach to other domains.
-%
-Specifically, I am trying to apply my DSL-based approach to fault localization and explainable graph machine learning.
-
-\myparagraph{Generalization to Fault Localization}
-The goal of fault localization is to identify the locations of faults in programs that produce errors.
-%
-Currently, \textit{Spectrum-Based Fault Localization} (SBFL), which localizes buggy lines using test cases execution information, is the dominant fault localization technique because of its outstanding efficiency.
-%
-SBFL, however, has a severe limitation in accuracy; it often fails to accurately identify the locations of faults.
-%
-To address this problem, Idevelop a DSL-based approach to improve the accuracy of SBFL.
-
-
-Our approach is based on an observation that similar faults have redundantly appeared in the same projects; faults in a previous version of a project are likely to occur again in subsequent versions.
-%
-Based on this observation, I designed a domain-specific language that describes various fault patterns.
-%
-Using the DSL, our synthesis algorithm learns fault patterns from the previous versions of a project.
-%
-These learned fault patterns are then applied to enhance the accuracy of SBFL in the next version of the project.
-%
-The preliminary results show that our project-aware fault localication technique successfully improves the accuracy of SBFL.
-% When a new version of a project is released, our approach automatically generates a spectrum-based fault localization technique tailored specifically for the project by utilizing the learend patterns.
+이 방법으로 지금까지 프로그램 분석, 설명가능한 기계학습, 프로그래밍 교육 등 다양한 컴퓨터학 분야의 문제에 대한 새로운 해결책을 제시해왔다.
 
 
 
 
 
+
+
+
+
+
+\clearpage
+교육의 본질은 학생들이 스스로 문제를 해결할 수 있는 힘을 길러주는 것이고, 연구의 
+%
+교육은 학생뿐만 아니라 교수, 조교, 학계에도 큰 영향을 미치는 가장 중요한 학술적 활동입니다. 수업에서 학생들은 기존 지식에 직면하며, 그들의 이해는 시험이나 과제로 평가됩니다. 그러나 저는 교육의 목표가 기존 지식을 전달하는 것뿐만 아니라 학생들이 습득한 지식을 활용하거나 새로운 지식을 창출하여 자신의 문제를 해결할 수 있도록 하는 것이라고 믿습니다. 잘 설계된 수업 자료가 이 목표를 달성하는 데 중추적인 역할을 한다는 것을 경험적으로 알고 있습니다~\cite{JeJeChOh17}.
+
+
+% As an educator, my primary goal in teaching is to motivate students to use their acquired knowledge to solve their problems. Teaching is the most important academic activity that has a great impact not only on students but also on instructors, teaching assistants, and academia. In a course, students face existing knowledge, and each of their understandings is graded by exams or assignments. However, I believe that the goal of teaching is not just to transmit existing knowledge but to enable the next generation to use the acquired knowledge or create new knowledge to solve their problems. I have experienced that well-designed course materials play a pivotal role in achieving this goal~\cite{JeJeChOh17}.
+
+\end{spacing}
 
 \bibliography{refs}
-
 
 \end{document}
 
