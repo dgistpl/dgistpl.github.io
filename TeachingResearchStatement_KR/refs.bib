@@ -1,3 +1,133 @@
+@article{Tjandrasuwita16,
+  author       = {Megan Tjandrasuwita and
+                  Jennifer J. Sun and
+                  Ann Kennedy and
+                  Swarat Chaudhuri and
+                  Yisong Yue},
+  title        = {Interpreting Expert Annotation Differences in Animal Behavior},
+  journal      = {CoRR},
+  volume       = {abs/2106.06114},
+  year         = {2021},
+  url          = {https://arxiv.org/abs/2106.06114},
+  eprinttype    = {arXiv},
+  eprint       = {2106.06114},
+  timestamp    = {Tue, 15 Jun 2021 16:35:15 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-2106-06114.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{Gulwani11,
+author = {Gulwani, Sumit},
+title = {Automating String Processing in Spreadsheets Using Input-Output Examples},
+year = {2011},
+isbn = {9781450304900},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1926385.1926423},
+doi = {10.1145/1926385.1926423},
+abstract = {We describe the design of a string programming/expression language that supports restricted forms of regular expressions, conditionals and loops. The language is expressive enough to represent a wide variety of string manipulation tasks that end-users struggle with. We describe an algorithm based on several novel concepts for synthesizing a desired program in this language from input-output examples. The synthesis algorithm is very efficient taking a fraction of a second for various benchmark examples. The synthesis algorithm is interactive and has several desirable features: it can rank multiple solutions and has fast convergence, it can detect noise in the user input, and it supports an active interaction model wherein the user is prompted to provide outputs on inputs that may have multiple computational interpretations.The algorithm has been implemented as an interactive add-in for Microsoft Excel spreadsheet system. The prototype tool has met the golden test - it has synthesized part of itself, and has been used to solve problems beyond author's imagination.},
+booktitle = {Proceedings of the 38th Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages},
+pages = {317-330},
+numpages = {14},
+keywords = {program synthesis, spreadsheet programming, string manipulation, user intent, version space algebra, programming by example (pbe)},
+location = {Austin, Texas, USA},
+series = {POPL '11}
+}
+
+@article{Ellis2022,
+        abstract = {Automated, data-driven construction and evaluation of scientific models and theories is a long-standing challenge in artificial intelligence. We present a framework for algorithmically synthesizing models of a basic part of human language: morpho-phonology, the system that builds word forms from sounds. We integrate Bayesian inference with program synthesis and representations inspired by linguistic theory and cognitive models of learning and discovery. Across 70 datasets from 58 diverse languages, our system synthesizes human-interpretable models for core aspects of each language's morpho-phonology, sometimes approaching models posited by human linguists. Joint inference across all 70 data sets automatically synthesizes a meta-model encoding interpretable cross-language typological tendencies. Finally, the same algorithm captures few-shot learning dynamics, acquiring new morphophonological rules from just one or a few examples. These results suggest routes to more powerful machine-enabled discovery of interpretable models in linguistics and other scientific domains.},
+        author = {Ellis, Kevin and Albright, Adam and Solar-Lezama, Armando and Tenenbaum, Joshua B. and O'Donnell, Timothy J.},
+        date = {2022/08/30},
+        date-added = {2023-07-11 21:41:52 +0900},
+        date-modified = {2023-07-11 21:41:52 +0900},
+        doi = {10.1038/s41467-022-32012-w},
+        id = {Ellis2022},
+        isbn = {2041-1723},
+        journal = {Nature Communications},
+        number = {1},
+        pages = {5024},
+        title = {Synthesizing theories of human language with Bayesian program induction},
+        url = {https://doi.org/10.1038/s41467-022-32012-w},
+        volume = {13},
+        year = {2022},
+        bdsk-url-1 = {https://doi.org/10.1038/s41467-022-32012-w}}
+
+@inproceedings{Oleksandr15,
+author = {Polozov, Oleksandr and Gulwani, Sumit},
+title = {FlashMeta: A Framework for Inductive Program Synthesis},
+year = {2015},
+isbn = {9781450336895},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2814270.2814310},
+doi = {10.1145/2814270.2814310},
+abstract = {Inductive synthesis, or programming-by-examples (PBE) is gaining prominence with disruptive applications for automating repetitive tasks in end-user programming. However, designing, developing, and maintaining an effective industrial-quality inductive synthesizer is an intellectual and engineering challenge, requiring 1-2 man-years of effort. Our novel observation is that many PBE algorithms are a natural fall-out of one generic meta-algorithm and the domain-specific properties of the operators in the underlying domain-specific language (DSL). The meta-algorithm propagates example-based constraints on an expression to its subexpressions by leveraging associated witness functions, which essentially capture the inverse semantics of the underlying operator. This observation enables a novel program synthesis methodology called data-driven domain-specific deduction (D4), where domain-specific insight, provided by the DSL designer, is separated from the synthesis algorithm. Our FlashMeta framework implements this methodology, allowing synthesizer developers to generate an efficient synthesizer from the mere DSL definition (if properties of the DSL operators have been modeled). In our case studies, we found that 10+ existing industrial-quality mass-market applications based on PBE can be cast as instances of D4. Our evaluation includes reimplementation of some prior works, which in FlashMeta become more efficient, maintainable, and extensible. As a result, FlashMeta-based PBE tools are deployed in several industrial products, including Microsoft PowerShell 3.0 for Windows 10, Azure Operational Management Suite, and Microsoft Cortana digital assistant.},
+booktitle = {Proceedings of the 2015 ACM SIGPLAN International Conference on Object-Oriented Programming, Systems, Languages, and Applications},
+pages = {107–126},
+numpages = {20},
+keywords = {programming by examples, search-based synthesis, domain-specific languages, frameworks, deductive inference, Inductive program synthesis},
+location = {Pittsburgh, PA, USA},
+series = {OOPSLA 2015}
+}
+
+@inproceedings{Le2014,
+author = {Le, Vu and Gulwani, Sumit},
+title = {FlashExtract: A Framework for Data Extraction by Examples},
+year = {2014},
+isbn = {9781450327848},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2594291.2594333},
+doi = {10.1145/2594291.2594333},
+abstract = {Various document types that combine model and view (e.g., text files, webpages, spreadsheets) make it easy to organize (possibly hierarchical) data, but make it difficult to extract raw data for any further manipulation or querying. We present a general framework FlashExtract to extract relevant data from semi-structured documents using examples. It includes: (a) an interaction model that allows end-users to give examples to extract various fields and to relate them in a hierarchical organization using structure and sequence constructs. (b) an inductive synthesis algorithm to synthesize the intended program from few examples in any underlying domain-specific language for data extraction that has been built using our specified algebra of few core operators (map, filter, merge, and pair). We describe instantiation of our framework to three different domains: text files, webpages, and spreadsheets. On our benchmark comprising 75 documents, FlashExtract is able to extract intended data using an average of 2.36 examples in 0.84 seconds per field.},
+booktitle = {Proceedings of the 35th ACM SIGPLAN Conference on Programming Language Design and Implementation},
+pages = {542-553},
+numpages = {12},
+keywords = {end-user programming, programming by examples, program synthesis},
+location = {Edinburgh, United Kingdom},
+series = {PLDI '14}
+}
+
+
+
+@article{Das2023,
+author = {Das, Ria and Tenenbaum, Joshua B. and Solar-Lezama, Armando and Tavares, Zenna},
+title = {Combining Functional and Automata Synthesis to Discover Causal Reactive Programs},
+year = {2023},
+issue_date = {January 2023},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {7},
+number = {POPL},
+url = {https://doi.org/10.1145/3571249},
+doi = {10.1145/3571249},
+abstract = {We present a new algorithm that synthesizes functional reactive programs from observation data. The key novelty is to iterate between a functional synthesis step, which attempts to generate a transition function over observed states, and an automata synthesis step, which adds any additional latent state necessary to fully account for the observations. We develop a functional reactive DSL called Autumn that can express a rich variety of causal dynamics in time-varying, Atari-style grid worlds, and apply our method to synthesize Autumn programs from data. We evaluate our algorithm on a benchmark suite of 30 Autumn programs as well as a third-party corpus of grid-world-style video games. We find that our algorithm synthesizes 27 out of 30 programs in our benchmark suite and 21 out of 27 programs from the third-party corpus, including several programs describing complex latent state transformations, and from input traces containing hundreds of observations. We expect that our approach will provide a template for how to integrate functional and automata synthesis in other induction domains.},
+journal = {Proc. ACM Program. Lang.},
+month = {jan},
+articleno = {56},
+numpages = {31},
+keywords = {automata, synthesis, reactive, causal}
+}
+
+@article{Du2018,
+author = {Du, Tao and Inala, Jeevana Priya and Pu, Yewen and Spielberg, Andrew and Schulz, Adriana and Rus, Daniela and Solar-Lezama, Armando and Matusik, Wojciech},
+title = {InverseCSG: Automatic Conversion of 3D Models to CSG Trees},
+year = {2018},
+issue_date = {December 2018},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {37},
+number = {6},
+issn = {0730-0301},
+url = {https://doi.org/10.1145/3272127.3275006},
+doi = {10.1145/3272127.3275006},
+abstract = {While computer-aided design is a major part of many modern manufacturing pipelines, the design files typically generated describe raw geometry. Lost in this representation is the procedure by which these designs were generated. In this paper, we present a method for reverse-engineering the process by which 3D models may have been generated, in the language of constructive solid geometry (CSG). Observing that CSG is a formal grammar, we formulate this inverse CSG problem as a program synthesis problem. Our solution is an algorithm that couples geometric processing with state-of-the-art program synthesis techniques. In this scheme, geometric processing is used to convert the mixed discrete and continuous domain of CSG trees to a pure discrete domain where modern program synthesizers excel. We demonstrate the efficiency and scalability of our algorithm on several different examples, including those with over 100 primitive parts. We show that our algorithm is able to find simple programs which are close to the ground truth, and demonstrate our method's applicability in mesh re-editing. Finally, we compare our method to prior state-of-the-art. We demonstrate that our algorithm dominates previous methods in terms of resulting CSG compactness and runtime, and can handle far more complex input meshes than any previous method.},
+journal = {ACM Trans. Graph.},
+month = {dec},
+articleno = {213},
+numpages = {16},
+keywords = {CAD, CSG, procedural modeling}
+}
 @InProceedings{ARES23,
       title={Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics}, 
       author={Kim, Jinkook and Jeon, Minseok and Jang, Sejeong and Oh, Hakjoo},
