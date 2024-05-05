@@ -1,0 +1,47 @@
+\begin{thebibliography}{1}
+
+\bibitem{IST2021}
+Donghoon Jeon, Minseok Jeon, and Hakjoo Oh.
+\newblock A practical algorithm for learning disjunctive abstraction heuristics
+  in static program analysis.
+\newblock {\em Information and Software Technology}, 135:106564, 2021.
+
+\bibitem{Jeon2019}
+Minseok Jeon, Sehun Jeong, Sungdeok Cha, and Hakjoo Oh.
+\newblock A machine-learning algorithm with disjunctive model for data-driven
+  program analysis.
+\newblock {\em ACM Trans. Program. Lang. Syst.}, 41(2):13:1--13:41, June 2019.
+
+\bibitem{JeJeOh18}
+Minseok Jeon, Sehun Jeong, and Hakjoo Oh.
+\newblock Precise and scalable points-to analysis via data-driven context
+  tunneling.
+\newblock {\em Proc. ACM Program. Lang.}, 2(OOPSLA):140:1--140:29, October
+  2018.
+
+\bibitem{Jeon20}
+Minseok Jeon, Myungho Lee, and Hakjoo Oh.
+\newblock Learning graph-based heuristics for pointer analysis without
+  handcrafting application-specific features.
+\newblock {\em Proc. ACM Program. Lang.}, 4(OOPSLA), November 2020.
+
+\bibitem{JeOh22}
+Minseok Jeon and Hakjoo Oh.
+\newblock Return of cfa: Call-site sensitivity can be superior to object
+  sensitivity even for object-oriented programs.
+\newblock {\em Proc. ACM Program. Lang.}, 6(POPL), jan 2022.
+
+\bibitem{JeJeChOh17}
+Sehun Jeong, Minseok Jeon, Sungdeok Cha, and Hakjoo Oh.
+\newblock Data-driven context-sensitivity for points-to analysis.
+\newblock {\em Proceedings of the ACM on Programming Languages}, 1(OOPSLA),
+  2017.
+
+\bibitem{ARES23}
+Jinkook Kim, Minseok Jeon, Sejeong Jang, and Hakjoo Oh.
+\newblock Automating endurance test for flash-based storage devices in samsung
+  electronics.
+\newblock In {\em 2023 IEEE Conference on Software Testing, Verification and
+  Validation (ICST)}, 2023.
+
+\end{thebibliography}
