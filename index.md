@@ -90,6 +90,7 @@ Additionally, I am interested in developing DSLs tailored to identify effective 
   
 &nbsp;  
 # Talks
++ PL4XGL: 프로그래밍 언어 기법을 활용한 설명 가능한 그래프 기계학습 방법. KAIST (ProSysLab Seminar). May 03 2024 [[slides](/papers/PL4XGL_ProSys_slide.pdf)]
 + 그래프 패턴 언어를 활용하여 다양한 분야의 핵심 문제 접근하기. STAAR Workshop. KAIST. Jan 30 2024 [[slides](/papers/ERC_2024_KAIST.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. STAAR Workshop. Jeju. Feb 11 2022 [[slides](/papers/CFA_slides.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. Philadelphia, USA. Jan 19 2022 [[slides](/papers/POPL22_slides.pdf)]
