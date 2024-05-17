@@ -17,19 +17,18 @@ Postdoctoral Researcher
 # About Me
 I am a postdoctoral researcher at [Korea University](https://www.korea.ac.kr/). 
 I received my Ph.D. from [Software Analysis Laboratory](https://prl.korea.ac.kr/) at [Korea University](https://www.korea.ac.kr/) under the supervision of [Prof. Hakjoo Oh](https://prl.korea.ac.kr/members/hakjoo-oh/). 
-I enjoy developing domain-specific languages (DSLs) (along with DSL program synthesis algorithms) to address various challenges in programming languages and software engineering. 
-I have developed DSLs for developing effective pointer analysis and software testing. 
+I enjoy developing domain-specific languages (DSLs) (along with DSL program synthesis algorithms) to address various challenges in programming languages, software engineering, and machine learning. 
+I have developed DSLs for developing inherently explainable graph machine learning method and effective program analysis.
 
 
 # Research Interests
- I am interested in designing domain-specific programming languages (DSLs) and developing program synthesis algorithms to address problems in programming languages and software engineering.
- More specifically, my research aims to design domain-specific programming languages (DSLs) that can describe solutions to problems and develop program synthesis algorithms to automatically find these solutions in the DSLs.
+
+I am interested in designing domain-specific programming languages (DSLs) and developing program synthesis algorithms to address problems in various fiels.
+More specifically, my research aims to design domain-specific programming languages (DSLs) that can describe solutions to problems and develop program synthesis algorithms to automatically find these solutions in the DSLs.
 
 + **Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages and software engineering.
 + **Developing program synthesis algorithms** for automatically generating programs (solutions) in DSLs.
 
-In particular, my focus is on designing DSLs and synthesis algorithms for effective pointer analysis.
-Additionally, I am interested in developing DSLs tailored to identify effective test cases in system software testing.
 
 
 
