@@ -23,7 +23,7 @@ I have developed DSLs for developing effective pointer analysis and software tes
 
 # Research Interests
  I am interested in designing domain-specific programming languages (DSLs) and developing program synthesis algorithms to address problems in programming languages and software engineering.
- More specifically, my research aims to design domain-specific programming languages (DSLs) that can describe solutions for given programming problems in languages or software engineering, and develop program synthesis algorithms to automatically find these solutions in the DSLs.
+ More specifically, my research aims to design domain-specific programming languages (DSLs) that can describe solutions to problems and develop program synthesis algorithms to automatically find these solutions in the DSLs.
 
 + **Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages and software engineering.
 + **Developing program synthesis algorithms** for automatically generating programs (solutions) in DSLs.
