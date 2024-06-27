@@ -50,7 +50,7 @@ More specifically, my research aims to design domain-specific programming langua
 + **PL4XGL: A Programming Language Approach to Explainable Graph Learning**    
   <u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh  
   [**PLDI 2024** : ACM SIGPLAN Conference on Programming Language Design and Implementation](https://pldi24.sigplan.org/)  
-  [pdf]
+  [[pdf](/papers/PLDI24.pdf)]
 + **Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics**  
   Jinkook Kim, <u>Minseok Jeon</u>, Sejeong Jang, and Hakjoo Oh  
   [**ICST 2023** : International Conference on Software Testing, Verification and Validation](https://conf.researchr.org/track/icst-2023/icst-2023-industry?) (Industry Track)  
