@@ -113,6 +113,7 @@ More specifically, my research aims to design domain-specific programming langua
   
   
 # Trips
++ PLDI 2024, Copenhagen, Denmark. 2024/June/24 - 2023/June/30.[[photos]] 
 + ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23.[[photos](https://photos.app.goo.gl/uj58LVXgQwAFspe26)] 
 + POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23.[[photos](https://photos.app.goo.gl/mPP1bNUytRND3Qxt5)] 
 + OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. 
