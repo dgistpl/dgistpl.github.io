@@ -99,9 +99,15 @@ More specifically, my research aims to design domain-specific programming langua
   
 &nbsp;  
   
-  
+
+
 # Project
-+ Bachelor Degree Project : Enough to check Collatz Conjecture for 16k+11 [[pdf](/papers/ccPaper.pdf)]  
++ (**National Research Foundation of Korea**) 설명 가능한 그래프 기계학습 방법 개발을 위한 프로그래밍 언어 기술 연구(Programming Language Technology for Explainable Graph Machine Learning), May 2024 ~ April 2029, Principal Investigator
+  
+
+
+<!-- Project
++ Bachelor Degree Project : Enough to check Collatz Conjecture for 16k+11 [[pdf](/papers/ccPaper.pdf)] --> 
 &nbsp;  
   
   
