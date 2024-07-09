@@ -50,15 +50,15 @@ More specifically, my research aims to design domain-specific programming langua
 + **PL4XGL: A Programming Language Approach to Explainable Graph Learning**    
   <u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh  
   [**PLDI 2024** : ACM SIGPLAN Conference on Programming Language Design and Implementation](https://pldi24.sigplan.org/)  
-  [pdf]
+  [[pdf](/papers/PLDI24.pdf)][[link](https://dl.acm.org/doi/10.1145/3656464)][[slides](/papers/PLDI2024_slides.pdf)][[repo](https://github.com/kupl/PL4XGL)]
 + **Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics**  
   Jinkook Kim, <u>Minseok Jeon</u>, Sejeong Jang, and Hakjoo Oh  
   [**ICST 2023** : International Conference on Software Testing, Verification and Validation](https://conf.researchr.org/track/icst-2023/icst-2023-industry?) (Industry Track)  
-  [[pdf](/papers/ARES.pdf)]
+  [[pdf](/papers/ARES.pdf)][[link](https://ieeexplore.ieee.org/document/10132302/)]
 + **Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs**  
   <u>Minseok Jeon</u> and Hakjoo Oh  
   [**POPL 2022** : ACM SIGPLAN Symposium on Principles of Programming Languages](https://popl22.sigplan.org/track/POPL-2022-popl-research-papers)  
-  [[pdf](/papers/POPL22_Obj2CFA.pdf)][[slides](/papers/POPL22_slides.pdf)][[artifact](https://github.com/kupl/Obj2CFA)]
+  [[pdf](/papers/POPL22_Obj2CFA.pdf)][[link](https://dl.acm.org/doi/abs/10.1145/3498720)][[slides](/papers/POPL22_slides.pdf)][[repo](https://github.com/kupl/Obj2CFA)]
 + **A Practical Algorithm for Learning Disjunctive Abstraction Heuristics in Static Program Analysis**  
   Donghoon Jeon, <u>Minseok Jeon</u>, and Hakjoo Oh  
   **[IST 2021: Information and Software Technology](https://www.sciencedirect.com/journal/information-and-software-technology)**, Volume 135, July 2021  
@@ -66,19 +66,19 @@ More specifically, my research aims to design domain-specific programming langua
 + **Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features**  
   <u>Minseok Jeon</u>, Myungho Lee, and Hakjoo Oh   
   [**OOPSLA 2020:** ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications](https://2020.splashcon.org/track/splash-2020-OOPSLA)  
-  [[pdf](/papers/Graphick.pdf)][[slides](/papers/oopsla2020_slide.pdf)][[artifact](https://github.com/kupl/Graphick)]
+  [[pdf](/papers/Graphick.pdf)][[link](https://dl.acm.org/doi/10.1145/3428247)][[slides](/papers/oopsla2020_slide.pdf)][[repo](https://github.com/kupl/Graphick)]
 + **A Machine-Learning Algorithm with Disjunctive Model for Data-Driven Program Analysis**   
   <u>Minseok Jeon*</u>, Sehun Jeong\*, Sungdeok Cha, and Hakjoo Oh (\*co-first authors)  
   [**TOPLAS 2019:** ACM Transactions on Programming Languages and Systems](https://dl.acm.org/journal/toplas)  
-  [[pdf](/papers/TOPLAS19.pdf)]
+  [[pdf](/papers/TOPLAS19.pdf)][[link](https://dl.acm.org/doi/10.1145/3293607)]
 + **Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling**  
   <u>Minseok Jeon</u>, Sehun Jeong, and Hakjoo Oh  
   [**OOPSLA 2018:** ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications](https://2018.splashcon.org/track/splash-2018-OOPSLA)  
-  [[pdf](/papers/oopsla18_paper.pdf)][[slides](/papers/oopsla18_slides.pdf)]
+  [[pdf](/papers/oopsla18_paper.pdf)][[link](https://dl.acm.org/doi/10.1145/3276510)][[slides](/papers/oopsla18_slides.pdf)]][[artifact](https://dl.acm.org/do/10.1145/3276931/full/)]
 + **Data-Driven Context-Sensitivity for Points-to Analysis**  
   Sehun Jeong\*, <u>Minseok Jeon*</u>, Sungdeok Cha, and Hakjoo Oh (\*co-first authors)  
   [**OOPSLA 2017:** ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications](https://2017.splashcon.org/track/splash-2017-OOPSLA)    
-  [[pdf](/papers/oopsla17a.pdf)][[slides](/papers/oopsla17_slides_jeong_jeon.pdf)]
+  [[pdf](/papers/oopsla17a.pdf)][[link](https://dl.acm.org/doi/10.1145/3133924)][[slides](/papers/oopsla17_slides_jeong_jeon.pdf)][[repo](https://github.com/kupl/Data-Driven-Pointsto-Analysis)]
   
 &nbsp;  
   
@@ -89,6 +89,7 @@ More specifically, my research aims to design domain-specific programming langua
   
 &nbsp;  
 # Talks
++ PL4XGL: A Programming Language Approach to Explainable Graph Learning. Paper presentation at PLDI 2024. Copenhagen, Denmark. June 27 2024 [[slides](/papers/PLDI2024_slides.pdf)]
 + PL4XGL: 프로그래밍 언어 기법을 활용한 설명 가능한 그래프 기계학습 방법. KAIST (ProSysLab Seminar). May 03 2024 [[slides](/papers/PL4XGL_ProSys_slide.pdf)]
 + 그래프 패턴 언어를 활용하여 다양한 분야의 핵심 문제 접근하기. STAAR Workshop. KAIST. Jan 30 2024 [[slides](/papers/ERC_2024_KAIST.pdf)]
 + Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs. Paper presentation at POPL 2022. STAAR Workshop. Jeju. Feb 11 2022 [[slides](/papers/CFA_slides.pdf)]
