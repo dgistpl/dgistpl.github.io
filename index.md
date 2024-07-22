@@ -7,7 +7,7 @@ author_profile: false
 </div>
 <!--img src="images/me.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
 # Minseok Jeon (전민석)  
-Postdoctoral Researcher  
+Research Professor   
 [Software Analysis Laboratory](http://prl.korea.ac.kr/),  
 [Dept. of Computer Science and Engineering](https://cs.korea.ac.kr/cs/index.do),    
 [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://korea.ac.kr/mbshome/mbs/university/index.do),    
@@ -15,7 +15,7 @@ Postdoctoral Researcher
   
   
 # About Me
-I am a postdoctoral researcher at [Korea University](https://www.korea.ac.kr/). 
+I am a research professor at [Korea University](https://www.korea.ac.kr/). 
 I received my Ph.D. from [Software Analysis Laboratory](https://prl.korea.ac.kr/) at [Korea University](https://www.korea.ac.kr/) under the supervision of [Prof. Hakjoo Oh](https://prl.korea.ac.kr/members/hakjoo-oh/). 
 I enjoy developing domain-specific languages (DSLs) (along with DSL program synthesis algorithms) to address various challenges in programming languages, software engineering, and machine learning. 
 I have developed DSLs for developing inherently explainable graph machine learning method and effective program analysis.
@@ -26,7 +26,7 @@ I have developed DSLs for developing inherently explainable graph machine learni
 I am interested in designing domain-specific programming languages (DSLs) and developing program synthesis algorithms to address problems in various fiels.
 More specifically, my research aims to design domain-specific programming languages (DSLs) that can describe solutions to problems and develop program synthesis algorithms to automatically find these solutions in the DSLs.
 
-+ **Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages and software engineering.
++ **Designing domain-specific languages (DSLs)** tailored to tackle challenges in programming languages, software engineering, and machine learning.
 + **Developing program synthesis algorithms** for automatically generating programs (solutions) in DSLs.
 
 
@@ -40,7 +40,8 @@ More specifically, my research aims to design domain-specific programming langua
 
 
 # Employed Positions 
-+ 2023.02 ~ Present - Postdoctoral Researcher, [Software Analysis Laboratory](http://prl.korea.ac.kr/), [Korea University](https://www.korea.ac.kr/)
++ 2024.07 ~ Present - Research Professor, [Korea University](https://www.korea.ac.kr/)
++ 2023.02 ~ 2024.06 - Postdoctoral Researcher, [Korea University](https://www.korea.ac.kr/)
 
 
 
@@ -113,7 +114,7 @@ More specifically, my research aims to design domain-specific programming langua
   
   
 # Trips
-+ PLDI 2024, Copenhagen, Denmark. 2024/June/24 - 2023/June/30.[[photos]] 
++ PLDI 2024, Copenhagen, Denmark. 2024/June/24 - 2023/June/30. 
 + ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23.[[photos](https://photos.app.goo.gl/uj58LVXgQwAFspe26)] 
 + POPL 2022, Philadelphia, USA. 2022/Jan/17 - 2022/Jan/23.[[photos](https://photos.app.goo.gl/mPP1bNUytRND3Qxt5)] 
 + OOPSLA 2019, Athens, Greece. 2019/Oct/20 - 2019/Oct/26. 
