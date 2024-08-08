@@ -51,7 +51,7 @@ More specifically, my research aims to design domain-specific programming langua
 + **PL4XGL: A Programming Language Approach to Explainable Graph Learning**    
   <u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh  
   [**PLDI 2024** : ACM SIGPLAN Conference on Programming Language Design and Implementation](https://pldi24.sigplan.org/)  
-  [[pdf](/papers/PLDI24.pdf)][[link](https://dl.acm.org/doi/10.1145/3656464)][[slides](/papers/PLDI2024_slides.pdf)][[repo](https://github.com/kupl/PL4XGL)]
+  [[pdf](/papers/PLDI24.pdf)][[link](https://dl.acm.org/doi/10.1145/3656464)][[slides](/papers/PLDI2024_slides.pdf)][[repo](https://github.com/kupl/PL4XGL)][[연구후기](https://minseokjgit.github.io/ep3/)]
 + **Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics**  
   Jinkook Kim, <u>Minseok Jeon</u>, Sejeong Jang, and Hakjoo Oh  
   [**ICST 2023** : International Conference on Software Testing, Verification and Validation](https://conf.researchr.org/track/icst-2023/icst-2023-industry?) (Industry Track)  
@@ -59,7 +59,7 @@ More specifically, my research aims to design domain-specific programming langua
 + **Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs**  
   <u>Minseok Jeon</u> and Hakjoo Oh  
   [**POPL 2022** : ACM SIGPLAN Symposium on Principles of Programming Languages](https://popl22.sigplan.org/track/POPL-2022-popl-research-papers)  
-  [[pdf](/papers/POPL22_Obj2CFA.pdf)][[link](https://dl.acm.org/doi/abs/10.1145/3498720)][[slides](/papers/POPL22_slides.pdf)][[repo](https://github.com/kupl/Obj2CFA)]
+  [[pdf](/papers/POPL22_Obj2CFA.pdf)][[link](https://dl.acm.org/doi/abs/10.1145/3498720)][[slides](/papers/POPL22_slides.pdf)][[repo](https://github.com/kupl/Obj2CFA)][[연구후기](https://minseokjgit.github.io/ep2/)]
 + **A Practical Algorithm for Learning Disjunctive Abstraction Heuristics in Static Program Analysis**  
   Donghoon Jeon, <u>Minseok Jeon</u>, and Hakjoo Oh  
   **[IST 2021: Information and Software Technology](https://www.sciencedirect.com/journal/information-and-software-technology)**, Volume 135, July 2021  
