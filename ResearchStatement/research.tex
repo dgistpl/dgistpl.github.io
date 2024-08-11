@@ -20,7 +20,7 @@
 \title{Research Statement}
 %\title{연구계획서}
 
-\author{Minseok Jeon (전민석)}
+\author{전민석\\\\지원분야: 소프트웨어 (Software)}
 
 \bibliographystyle{plain}
 
@@ -37,24 +37,24 @@
 
 To effectively address a problem, a domain-specific language designed for that problem is essential. 
 %
-Using a suitable language allows us to grasp the essence of the problem and find the appropriate solution. 
+Using suitable language allows us to grasp the essence of the problem and find the appropriate solution. 
 %
 This principle is also applicable in computer science.
 %
-Each problem in computer science has its own characteristics, and a domain-specific language tailored to these characteristics is necessary to solve the problem effectively.
+Each problem in computer science has its own characteristics, and a domain-specific language tailored to these characteristics is necessary to address the problem effectively.
 
 
 
 
-My research aims to design domain-specific programming languages (DSLs) and program synthesis algorithms to address challenges in various computer science domains, including programming languages, software engineering, and machine learning.
+My research aims to design domain-specific programming languages (DSLs) and program synthesis algorithms to address challenges in various computer science domains including programming languages, software engineering, and machine learning.
 %
 Given a problem, I design a DSL that can describe the solution to the target problem.
 %
 The domain-specific language is carefully designed to capture the essence of the problem.
 %
-Then, I develop a synthesis algorithm that automatically and effectively searches for solutions within the DSL.
+Then, I developed a synthesis algorithm that automatically and effectively searches for solutions within the DSL.
 %
-The work has been published in top-tier conferences (PLDI 2024, ICST 2023, POPL 2022, OOPSLA 2020, OOPSLA 2018, OOPSLA 2017).
+The results have been published in top-tier conferences (PLDI 2024, ICST 2023, POPL 2022, OOPSLA 2020, OOPSLA 2018, OOPSLA 2017).
 %
 In the programming language domain, for example, I have developed DSLs and program synthesis algorithms for generating powerful analysis heuristics in pointer analysis, a key ingredient in compiler optimization.
 %
@@ -64,7 +64,7 @@ In machine learning, I used my DSL-based approach to develop an inherently expla
 %
 I have demonstrated that the DSL-based approach produces outstanding results in various domains.
 %
-Currently, I am applying the DSL-based approach to fault localization or trying and working on improving the designed DSLs and synthesis algorithms.
+Currently, I am trying to extend the DSL-based approach to other domains, such as fault localization, and improve the existing DSLs and synthesis algorithms.
 
 
 
@@ -74,7 +74,7 @@ Currently, I design DSLs manually for each problem, which is a very challenging 
 %
 This is primarily because we do not know the solutions to the problem when we begin designing a DSL.
 %
-Currently, I repeatedly guess and refine a DSL, then check its effectiveness, which is time-consuming.
+Currently, I repeatedly guess and refine a DSL, and then check its effectiveness, which is time-consuming.
 %
 As a long-term goal, I aim to develop a framework that automates this language designing process.
 %
@@ -84,14 +84,14 @@ Based on this framework, I will establish the DSL-based approach as a dominant m
 
 \section{DSL \& Synthesis for Explainable Graph Machine Learning}
 %
-In my recent work, I applied my DSL-based approach to develop an inherently explainable graph machine learning method, which will be published at PLDI 2024.
+In my recent work, I applied my DSL-based approach to develop an inherently explainable graph machine learning method.
 %
-Currently, I am collaborating with students to further extend this research.
+Currently, I am collaborating with undergraduate students to further explore this research direction.
 %
-Moving forward, I will lead the DSL-based explainable machine learning research, building upon the strong foundation laid by this work.
+Based on this work, I will lead the DSL-based explainable machine learning research.
 
 
-\myparagraph{PL4XGL}
+\myparagraph{PL4XGL~\cite{Jeon2024}}
 Many significant real-world problems can be modeled as graph machine learning problems, including fraud detection, program repair, and drug discovery.
 %
 In such decision-critical applications, it is crucial to understand the reason why the models made each prediction.
@@ -102,7 +102,7 @@ Various GNN explanation techniques have been proposed, but they fall short in pr
 %
 To address this problem, I developed an inherently explainable machine learning method {\PLXGL}.
 %
-The key idea of \PLXGL~is to generate inherently explainable graph machine learning models by designing a domain-specific language, called \GDL, and synthesis algorithms that learn models from training graph data.
+The key idea of \PLXGL~is to generate inherently explainable graph machine learning models by designing a domain-specific language called \GDL~and synthesis algorithms that learn models from training graph data.
 %
 Our experimental results demonstrate that this DSL-based approach not only competes in accuracy with existing neural network-based models but also provides significantly clearer explanations for the predictions.
 %
@@ -145,7 +145,7 @@ To effectively apply selective context sensitivity, however, qualified analysis 
 
 To address this problem, I designed a domain-specific language, called \DisjunctiveModel, which can describe various selective context sensitivity heuristics.
 %
-A heuristic in this DSL is a sequence of disjunctive normal form (DNF) formulas consist of user-provided features describing methods that will be analyzed context sensitively.
+A heuristic in this DSL is a sequence of disjunctive normal form (DNF) formulas consisting of user-provided features describing methods that will be analyzed context sensitively.
 %
 Simultaneously, I designed program synthesis algorithms that automatically generate effective selective context sensitivity heuristics from the DSL.
 %
@@ -170,7 +170,7 @@ This exclusion substantially degrades the precision of the analysis, as importan
 
 To address the limitations of the conventional $k$-limited context sensitivity, I present 'context tunneling,' a method that allows for retaining the most important $k$ context elements, rather than merely the last $k$ context elements.
 %
-To apply context tunneling, however, context tunneling heuristics, checking whether each context element is important, are required.
+To apply context tunneling, however, a context tunneling heuristic, checking whether each context element is important, is required.
 %
 To this end, I adapted the \DisjunctiveModel~and the synthesis algorithm~\cite{JeJeChOh17} to learn high-quality context tunneling heuristics.
 %
@@ -187,7 +187,7 @@ The superiority of object sensitivity over other context flavors has been reinfo
 %
 Conversely, call-site sensitivity has been consistently dismissed because it has shown poor performance in both precision and scalability.
 %
-However, this research challenge this status quo. 
+However, this research challenges this status quo. 
 I discovered that the perceived superiority of object sensitivity over call-site sensitivity does not hold when context tunneling~\cite{JeJeOh18} is applied.
 
 
@@ -235,7 +235,7 @@ This method not only reduces the effort required but also improves the quality o
 %\myparagraph{DSL $\&$ Synthesis Algorithm for Generating Effective Test Cases in Endurance Test for Flash-based Storage Devices~\cite{ARES23}}
 \myparagraph{ARES~\cite{ARES23}}
 %
-Flash-based storage devices are widely used in practice, including mobile devices, automotives, and PC. 
+Flash-based storage devices are widely used in practice, including mobile devices, automotive, and PC. 
 %
 However, flash-based storage devices have a finite limit in processing data write requests.
 %
@@ -253,11 +253,11 @@ The experimental results show that the DSL-based approach successfully generates
 
 
 \section{Future Research Plan}
-I am confident that my DSL-based approach is promising and offers numerous opportunities for further refinement and broadening of their applicability across various domains.
+My DSL-based approach is promising and offers numerous opportunities for further refinement and broadening of their applicability across various domains.
 %
-In the short term, I am committed to addressing the existing challenges and limitations within our current methods.
+Currently, I am committed to addressing the existing challenges and limitations within our current methods.
 %
-Concurrently, I plan to expand the use of the DSL-based approach to additional domains. 
+Also, I plan to expand the use of the DSL-based approach to additional domains. 
 %
 As a long-term goal, I will develop a general framework that can automatically generate DSLs for any given problem.
 %
@@ -299,9 +299,9 @@ Understanding the principles behind the learned heuristics, however, is importan
 %
 Currently, the learned analysis heuristics consist of complex DNF formulas, and this complexity poses a significant challenge in understanding the essence of the learned heuristics.
 %
-To understand the principle behind the learned heuristics, I plan to design a framework that transform a given heuristic into a simplified one while maintaining its effectiveness.
+To understand the principle behind the learned heuristics, I plan to design a framework that transforms a given heuristic into a simplified one while maintaining its effectiveness.
 %
-The simplified heuristics will help the understanding of the learned principles.
+Simplified heuristics will help the understanding of the learned principles.
 %
 Additionally, this simplification process may lead to the generalization of the learned heuristics, potentially enhancing their performance.
 
@@ -317,10 +317,10 @@ The current version of \PLXGL~has shown suboptimal accuracy on certain datasets.
 %
 This problem comes from the current DSL's limitations in describing some key properties in the datasets.
 %
-To address this problem, I am trying to extend the expressiveness of the DSL to describe these key properties with a student, and I recently observed a promising results that significantly improve the accuracy of {\PLXGL}.
+To address this problem, I am trying to extend the expressiveness of the DSL to describe these key properties with a student, and I recently observed promising results that significantly improve the accuracy of {\PLXGL}.
 
 
-\myparagraph{Combining DSL-based Approach with Nueural Network-based Methods}
+\myparagraph{Combining DSL-based Approach with Neural Network-based Methods}
 Another interesting future work is to combine our DSL-based approach with existing neural network-based methods.
 %
 For instance, I am currently using {\PLXGL} to generate high-quality features, which are then incorporated into established neural network-based graph machine learning models. 
