@@ -1,4 +1,10 @@
 # main links
 main:
+  - title: "Courses"
+    url: /courses/
+
   - title: "연구 이야기"
-    url: /posts/ 
+    url: /posts/
+
+
+ 
