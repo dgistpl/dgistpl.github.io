@@ -32,6 +32,7 @@ author_profile: false
 + Course Overview: [lecture0.pdf](slides/lecture0.pdf)
 + (Part 1) Basic concepts
   - Array: [lecture1.pdf](slides/lecture1.pdf)  &nbsp; [review.pdf](slides/lecture1_review.pdf)
-  - Analysis of Algorithms: [lecture2.pdf](slides/lecture2.pdf)
+  - Analysis of Algorithms: [lecture2.pdf](slides/lecture2.pdf) &nbsp; [review.pdf](slides/lecture2_review.pdf)
+  - Stacks: [lecture3.pdf](slides/lecture3.pdf)
 
 
