@@ -33,6 +33,7 @@ author_profile: false
 + (Part 1) Basic concepts
   - Array: [lecture1.pdf](slides/lecture1.pdf)  &nbsp; [review.pdf](slides/lecture1_review.pdf)
   - Analysis of Algorithms: [lecture2.pdf](slides/lecture2.pdf) &nbsp; [review.pdf](slides/lecture2_review.pdf)
-  - Stacks: [lecture3.pdf](slides/lecture3.pdf)
+  - Stack: [lecture3.pdf](slides/lecture3.pdf) &nbsp; [review.pdf](slides/lecture3_review.pdf)
+  - Queue: [lecture4.pdf](slides/lecture4.pdf)
 
 
