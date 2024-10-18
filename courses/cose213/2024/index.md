@@ -34,6 +34,7 @@ author_profile: false
   - Array: [lecture1.pdf](slides/lecture1.pdf)  &nbsp; [review.pdf](slides/lecture1_review.pdf)
   - Analysis of Algorithms: [lecture2.pdf](slides/lecture2.pdf) &nbsp; [review.pdf](slides/lecture2_review.pdf)
   - Stack: [lecture3.pdf](slides/lecture3.pdf) &nbsp; [review.pdf](slides/lecture3_review.pdf)
-  - Queue: [lecture4.pdf](slides/lecture4.pdf)
-
+  - Queue: [lecture4.pdf](slides/lecture4.pdf) &nbsp; [review.pdf](slides/lecture4_review.pdf)
+  - Linked List: [lecture5.pdf](slides/lecture5.pdf)
+  - List: [lecture6.pdf](slides/lecture6.pdf)
 
