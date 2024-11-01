@@ -37,4 +37,5 @@ author_profile: false
   - Queue: [lecture4.pdf](slides/lecture4.pdf) &nbsp; [review.pdf](slides/lecture4_review.pdf)
   - Linked List: [lecture5.pdf](slides/lecture5.pdf)
   - List: [lecture6.pdf](slides/lecture6.pdf)
+  - Tree: [lecture7.pdf](slides/lecture7.pdf)
 
