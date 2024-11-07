@@ -85,8 +85,8 @@ More specifically, my research aims to design domain-specific programming langua
   
 # Academic Activities
 ## Program Committee (PC) members
-+ [OOPSLA 2024](https://2024.splashcon.org/track/splash-2024-oopsla): ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications
 + [ICFP 2025](https://icfp25.sigplan.org/track/icfp-2025-papers): ACM SIGPLAN International Conference on Functional Programming
++ [OOPSLA 2024](https://2024.splashcon.org/track/splash-2024-oopsla): ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications
 
   
 &nbsp;  
