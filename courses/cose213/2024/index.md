@@ -38,4 +38,5 @@ author_profile: false
   - Linked List: [lecture5.pdf](slides/lecture5.pdf)
   - List: [lecture6.pdf](slides/lecture6.pdf)
   - Tree: [lecture7.pdf](slides/lecture7.pdf)
+  - Binary Search Tree: [lecture8.pdf](slides/lecture8.pdf)
 
