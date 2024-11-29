@@ -40,5 +40,6 @@ author_profile: false
   - Tree: [lecture7.pdf](slides/lecture7.pdf)
   - Binary Search Tree: [lecture8.pdf](slides/lecture8.pdf) &nbsp; [review.pdf](slides/lecture8_review.pdf)
   - AVL Tree: [lecture9.pdf](slides/lecture9.pdf) &nbsp; [review.pdf](slides/lecture9_review.pdf)
-  - Heap: [lecture10.pdf](slides/lecture10.pdf)
+  - Heap: [lecture10.pdf](slides/lecture10.pdf) &nbsp; [review.pdf](slides/lecture10_review.pdf)
+  - Multiway Search Tree: [lecture11.pdf](slides/lecture11.pdf) 
 
