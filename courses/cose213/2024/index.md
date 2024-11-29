@@ -33,10 +33,12 @@ author_profile: false
 + (Part 1) Basic concepts
   - Array: [lecture1.pdf](slides/lecture1.pdf)  &nbsp; [review.pdf](slides/lecture1_review.pdf)
   - Analysis of Algorithms: [lecture2.pdf](slides/lecture2.pdf) &nbsp; [review.pdf](slides/lecture2_review.pdf)
++ (Part 2) Linear data structures
   - Stack: [lecture3.pdf](slides/lecture3.pdf) &nbsp; [review.pdf](slides/lecture3_review.pdf)
   - Queue: [lecture4.pdf](slides/lecture4.pdf) &nbsp; [review.pdf](slides/lecture4_review.pdf)
   - Linked List: [lecture5.pdf](slides/lecture5.pdf)
   - List: [lecture6.pdf](slides/lecture6.pdf)
++ (Part 3) Non-linear data structures
   - Tree: [lecture7.pdf](slides/lecture7.pdf)
   - Binary Search Tree: [lecture8.pdf](slides/lecture8.pdf) &nbsp; [review.pdf](slides/lecture8_review.pdf)
   - AVL Tree: [lecture9.pdf](slides/lecture9.pdf) &nbsp; [review.pdf](slides/lecture9_review.pdf)
