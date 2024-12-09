@@ -44,4 +44,5 @@ author_profile: false
   - AVL Tree: [lecture9.pdf](slides/lecture9.pdf) &nbsp; [review.pdf](slides/lecture9_review.pdf)
   - Heap: [lecture10.pdf](slides/lecture10.pdf) &nbsp; [review.pdf](slides/lecture10_review.pdf)
   - Multiway Search Tree: [lecture11.pdf](slides/lecture11.pdf) 
+  - Graph: [lecture12.pdf](slides/lecture12.pdf) 
 
