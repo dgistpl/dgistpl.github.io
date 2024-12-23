@@ -48,6 +48,10 @@ More specifically, my research aims to design domain-specific programming langua
 
 # Publications 
 
++ **PAFL: Enhancing Fault Localizers by Leveraging Project-Specific Fault Patterns** (Conditional Accept)  
+  Donguk Kim, Doha Hwang, <u>Minseok Jeon*</u>, Hakjoo Oh* (\*corresponding authors)  
+  [**OOPSLA 2025**: ACM Conference on Object-oriented Programming, Systems, Languages, and Applications](https://2025.splashcon.org/track/OOPSLA)  
+  [pdf]
 + **PL4XGL: A Programming Language Approach to Explainable Graph Learning**    
   <u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh  
   [**PLDI 2024** : ACM SIGPLAN Conference on Programming Language Design and Implementation](https://pldi24.sigplan.org/)  
