@@ -48,7 +48,7 @@ More specifically, my research aims to design domain-specific programming langua
 
 # Publications 
 
-+ **PAFL: Enhancing Fault Localizers by Leveraging Project-Specific Fault Patterns** (Conditional Accept)  
++ **PAFL: Enhancing Fault Localizers by Leveraging Project-Specific Fault Patterns** (Accept)  
   Donguk Kim, Doha Hwang, <u>Minseok Jeon*</u>, Hakjoo Oh* (\*corresponding authors)  
   [**OOPSLA 2025**: ACM Conference on Object-oriented Programming, Systems, Languages, and Applications](https://2025.splashcon.org/track/OOPSLA)  
   [pdf]
