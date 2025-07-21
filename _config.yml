@@ -96,8 +96,10 @@ social:
 
 # Analytics
 analytics:
-  provider               : false # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : "google-gtag" # Using gtag.js for modern tracking
   google:
+    tracking_id: "G-KTKXXC6BCQ"
+    anonymize_ip: true
     tracking_id          :
     anonymize_ip         : # true, false (default)
 
