@@ -1,0 +1,108 @@
+{% assign post_url = include.post_url | default: page.url %}
+<div id="view-counter-{{ post_url | replace: '/', '-' | replace: '.', '_' }}" class="page__meta-views" style="display: inline;">
+  <i class="fas fa-eye" aria-hidden="true"></i>
+  <span id="view-count-{{ post_url | replace: '/', '-' | replace: '.', '_' }}">Loading...</span> views
+</div>
+
+<script>
+// Firebase-powered view counter
+(function() {
+  const pageUrl = "{{ post_url }}";
+  const elementId = "view-count-{{ post_url | replace: '/', '-' | replace: '.', '_' }}";
+  const viewCountElement = document.getElementById(elementId);
+  
+  // Fallback to localStorage if Firebase not available
+  function fallbackToLocalStorage() {
+    let viewCounts = JSON.parse(localStorage.getItem('pageViewCounts') || '{}');
+    let sessionViews = JSON.parse(sessionStorage.getItem('sessionViews') || '{}');
+    
+    // Only increment if we're actually on this page and haven't viewed it in this session
+    if (!sessionViews[pageUrl] && window.location.pathname === pageUrl) {
+      viewCounts[pageUrl] = (viewCounts[pageUrl] || 0) + 1;
+      sessionViews[pageUrl] = true;
+      localStorage.setItem('pageViewCounts', JSON.stringify(viewCounts));
+      sessionStorage.setItem('sessionViews', JSON.stringify(sessionViews));
+    }
+    
+    const currentViews = viewCounts[pageUrl] || 0;
+    if (viewCountElement) {
+      viewCountElement.textContent = currentViews.toLocaleString();
+    }
+  }
+  
+  // Wait for Firebase to be available
+  function waitForFirebase(callback, maxAttempts = 50, attempt = 1) {
+    if (window.firebaseDatabase) {
+      callback();
+    } else if (attempt < maxAttempts) {
+      setTimeout(() => waitForFirebase(callback, maxAttempts, attempt + 1), 100);
+    } else {
+      console.log('Firebase not available, using localStorage fallback');
+      fallbackToLocalStorage();
+    }
+  }
+  
+  function initFirebaseViewCounter() {
+    try {
+      const database = window.firebaseDatabase;
+      const ref = window.firebaseRef;
+      const get = window.firebaseGet;
+      const set = window.firebaseSet;
+      const increment = window.firebaseIncrement;
+      
+      // Clean URL for Firebase key (remove special characters)
+      const cleanUrl = pageUrl.replace(/[.#$[\]]/g, '_').replace(/^\/+|\/+$/g, '') || 'home';
+      
+      
+      const viewRef = ref(database, `views/${cleanUrl}`);
+      
+      // Check if this page was viewed in this session
+      const sessionKey = `firebase_viewed_${cleanUrl}`;
+      const hasViewedInSession = sessionStorage.getItem(sessionKey);
+      
+      // Get current view count
+      get(viewRef).then((snapshot) => {
+        const currentCount = snapshot.val() || 0;
+        
+        // Display current count
+        if (viewCountElement) {
+          viewCountElement.textContent = currentCount.toLocaleString();
+        }
+        
+        // Only increment count if we're actually on this page and haven't viewed it in this session
+        if (!hasViewedInSession && window.location.pathname === pageUrl) {
+          set(viewRef, increment(1)).then(() => {
+            // Update display with new count
+            if (viewCountElement) {
+              viewCountElement.textContent = (currentCount + 1).toLocaleString();
+            }
+            // Mark as viewed in this session
+            sessionStorage.setItem(sessionKey, 'true');
+          }).catch((error) => {
+            console.error('Error incrementing view count:', error);
+          });
+        }
+      }).catch((error) => {
+        console.error('Error getting view count:', error);
+        fallbackToLocalStorage();
+      });
+      
+      // Send to Google Analytics if available
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          'page_title': document.title,
+          'page_location': window.location.href,
+          'custom_parameter': 'firebase_view_counter'
+        });
+      }
+      
+    } catch (error) {
+      console.error('Firebase view counter error:', error);
+      fallbackToLocalStorage();
+    }
+  }
+  
+  // Initialize when Firebase is ready
+  waitForFirebase(initFirebaseViewCounter);
+})();
+</script>

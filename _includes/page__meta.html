@@ -27,5 +27,10 @@
         {% endif %}
       </span>
     {% endif %}
+
+    {% unless document.show_views == false %}
+      {% if document.read_time or document.show_date %}<span class="page__meta-sep"></span>{% endif %}
+      {% include view-counter.html post_url=document.url %}
+    {% endunless %}
   </p>
 {% endif %}

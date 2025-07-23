@@ -103,6 +103,16 @@ analytics:
     tracking_id          :
     anonymize_ip         : # true, false (default)
 
+# Firebase Configuration for View Counter
+firebase:
+  api_key: "AIzaSyDGf7VklgsmmFMzSaQj0mHVQIPHZw2pcRY"
+  auth_domain: "myhomepage-78f7b.firebaseapp.com"
+  database_url: "https://myhomepage-78f7b-default-rtdb.firebaseio.com"
+  project_id: "myhomepage-78f7b"
+  storage_bucket: "myhomepage-78f7b.firebasestorage.app"
+  messaging_sender_id: "159312477443"
+  app_id: "1:159312477443:web:44419baa195fa5d7627d36"
+
 
 # Site Author
 author:
@@ -112,9 +122,9 @@ author:
   location         : #"Korea"
   email            :
   links:
-    - label: "Email"
-      icon: "minseok_jeon@korea.ac.kr"
-      # url: "mailto:your.name@email.com"
+    # - label: "Email"
+    #   icon: "minseok_jeon@korea.ac.kr"
+    #   # url: "mailto:your.name@email.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
