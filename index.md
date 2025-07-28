@@ -96,6 +96,7 @@ More specifically, my research aims to design domain-specific programming langua
   
 &nbsp;  
 # Talks
++ 성공적인 연구를 위한 문제 발견하기. 소프트웨어 분석 연구실 세미나, Korea University. Jul 18 2025  [[slides](/papers/problem_slides.pdf)]
 + 될 때까지 개선하기. SIGPL Summer School, Sungkyunkwan University. Aug. 23 2024  [[slides](/papers/SIGPL_2024_Aug.pdf)]
 + PL4XGL: A Programming Language Approach to Explainable Graph Learning. Paper presentation at PLDI 2024. Copenhagen, Denmark. June 27 2024 [[slides](/papers/PLDI2024_slides.pdf)]
 + PL4XGL: 프로그래밍 언어 기법을 활용한 설명 가능한 그래프 기계학습 방법. KAIST (ProSysLab Seminar). May 03 2024 [[slides](/papers/PL4XGL_ProSys_slide.pdf)]
