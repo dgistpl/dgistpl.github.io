@@ -8,19 +8,30 @@ This is Minseok Jeon's personal academic homepage built with Jekyll using the Mi
 
 ## Development Commands
 
+### Setup
+```bash
+bundle install    # Install Ruby gems (Jekyll dependencies)
+npm install      # Install Node.js dependencies (for JavaScript build tools)
+```
+
 ### Build and Serve
-- `bundle exec jekyll serve` - Start development server (standard Jekyll command)
-- `bundle exec jekyll build` - Build the site for production
+```bash
+bundle exec jekyll serve    # Start development server at http://localhost:4000
+bundle exec jekyll build    # Build the site for production (outputs to _site/)
+```
 
 ### JavaScript Development  
-- `npm run build:js` - Build and minify JavaScript files (runs uglify + add-banner)
-- `npm run uglify` - Minify JavaScript assets
-- `npm run add-banner` - Add banner to JavaScript files
-- `npm run watch:js` - Watch JavaScript files for changes and auto-rebuild
+```bash
+npm run build:js    # Build and minify JavaScript files (runs uglify + add-banner)
+npm run uglify      # Minify JavaScript assets only
+npm run add-banner  # Add banner to JavaScript files only
+npm run watch:js    # Watch JavaScript files for changes and auto-rebuild
+```
 
-### Dependencies
-- `bundle install` - Install Ruby gems (Jekyll dependencies)
-- `npm install` - Install Node.js dependencies (for JavaScript build tools)
+### Testing and Validation
+- No automated tests configured - manual testing via local server required
+- Check Firebase view counter functionality on localhost:4000
+- Validate JavaScript minification with `npm run build:js`
 
 ## Architecture
 
@@ -34,10 +45,15 @@ This is Minseok Jeon's personal academic homepage built with Jekyll using the Mi
 
 ### Custom Features
 - **Firebase View Counter**: Custom view tracking system using Firebase Realtime Database
-  - Configuration in `_config.yml` under `firebase:` section
-  - Implementation in `_includes/firebase-config.html` and `_includes/view-counter.html`
-  - Fallback to localStorage if Firebase unavailable
-  - Session-based counting to prevent multiple counts per session
+  - Configuration in `_config.yml` under `firebase:` section  
+  - Implementation files:
+    - `_includes/firebase-config.html`: Firebase SDK initialization and global setup
+    - `_includes/view-counter.html`: View counting logic with localStorage fallback
+  - Features:
+    - Session-based counting (one count per session per page)
+    - Automatic fallback to localStorage if Firebase unavailable
+    - Integration with Google Analytics event tracking
+    - Real-time view count display with number formatting
 
 ### Key Customizations
 - **Author Profile**: Enhanced author profile with post-specific version (`_includes/author-profile-post.html`)
@@ -86,9 +102,25 @@ This site extends the Minimal Mistakes theme:
 - SCSS customizations in `_sass/` directory
 - JavaScript enhancements for Firebase integration
 
+## Development Workflow
+
+### Making Changes
+1. Edit content files (markdown in `_posts/`, `courses/`, etc.)
+2. For JavaScript changes: run `npm run watch:js` during development
+3. Test locally with `bundle exec jekyll serve`
+4. Build production assets with `npm run build:js` before committing
+5. Commit changes (site auto-deploys via GitHub Pages)
+
+### Firebase View Counter Development
+- Firebase config is in both `_config.yml` and hardcoded in `_includes/firebase-config.html`
+- Test view counter functionality requires actual page loads (not just Jekyll compilation)
+- View counts are stored with cleaned URLs as keys (special chars removed)
+- Session storage prevents multiple counts per browser session
+
 ## Important Notes
 
-- The site is designed for GitHub Pages deployment
-- Firebase API keys are intentionally public (database has restrictive read/write rules)
-- JavaScript build process handles asset minification and banner addition
-- All paper PDFs and academic materials are version-controlled
+- **Deployment**: Site auto-deploys to GitHub Pages on push to master branch
+- **Firebase**: API keys are intentionally public (database has read-only rules)
+- **Assets**: JavaScript build process handles minification and banner addition
+- **Content**: All paper PDFs and academic materials are version-controlled
+- **Theme**: Extends Minimal Mistakes theme - avoid overriding core theme files when possible

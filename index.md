@@ -12,7 +12,15 @@ Research Professor
 [Dept. of Computer Science and Engineering](https://cs.korea.ac.kr/cs/index.do),    
 [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://korea.ac.kr/mbshome/mbs/university/index.do),    
 [[Curriculum Vitae (CV)](new_cv/cv.pdf)]  
-  
+
+
+<div style="border: 2px solid #4CAF50; border-radius: 8px; padding: 20px; margin: 20px 0; background-color: #f8fff8;">
+<strong>I will be joining <a href="https://www.dgist.ac.kr/">DGIST</a> (Daegu Gyeongbuk Institute of Science and Technology) as an Assistant Professor in the <a href="https://ee.dgist.ac.kr/">Department of Electrical Engineering and Computer Science</a> starting in September 2025!</strong>
+
+<p><strong>🎓 I am actively recruiting strongly motivated graduate/undergraduate students and postdocs to join my research group at DGIST. If you are interested in working on programming languages, program synthesis, or related areas, please feel free to reach out!</strong></p>
+</div>
+
+ 
   
 # About Me
 I am a research professor at [Korea University](https://www.korea.ac.kr/). 
