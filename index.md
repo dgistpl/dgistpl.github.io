@@ -17,7 +17,7 @@ Research Professor
 <div style="border: 2px solid #4CAF50; border-radius: 8px; padding: 20px; margin: 20px 0; background-color: #f8fff8;">
 <strong>I will be joining <a href="https://www.dgist.ac.kr/">DGIST</a> (Daegu Gyeongbuk Institute of Science and Technology) as an Assistant Professor in the <a href="https://ee.dgist.ac.kr/">Department of Electrical Engineering and Computer Science</a> starting in September 2025!</strong>
 
-<p><strong>🎓 I am actively recruiting motivated graduate/undergraduate students and postdocs to join my research group at DGIST. If you are interested in working on programming languages, program synthesis, or related areas, please feel free to reach out!</strong></p>
+<p><strong>🎓 I am actively recruiting motivated graduate/undergraduate students and postdocs to join my research group at DGIST. If you are interested in working on programming languages, program synthesis, or related areas, please feel free to reach out at <a href="mailto:minseok_jeon@dgist.ac.kr">minseok_jeon@dgist.ac.kr</a>!</strong></p>
 </div>
 
  
@@ -139,4 +139,3 @@ More specifically, my research aims to design domain-specific programming langua
 + OOPSLA 2018, Boston, USA. 2018/Nov/4 - 2018/Nov/11. [[photos](https://photos.google.com/share/AF1QipP7fy5Ns5z4Sy1TYTuPEp77spDsrG6wZPjp2LxGqDA2WKlmwOmFHuG4uRxETTGpFw?key=WGhVOWtPRkpLS0xpWEpKVEthNWczZXpxV0ZvNUlR)] 
 + OOPSLA 2017, Vancouver, Canada. 2017/Oct/23 - 2017/Oct/27. [[photos](https://photos.google.com/share/AF1QipMzIt3Jd4yTlwBg-at0ocKlGelQ08QT3M13hP6b79Xo4IE8xGLBvwxzMlmL8gYXYw?key=Z0tQOFV3RDFsRXNfc1ExQ2haWDRJTFlBZkZHQkFR)] 
   
-
