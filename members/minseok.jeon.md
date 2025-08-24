@@ -12,7 +12,7 @@ I am an Assistant Professor at DGIST, leading the PLX Lab. I received my Ph.D. f
 
 My research focuses on developing domain-specific languages (DSLs) and program synthesis algorithms to address various challenges in programming languages, software engineering, and machine learning.  <br>
 
-    <a href="/cv/minseok_cv.pdf" target="_blank">Curriculum Vitae (CV)</a></p>
+    <a href="/cv/minseok_cv.pdf" target="_blank">Curriculum Vitae (CV)</a>
   </div>
 </div>
 
