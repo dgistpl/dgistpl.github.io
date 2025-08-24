@@ -1,0 +1,360 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage{kotex}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+\usepackage{multirow}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheadingTwo}[2]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      %\textbf{#1} & \textbf{\small #2} \\
+      \textit{#1} & \textit{#2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    {\Huge \scshape Minseok Jeon} \\ \vspace{1pt}
+    Assistant Professor\\\vspace{1pt}
+    %Department of Computer Science and Engineering\\\vspace{1pt}
+    DGIST\\\vspace{1pt}
+        
+    %123 Street Name, Town, State 12345 \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ +82-10-4139-4729 ~ \href{mailto:minseok_jeon@dgist.ac.kr}{\raisebox{-0.2\height}\faEnvelope\  \underline{minseok$\_$jeon@dgist.ac.kr}} ~ 
+    % \href{https://minseokjgit.github.io/}{\raisebox{-0.2\height}\faHome\ \underline{https://minseokjgit.github.io/}} 
+    \vspace{-8pt}
+\end{center}
+
+\section{Research Interests}
+I am broadly interested in developing programming language techniques for addressing challenges in various fields, including software engineering and machine learning.
+%
+Specifically, I take pleasure in designing domain-specific programming languages (DSLs) and developing program synthesis algorithms to address the challenges.
+%
+In particular, my focus is on designing DSLs and synthesis algorithms for effective pointer analysis, a key component in compiler optimization, and explainable graph machine learning. 
+% %
+I am also interested in developing DSLs tailored to identify effective test cases in system software testing.
+%
+% In particular, my focus is on developing DSLs and synthesis algorithms for effective pointer analysis and explainable graph machine learning.
+
+
+% In particular, my focus is on designing DSLs and synthesis algorithms for effective pointer analysis, a key component in compiler optimization. 
+% %
+% I am also interested in developing DSLs tailored to identify effective test cases in system software testing.
+
+
+
+
+
+
+
+% I am interested in static program analysis, with a focus on pointer analysis, 
+% which is a key component in compiler optimization and various other software engineering techniques.
+% I am also interested in software testing to find bugs in system software. 
+
+% \begin{itemize}[itemsep=-1pt, parsep=3pt]
+%   \item\small \textbf{Static Program Analysis}, focusing on pointer analysis, for compiler optimizations and automatic detection of software bugs and vulnerabilities.
+
+%   \item\small \textbf{Software testing} for automatically generating effective test inputs to detect bugs in system software.
+
+%   \item\small \textbf{Program Synthesis} for automatically generating programs from domain-specific programming languages.
+% \end{itemize}
+
+% To address the research problems, I have designed domain-specific programming languages (DSLs) tailored to the problems and developed program synthesis algorithms that automatically generate programs (solutions) in the DSLs.
+
+
+%-----------EDUCATION-----------
+\section{Education Background}
+  \resumeSubHeadingListStart
+  \resumeSubheadingTwo
+      %{State University}{Mar. 2017 -- Feb 2023}
+      {Integrated M.S. $\&$ Ph.D. in Computer Science and Engineering. Korea University}{Mar. 2017 -- Feb 2023}\vspace{-12pt}
+      \resumeSubheadingTwo
+      %{State University}{Mar. 2017 -- Feb 2023}
+      {B.S. in Computer Science and Engineering. Korea University}{Mar. 2011 -- Feb 2017}      
+  \resumeSubHeadingListEnd
+
+%------Employment-------
+
+\section{Employment History}
+\resumeSubHeadingListStart
+\resumeSubheadingTwo
+{Assistant Professor. DGIST}{September. 2025 -- Present}\vspace{-10pt}  
+\resumeSubheadingTwo
+    {Research Professor. Korea University}{July. 2024 -- August. 2025}\vspace{-10pt}  
+    \resumeSubheadingTwo
+    {Postdoctoral Researcher. Korea University}{Mar. 2023 -- June. 2024}\vspace{-15pt}  
+    % \resumeSubheading
+    % {Korea University}{Mar. 2023 -- Aug 2023}
+    % {Postdoctoral Researcher. Korea University}{Mar. 2023 -- Present}\vspace{-1pt}      
+\resumeSubHeadingListEnd
+
+
+%------Publications-------
+\section{Publications}
+Published papers on programming languages in premier conferences
+(OOPSLA 2025, PLDI 2024, POPL 2022, OOPSLA 2020, OOPSLA 2018, and OOPSLA 2017) and
+journal (TOPLAS 2019). 
+\begin{enumerate}
+  \item {
+    Donguk Kim, \underline{Minseok Jeon*}, Doha Hwang, Hakjoo Oh* (*corresponding authors).\\
+    \textit{PAFL: Enhancing Fault Localizers by Leveraging Project-Specific Fault Patterns.}\\
+    OOPSLA 2025: ACM Conference on Object-oriented Programming, Systems, Languages, and Applications. October 2025
+  }    
+  \item {
+    \underline{Minseok Jeon}, Jihyeok Park, and Hakjoo Oh.\\
+    \textit{PL4XGL: A Programming Language Approach to Explainable Graph Learning.}\\
+    PLDI 2024 : ACM SIGPLAN Conference on Programming Language Design and Implementation. June 2024
+  }  
+  \item {
+    Jinkook Kim, \underline{Minseok Jeon}, Sejeong Jang, and Hakjoo Oh.\\
+    \textit{Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics.}\\
+    ICST 2023: IEEE International Conference on Software Testing, Verification and Validation (Industry Track). April 2023
+  }
+  \item{
+    \underline{Minseok Jeon} and Hakjoo Oh.\\
+    \textit{Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for
+    Object-Oriented Programs.}\\
+    POPL 2022: The 49th ACM SIGPLAN Symposium on Principles of Programming Languages. January 2022
+  }
+  \item{
+    Donghoon Jeon, \underline{Minseok Jeon}, and Hakjoo Oh.\\
+    \textit{A Practical Algorithm for Learning Disjunctive Abstraction Heuristics in Static Program
+    Analysis.}\\
+    IST: Information and Software Technology. July 2021
+  }
+  \item{
+    \underline{Minseok Jeon}, Myungho Lee, and Hakjoo Oh.\\
+    \textit{Learning Graph-based Heuristics for Pointer Analysis without Handcrafting ApplicationSpecific Features.}\\
+    OOPSLA 2020: ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications. November 2020
+  }
+  \item{\underline{Minseok Jeon}$^*$, Sehun Jeong$^*$, Sungdeok Cha, and Hakjoo Oh (*co-first authors).\\
+  \textit{A Machine-Learning Algorithm with Disjunctive Model for Data-Driven Program Analysis.}\\
+  TOPLAS: ACM Transactions on Programming Languages and Systems. June 2019
+  }
+  \item{\underline{Minseok Jeon}, Sehun Jeong, and Hakjoo Oh.\\
+  \textit{Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling.}\\
+  OOPSLA 2018: ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications. November 2018
+  }
+  \item {Sehun Jeong$^*$, \underline{Minseok Jeon}$^*$, Sungdeok Cha, and Hakjoo Oh  (*co-first
+  authors).\\\textit{Data-Driven Context-Sensitivity for Points-to Analysis.}\\
+  OOPSLA 2017: ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications. October 2017
+  }
+\end{enumerate}
+
+
+% %------Ongoing Projects-------
+% \section{Ongoing Projects}
+% Ongoing research projects with students.
+% \begin{enumerate}
+%   \item {%Donguk Kim and Minseok Jeon\\
+%     \textit{Project-Aware Fault Localization via Synthesizing Suspiciousness Score Updating Rules}\\
+%     with Donguk Kim (undergraduate student)
+%     }
+%   \item {
+%     \textit{Programming Language-based Automated Feature Engineering for Graph Neural Networks}\\
+%     with Seunghyun Park (undergraduate student)
+%     }
+%   \item {%Seokhyun Lee and Minseok Jeon\\
+%     \textit{Automatically Classifying Minor Revisions in Programming Assignments}\\
+%     with Seokhyun Lee (Ph.D. student)
+%     }  
+% \end{enumerate}
+  
+% My ongoing projects.
+% \begin{enumerate}
+%   \item {\textit{Learning Tunneling Hueristics for JavaScript Static Analysis}}
+%   \item {\textit{Learning Cominations of Selective Context Sensitivity and Context Tunneling for Java Pointer Analysis}}
+%   \item {\textit{Understanding Context Tunneling in Java Pointer Analysis}}
+% \end{enumerate}
+
+
+
+\section{Research Grants}
+\begin{enumerate}
+  \item{설명 가능한 그래프 기계학습 방법 개발을 위한 프로그래밍 언어 기술 연구 (Programming Language Technology for Explainable Graph Machine Learning)
+}
+\end{enumerate}
+
+%------Service-------
+\section{Service}
+Program committee (PC) members:
+\begin{enumerate}
+  \item{ICFP 2025: ACM SIGPLAN International Conference on Functional Programming}
+  \item{SOAP 2025: ACM SIGPLAN International Workshop on the State Of the Art in Program Analysis}
+  \item{OOPSLA 2024: ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications}
+\end{enumerate}
+Journal Reviewer:
+\begin{enumerate}
+\item{TOSEM: ACM Transactions on Software Engineering and Methodology (2025)}  
+\end{enumerate}
+
+
+\section{Teaching Experience}
+\begin{itemize}
+  \item{{\bf 2025 Fall:} Program Analysis (DGIST IC637)}
+  \item{{\bf 2024 Fall:} Data Structure (Korea University COSE214)}
+\end{itemize}
+
+
+\section{Talks}
+
+\begin{enumerate}
+  \item{컨텍스트 터널링: 고정관념에 도전하기. SIGPL Summer School, Seogang University. Aug. 21 2025.}
+
+  \item{성공적인 연구를 위한 문제 발견하기. SAL Lab Seminar, Korea University. Jul. 18 2025.}
+
+  \item{될 때까지 개선하기. SIGPL Summer School, Sungkyunkwan University. Aug. 23 2024.}
+
+  \item{PL4XGL: A Programming Language Approach to Explainable Graph Learning. Paper presentation at PLDI 2024. Copenhagen, Denmark. June 27 2024.}
+  
+  \item{PL4XGL: 프로그래밍 언어 기법을 활용한 설명 가능한 그래프 기계학습 방법. KAIST (ProSysLab Seminar). May 03 2024.}
+  
+  \item{그래프 패턴 언어를 활용하여 다양한 분야의 핵심 문제 접근하기. STAAR Workshop. KAIST. Jan 30 2024.}
+
+  \item{Data-Driven Static Analysis. POSTECH. Pohang, Korea. Nov 15 2023.}
+
+  \item{Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object- Oriented Programs. STAAR Workshop. Jeju. Feb 11 2022.}
+
+  \item{Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object- Oriented Programs. Paper presentation at POPL 2022. Philadelphia,  USA. Jan 19 2022.}
+ 
+  \item{Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application- Specific Features. KSC2020.}
+ 
+  \item{Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application- Specific Features. Paper presentation at OOPSLA 2020. Online. Nov 20 2020.}
+ 
+  \item{Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling. Paper presen- tation at OOPSLA 2018. BOSTON, USA. Nov 8 2018.}
+ 
+  \item{Data-Driven Context-Sensitivity for Points-to Analysis, KCC 2018. JeJu, Korea.}
+ 
+  \item{Data-Driven Context-Sensitivity for Points-to Analysis, KCSE 2018. Pyeongchang, Korea.}
+\end{enumerate}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+
+
+
+
+% \section{Courses}
+% \begin{itemize}
+%   \item{COSE 214}
+% \end{itemize}
+
+\end{document}
+

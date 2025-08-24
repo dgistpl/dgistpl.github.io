@@ -3,7 +3,7 @@ title: Courses
 layout: collection 
 author_profile: false 
 ---
-<!--img src="images/me.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
+<!--img src="images/minseokjeon.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
  
 
 ## Fall 2025

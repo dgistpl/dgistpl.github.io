@@ -1,5 +1,20 @@
 # main links
 main:
+  - title: "About"
+    url: /
+    
+  - title: "Members"
+    url: /members/
+    
+  - title: "Research"
+    url: /research/
+    
+  - title: "Publications"
+    url: /publications/
+    
+  - title: "Talks"
+    url: /talks/
+    
   - title: "Courses"
     url: /courses/
 

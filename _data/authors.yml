@@ -1,10 +1,21 @@
-Minseok Jeon:
-  name        : "전민석"
-  avatar      : "/images/me.png"
-  links:
-    # - label: "Email"
-    #   icon: "fas fa-fw fa-envelope-square"
-    #   url: "mailto:minseok_jeon@korea.ac.kr"
-    #- label: "Website"
-    #  icon: "fas fa-fw fa-link"
-    #  url: "https://minseokjgit.github.io/"
+minseok_jeon:
+  name: Minseok Jeon
+  url: /members/minseok.jeon
+  ko-name: 전민석
+  avatar: /images/minseokjeon.png
+  image: /images/minseokjeon.png
+  position: Assistant Professor
+  email: minseok_jeon@dgist.ac.kr
+  scholar: 3AuKv8EAAAAJ
+  dblp: ""
+  googleplus: ""
+  telegram: ""
+  meidum: ""
+  github: ""
+  npm: ""
+  youtube: ""
+  twitter: ""
+  facebook: ""
+  linkedin: ""
+
+

@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "default" #"default", "air", "aqua", "contrast", "dar
 
 # Site Settings
 locale                   : #"en-US"
-title                    : "Minseok Jeon's Homepage"
+title                    : #"Minseok Jeon's Homepage"
 title_separator          : #"-"
 subtitle                 : #"Subtitle" # site tagline that appears below site title in masthead
 name                     : #"Minseok Jeon"
@@ -116,15 +116,18 @@ firebase:
 
 # Site Author
 author:
-  name             : #"Minseok Jeon"
+  name             : "Minseok Jeon"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : #"Hi"
   location         : #"Korea"
-  email            :
+  email            : "minseok_jeon@dgist.ac.kr"
   links:
-    # - label: "Email"
-    #   icon: "minseok_jeon@korea.ac.kr"
-    #   # url: "mailto:your.name@email.com"
+    - label: "Email"
+      icon: "fab fa-fw fa-envelope-square"
+      url: "mailto:minseok_jeon@dgist.ac.kr"
+    - label: "Google Scholar"
+      icon: "fab fa-fw fa-google-scholar"
+      url: "https://scholar.google.com/citations?user=3AuKv8EAAAAJ&hl=ko&oi=ao"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"

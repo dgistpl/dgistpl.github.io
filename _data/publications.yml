@@ -1,0 +1,120 @@
+- year: 2025
+  papers:
+    - title: "PAFL: Enhancing Fault Localizers by Leveraging Project-Specific Fault Patterns"
+      authors: "Donguk Kim, <u>Minseok Jeon*</u>, Doha Hwang, Hakjoo Oh* (*corresponding authors)"
+      venue: "OOPSLA 2025: ACM Conference on Object-oriented Programming, Systems, Languages, and Applications"
+      links:
+        - type: "PDF"
+          url: "/papers/PAFL.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/10.1145/3720526"
+
+- year: 2024
+  papers:
+    - title: "PL4XGL: A Programming Language Approach to Explainable Graph Learning"
+      authors: "<u>Minseok Jeon</u>, Jihyeok Park, and Hakjoo Oh"
+      venue: "PLDI 2024: ACM SIGPLAN Conference on Programming Language Design and Implementation"
+      links:
+        - type: "PDF"
+          url: "/papers/PLDI24.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/10.1145/3656464"
+        - type: "Slides"
+          url: "/papers/PLDI2024_slides.pdf"
+        - type: "Repo"
+          url: "https://github.com/kupl/PL4XGL"
+        - type: "연구후기"
+          url: "https://minseokjgit.github.io/ep3/"
+
+- year: 2023
+  papers:
+    - title: "Automating Endurance Test for Flash-based Storage Devices in Samsung Electronics"
+      authors: "Jinkook Kim, <u>Minseok Jeon</u>, Sejeong Jang, and Hakjoo Oh"
+      venue: "ICST 2023: International Conference on Software Testing, Verification and Validation (Industry Track)"
+      links:
+        - type: "PDF"
+          url: "/papers/ARES.pdf"
+        - type: "IEEE Xplore"
+          url: "https://ieeexplore.ieee.org/document/10132302/"
+
+- year: 2022
+  papers:
+    - title: "Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs"
+      authors: "<u>Minseok Jeon</u> and Hakjoo Oh"
+      venue: "POPL 2022: ACM SIGPLAN Symposium on Principles of Programming Languages"
+      links:
+        - type: "PDF"
+          url: "/papers/POPL22_Obj2CFA.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/abs/10.1145/3498720"
+        - type: "Slides"
+          url: "/papers/POPL22_slides.pdf"
+        - type: "Repo"
+          url: "https://github.com/kupl/Obj2CFA"
+        - type: "연구후기"
+          url: "https://minseokjgit.github.io/ep2/"
+
+- year: 2021
+  papers:
+    - title: "A Practical Algorithm for Learning Disjunctive Abstraction Heuristics in Static Program Analysis"
+      authors: "Donghoon Jeon, <u>Minseok Jeon</u>, and Hakjoo Oh"
+      venue: "IST 2021: Information and Software Technology, Volume 135, July 2021"
+      links:
+        - type: "ScienceDirect"
+          url: "https://www.sciencedirect.com/science/article/abs/pii/S0950584921000471?dgcid=coauthor"
+
+- year: 2020
+  papers:
+    - title: "Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features"
+      authors: "<u>Minseok Jeon</u>, Myungho Lee, and Hakjoo Oh"
+      venue: "OOPSLA 2020: ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications"
+      links:
+        - type: "PDF"
+          url: "/papers/Graphick.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/10.1145/3428247"
+        - type: "Slides"
+          url: "/papers/oopsla2020_slide.pdf"
+        - type: "Repo"
+          url: "https://github.com/kupl/Graphick"
+
+- year: 2019
+  papers:
+    - title: "A Machine-Learning Algorithm with Disjunctive Model for Data-Driven Program Analysis"
+      authors: "<u>Minseok Jeon*</u>, Sehun Jeong*, Sungdeok Cha, and Hakjoo Oh (*co-first authors)"
+      venue: "TOPLAS 2019: ACM Transactions on Programming Languages and Systems"
+      links:
+        - type: "PDF"
+          url: "/papers/TOPLAS19.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/10.1145/3293607"
+
+- year: 2018
+  papers:
+    - title: "Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling"
+      authors: "<u>Minseok Jeon</u>, Sehun Jeong, and Hakjoo Oh"
+      venue: "OOPSLA 2018: ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications"
+      links:
+        - type: "PDF"
+          url: "/papers/oopsla18_paper.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/10.1145/3276510"
+        - type: "Slides"
+          url: "/papers/oopsla18_slides.pdf"
+        - type: "Artifact"
+          url: "https://dl.acm.org/do/10.1145/3276931/full/"
+
+- year: 2017
+  papers:
+    - title: "Data-Driven Context-Sensitivity for Points-to Analysis"
+      authors: "Sehun Jeong*, <u>Minseok Jeon*</u>, Sungdeok Cha, and Hakjoo Oh (*co-first authors)"
+      venue: "OOPSLA 2017: ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications"
+      links:
+        - type: "PDF"
+          url: "/papers/oopsla17a.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/10.1145/3133924"
+        - type: "Slides"
+          url: "/papers/oopsla17_slides_jeong_jeon.pdf"
+        - type: "Repo"
+          url: "https://github.com/kupl/Data-Driven-Pointsto-Analysis"

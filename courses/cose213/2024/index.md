@@ -2,7 +2,7 @@
 layout: splash 
 author_profile: false 
 ---
-<!--img src="images/me.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
+<!--img src="images/minseokjeon.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
 ## COSE213 : Data Structure, 2024 Fall
 
 ### Course Information

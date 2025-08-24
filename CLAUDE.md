@@ -28,6 +28,12 @@ npm run add-banner  # Add banner to JavaScript files only
 npm run watch:js    # Watch JavaScript files for changes and auto-rebuild
 ```
 
+### LaTeX CV Compilation
+```bash
+cd cv/
+pdflatex main.tex   # Compile CV from LaTeX source to PDF
+```
+
 ### Testing and Validation
 - No automated tests configured - manual testing via local server required
 - Check Firebase view counter functionality on localhost:4000
@@ -61,6 +67,7 @@ npm run watch:js    # Watch JavaScript files for changes and auto-rebuild
 - **Google Analytics**: Configured with gtag.js (tracking ID: G-KTKXXC6BCQ)
 
 ### File Organization
+- `_data/`: Structured data files (publications.yml, talks.yml, authors.yml, navigation.yml)
 - `_includes/`: Custom HTML includes for modular components
 - `_layouts/`: Page layout templates (customized default.html)
 - `_sass/`: SCSS stylesheets (inherits from Minimal Mistakes)
@@ -68,6 +75,8 @@ npm run watch:js    # Watch JavaScript files for changes and auto-rebuild
 - `courses/`: Course-specific content and materials
 - `papers/`: PDF files for research papers and slides
 - `images/`: Image assets for posts and pages
+- `members/`: Individual member profile pages
+- `publications/`, `research/`, `talks/`: Academic content sections
 
 ## Firebase Configuration
 
@@ -90,9 +99,11 @@ The site uses Firebase for view counting functionality:
 - Store slides/PDFs in course-specific subdirectories
 
 ### Academic Content
-- Research publications listed in `index.md`
+- Research publications listed in `index.md` and structured data in `_data/publications.yml`
 - Papers and slides stored in `/papers/` directory
-- CV maintained as LaTeX source in `new_cv/` directory
+- CV maintained as LaTeX source in `cv/` directory (main.tex -> main.pdf)
+- Member profiles in `members/` directory (markdown files)
+- Talks and presentations data in `_data/talks.yml`
 
 ## Theme Integration
 

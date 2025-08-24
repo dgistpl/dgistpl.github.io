@@ -1,0 +1,72 @@
+- title: "컨텍트 터널링: 고정관념에 도전하기"
+  venue: "SIGPL Summer School, Seogang University"
+  date: "Aug 21 2025"
+  year: 2025
+  slides: "/papers/SIGPL2025.pdf"
+
+
+- title: "성공적인 연구를 위한 문제 발견하기"
+  venue: "소프트웨어 분석 연구실 세미나, Korea University"
+  date: "Jul 18 2025"
+  year: 2025
+  slides: "/papers/problem_slides.pdf"
+
+- title: "될 때까지 개선하기"
+  venue: "SIGPL Summer School, Sungkyunkwan University"
+  date: "Aug. 23 2024"
+  year: 2024
+  slides: "/papers/SIGPL_2024_Aug.pdf"
+
+- title: "PL4XGL: A Programming Language Approach to Explainable Graph Learning"
+  venue: "Paper presentation at PLDI 2024. Copenhagen, Denmark"
+  date: "June 27 2024"
+  year: 2024
+  slides: "/papers/PLDI2024_slides.pdf"
+
+- title: "PL4XGL: 프로그래밍 언어 기법을 활용한 설명 가능한 그래프 기계학습 방법"
+  venue: "KAIST (ProSysLab Seminar)"
+  date: "May 03 2024"
+  year: 2024
+  slides: "/papers/PL4XGL_ProSys_slide.pdf"
+
+- title: "그래프 패턴 언어를 활용하여 다양한 분야의 핵심 문제 접근하기"
+  venue: "STAAR Workshop. KAIST"
+  date: "Jan 30 2024"
+  year: 2024
+  slides: "/papers/ERC_2024_KAIST.pdf"
+
+- title: "Data-Driven Static Analysis"
+  venue: "CSE GSAI Seminar. POSTECH"
+  date: "Nov 15 2023"
+  year: 2023
+  slides: "/papers/POSTECH.pdf"
+
+- title: "Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs"
+  venue: "Paper presentation at POPL 2022. STAAR Workshop. Jeju"
+  date: "Feb 11 2022"
+  year: 2022
+  slides: "/papers/CFA_slides.pdf"
+
+- title: "Return of CFA: Call-Site Sensitivity Can Be Superior to Object Sensitivity Even for Object-Oriented Programs"
+  venue: "Paper presentation at POPL 2022. Philadelphia, USA"
+  date: "Jan 19 2022"
+  year: 2022
+  slides: "/papers/POPL22_slides.pdf"
+
+- title: "Learning Graph-based Heuristics for Pointer Analysis without Handcrafting Application-Specific Features"
+  venue: "Paper presentation at OOPLSA 2020, Online"
+  date: "Nov. 20 2020"
+  year: 2020
+  slides: "/papers/oopsla2020_slide.pdf"
+
+- title: "Precise and Scalable Points-to Analysis via Data-Driven Context Tunneling"
+  venue: "Paper presentation at OOPSLA2018. BOSTON, USA"
+  date: "NOV 8 2018"
+  year: 2018
+  slides: "/papers/oopsla18_slides.pdf"
+
+- title: "Data-Driven Context-Sensitivity for Points-to Analysis"
+  venue: "KCSE2018"
+  date: "Jan 2018"
+  year: 2018
+  slides: "/papers/KCSESlide.pdf"
