@@ -21,11 +21,11 @@ My research focuses on developing domain-specific languages (DSLs) and program s
 
 ## Education
 
-+ **Ph.D. in Computer Science** (2017.03 - 2023.02)  
++ **Ph.D. in Computer Science and Engineering** (2017.03 - 2023.02)  
   [Computer Science Department](https://cs.korea.ac.kr/cs/index.do), [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://www.korea.ac.kr/sites/ko/index.do)  
   Advisor: Prof. [Hakjoo Oh](https://prl.korea.ac.kr/members/hakjoo-oh/)
 
-+ **B.S. in Computer Science** (2011.03 - 2017.02)  
++ **B.S. in Computer Science and Engineering** (2011.03 - 2017.02)  
   [Computer Science Department](https://cs.korea.ac.kr/cs/index.do), [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://www.korea.ac.kr/sites/ko/index.do)  
 
 
