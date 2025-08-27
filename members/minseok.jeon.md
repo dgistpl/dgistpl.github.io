@@ -4,9 +4,11 @@ author_profile: false
 permalink: /members/minseok.jeon/
 ---
 
-<div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
-  <img src="/images/minseokjeon.png" alt="Minseok Jeon" style="width: 200px; height: auto; margin-right: 30px; border-radius: 8px;">
-  <div>
+<div style="margin-bottom: 30px;">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <img src="/images/minseokjeon.png" alt="Minseok Jeon" style="width: 200px; height: auto; border-radius: 8px;">
+  </div>
+  <div style="text-align: left;">
     <h1>Minseok Jeon (전민석)</h1>
 I am an Assistant Professor at DGIST, leading the PLX Lab. I received my Ph.D. from Software Analysis Laboratory at Korea University under the supervision of Prof. Hakjoo Oh. 
 
@@ -23,7 +25,7 @@ My research focuses on developing domain-specific languages (DSLs) and program s
   [Computer Science Department](https://cs.korea.ac.kr/cs/index.do), [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://www.korea.ac.kr/sites/ko/index.do)  
   Advisor: Prof. [Hakjoo Oh](https://prl.korea.ac.kr/members/hakjoo-oh/)
 
-+ **B.S. in Computer Science** (2011.03 - 2017.02)  
++ **B.S. in Computer Science and Engineering** (2011.03 - 2017.02)  
   [Computer Science Department](https://cs.korea.ac.kr/cs/index.do), [College of Informatics](https://info.korea.ac.kr/info/index.do), [Korea University](https://www.korea.ac.kr/sites/ko/index.do)  
 
 
