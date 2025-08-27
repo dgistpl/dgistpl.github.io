@@ -7,7 +7,7 @@ author_profile: false
  
 
 ## Fall 2025
-+ **IC637: Program Analysis**
++ [**IC637: Program Analysis**](./ic637/2025/)
 
 ## Fall 2024
 
