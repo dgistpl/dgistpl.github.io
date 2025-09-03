@@ -2,12 +2,18 @@
 layout: archive
 author_profile: false 
 ---
-<!--img src="images/minseokjeon.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
-# PLX@DGIST
+
+
+
+
 
 
 <div style="border: 2px solid #2196F3; border-radius: 8px; padding: 20px; margin: 20px 0; background-color: #f0f8ff;">
 <strong>Welcome to PLX Lab at DGIST!</strong>
+</div>
+
+<div style="text-align: center;">
+<img src="images/logo/black_transparent_.png" alt="PLX@DGIST Logo" width="200">
 </div>
 
 Our research group aims to develop programming language technologies for addressing challenges in various computer science domains.
@@ -23,16 +29,17 @@ For more detail, please see [Research]() and [Publications]().
 # Contact Information
 
 <div style="border: 2px solid #2196F3; border-radius: 8px; padding: 20px; margin: 20px 0; background-color: #f0f8ff;">
-<strong>We are recruiting motivated graduate and undergraduate students, interested in developing programming language technologies for addressing various computer science domains.</strong>
+<strong>We are recruiting motivated graduate and undergraduate students, interested in developing programming language technologies.</strong>
 </div>
 
+minseok_jeon (at) dgist.ac.kr  
++82-53-785-6324  
 Room 211, E7 Building  
 [Department of Computer Science and Engineering](https://www.dgist.ac.kr/eecs/index.do)  
 [DGIST](https://www.dgist.ac.kr/eng/)  
 333, Techno jungang-daero,   
 Hyeonpung-eup, Dalseong-gun,   
-Daegu, Republic of Korea
-
+Daegu, Republic of Korea  
 {% assign author = site.data.authors.minseok_jeon %}
 <div style="margin-top: 40px;">
   <a href="mailto:{{ author.email }}" class="btn btn--primary">
@@ -42,3 +49,4 @@ Daegu, Republic of Korea
     <i class="fas fa-graduation-cap"></i>
   </a>
 </div>
+

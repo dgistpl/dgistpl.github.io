@@ -24,7 +24,7 @@ bundle exec jekyll build    # Build the site for production (outputs to _site/)
 ```bash
 npm run build:js    # Build and minify JavaScript files (runs uglify + add-banner)
 npm run uglify      # Minify JavaScript assets only
-npm run add-banner  # Add banner to JavaScript files only
+npm run add-banner  # Add banner to JavaScript files using banner.js
 npm run watch:js    # Watch JavaScript files for changes and auto-rebuild
 ```
 
@@ -35,9 +35,9 @@ pdflatex main.tex   # Compile CV from LaTeX source to PDF
 ```
 
 ### Testing and Validation
-- No automated tests configured - manual testing via local server required
-- Check Firebase view counter functionality on localhost:4000
-- Validate JavaScript minification with `npm run build:js`
+- **No automated test suite** - this site relies on manual testing via local server
+- Test Firebase view counter functionality on localhost:4000 with real page loads
+- Validate JavaScript minification with `npm run build:js` before deployment
 
 ## Architecture
 
