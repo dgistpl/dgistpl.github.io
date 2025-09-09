@@ -24,5 +24,6 @@ Interpretation Perspective.](https://mitpress.mit.edu/9780262043410/introduction
 ### Slides
 
 + Course Overview: [lecture0.pdf](slides/lecture0.pdf)
-+ Introduction to Program Analysis: [lecture1.pdf](slides/lecture1.pdf)
++ Introduction to Program Analysis: [lecture1.pdf](slides/lecture1.pdf) [review.pdf](slides/lecture1_review.pdf)
++ Static Analysis Example 1: [lecture2.pdf](slides/lecture2.pdf)
 
