@@ -29,7 +29,7 @@ For more detail, please see [Research]() and [Publications]().
 # Contact Information
 
 <div style="border: 2px solid #2196F3; border-radius: 8px; padding: 20px; margin: 20px 0; background-color: #f0f8ff;">
-<strong>We are recruiting motivated graduate and undergraduate students, interested in developing programming language technologies.</strong>
+<strong>We are recruiting motivated graduate, undergraduate students, and postdocs, interested in developing programming language technologies.</strong>
 </div>
 
 minseok_jeon (at) dgist.ac.kr  
