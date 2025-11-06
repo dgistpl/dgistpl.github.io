@@ -13,6 +13,9 @@ author_profile: false
 
 + [**COSE213 (Korea University): Data Structure**](./cose213/2024/)
 
+
+## AI-Generated Courses
++ [**AI-Generated Data Strueture Course**](./ai_ds/2025/)
  
   
   
