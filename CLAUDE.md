@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is Minseok Jeon's personal academic homepage built with Jekyll using the Minimal Mistakes theme. The site serves as both a portfolio and blog for a research professor at Korea University, showcasing research publications, academic activities, and course materials.
+This is the PLX Lab website at DGIST (Daegu Gyeongbuk Institute of Science and Technology), led by Professor Minseok Jeon. Built with Jekyll using the Minimal Mistakes theme, the site serves as both a research group homepage and academic blog, showcasing research publications (focusing on PL4SE and PL4ML), lab member profiles, academic activities, and course materials.
 
 ## Development Commands
 
@@ -82,9 +82,8 @@ pdflatex main.tex   # Compile CV from LaTeX source to PDF
 
 The site uses Firebase for view counting functionality:
 - Database: Firebase Realtime Database
-- Configuration stored in `_config.yml` 
+- Configuration stored in both `_config.yml` and hardcoded in `_includes/firebase-config.html`
 - API keys and configuration are public (read-only database rules)
-- Setup documentation available in `FIREBASE_SETUP.md`
 
 ## Content Management
 
