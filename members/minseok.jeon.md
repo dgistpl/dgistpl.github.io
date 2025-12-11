@@ -43,14 +43,14 @@ My research focuses on developing domain-specific languages (DSLs) and program s
 ## Professional Activities
 
 + Committee Members
-
+  + SOAP 2026: ACM SIGPLAN Workshop on the State of the Art of Program Analysis
   + [ICFP 2025](https://icfp25.sigplan.org/track/icfp-2025-papers): ACM SIGPLAN International Conference on Functional Programming
   + [SOAP 2025](https://pldi25.sigplan.org/home/SOAP-2025): ACM SIGPLAN Workshop on the State of the Art of Program Analysis
   + [OOPSLA 2024](https://2024.splashcon.org/track/splash-2024-oopsla): ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications
 
 + Journal Reviewers
 
-  + TOSEM: ACM Transactions on Software Engineering and Methodology (2025)
+  + TOSEM: ACM Transactions on Software Engineering and Methodology (2025, 2026)
 
 ## Publications
 Please see [Publications](/publications).

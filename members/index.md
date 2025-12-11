@@ -99,8 +99,30 @@ permalink: /members/
 </div>
 
 <div class="section-title">Undergraduate Interns</div>
-<div class="recruiting-message">
-  Currently recruiting motivated undergraduate students!
+<div class="member-grid">
+  {% for author_id in site.data.authors %}
+    {% assign author = author_id[1] %}
+    {% if author.position == "Undergraduate Intern" %}
+    <div class="member-card">
+      {% if author.url %}
+      <a href="{{ author.url }}">
+        <img src="{{ author.avatar }}" alt="{{ author.name }}" class="member-photo">
+      </a>
+      {% else %}
+        <img src="{{ author.avatar }}" alt="{{ author.name }}" class="member-photo">
+      {% endif %}
+      <div class="member-name">
+        {% if author.url %}
+        <a href="{{ author.url }}" style="text-decoration: none; color: inherit;">{{ author.name }}</a>
+        {% else %}
+        {{ author.name }}
+        {% endif %}
+      </div>
+      <div class="member-name-kr">{{ author.ko-name }}</div>
+      <div class="member-title">{{ author.position }}</div>
+    </div>
+    {% endif %}
+  {% endfor %}
 </div>
 
 <!-- <div class="section-title">Alumni</div>
