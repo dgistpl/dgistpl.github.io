@@ -469,12 +469,11 @@
   <!-- ════════ WINDOWS PANEL ════════ -->
   <div class="os-panel" id="panel-win">
 
-    <!-- Option A – npm via PowerShell -->
+    <!-- Windows Installation via Command Prompt -->
     <div class="card">
       <div class="card-header">
         <span style="font-size:1.2rem">&#128241;</span>
-        <h3>Option A &mdash; npm via PowerShell</h3>
-        <span class="method-badge">Recommended</span>
+        <h3>Windows Installation via Command Prompt</h3>
       </div>
       <div class="card-body">
         <div class="steps">
@@ -482,8 +481,8 @@
           <div class="step">
             <div class="step-num">1</div>
             <div class="step-content">
-              <p><strong>Open PowerShell</strong><br>
-              Press <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Win</kbd>, type <em>PowerShell</em>, and click <em>Open</em>.</p>
+              <p><strong>Open Command Prompt</strong><br>
+              Press <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Win</kbd>, type <em>cmd</em>, and click <em>Open</em>.</p>
             </div>
           </div>
 
@@ -494,7 +493,7 @@
               You need version <strong>18 or higher</strong>.</p>
               <div class="code-block">
                 <div class="code-header">
-                  <span class="lang-tag">PowerShell</span>
+                  <span class="lang-tag">cmd</span>
                   <button class="copy-btn" onclick="copyCode(this, 'node --version')">Copy</button>
                 </div>
                 <pre><code><span class="c-cmd">node</span> <span class="c-flag">--version</span></code></pre>
@@ -512,14 +511,14 @@
               <p><strong>Install Claude Code globally via npm</strong></p>
               <div class="code-block">
                 <div class="code-header">
-                  <span class="lang-tag">PowerShell</span>
+                  <span class="lang-tag">cmd</span>
                   <button class="copy-btn" onclick="copyCode(this, 'npm install -g @anthropic-ai/claude-code')">Copy</button>
                 </div>
                 <pre><code><span class="c-cmd">npm</span> install <span class="c-flag">-g</span> <span class="c-str">@anthropic-ai/claude-code</span></code></pre>
               </div>
               <div class="warn-box">
                 <span class="box-icon">&#9888;</span>
-                <span>Do <strong>not</strong> use <code>sudo</code> (or <code>-RunAs Administrator</code> for the npm command itself). It can cause permission issues and security risks.</span>
+                <span>Do <strong>not</strong> run Command Prompt as Administrator for the npm command. It can cause permission issues and security risks.</span>
               </div>
             </div>
           </div>
@@ -538,7 +537,7 @@
               <p><strong>Verify the installation</strong></p>
               <div class="code-block">
                 <div class="code-header">
-                  <span class="lang-tag">PowerShell</span>
+                  <span class="lang-tag">cmd</span>
                   <button class="copy-btn" onclick="copyCode(this, 'claude doctor')">Copy</button>
                 </div>
                 <pre><code><span class="c-cmd">claude</span> doctor</code></pre>
@@ -556,7 +555,7 @@
               <p><strong>Launch Claude Code in your project</strong></p>
               <div class="code-block">
                 <div class="code-header">
-                  <span class="lang-tag">PowerShell</span>
+                  <span class="lang-tag">cmd</span>
                   <button class="copy-btn" onclick="copyCode(this, 'cd your-project-folder\nclaude')">Copy</button>
                 </div>
                 <pre><code><span class="c-cmd">cd</span> your-project-folder
@@ -573,109 +572,20 @@
       </div>
     </div>
 
-    <!-- Option B – WSL -->
-    <div class="card">
-      <div class="card-header">
-        <span style="font-size:1.2rem">&#128196;</span>
-        <h3>Option B &mdash; Windows Subsystem for Linux (WSL)</h3>
-        <span class="method-badge alt">Alternative</span>
-      </div>
-      <div class="card-body">
-        <p style="font-size:.92rem;margin-bottom:16px">WSL gives you a full Linux environment on Windows. Use this if you are more comfortable with Linux terminals or need <strong>sandboxing</strong> support (WSL 2 only).</p>
-
-        <div class="steps">
-
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-              <p><strong>Install WSL 2</strong><br>
-              Open PowerShell as administrator and run:</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="lang-tag">PowerShell</span>
-                  <button class="copy-btn" onclick="copyCode(this, 'wsl --install')">Copy</button>
-                </div>
-                <pre><code><span class="c-cmd">wsl</span> <span class="c-flag">--install</span></code></pre>
-              </div>
-              <div class="info-box">
-                <span class="box-icon">&#8504;</span>
-                <span>This enables the required Windows features, downloads the WSL 2 kernel, and installs Ubuntu automatically. A <strong>restart</strong> is required afterward.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-              <p><strong>Restart your PC</strong>, then open <strong>Ubuntu</strong> from the Start menu and set up a username and password when prompted.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-              <p><strong>Install Node.js inside WSL</strong><br>
-              Run the following commands in the Ubuntu terminal to install Node.js 20 LTS:</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="lang-tag">bash (Ubuntu / WSL)</span>
-                  <button class="copy-btn" onclick="copyCode(this, 'curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash -\nsudo apt-get install -y nodejs')">Copy</button>
-                </div>
-                <pre><code><span class="c-cmd">curl</span> <span class="c-flag">-fsSL</span> <span class="c-str">https://deb.nodesource.com/setup_20.x</span> | sudo bash -
-sudo apt-get install <span class="c-flag">-y</span> nodejs</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-content">
-              <p><strong>Install Claude Code via npm inside WSL</strong></p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="lang-tag">bash (Ubuntu / WSL)</span>
-                  <button class="copy-btn" onclick="copyCode(this, 'npm install -g @anthropic-ai/claude-code')">Copy</button>
-                </div>
-                <pre><code><span class="c-cmd">npm</span> install <span class="c-flag">-g</span> <span class="c-str">@anthropic-ai/claude-code</span></code></pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">5</div>
-            <div class="step-content">
-              <p><strong>Authenticate</strong><br>
-              Run <code>claude</code> for the first time. A URL will appear in the terminal. Copy it and paste it into any browser on your Windows desktop to complete sign-in.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">6</div>
-            <div class="step-content">
-              <p><strong>Verify and launch</strong></p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="lang-tag">bash (WSL)</span>
-                  <button class="copy-btn" onclick="copyCode(this, 'claude doctor')">Copy</button>
-                </div>
-                <pre><code><span class="c-cmd">claude</span> doctor</code></pre>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /steps -->
-
-        <div class="tip-box">
-          <span class="box-icon">&#128161;</span>
-          <span><strong>Tip:</strong> Install <a href="https://apps.microsoft.com/store/detail/windows-terminal" target="_blank">Windows Terminal</a> from the Microsoft Store for a better multi-tab experience that works with both PowerShell and WSL.</span>
-        </div>
-      </div>
-    </div>
-
   </div><!-- /panel-win -->
 
   <!-- ── Authentication Details ── -->
 
+
+  <!-- ── What You'll See ── -->
+  <div class="section-title"><span class="icon">&#128187;</span> What You'll See</div>
+  <p class="section-sub">After running <code style="background:#1e1e2e;color:#fff;padding:2px 6px;border-radius:4px;font-size:.88rem">claude</code>, your terminal will display the Claude Code interface.</p>
+
+  <div class="card">
+    <div class="card-body" style="padding:0;overflow:hidden">
+      <img src="/images/claude_code.png" alt="Claude Code terminal interface" style="width:100%;display:block">
+    </div>
+  </div>
 
   <!-- ── Quick Reference ── -->
   <div class="section-title"><span class="icon">&#128196;</span> Quick Reference</div>
@@ -692,23 +602,23 @@ sudo apt-get install <span class="c-flag">-y</span> nodejs</code></pre>
         </thead>
         <tbody>
           <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:11px 0"><code style="background:#f3f4f6;padding:3px 8px;border-radius:4px;font-size:.84rem">claude</code></td>
+            <td style="padding:11px 0"><code style="background:#1e1e2e;color:#fff;padding:3px 8px;border-radius:4px;font-size:.84rem">claude</code></td>
             <td style="padding:11px 0">Start Claude Code in the current directory</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:11px 0"><code style="background:#f3f4f6;padding:3px 8px;border-radius:4px;font-size:.84rem">claude doctor</code></td>
+            <td style="padding:11px 0"><code style="background:#1e1e2e;color:#fff;padding:3px 8px;border-radius:4px;font-size:.84rem">claude doctor</code></td>
             <td style="padding:11px 0">Check installation health and version</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:11px 0"><code style="background:#f3f4f6;padding:3px 8px;border-radius:4px;font-size:.84rem">claude update</code></td>
+            <td style="padding:11px 0"><code style="background:#1e1e2e;color:#fff;padding:3px 8px;border-radius:4px;font-size:.84rem">claude update</code></td>
             <td style="padding:11px 0">Manually update to the latest version</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:11px 0"><code style="background:#f3f4f6;padding:3px 8px;border-radius:4px;font-size:.84rem">claude --help</code></td>
+            <td style="padding:11px 0"><code style="background:#1e1e2e;color:#fff;padding:3px 8px;border-radius:4px;font-size:.84rem">claude --help</code></td>
             <td style="padding:11px 0">Show all available options</td>
           </tr>
           <tr>
-            <td style="padding:11px 0"><code style="background:#f3f4f6;padding:3px 8px;border-radius:4px;font-size:.84rem">/help</code></td>
+            <td style="padding:11px 0"><code style="background:#1e1e2e;color:#fff;padding:3px 8px;border-radius:4px;font-size:.84rem">/help</code></td>
             <td style="padding:11px 0">In-session help (after claude is running)</td>
           </tr>
         </tbody>
