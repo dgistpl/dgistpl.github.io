@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 1: Beginner Guide - Claude Code Seminar</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f4f6f9;
+      --card:        #ffffff;
+      --text:        #1e2328;
+      --text-light:  #1e2328;
+      --accent:      #7c3aed;
+      --accent-light:#ede9fe;
+      --accent-dark: #6d28d9;
+      --code-bg:     #1e1e2e;
+      --code-text:   #cdd6f4;
+      --code-green:  #a6e3a1;
+      --code-yellow: #f9e2af;
+      --code-pink:   #f38ba8;
+      --code-blue:   #89b4fa;
+      --border:      #e2e6eb;
+      --radius:      12px;
+      --shadow:      0 2px 12px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      color: #fff;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 56px 40px 48px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.02em; }
+    .hero p  { font-size: 1.08rem; opacity: .88; max-width: 600px; margin: 0 auto; }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 44px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 1.3rem; }
+    .section-sub { color: var(--text-light); font-size: .92rem; margin-bottom: 20px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .card-header {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header h3 { font-size: 1.05rem; font-weight: 600; }
+    .card-body { padding: 20px 24px; }
+
+    /* ── Step list ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .step-num {
+      counter-increment: step;
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content { padding-top: 6px; flex: 1; }
+    .step-content p { margin-bottom: 12px; }
+    .step-content strong { font-weight: 600; }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0 16px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: #181825;
+    }
+    .code-header .lang-tag {
+      font-size: .75rem;
+      color: #585b70;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .copy-btn:hover { background: #313244; border-color: #585b70; }
+    .copy-btn.copied { color: var(--code-green); border-color: var(--code-green); }
+    pre {
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 0;
+    }
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: .85rem;
+      color: var(--code-text);
+      line-height: 1.7;
+    }
+    .c-comment { color: #585b70; font-style: italic; }
+    .c-cmd     { color: var(--code-green); }
+    .c-flag    { color: var(--code-yellow); }
+    .c-str     { color: #fab387; }
+    .c-key     { color: var(--code-blue); }
+
+    /* ── Prompt block ── */
+    .prompt-block {
+      background: #f8fafc;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .prompt-block h4 {
+      color: var(--accent);
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt-section {
+      margin-bottom: 16px;
+    }
+    .prompt-section:last-child {
+      margin-bottom: 0;
+    }
+    .prompt-label {
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+    .prompt-content {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+    .prompt-content ol, .prompt-content ul {
+      margin: 8px 0 8px 20px;
+    }
+    .prompt-content li {
+      margin-bottom: 6px;
+    }
+
+    /* ── Info / Tip boxes ── */
+    .info-box, .tip-box, .warn-box {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: .9rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .info-box  { background: #eef2ff; border: 1px solid #c7d2fe; }
+    .tip-box   { background: #ecfdf5; border: 1px solid #6ee7b7; }
+    .warn-box  { background: #fef3c7; border: 1px solid #fcd34d; }
+    .info-box .box-icon  { color: #4f46e5; font-size: 1.1rem; flex-shrink:0; }
+    .tip-box  .box-icon  { color: #059669; font-size: 1.1rem; flex-shrink:0; }
+    .warn-box .box-icon  { color: #d97706; font-size: 1.1rem; flex-shrink:0; }
+
+    /* ── Output preview ── */
+    .output-preview {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+    .output-preview h5 {
+      font-size: .82rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .file-tree {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .85rem;
+      line-height: 1.8;
+    }
+    .file-tree .folder { color: #2563eb; font-weight: 600; }
+    .file-tree .file { color: var(--text); }
+
+    /* ── Footer ── */
+    .page-footer {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .82rem;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .page-footer a { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 24px 36px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-body, .card-header { padding: 16px; }
+      .step { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───────────── HERO ───────────── -->
+<div class="hero">
+  <div class="badge">Level 1 &middot; Beginner</div>
+  <h1>Getting Started with Claude Code</h1>
+  <p>A step-by-step guide for beginners who just installed Claude Code or have never used Beamer before.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- ── Overview ── -->
+  <div class="section-title"><span class="icon">&#128218;</span> What You'll Create</div>
+  <p class="section-sub">By the end of this guide, you will have generated a complete set of lecture notes for a your lecture.</p>
+
+
+  <!-- ── Steps ── -->
+  <div class="section-title"><span class="icon">&#128736;</span> Step-by-Step Instructions</div>
+  <p class="section-sub">Follow these steps carefully to generate your lecture materials.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <!-- Step 1 -->
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Create a folder for your course</strong></p>
+            <p>Create a new folder with your course name. This will be the working directory for Claude Code.</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'mkdir DataStructure')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">mkdir</span> DataStructure</code></pre>
+            </div>
+
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>Replace DataStructure with your actual course name (e.g., Algorithms, MachineLearning).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Open Terminal and navigate to the folder</strong></p>
+            <p>Use the cd command to change directory to your newly created folder.</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'cd DataStructure')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">cd</span> DataStructure</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Execute Claude Code</strong></p>
+            <p>Start Claude Code in your project folder.</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'claude')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">claude</span></code></pre>
+            </div>
+
+            <div class="info-box">
+              <span class="box-icon">&#8505;</span>
+              <span>If this is your first time running Claude Code, it will open your browser for authentication. Log in with your Claude.ai account.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <p><strong>Type the following prompt</strong></p>
+            <p>Copy and paste this prompt into Claude Code. This structured prompt will guide Claude to generate your lecture materials.</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">prompt</span>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Full Prompt</button>
+              </div>
+              <pre><code><span class="c-key">Context:</span>
+I will teach datastructure for undergraduate students. I need to generate lecture note and slides.
+
+<span class="c-key">Role:</span>
+You are an instructor who generate lecture note and slide for datastructure lecture.
+The slide is generated using beamer. Use a basic beamer template.
+
+<span class="c-key">Command:</span>
+I need you to sequentially do the following three steps:
+
+1. Generate a roadmap.md file that illustrate a roadmap for learning data structure course.
+
+2. Generate a folder 'topics/' and do the following three in the folder:
+
+  2-1. Based on the learning roadmap, create a list of markdown files for each topic.
+  2-2. For each topic, write an introduction and list of knowledge points.
+  2-3. In each file, explain the knowledge points in detail.
+
+3. Generate a folder 'slides/Topic1' and write a Beamer Latex file for the first topic based on the contents (i.e., topic1) in 'topics/' folder.
+
+<span class="c-key">Format:</span>
+Lecture notes written in markdown files as follows:
+
+roadmap.md
+topics/topic1.md
+topics/topic2.md
+....
+
+Beamer Latex file for the first topic:
+
+slides/Topic1/slide.tex</code></pre>
+            </div>
+
+            <div class="warn-box">
+              <span class="box-icon">&#9888;</span>
+              <span>Claude Code will ask for permission to create files and folders. Type <strong>y</strong> or press <strong>Enter</strong> to allow each action.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <p><strong>Check the output lecture notes and slides</strong></p>
+            <p>After Claude Code finishes, verify the generated files in your folder.</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'ls -la\nls -la topics/\nls -la slides/Topic1/')">Copy</button>
+              </div>
+              <pre><code><span class="c-comment"># List all files in the current directory</span>
+<span class="c-cmd">ls</span> <span class="c-flag">-la</span>
+
+<span class="c-comment"># List all files in the topics folder</span>
+<span class="c-cmd">ls</span> <span class="c-flag">-la</span> topics/
+
+<span class="c-comment"># List all files in the slides/Topic1 folder</span>
+<span class="c-cmd">ls</span> <span class="c-flag">-la</span> slides/Topic1/</code></pre>
+            </div>
+
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>You can also open the folder in your file explorer or code editor to review the generated content.</span>
+            </div>
+
+            <div class="output-preview">
+              <h5>You should see files like:</h5>
+              <div class="file-tree">
+                <span class="file">roadmap.md</span> &mdash; Learning roadmap for the course<br>
+                <span class="folder">topics/</span><br>
+                &nbsp;&nbsp;├── <span class="file">topic1.md</span> &mdash; First topic (e.g., Introduction)<br>
+                &nbsp;&nbsp;├── <span class="file">topic2.md</span> &mdash; Second topic (e.g., Arrays)<br>
+                &nbsp;&nbsp;├── <span class="file">topic3.md</span> &mdash; Third topic (e.g., Linked Lists)<br>
+                &nbsp;&nbsp;└── <span class="file">...</span> &mdash; More topic files<br>
+                <span class="folder">slides/</span><br>
+                &nbsp;&nbsp;└── <span class="folder">Topic1/</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">slide.tex</span> &mdash; Beamer slides for Topic 1<br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-content">
+            <p><strong>Compile the slide.tex to generate PDF</strong></p>
+            <p>Convert your Beamer LaTeX file to a PDF presentation.</p>
+
+            <p style="margin-top: 16px; margin-bottom: 8px;"><strong>Option A: Using local LaTeX compiler</strong></p>
+            <p>If you have LaTeX installed (e.g., TeX Live, MiKTeX), run:</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'cd slides/Topic1\npdflatex slide.tex')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">cd</span> slides/Topic1
+<span class="c-cmd">pdflatex</span> slide.tex</code></pre>
+            </div>
+
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>Run <code>pdflatex</code> twice if your slides contain a table of contents or cross-references.</span>
+            </div>
+
+            <p style="margin-top: 20px; margin-bottom: 8px;"><strong>Option B: Using online LaTeX compilers</strong></p>
+            <p>If you don't have LaTeX installed locally, use one of these free online compilers:</p>
+
+            <div style="margin: 14px 0; display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="https://www.overleaf.com/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #47a141; color: #fff; padding: 10px 18px; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                &#128196; Overleaf
+              </a>
+              <a href="https://www.murfy.ai/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #3b82f6; color: #fff; padding: 10px 18px; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                &#128196; Murfy
+              </a>
+            </div>
+
+            <div class="info-box">
+              <span class="box-icon">&#8505;</span>
+              <span>To use online compilers: Create a new project, upload your <code>slide.tex</code> file, and click the compile button to generate the PDF.</span>
+            </div>
+
+            <div class="output-preview">
+              <h5>After compilation, you should have:</h5>
+              <div class="file-tree">
+                <span class="folder">slides/Topic1/</span><br>
+                &nbsp;&nbsp;├── <span class="file">slide.tex</span> &mdash; Source LaTeX file<br>
+                &nbsp;&nbsp;├── <span class="file" style="color: #059669; font-weight: 600;">slide.pdf</span> &mdash; Your presentation!<br>
+                &nbsp;&nbsp;├── <span class="file" style="color: #9ca3af;">slide.aux</span> &mdash; Auxiliary file<br>
+                &nbsp;&nbsp;└── <span class="file" style="color: #9ca3af;">slide.log</span> &mdash; Compilation log<br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /steps -->
+    </div>
+  </div>
+
+  <!-- ── Next Steps ── -->
+  <div class="section-title"><span class="icon">&#128640;</span> Next Steps</div>
+  <p class="section-sub">After completing Level 1, generate slides for the remaining topics:</p>
+
+  <div class="card">
+    <div class="card-body">
+      <p><strong>Generate slides for other topics</strong></p>
+      <p style="margin-top: 8px;">In Claude Code, ask it to generate slides for the remaining topics:</p>
+
+      <div class="code-block" style="margin: 16px 0;">
+        <div class="code-header">
+          <span class="lang-tag">prompt</span>
+          <button class="copy-btn" onclick="copyCode(this, 'Generate a folder \'slides/Topic2\' and write a Beamer Latex file for topic2 based on the contents in \'topics/topic2.md\'.')">Copy</button>
+        </div>
+        <pre><code>Generate a folder 'slides/Topic2' and write a Beamer Latex file for topic2 based on the contents in 'topics/topic2.md'.</code></pre>
+      </div>
+
+      <p style="margin-top: 16px;">Repeat for each topic (Topic3, Topic4, etc.) or ask Claude to generate all at once:</p>
+
+      <div class="code-block" style="margin: 16px 0;">
+        <div class="code-header">
+          <span class="lang-tag">prompt</span>
+          <button class="copy-btn" onclick="copyCode(this, 'Generate Beamer slides for all remaining topics. For each topic file in \'topics/\', create a corresponding folder in \'slides/\' (e.g., slides/Topic2, slides/Topic3, ...) and write a slide.tex file based on the topic content.')">Copy</button>
+        </div>
+        <pre><code>Generate Beamer slides for all remaining topics. For each topic file in 'topics/', create a corresponding folder in 'slides/' (e.g., slides/Topic2, slides/Topic3, ...) and write a slide.tex file based on the topic content.</code></pre>
+      </div>
+
+      <div class="output-preview" style="margin-top: 20px;">
+        <h5>Final folder structure:</h5>
+        <div class="file-tree">
+          <span class="file">roadmap.md</span><br>
+          <span class="folder">topics/</span><br>
+          &nbsp;&nbsp;├── <span class="file">topic1.md</span><br>
+          &nbsp;&nbsp;├── <span class="file">topic2.md</span><br>
+          &nbsp;&nbsp;├── <span class="file">topic3.md</span><br>
+          &nbsp;&nbsp;└── <span class="file">...</span><br>
+          <span class="folder">slides/</span><br>
+          &nbsp;&nbsp;├── <span class="folder">Topic1/</span> &rarr; <span class="file">slide.tex</span>, <span class="file" style="color: #059669;">slide.pdf</span><br>
+          &nbsp;&nbsp;├── <span class="folder">Topic2/</span> &rarr; <span class="file">slide.tex</span>, <span class="file" style="color: #059669;">slide.pdf</span><br>
+          &nbsp;&nbsp;├── <span class="folder">Topic3/</span> &rarr; <span class="file">slide.tex</span>, <span class="file" style="color: #059669;">slide.pdf</span><br>
+          &nbsp;&nbsp;└── <span class="file">...</span><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="page-footer">
+    <p><a href="/courses/claude_code/2026/">&larr; Back to Seminar Page</a></p>
+    <p style="margin-top:10px">PLX Lab &middot; DGIST &middot; Prof. Minseok Jeon &middot; 2026</p>
+  </div>
+
+</div><!-- /page-wrapper -->
+
+<!-- ── Scripts ── -->
+<script>
+function copyCode(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+
+function copyPrompt(btn) {
+  const prompt = `Context:
+I will teach datastructure for undergraduate students. I need to generate lecture note and slides.
+
+Role:
+You are an instructor who generate lecture note and slide for datastructure lecture.
+The slide is generated using beamer. Use a basic beamer template.
+
+Command:
+I need you to sequentially do the following three steps:
+
+1. Generate a roadmap.md file that illustrate a roadmap for learning data structure course.
+
+2. Generate a folder 'topics/' and do the following three in the folder:
+
+  2-1. Based on the learning roadmap, create a list of markdown files for each topic.
+  2-2. For each topic, write an introduction and list of knowledge points.
+  2-3. In each file, explain the knowledge points in detail.
+
+3. Generate a folder 'slides/Topic1' and write a Beamer Latex file for the first topic based on the contents (i.e., topic1) in 'topics/' folder.
+
+Format:
+Lecture notes written in markdown files as follows:
+
+roadmap.md
+topics/topic1.md
+topics/topic2.md
+....
+
+Beamer Latex file for the first topic:
+
+slides/Topic1/slide.tex`;
+
+  navigator.clipboard.writeText(prompt).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy Full Prompt';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+</script>
+</body>
+</html>

@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the PLX Lab website at DGIST (Daegu Gyeongbuk Institute of Science and Technology), led by Professor Minseok Jeon. Built with Jekyll using the Minimal Mistakes theme, the site serves as both a research group homepage and academic blog, showcasing research publications (focusing on PL4SE and PL4ML), lab member profiles, academic activities, and course materials.
 
+**Live site:** https://dgistpl.github.io
+
 ## Development Commands
 
 ### Docker Setup (Recommended)
@@ -16,6 +18,7 @@ docker run -p 4000:4000 -p 35729:35729 -v $(pwd):/site dgistpl-jekyll  # Run wit
 The Docker setup includes both Jekyll (port 4000) and LiveReload (port 35729) with automatic file watching.
 
 ### Native Setup
+Requires Ruby 3.x, Node.js 18+, and Bundler (`gem install bundler`).
 ```bash
 bundle install    # Install Ruby gems (Jekyll dependencies)
 npm install      # Install Node.js dependencies (for JavaScript build tools)
@@ -96,7 +99,8 @@ Custom view tracking system using Firebase Realtime Database:
 - `papers/`: PDF files for research papers and slides
 - `images/`: Image assets for posts and pages
 - `members/`: Individual member profile pages
-- `publications/`, `research/`, `talks/`, `trips/`: Academic content sections
+- `publications/`, `research/`, `talks/`: Academic content sections
+- `trips/`: Conference trip photos and documentation
 - `_pages/`: Static pages
 - `about.md` / `about.html`: About page (root-level)
 
