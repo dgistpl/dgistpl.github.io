@@ -75,8 +75,8 @@ Custom view tracking system using Firebase Realtime Database:
   - URL cleaning for Firebase keys (removes special characters like `.#$[]`)
 
 #### JavaScript Build Pipeline
-- **Source files**: Located in `assets/js/vendor/` and `assets/js/plugins/`
-- **Build process**: Concatenation → Uglification → Banner addition
+- **Source files**: Located in `assets/js/vendor/` and `assets/js/plugins/`, plus `assets/js/_main.js`
+- **Build process**: uglifyjs bundles all source files → Uglification → Banner addition (via banner.js)
 - **Output**: `assets/js/main.min.js` with MIT license banner
 - **banner.js**: Node script that adds Minimal Mistakes theme license header
 - **Watch mode**: `npm run watch:js` uses `onchange` to auto-rebuild on file changes
@@ -96,7 +96,9 @@ Custom view tracking system using Firebase Realtime Database:
 - `papers/`: PDF files for research papers and slides
 - `images/`: Image assets for posts and pages
 - `members/`: Individual member profile pages
-- `publications/`, `research/`, `talks/`: Academic content sections
+- `publications/`, `research/`, `talks/`, `trips/`: Academic content sections
+- `_pages/`: Static pages
+- `about.md` / `about.html`: About page (root-level)
 
 ## Firebase Configuration
 
@@ -117,7 +119,8 @@ The site uses Firebase for view counting functionality:
 - Organize by course code and year in `courses/` directory structure: `courses/{course_code}/{year}/`
 - Examples: `courses/cose213/2024/`, `courses/ai_ds/2025/`, `courses/ic637/2025/`
 - Use markdown files with proper navigation structure
-- Store slides/PDFs in course-specific subdirectories
+- Store slides/PDFs in course-specific subdirectories (`slides/`)
+- Some courses include a `book/` subdirectory with topic-based markdown files (e.g., `ai_ds/2025/book/topics/`)
 - Course index at `courses/index.md` lists all courses
 
 ### Academic Content
@@ -167,5 +170,6 @@ This site extends the Minimal Mistakes theme:
 - **Assets**: JavaScript build process handles minification and banner addition
 - **Content**: All paper PDFs and academic materials are version-controlled in repository
 - **Theme**: Extends Minimal Mistakes theme - prefer custom includes/layouts over modifying core theme files
+- **Comments**: `staticman.yml` at the root configures the Staticman comment backend (one of several comment providers available via `_includes/comments-providers/`)
 - **LiveReload**: Docker setup includes LiveReload on port 35729 for automatic browser refresh
 - **File Watching**: Docker uses `--force_polling` flag for reliable file change detection in containers
