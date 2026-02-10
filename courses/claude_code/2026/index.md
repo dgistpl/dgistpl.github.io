@@ -32,10 +32,11 @@ If you are a beginner (just installed Claude Code or have never used beamer), fo
 
 If you are a intermediate (have used beamer before), follow this guide.
 
-+ ToDo
++ [**Level 2 Guide**](level2.html)
+
 
 ### Level 3
 
 If you are a advanced (currently using beamer, claude code, and editors with AI), follow this guide. 
 
-+ ToDo
++ [**Level 3 Guide**](https://dgistpl.github.io/ep9/)
