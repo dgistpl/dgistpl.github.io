@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the PLX Lab website at DGIST (Daegu Gyeongbuk Institute of Science and Technology), led by Professor Minseok Jeon. Built with Jekyll using the Minimal Mistakes theme, the site serves as both a research group homepage and academic blog, showcasing research publications (focusing on PL4SE and PL4ML), lab member profiles, academic activities, and course materials.
+PLX Lab website at DGIST, led by Professor Minseok Jeon. Jekyll site using Minimal Mistakes theme — academic homepage, research publications (PL4SE and PL4ML), member profiles, course materials, and blog ("연구 이야기").
 
 **Live site:** https://dgistpl.github.io
 
@@ -12,168 +12,113 @@ This is the PLX Lab website at DGIST (Daegu Gyeongbuk Institute of Science and T
 
 ### Docker Setup (Recommended)
 ```bash
-docker build -t dgistpl-jekyll .                                    # Build Docker image
-docker run -p 4000:4000 -p 35729:35729 -v $(pwd):/site dgistpl-jekyll  # Run with live reload
+docker build -t dgistpl-jekyll .
+docker run -p 4000:4000 -p 35729:35729 -v $(pwd):/site dgistpl-jekyll
 ```
-The Docker setup includes both Jekyll (port 4000) and LiveReload (port 35729) with automatic file watching.
 
 ### Native Setup
-Requires Ruby 3.x, Node.js 18+, and Bundler (`gem install bundler`).
+Requires Ruby 3.x, Node.js 18+, Bundler.
 ```bash
-bundle install    # Install Ruby gems (Jekyll dependencies)
-npm install      # Install Node.js dependencies (for JavaScript build tools)
+bundle install && npm install
 ```
 
 ### Build and Serve
 ```bash
-bundle exec jekyll serve    # Start development server at http://localhost:4000
-bundle exec jekyll build    # Build the site for production (outputs to _site/)
+bundle exec jekyll serve       # Dev server at http://localhost:4000
+bundle exec jekyll build       # Production build (outputs to _site/)
 ```
 
-### JavaScript Development
+### JavaScript Build
 ```bash
-npm run build:js    # Build and minify JavaScript files (runs uglify + add-banner)
-npm run uglify      # Minify JavaScript assets only
-npm run add-banner  # Add banner to JavaScript files using banner.js
-npm run watch:js    # Watch JavaScript files for changes and auto-rebuild
+npm run build:js    # Minify + add banner (must run before committing JS changes)
+npm run watch:js    # Watch mode for development
 ```
 
-### LaTeX CV Compilation
+### LaTeX CV
 ```bash
-cd cv/
-pdflatex main.tex   # Compile CV from LaTeX source to PDF
+cd cv/ && pdflatex main.tex
 ```
 
-### Testing and Validation
-- **No automated test suite** - this site relies on manual testing via local server
-- Test Firebase view counter functionality on localhost:4000 with real page loads
-- Validate JavaScript minification with `npm run build:js` before deployment
+### Testing
+No automated test suite. Test manually via local server. Validate JS with `npm run build:js`.
 
 ## Architecture
 
-### Jekyll Site Structure
-- **Theme**: Uses Minimal Mistakes Jekyll theme with extensive customizations
-- **Content Types**:
-  - Academic homepage (`index.md`)
-  - Blog posts in `_posts/` (research updates and experiences, with Korean title "연구 이야기")
-  - Course materials in `courses/` directory
-  - Static assets (papers, slides) in dedicated folders
+### Key Architectural Decisions
 
-### Custom Features
+- **Theme**: Minimal Mistakes Jekyll theme — prefer custom includes/layouts over modifying core theme files. No custom SCSS exists; page-specific styling uses inline `<style>` blocks in Markdown files.
+- **Deployment**: Auto-deploys to GitHub Pages on push to `master`
+- **`_config.yml` changes require server restart** (standard Jekyll behavior)
+- **Permalink structure**: `/:categories/:title/` (set in `_config.yml`)
 
-#### Firebase View Counter
-Custom view tracking system using Firebase Realtime Database:
-- **Configuration**:
-  - Firebase config in `_config.yml` under `firebase:` section
-  - Hardcoded config in `_includes/firebase-config.html` (Jekyll variable processing workaround)
-- **Implementation**:
-  - `_includes/firebase-config.html`: Firebase SDK v12.0.0 initialization using ES modules
-  - `_includes/view-counter.html`: View counting logic with localStorage fallback
-  - Firebase globals exposed via `window.firebaseDatabase`, `window.firebaseRef`, etc.
-- **Features**:
-  - Session-based counting (one count per session per page using sessionStorage)
-  - Automatic fallback to localStorage if Firebase unavailable
-  - Integration with Google Analytics event tracking
-  - Real-time view count display with number formatting
-  - URL cleaning for Firebase keys (removes special characters like `.#$[]`)
+### Page Organization
 
-#### JavaScript Build Pipeline
-- **Source files**: Located in `assets/js/vendor/` and `assets/js/plugins/`, plus `assets/js/_main.js`
-- **Build process**: uglifyjs bundles all source files → Uglification → Banner addition (via banner.js)
-- **Output**: `assets/js/main.min.js` with MIT license banner
-- **banner.js**: Node script that adds Minimal Mistakes theme license header
-- **Watch mode**: `npm run watch:js` uses `onchange` to auto-rebuild on file changes
+Content pages live in **root-level directories** (not `_pages/`). This is non-standard for Jekyll but works because each directory has its own `index.md`:
 
-### Key Customizations
-- **Author Profile**: Enhanced author profile with post-specific version (`_includes/author-profile-post.html`)
-- **View Counter Integration**: Included in `_layouts/default.html` via `{% include firebase-config.html %}`
-- **Google Analytics**: Configured with gtag.js (tracking ID: G-KTKXXC6BCQ)
+- `index.md` — Homepage (`archive` layout, pulls from `site.data.authors.minseok_jeon` for contact info)
+- `research/index.md` — Research areas
+- `publications/index.md` — Loops over `_data/publications.yml` by year
+- `members/index.md` — Loops over `_data/authors.yml`, filters by `position` field
+- `talks/index.md` — Loops over `_data/talks.yml` by year
+- `trips/index.md`, `courses/index.md`
 
-### File Organization
-- `_data/`: Structured data files (publications.yml, talks.yml, authors.yml, navigation.yml)
-- `_includes/`: Custom HTML includes for modular components
-- `_layouts/`: Page layout templates (customized default.html)
-- `_sass/`: SCSS stylesheets (inherits from Minimal Mistakes)
-- `assets/`: Static assets including custom JavaScript and images
-- `courses/`: Course-specific content and materials
-- `papers/`: PDF files for research papers and slides
-- `images/`: Image assets for posts and pages
-- `members/`: Individual member profile pages
-- `publications/`, `research/`, `talks/`: Academic content sections
-- `trips/`: Conference trip photos and documentation
-- `_pages/`: Static pages
-- `about.md` / `about.html`: About page (root-level)
+The only file in `_pages/` is `tag-archive.md`. Navigation links are defined in `_data/navigation.yml`.
 
-## Firebase Configuration
+### Data-Driven Content
 
-The site uses Firebase for view counting functionality:
-- Database: Firebase Realtime Database
-- Configuration stored in both `_config.yml` and hardcoded in `_includes/firebase-config.html`
-- API keys and configuration are public (read-only database rules)
+Most dynamic pages use Liquid loops over `_data/*.yml` files:
+
+**`_data/publications.yml`** — Grouped by year, each paper has:
+```yaml
+- year: 2025
+  papers:
+    - title: "Paper Title"
+      authors: "<u>Name</u>, Name"  # HTML markup for underlines
+      venue: "Conference 2025"
+      links:
+        - type: "PDF"
+          url: "/papers/filename.pdf"
+        - type: "Slides"
+          url: "/papers/slides.pdf"
+```
+
+**`_data/authors.yml`** — Keyed by ID (e.g., `minseok_jeon`), each entry has `name`, `ko-name`, `avatar`, `position`, `email`, `scholar`, etc. The `members/index.md` page filters by position to display members in sections (Professor, PhD, MS, Undergraduate Intern).
+
+**`_data/talks.yml`** — List of `{title, venue, date, year, slides}` entries.
+
+### Firebase View Counter
+
+Custom page view tracking using Firebase Realtime Database (SDK v12.0.0 via ES modules).
+
+**Critical: dual-config issue** — Firebase config is duplicated in both `_config.yml` (under `firebase:`) and hardcoded in `_includes/firebase-config.html` because Jekyll variables don't process correctly in the module script. When updating Firebase config, **both files must be changed**.
+
+How it works:
+- `_includes/firebase-config.html`: Initializes Firebase, exposes globals (`window.firebaseDatabase`, `window.firebaseRef`, etc.). Included in `_layouts/default.html`.
+- `_includes/view-counter.html`: Polls for Firebase availability (up to 50 attempts), increments view count, falls back to localStorage if unavailable.
+- Session-based counting via `sessionStorage` (key: `firebase_viewed_{cleanUrl}`)
+- URLs cleaned for Firebase keys by removing `.#$[]` characters
+- Firebase API keys are intentionally public (database has read-only security rules)
+
+### JavaScript Build Pipeline
+
+Source: `assets/js/vendor/jquery/`, `assets/js/plugins/`, `assets/js/_main.js`
+→ uglifyjs bundles and minifies → `banner.js` adds MIT license header
+→ Output: `assets/js/main.min.js`
 
 ## Content Management
 
-### Adding Blog Posts
-- Create files in `_posts/` with format: `YYYY-MM-DD-title.md`
-- Use `layout: single` for consistency
-- Include appropriate front matter for author profile and metadata
-- Posts appear under "연구 이야기" (Research Stories) in navigation
+### Blog Posts
+Create in `_posts/` as `YYYY-MM-DD-title.md` with `layout: single`.
 
-### Adding Course Materials
-- Organize by course code and year in `courses/` directory structure: `courses/{course_code}/{year}/`
-- Examples: `courses/cose213/2024/`, `courses/ai_ds/2025/`, `courses/ic637/2025/`
-- Use markdown files with proper navigation structure
-- Store slides/PDFs in course-specific subdirectories (`slides/`)
-- Some courses include a `book/` subdirectory with topic-based markdown files (e.g., `ai_ds/2025/book/topics/`)
-- Course index at `courses/index.md` lists all courses
+### Course Materials
+Organize as `courses/{course_code}/{year}/` with slides in `slides/` subdirectory. Course pages use `layout: splash` for full-width display. Course index at `courses/index.md`.
 
-### Academic Content
-- **Publications**: Listed in `index.md` and structured data in `_data/publications.yml`
-- **Papers and Slides**: Stored in `/papers/` directory as PDFs
-- **CV**: LaTeX source in `cv/` directory (main.tex compiles to main.pdf)
-- **Member Profiles**: Individual markdown files in `members/` directory (e.g., `members/minseok.jeon.md`)
-- **Talks**: Structured data in `_data/talks.yml`
-- **Navigation**: Site navigation configured in `_data/navigation.yml` (main menu links)
-- **Authors**: Author metadata in `_data/authors.yml` for multi-author support
+### Adding Publications
+Add entries to `_data/publications.yml` under the appropriate year. Store PDFs/slides in `papers/`. Use HTML in the `authors` field for formatting (e.g., `<u>Name</u>` to underline).
 
-## Theme Integration
+### Adding Members
+Add an entry to `_data/authors.yml` with a unique key. The `position` field determines which section the member appears in on the members page. Store avatar images in `images/members/`.
 
-This site extends the Minimal Mistakes theme:
-- Configuration in `_config.yml` follows MM conventions
-- Custom includes override theme defaults
-- SCSS customizations in `_sass/` directory
-- JavaScript enhancements for Firebase integration
-
-## Development Workflow
-
-### Making Changes
-1. Edit content files (markdown in `_posts/`, `courses/`, etc.)
-2. For JavaScript changes: run `npm run watch:js` during development
-3. Test locally with `bundle exec jekyll serve` or Docker
-4. Build production assets with `npm run build:js` before committing JavaScript changes
-5. Commit changes (site auto-deploys via GitHub Pages on push to master)
-
-### Firebase View Counter Development
-- Firebase config duplicated in `_config.yml` and `_includes/firebase-config.html` (due to Jekyll variable processing issues)
-- Testing requires actual page loads in browser at localhost:4000 (not just Jekyll compilation)
-- View counts stored in Firebase with cleaned URLs as keys (special chars like `.#$[]` removed)
-- Session storage prevents multiple counts per browser session (key format: `firebase_viewed_{cleanUrl}`)
-- If Firebase unavailable, automatically falls back to localStorage with similar session logic
-
-### Jekyll Configuration Notes
-- Site uses `minimal-mistakes-jekyll` gem (not `github-pages` gem)
-- Pagination set to 5 posts per page
-- Markdown processor: kramdown with GFM input
-- Permalink format: `/:categories/:title/`
-- Default layouts configured in `_config.yml` under `defaults:` section
-
-## Important Notes
-
-- **Deployment**: Site auto-deploys to GitHub Pages on push to master branch
-- **Firebase**: API keys are intentionally public (database has read-only security rules)
-- **Assets**: JavaScript build process handles minification and banner addition
-- **Content**: All paper PDFs and academic materials are version-controlled in repository
-- **Theme**: Extends Minimal Mistakes theme - prefer custom includes/layouts over modifying core theme files
-- **Comments**: `staticman.yml` at the root configures the Staticman comment backend (one of several comment providers available via `_includes/comments-providers/`)
-- **LiveReload**: Docker setup includes LiveReload on port 35729 for automatic browser refresh
-- **File Watching**: Docker uses `--force_polling` flag for reliable file change detection in containers
+### Other Data Files
+- **Navigation**: `_data/navigation.yml`
+- **CV**: LaTeX source in `cv/main.tex`
