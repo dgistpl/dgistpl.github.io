@@ -38,4 +38,5 @@ author_profile: false
 
 ### Slides
 
-+ Course Overview: [lecture0.pdf](slides/lec0.pdf)
++ Course Overview: [lec0.pdf](slides/lec0.pdf)
++ Inductive Definition (1): [lec1.pdf](slides/lec1.pdf)
