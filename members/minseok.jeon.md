@@ -14,7 +14,7 @@ I am an Assistant Professor at DGIST, leading the PLX Lab. I received my Ph.D. f
 
 My research focuses on developing domain-specific languages (DSLs) and program synthesis algorithms to address various challenges in programming languages, software engineering, and machine learning.  <br>
 
-    <a href="/cv/minseok_cv.pdf" target="_blank">Curriculum Vitae (CV)</a>
+    <a href="/cv/cv.pdf" target="_blank">Curriculum Vitae (CV)</a>
   </div>
 </div>
 
@@ -43,7 +43,8 @@ My research focuses on developing domain-specific languages (DSLs) and program s
 ## Professional Activities
 
 + Committee Members
-  + SOAP 2026: ACM SIGPLAN Workshop on the State of the Art of Program Analysis
+  + [NSAD 2026](https://conf.researchr.org/series/nsad): ACM SIGPLAN International Workshop on Numerical and Symbolic Abstract Domains
+  + [SOAP 2026](https://pldi26.sigplan.org/home/SOAP-2026): ACM SIGPLAN Workshop on the State of the Art of Program Analysis
   + [ICFP 2025](https://icfp25.sigplan.org/track/icfp-2025-papers): ACM SIGPLAN International Conference on Functional Programming
   + [SOAP 2025](https://pldi25.sigplan.org/home/SOAP-2025): ACM SIGPLAN Workshop on the State of the Art of Program Analysis
   + [OOPSLA 2024](https://2024.splashcon.org/track/splash-2024-oopsla): ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications

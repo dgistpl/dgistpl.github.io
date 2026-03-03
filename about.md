@@ -97,9 +97,13 @@ More specifically, my research aims to design domain-specific programming langua
   
 # Academic Activities
 ## Program Committee (PC) members
++ NSAD 2026: ACM SIGPLAN International Workshop on Numerical and Symbolic Abstract Domains
 + [ICFP 2025](https://icfp25.sigplan.org/track/icfp-2025-papers): ACM SIGPLAN International Conference on Functional Programming
 + [SOAP 2025](https://pldi25.sigplan.org/home/SOAP-2025):  ACM SIGPLAN Workshop on the State of the Art of Program Analysis
 + [OOPSLA 2024](https://2024.splashcon.org/track/splash-2024-oopsla): ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications
+
+## Journal Reviewers
++ TOSEM: ACM Transactions on Software Engineering and Methodology (2025, 2026)
 
   
 &nbsp;  
