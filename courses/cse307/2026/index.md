@@ -39,4 +39,9 @@ author_profile: false
 ### Slides
 
 + Course Overview: [lec0.pdf](slides/lec0.pdf)
-+ Inductive Definition (1): [lec1.pdf](slides/lec1.pdf)
++ Inductive Definition (1): [lec1.pdf](slides/lec1.pdf) [lec1_review.pdf](slides/lec1_review.pdf)
++ Inductive Definition (2): [lec2.pdf](slides/lec2.pdf)
+
+
+### Open Project
++ Open Project Guideline: [open_project_guideline.pdf](slides/open_project_guideline.pdf)
