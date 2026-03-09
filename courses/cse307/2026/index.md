@@ -39,8 +39,8 @@ author_profile: false
 ### Slides
 
 + Course Overview: [lec0.pdf](slides/lec0.pdf)
-+ Inductive Definition (1): [lec1.pdf](slides/lec1.pdf) [lec1_review.pdf](slides/lec1_review.pdf)
-+ Inductive Definition (2): [lec2.pdf](slides/lec2.pdf)
++ Inductive Definition: [lec1.pdf](slides/lec1.pdf) [lec2.pdf](slides/lec2.pdf)
++ Functional Programming: [lec3.pdf](slides/lec3.pdf)
 
 
 ### Open Project
