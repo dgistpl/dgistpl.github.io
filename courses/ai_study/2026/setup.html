@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup: VS Code with Claude Code</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f4f6f9;
+      --card:        #ffffff;
+      --text:        #1e2328;
+      --text-light:  #5a6370;
+      --accent:      #7c3aed;
+      --accent-light:#ede9fe;
+      --accent-dark: #6d28d9;
+      --code-bg:     #1e1e2e;
+      --code-text:   #cdd6f4;
+      --code-green:  #a6e3a1;
+      --code-yellow: #f9e2af;
+      --code-pink:   #f38ba8;
+      --code-blue:   #89b4fa;
+      --border:      #e2e6eb;
+      --radius:      12px;
+      --shadow:      0 2px 12px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--accent) 0%, #a855f7 100%);
+      color: #fff;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 56px 40px 48px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.02em; }
+    .hero p  { font-size: 1.08rem; opacity: .88; max-width: 600px; margin: 0 auto; }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 44px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 1.3rem; }
+    .section-sub { color: var(--text-light); font-size: .92rem; margin-bottom: 20px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .card-header {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header h3 { font-size: 1.05rem; font-weight: 600; }
+    .card-body { padding: 20px 24px; }
+
+    /* ── Prereq grid ── */
+    .prereq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .prereq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .prereq-item .prereq-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .prereq-item .prereq-label { font-size: .82rem; font-weight: 600; color: var(--text); }
+    .prereq-item .prereq-note  { font-size: .76rem; color: var(--text-light); margin-top: 2px; }
+
+    /* ── Step list ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .step-num {
+      counter-increment: step;
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content { padding-top: 6px; flex: 1; }
+    .step-content p { margin-bottom: 12px; }
+    .step-content strong { font-weight: 600; }
+
+    /* ── Info / Tip / Warning boxes ── */
+    .info-box, .tip-box, .warn-box {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: .9rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .info-box  { background: #eef2ff; border: 1px solid #c7d2fe; }
+    .tip-box   { background: #ecfdf5; border: 1px solid #6ee7b7; }
+    .warn-box  { background: #fef3c7; border: 1px solid #fcd34d; }
+    .info-box .box-icon  { color: #4f46e5; font-size: 1.1rem; flex-shrink:0; }
+    .tip-box  .box-icon  { color: #059669; font-size: 1.1rem; flex-shrink:0; }
+    .warn-box .box-icon  { color: #d97706; font-size: 1.1rem; flex-shrink:0; }
+
+    /* ── OS Tabs ── */
+    .os-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .os-tab {
+      flex: 1;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: var(--shadow);
+    }
+    .os-tab:hover { border-color: var(--accent); }
+    .os-tab.active {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 0 0 3px rgba(124,58,237,.15);
+    }
+    .os-tab .tab-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+    .os-tab .tab-label { font-weight: 600; font-size: .92rem; }
+
+    /* ── Panel show/hide ── */
+    .os-panel { display: none; }
+    .os-panel.active { display: block; }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0 16px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: #181825;
+    }
+    .code-header .lang-tag {
+      font-size: .75rem;
+      color: #585b70;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .copy-btn:hover { background: #313244; border-color: #585b70; }
+    .copy-btn.copied { color: var(--code-green); border-color: var(--code-green); }
+    pre {
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 0;
+    }
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: .85rem;
+      color: var(--code-text);
+      line-height: 1.7;
+    }
+    .c-comment { color: #585b70; font-style: italic; }
+    .c-cmd     { color: var(--code-green); }
+    .c-flag    { color: var(--code-yellow); }
+    .c-str     { color: #fab387; }
+
+    /* ── Footer ── */
+    .page-footer {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .82rem;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .page-footer a { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 24px 36px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-body, .card-header { padding: 16px; }
+      .step { flex-direction: column; gap: 12px; }
+      .os-tabs { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───────────── HERO ───────────── -->
+<div class="hero">
+  <div class="badge">Setup Guide</div>
+  <h1>Setting Up VS Code with Claude Code</h1>
+  <p>Install Visual Studio Code and the Claude Code extension to create your AI-powered learning environment.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <p style="text-align:center; margin-top:-18px; margin-bottom: 26px;">
+    <a href="guide.html"><strong>Next: How to Use AI to Take Courses &rarr;</strong></a>
+  </p>
+
+  <!-- ── Prerequisites ── -->
+  <div class="section-title"><span class="icon">&#10004;</span> Prerequisites</div>
+  <p class="section-sub">Make sure you have the following before you begin.</p>
+
+  <div class="prereq-grid">
+    <div class="prereq-item">
+      <div class="prereq-icon">&#128187;</div>
+      <div class="prereq-label">Operating System</div>
+      <div class="prereq-note">macOS 13+ &nbsp;|&nbsp; Windows 10+</div>
+    </div>
+    <div class="prereq-item">
+      <div class="prereq-icon">&#128188;</div>
+      <div class="prereq-label">Node.js</div>
+      <div class="prereq-note">Version 18 or higher required</div>
+    </div>
+    <div class="prereq-item">
+      <div class="prereq-icon">&#127760;</div>
+      <div class="prereq-label">Internet</div>
+      <div class="prereq-note">Stable connection required</div>
+    </div>
+    <div class="prereq-item">
+      <div class="prereq-icon">&#128337;</div>
+      <div class="prereq-label">Claude Subscription</div>
+      <div class="prereq-note">Claude Pro or Max plan</div>
+    </div>
+  </div>
+
+  <!-- ── Part 1: Install VS Code ── -->
+  <div class="section-title"><span class="icon">&#128296;</span> Part 1: Install Visual Studio Code</div>
+  <p class="section-sub">Download and install VS Code for your operating system.</p>
+
+  <div class="card">
+    <div class="card-header">
+      <span style="font-size:1.2rem">&#128230;</span>
+      <h3>Download Visual Studio Code</h3>
+    </div>
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Go to the VS Code website</strong></p>
+            <p>Visit <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a> and click the download button for your OS.</p>
+            <div style="margin: 14px 0; display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="https://code.visualstudio.com/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #0078d4; color: #fff; padding: 10px 18px; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                &#128229; Download VS Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Install VS Code</strong></p>
+            <p><strong>macOS:</strong> Open the downloaded <code>.dmg</code> file and drag Visual Studio Code to your Applications folder.</p>
+            <p><strong>Windows:</strong> Run the downloaded <code>.exe</code> installer and follow the setup wizard. Check "Add to PATH" when prompted.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Launch VS Code</strong></p>
+            <p>Open Visual Studio Code from your Applications (macOS) or Start Menu (Windows) to verify it works.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Part 2: Install Node.js ── -->
+  <div class="section-title"><span class="icon">&#128230;</span> Part 2: Install Node.js</div>
+  <p class="section-sub">Claude Code requires Node.js 18 or higher.</p>
+
+  <div class="os-tabs">
+    <div class="os-tab active" onclick="switchOS('mac')" id="tab-mac">
+      <span class="tab-icon">&#127793;</span>
+      <span class="tab-label">macOS</span>
+    </div>
+    <div class="os-tab" onclick="switchOS('win')" id="tab-win">
+      <span class="tab-icon">&#128241;</span>
+      <span class="tab-label">Windows</span>
+    </div>
+  </div>
+
+  <!-- macOS panel -->
+  <div class="os-panel active" id="panel-mac">
+    <div class="card">
+      <div class="card-header">
+        <span style="font-size:1.2rem">&#127793;</span>
+        <h3>Install Node.js on macOS</h3>
+      </div>
+      <div class="card-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <p><strong>Download Node.js</strong></p>
+              <p>Visit <a href="https://nodejs.org" target="_blank">nodejs.org</a> and download the <strong>LTS</strong> version (20 or later recommended).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <p><strong>Install and verify</strong></p>
+              <p>Open the downloaded <code>.pkg</code> file and follow the installer. Then open Terminal and verify:</p>
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="lang-tag">terminal</span>
+                  <button class="copy-btn" onclick="copyCode(this, 'node --version')">Copy</button>
+                </div>
+                <pre><code><span class="c-cmd">node</span> <span class="c-flag">--version</span></code></pre>
+              </div>
+              <div class="tip-box">
+                <span class="box-icon">&#128161;</span>
+                <span>You should see a version number like <code>v20.x.x</code> or higher.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Windows panel -->
+  <div class="os-panel" id="panel-win">
+    <div class="card">
+      <div class="card-header">
+        <span style="font-size:1.2rem">&#128241;</span>
+        <h3>Install Node.js on Windows</h3>
+      </div>
+      <div class="card-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <p><strong>Download Node.js</strong></p>
+              <p>Visit <a href="https://nodejs.org" target="_blank">nodejs.org</a> and download the <strong>LTS</strong> version (20 or later recommended).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <p><strong>Install and verify</strong></p>
+              <p>Run the <code>.msi</code> installer and follow the setup wizard. Then open Command Prompt and verify:</p>
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="lang-tag">cmd</span>
+                  <button class="copy-btn" onclick="copyCode(this, 'node --version')">Copy</button>
+                </div>
+                <pre><code><span class="c-cmd">node</span> <span class="c-flag">--version</span></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Part 3: Install Claude Code ── -->
+  <div class="section-title"><span class="icon">&#129302;</span> Part 3: Install Claude Code</div>
+  <p class="section-sub">Install Claude Code globally via npm.</p>
+
+  <div class="card">
+    <div class="card-header">
+      <span style="font-size:1.2rem">&#128268;</span>
+      <h3>Install Claude Code via npm</h3>
+    </div>
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Open your terminal</strong></p>
+            <p><strong>macOS:</strong> Press <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Cmd + Space</kbd>, type <em>Terminal</em>, and press Enter.</p>
+            <p><strong>Windows:</strong> Press <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Win</kbd>, type <em>cmd</em>, and click Open.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Install Claude Code globally</strong></p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'npm install -g @anthropic-ai/claude-code')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">npm</span> install <span class="c-flag">-g</span> <span class="c-str">@anthropic-ai/claude-code</span></code></pre>
+            </div>
+            <div class="warn-box">
+              <span class="box-icon">&#9888;</span>
+              <span><strong>macOS:</strong> Do <strong>not</strong> use <code>sudo</code>. <strong>Windows:</strong> Do <strong>not</strong> run Command Prompt as Administrator. Both can cause permission issues.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Authenticate</strong></p>
+            <p>Run <code>claude</code> for the first time. Your browser will open for a one-time sign-in.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'claude')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">claude</span></code></pre>
+            </div>
+            <p>Log in with your Claude.ai account (Pro or Max plan).</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <p><strong>Verify the installation</strong></p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'claude doctor')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">claude</span> doctor</code></pre>
+            </div>
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span><code>claude doctor</code> checks your installation type, version, and connectivity. All items should show green.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <span class="box-icon">&#8505;</span>
+    <span>For more detailed installation instructions, see the <a href="/courses/claude_code/2026/claude-code-install.html">full Claude Code installation guide</a>.</span>
+  </div>
+
+  <!-- ── Part 4: Install Claude Code Extension ── -->
+  <div class="section-title"><span class="icon">&#128268;</span> Part 4: Install the Claude Code Extension in VS Code</div>
+  <p class="section-sub">Add the Claude Code extension to Visual Studio Code.</p>
+
+  <div class="card">
+    <div class="card-header">
+      <span style="font-size:1.2rem">&#128268;</span>
+      <h3>Install Claude Code Extension in VS Code</h3>
+    </div>
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Open VS Code</strong></p>
+            <p>Launch Visual Studio Code on your computer.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Open the Extensions panel</strong></p>
+            <p>Click the Extensions icon in the left sidebar, or press:</p>
+            <p>
+              <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Cmd + Shift + X</kbd> (macOS) &nbsp;/&nbsp;
+              <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Ctrl + Shift + X</kbd> (Windows)
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Search for "Claude Code"</strong></p>
+            <p>Type <code>Claude Code</code> in the search bar. Look for the official extension by <strong>Anthropic</strong>.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <p><strong>Install the extension</strong></p>
+            <p>Click the <strong>Install</strong> button on the Claude Code extension.</p>
+            <div class="info-box">
+              <span class="box-icon">&#8505;</span>
+              <span>Make sure it is the official extension published by <strong>Anthropic</strong>.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <p><strong>Authenticate with your Claude account</strong></p>
+            <p>After installation, open the Claude Code panel in VS Code. It will prompt you to sign in with your Claude.ai account. Your browser will open for a one-time authentication.</p>
+            <p>Log in with your <strong>Claude Pro</strong> or <strong>Max</strong> plan account.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-content">
+            <p><strong>Verify the setup</strong></p>
+            <p>After signing in, the Claude Code panel should show a chat interface inside VS Code. You are ready to go!</p>
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>You can open the Claude Code panel anytime using <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Cmd + Shift + P</kbd> (macOS) / <kbd style="background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:2px 7px;font-size:.85rem">Ctrl + Shift + P</kbd> (Windows) and typing "Claude Code".</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What You'll See ── -->
+  <div class="section-title"><span class="icon">&#128187;</span> What You'll See</div>
+  <p class="section-sub">After setup, VS Code with Claude Code looks like this: an editor on the left and the AI chat panel on the right.</p>
+
+  <div class="card">
+    <div class="card-body" style="padding: 24px; text-align: center;">
+      <img src="figures/vsCode.png" alt="VS Code with file explorer (left) and Claude Code chat panel (right)" style="max-width: 700px; width: 100%; border-radius: 10px;">
+      <p style="margin-top: 16px; color: var(--text-light); font-size: .85rem;">VS Code with file explorer (left) and Claude Code chat panel (right)</p>
+    </div>
+  </div>
+
+  <!-- ── Next ── -->
+  <div style="text-align:center; margin-top: 40px;">
+    <a href="guide.html" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 1rem; text-decoration: none;">
+      Next: How to Use AI to Take Courses &rarr;
+    </a>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="page-footer">
+    <p><a href="/courses/ai_study/2026/">&larr; Back to Seminar Page</a></p>
+    <p style="margin-top:10px">PLX Lab &middot; DGIST &middot; Prof. Minseok Jeon &middot; 2026</p>
+  </div>
+
+</div>
+
+<!-- ── Scripts ── -->
+<script>
+function switchOS(os) {
+  document.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.os-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + os).classList.add('active');
+  document.getElementById('panel-' + os).classList.add('active');
+}
+
+function copyCode(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+</script>
+</body>
+</html>

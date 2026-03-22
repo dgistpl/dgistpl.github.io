@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Use AI to Take Courses</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f4f6f9;
+      --card:        #ffffff;
+      --text:        #1e2328;
+      --text-light:  #5a6370;
+      --accent:      #7c3aed;
+      --accent-light:#ede9fe;
+      --accent-dark: #6d28d9;
+      --code-bg:     #1e1e2e;
+      --code-text:   #cdd6f4;
+      --code-green:  #a6e3a1;
+      --code-yellow: #f9e2af;
+      --code-pink:   #f38ba8;
+      --code-blue:   #89b4fa;
+      --border:      #e2e6eb;
+      --radius:      12px;
+      --shadow:      0 2px 12px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      color: #fff;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 56px 40px 48px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.02em; }
+    .hero p  { font-size: 1.08rem; opacity: .88; max-width: 620px; margin: 0 auto; }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 44px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 1.3rem; }
+    .section-sub { color: var(--text-light); font-size: .92rem; margin-bottom: 20px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .card-header {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header h3 { font-size: 1.05rem; font-weight: 600; }
+    .card-body { padding: 20px 24px; }
+
+    /* ── Step list ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .step-num {
+      counter-increment: step;
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content { padding-top: 6px; flex: 1; }
+    .step-content p { margin-bottom: 12px; }
+    .step-content strong { font-weight: 600; }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0 16px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: #181825;
+    }
+    .code-header .lang-tag {
+      font-size: .75rem;
+      color: #585b70;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .copy-btn:hover { background: #313244; border-color: #585b70; }
+    .copy-btn.copied { color: var(--code-green); border-color: var(--code-green); }
+    pre {
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 0;
+    }
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: .85rem;
+      color: var(--code-text);
+      line-height: 1.7;
+    }
+    .c-comment { color: #585b70; font-style: italic; }
+    .c-cmd     { color: var(--code-green); }
+    .c-flag    { color: var(--code-yellow); }
+    .c-str     { color: #fab387; }
+    .c-key     { color: var(--code-blue); }
+
+    /* ── Prompt block ── */
+    .prompt-block {
+      background: #f8fafc;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .prompt-block h4 {
+      color: var(--accent);
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt-section {
+      margin-bottom: 16px;
+    }
+    .prompt-section:last-child {
+      margin-bottom: 0;
+    }
+    .prompt-label {
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+    .prompt-content {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    /* ── Info / Tip / Warning boxes ── */
+    .info-box, .tip-box, .warn-box {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: .9rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .info-box  { background: #eef2ff; border: 1px solid #c7d2fe; }
+    .tip-box   { background: #ecfdf5; border: 1px solid #6ee7b7; }
+    .warn-box  { background: #fef3c7; border: 1px solid #fcd34d; }
+    .info-box .box-icon  { color: #4f46e5; font-size: 1.1rem; flex-shrink:0; }
+    .tip-box  .box-icon  { color: #059669; font-size: 1.1rem; flex-shrink:0; }
+    .warn-box .box-icon  { color: #d97706; font-size: 1.1rem; flex-shrink:0; }
+
+    /* ── Example cards ── */
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    @media (max-width: 700px) {
+      .example-grid { grid-template-columns: 1fr; }
+    }
+    .example-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s;
+    }
+    .example-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,.12);
+    }
+    .example-card .example-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-bottom: 10px;
+    }
+    .example-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .example-card p {
+      font-size: .88rem;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .example-card .example-prompt {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .82rem;
+      line-height: 1.6;
+      position: relative;
+    }
+    .example-card .example-prompt .copy-btn-sm {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 1px 8px;
+      font-size: .68rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .example-card .example-prompt .copy-btn-sm:hover { background: #313244; }
+    .example-card .example-prompt .copy-btn-sm.copied { color: var(--code-green); border-color: var(--code-green); }
+
+    /* ── Output preview ── */
+    .output-preview {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+    .output-preview h5 {
+      font-size: .82rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .file-tree {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .85rem;
+      line-height: 1.8;
+    }
+    .file-tree .folder { color: #2563eb; font-weight: 600; }
+    .file-tree .file { color: var(--text); }
+
+    /* ── Footer ── */
+    .page-footer {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .82rem;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .page-footer a { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 24px 36px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-body, .card-header { padding: 16px; }
+      .step { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───────────── HERO ───────────── -->
+<div class="hero">
+  <div class="badge">Learning Guide</div>
+  <h1>How to Use AI to Take Courses</h1>
+  <p>A step-by-step workflow for leveraging Visual Studio Code with Claude Code to learn any course effectively.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <p style="text-align:center; margin-top:-18px; margin-bottom: 26px;">
+    <a href="setup.html"><strong>&larr; Setup Guide</strong></a>
+  </p>
+
+  <!-- ── Overview ── -->
+  <div class="section-title"><span class="icon">&#128218;</span> Overview</div>
+  <p class="section-sub">The idea is simple: place all your course materials in a folder, open it in VS Code, and use Claude Code as your personal AI tutor.</p>
+
+  <div class="card">
+    <div class="card-body" style="text-align:center; padding: 30px;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: .95rem;">
+        <div style="background: var(--accent-light); border-radius: 10px; padding: 16px 20px; font-weight: 600; color: var(--accent-dark);">
+          &#128218; Course Materials<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">slides, notes, recordings</span>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
+        <div style="background: #dbeafe; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #1e40af;">
+          &#128187; VS Code + Claude Code<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">your AI learning environment</span>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
+        <div style="background: #ecfdf5; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #065f46;">
+          &#127891; Deep Understanding<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">ask anything, anytime</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Step-by-Step Workflow ── -->
+  <div class="section-title"><span class="icon">&#128736;</span> Step-by-Step Workflow</div>
+  <p class="section-sub">Follow these steps to set up your AI-powered study session.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <!-- Step 1 -->
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Create a folder for your course</strong></p>
+            <p>Create a folder named after your course (e.g., <code>ProgrammingLanguages</code>) and place <strong>all provided course materials</strong> inside it: lecture slides, lecture notes, recordings, handouts, etc.</p>
+
+            <div class="output-preview">
+              <h5>Example folder structure:</h5>
+              <div class="file-tree">
+                <span class="folder">ProgrammingLanguages/</span><br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">lec1.pdf</span> &mdash; Lecture 1 slides<br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">lec2.pdf</span> &mdash; Lecture 2 slides<br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">lec3.pdf</span> &mdash; Lecture 3 slides<br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">lec4.pdf</span> &mdash; Lecture 4 slides<br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">lec5.pdf</span> &mdash; Lecture 5 slides<br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">notes.pdf</span> &mdash; Lecture notes<br>
+                &nbsp;&nbsp;&#9492;&#9472;&#9472; <span class="file">...</span><br>
+              </div>
+            </div>
+
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>The more materials you provide, the better Claude can help. Include slides (PDF), notes, assignments, and any supplementary resources.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Open the folder in VS Code</strong></p>
+            <p>Launch Visual Studio Code and open your course folder:</p>
+            <p><strong>File</strong> &rarr; <strong>Open Folder...</strong> &rarr; Select your course folder (e.g., <code>ProgrammingLanguages</code>)</p>
+            <p>Then open the Claude Code extension panel in the sidebar.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Initialize with <code>/init</code></strong></p>
+            <p>In the Claude Code panel, type <code>/init</code> and press Enter. This creates a <code>CLAUDE.md</code> file that helps Claude understand your project context.</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">Claude Code</span>
+              </div>
+              <pre><code><span class="c-cmd">/init</span></code></pre>
+            </div>
+
+            <div class="info-box">
+              <span class="box-icon">&#8505;</span>
+              <span><code>/init</code> scans your folder and creates a <code>CLAUDE.md</code> file. This gives Claude context about the materials in your folder.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <p><strong>Set up Claude as your course tutor</strong></p>
+            <p>Type the following prompt to configure Claude as your personal course instructor. Replace <code>{Course Name}</code> with your actual course name.</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">prompt</span>
+                <button class="copy-btn" onclick="copySetupPrompt(this)">Copy Full Prompt</button>
+              </div>
+              <pre><code><span class="c-key">Context:</span>
+Currently I am taking <span class="c-str">{Course Name}</span> course where all the
+contents are provided in the folder.
+
+<span class="c-key">Role:</span>
+You are the instructor of the course who will answer my
+questions about the course.
+
+<span class="c-key">Command:</span>
+You need to answer my questions in detail and step-by-step.
+
+<span class="c-key">Format:</span>
+If I request, save the illustration as a .md file.</code></pre>
+            </div>
+
+            <div class="warn-box">
+              <span class="box-icon">&#9888;</span>
+              <span>Replace <code>{Course Name}</code> with the actual name of your course (e.g., Programming Languages, Data Structures, Machine Learning).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <p><strong>Start asking questions!</strong></p>
+            <p>You are now ready to learn. Ask Claude anything about your course materials. See the example questions below for inspiration.</p>
+
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>Claude can read your PDF slides, understand diagrams, and provide detailed explanations. Don't hesitate to ask follow-up questions!</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Example Questions ── -->
+  <div class="section-title"><span class="icon">&#128172;</span> Example Questions You Can Ask</div>
+  <p class="section-sub">Here are four types of questions to help you learn effectively.</p>
+
+  <div class="example-grid">
+
+    <!-- Q1: Concept Check -->
+    <div class="example-card">
+      <span class="example-tag">Q1: Concept Check</span>
+      <h4>Understand Each Slide</h4>
+      <p>Ask Claude to explain every slide in a lecture in detail.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'For the first lecture (i.e., lec1.pdf), explain each slide in detail.')">Copy</button>
+        For the first lecture (i.e., lec1.pdf), explain each slide in detail.
+      </div>
+    </div>
+
+    <!-- Q2: Coding Practice -->
+    <div class="example-card">
+      <span class="example-tag">Q2: Coding Practice</span>
+      <h4>Implement Executable Code</h4>
+      <p>Ask Claude to create runnable programs based on lecture content.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'For the third lecture (i.e., lec3.pdf), I need you to implement programs that I can execute. I need you to add detailed comments illustrating the role of each line.')">Copy</button>
+        For the third lecture (i.e., lec3.pdf), I need you to implement programs that I can execute. I need you to add detailed comments illustrating the role of each line.
+      </div>
+    </div>
+
+    <!-- Q3: Deep Dive -->
+    <div class="example-card">
+      <span class="example-tag">Q3: Deep Dive</span>
+      <h4>Challenge and Verify Content</h4>
+      <p>Question the slides and ask Claude to cross-check or find errors.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'In the page 15 of lec5.pdf, I guess the slide is wrong. The inference rule is missing some rules (the entire inference rules are provided in page 8).')">Copy</button>
+        In page 15 of lec5.pdf, I guess the slide is wrong. The inference rule is missing some rules (the entire inference rules are provided in page 8).
+      </div>
+    </div>
+
+    <!-- Q4: Self-Assessment -->
+    <div class="example-card">
+      <span class="example-tag">Q4: Self-Assessment</span>
+      <h4>Test Your Understanding</h4>
+      <p>Ask Claude to generate quizzes based on the lecture content.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'Based on the lecture notes and slides for lecture 5, give me a quiz for verifying my understanding of the lecture.')">Copy</button>
+        Based on the lecture notes and slides for lecture 5, give me a quiz for verifying my understanding of the lecture.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Tips for Effective Use ── -->
+  <div class="section-title"><span class="icon">&#127775;</span> Tips for Effective Learning</div>
+  <p class="section-sub">Make the most out of your AI tutor with these tips.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div style="display: grid; gap: 18px;">
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #eef2ff; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4f46e5; font-size:.9rem;">1</div>
+          <div>
+            <strong>Be specific with references</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Always mention the exact file name and page number (e.g., "page 15 of lec5.pdf") so Claude can locate the exact content.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #ecfdf5; display:flex; align-items:center; justify-content:center; font-weight:700; color:#059669; font-size:.9rem;">2</div>
+          <div>
+            <strong>Ask follow-up questions</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Don't stop at the first answer. Ask "Why?", "Can you give another example?", or "How does this relate to the previous topic?"</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fef3c7; display:flex; align-items:center; justify-content:center; font-weight:700; color:#d97706; font-size:.9rem;">3</div>
+          <div>
+            <strong>Save important explanations</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Ask Claude to save explanations as <code>.md</code> files. This builds your own study notes that you can review later.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fce7f3; display:flex; align-items:center; justify-content:center; font-weight:700; color:#db2777; font-size:.9rem;">4</div>
+          <div>
+            <strong>Run the code yourself</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">When Claude generates code examples, run them in VS Code's terminal. Modify the code and experiment to deepen your understanding.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #e0e7ff; display:flex; align-items:center; justify-content:center; font-weight:700; color:#3730a3; font-size:.9rem;">5</div>
+          <div>
+            <strong>Quiz yourself</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Use the self-assessment feature regularly. Ask Claude to generate quizzes of varying difficulty to test your comprehension.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="page-footer">
+    <p><a href="setup.html">&larr; Setup Guide</a> &nbsp;&middot;&nbsp; <a href="/courses/ai_study/2026/">Back to Seminar Page</a></p>
+    <p style="margin-top:10px">PLX Lab &middot; DGIST &middot; Prof. Minseok Jeon &middot; 2026</p>
+  </div>
+
+</div>
+
+<!-- ── Scripts ── -->
+<script>
+function copyCode(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+
+function copySetupPrompt(btn) {
+  const prompt = `Context:
+Currently I am taking {Course Name} course where all the contents are provided in the folder.
+
+Role:
+You are the instructor of the course who will answer my questions about the course.
+
+Command:
+You need to answer my questions in detail and step-by-step.
+
+Format:
+If I request, save the illustration as a .md file.`;
+
+  navigator.clipboard.writeText(prompt).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy Full Prompt';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+
+function copyExample(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@ author_profile: false
 ## Seminars
 + [**Automated Lecture Notes and Slides Generation**](./claude_code/2026/)
  
-  
++ [**How to Learn Course Content Using AI**](./ai_study/2026/)
+
   
 

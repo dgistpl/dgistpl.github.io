@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Motivation}{3}{0}{1}
+\beamer@sectionintoc {2}{Tools}{6}{0}{2}
+\beamer@sectionintoc {3}{Setup}{9}{0}{3}
+\beamer@sectionintoc {4}{Learning Workflow}{14}{0}{4}
+\beamer@sectionintoc {5}{Example Questions}{21}{0}{5}
+\beamer@sectionintoc {6}{Tips}{26}{0}{6}
+\beamer@sectionintoc {7}{Summary}{28}{0}{7}
