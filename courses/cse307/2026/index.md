@@ -43,7 +43,8 @@ author_profile: false
   + Inductive Definition: [lec1.pdf](slides/lec1.pdf) [lec2.pdf](slides/lec2.pdf)
   + Functional Programming: [lec3.pdf](slides/lec3.pdf) [lec4.pdf](slides/lec4.pdf)
 + (Part 2) Basic Concepts
-  + Expressions: [lec5.pdf](slides/lec5.pdf)
+  + Expressions: [lec5.pdf](slides/lec5.pdf) 
+  + Procedures: [lec6.pdf](slides/lec6.pdf)
 
 ### Open Project
 + Open Project Guideline: [open_project_guideline.pdf](slides/open_project_guideline.pdf)
