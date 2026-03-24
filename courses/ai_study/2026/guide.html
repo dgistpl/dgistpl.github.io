@@ -440,6 +440,21 @@
               <span class="box-icon">&#8505;</span>
               <span><code>/init</code> scans your folder and creates a <code>CLAUDE.md</code> file. This gives Claude context about the materials in your folder.</span>
             </div>
+
+            <p style="margin-top: 16px;">Then, type the following prompt:</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">prompt</span>
+                <button class="copy-btn" onclick="copyCode(this, 'This folder includes lecture slides of {Course Name} saved as .pdf files. read the files')">Copy</button>
+              </div>
+              <pre><code>This folder includes lecture slides of <span class="c-str">{Course Name}</span> saved as .pdf files. read the files.</code></pre>
+            </div>
+
+            <div class="warn-box">
+              <span class="box-icon">&#9888;</span>
+              <span>Replace <code>{Course Name}</code> with the actual name of your course.</span>
+            </div>
           </div>
         </div>
 

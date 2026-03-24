@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1774139363513,
+  "lastScanned": 1774310268447,
   "projectRoot": "/Users/minseokjeon/dgistpl.github.io",
   "techStack": {
     "languages": [
@@ -60,14 +60,14 @@
       "path": "$MYVIMDIR",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1774139363496,
+      "lastAccessed": 1774310268429,
       "keyFiles": []
     },
     "_data": {
       "path": "_data",
       "purpose": null,
       "fileCount": 5,
-      "lastAccessed": 1774139363496,
+      "lastAccessed": 1774310268429,
       "keyFiles": [
         "authors.yml",
         "navigation.yml",
@@ -80,7 +80,7 @@
       "path": "_includes",
       "purpose": null,
       "fileCount": 38,
-      "lastAccessed": 1774139363500,
+      "lastAccessed": 1774310268429,
       "keyFiles": [
         "analytics.html",
         "archive-single.html",
@@ -93,7 +93,7 @@
       "path": "_layouts",
       "purpose": null,
       "fileCount": 14,
-      "lastAccessed": 1774139363500,
+      "lastAccessed": 1774310268433,
       "keyFiles": [
         "archive-taxonomy.html",
         "archive.html",
@@ -106,7 +106,7 @@
       "path": "_pages",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774139363501,
+      "lastAccessed": 1774310268433,
       "keyFiles": [
         "tag-archive.md"
       ]
@@ -115,7 +115,7 @@
       "path": "_posts",
       "purpose": null,
       "fileCount": 12,
-      "lastAccessed": 1774139363501,
+      "lastAccessed": 1774310268433,
       "keyFiles": [
         "2024-02-03-ep1.md",
         "2024-02-18-ep2.md",
@@ -128,7 +128,7 @@
       "path": "_sass",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774139363501,
+      "lastAccessed": 1774310268434,
       "keyFiles": [
         "minimal-mistakes.scss"
       ]
@@ -137,7 +137,7 @@
       "path": "_site",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1774139363501,
+      "lastAccessed": 1774310268434,
       "keyFiles": [
         "CLAUDE.md",
         "Dockerfile",
@@ -150,14 +150,14 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1774139363501,
+      "lastAccessed": 1774310268434,
       "keyFiles": []
     },
     "courses": {
       "path": "courses",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1774139363501,
+      "lastAccessed": 1774310268434,
       "keyFiles": [
         "index.md"
       ]
@@ -166,7 +166,7 @@
       "path": "cv",
       "purpose": null,
       "fileCount": 15,
-      "lastAccessed": 1774139363502,
+      "lastAccessed": 1774310268434,
       "keyFiles": [
         "cv.aux",
         "cv.fdb_latexmk",
@@ -179,7 +179,7 @@
       "path": "images",
       "purpose": null,
       "fileCount": 30,
-      "lastAccessed": 1774139363502,
+      "lastAccessed": 1774310268434,
       "keyFiles": [
         "25421.jpg",
         "Claudecode.png",
@@ -192,7 +192,7 @@
       "path": "members",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1774139363502,
+      "lastAccessed": 1774310268435,
       "keyFiles": [
         "index.md",
         "minseok.jeon.md"
@@ -202,7 +202,7 @@
       "path": "papers",
       "purpose": null,
       "fileCount": 28,
-      "lastAccessed": 1774139363503,
+      "lastAccessed": 1774310268435,
       "keyFiles": [
         "AI_Usage_Presentation.pdf",
         "ARES.pdf",
@@ -215,7 +215,7 @@
       "path": "publications",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774139363503,
+      "lastAccessed": 1774310268435,
       "keyFiles": [
         "index.md"
       ]
@@ -224,7 +224,7 @@
       "path": "research",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774139363503,
+      "lastAccessed": 1774310268436,
       "keyFiles": [
         "index.md"
       ]
@@ -233,7 +233,7 @@
       "path": "talks",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774139363503,
+      "lastAccessed": 1774310268436,
       "keyFiles": [
         "index.md"
       ]
@@ -242,7 +242,7 @@
       "path": "trips",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774139363503,
+      "lastAccessed": 1774310268436,
       "keyFiles": [
         "index.md"
       ]
@@ -251,88 +251,22 @@
       "path": "_site/assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1774139363504,
+      "lastAccessed": 1774310268437,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "courses/ai_study/2026/setup.html",
-      "accessCount": 7,
-      "lastAccessed": 1774142141160,
-      "type": "file"
-    },
-    {
-      "path": "courses/ai_study/2026/slides/seminar.tex",
-      "accessCount": 6,
-      "lastAccessed": 1774144448420,
-      "type": "file"
-    },
-    {
-      "path": "courses/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1774141372881,
-      "type": "file"
-    },
-    {
-      "path": "courses/claude_code/2026/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1774141049199,
-      "type": "file"
-    },
-    {
-      "path": "courses/claude_code/2026/claude-code-install.html",
-      "accessCount": 1,
-      "lastAccessed": 1774141049941,
-      "type": "file"
-    },
-    {
-      "path": "courses/claude_code/2026/level1.html",
-      "accessCount": 1,
-      "lastAccessed": 1774141050881,
-      "type": "file"
-    },
-    {
-      "path": "courses/ai_study/2026/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1774141189310,
-      "type": "file"
-    },
-    {
       "path": "courses/ai_study/2026/guide.html",
-      "accessCount": 1,
-      "lastAccessed": 1774141366785,
+      "accessCount": 2,
+      "lastAccessed": 1774310609456,
       "type": "file"
     },
     {
-      "path": "courses/ai_study/2026/slides/BeamerTemplate/CleanEasy.tex",
+      "path": "courses/ai_study/2026",
       "accessCount": 1,
-      "lastAccessed": 1774142859254,
-      "type": "file"
-    },
-    {
-      "path": "courses/ai_study/2026/slides/BeamerTemplate/configs/configs.tex",
-      "accessCount": 1,
-      "lastAccessed": 1774142859333,
-      "type": "file"
-    },
-    {
-      "path": "courses/ai_study/2026/slides/BeamerTemplate/configs/title_page.tex",
-      "accessCount": 1,
-      "lastAccessed": 1774142859867,
-      "type": "file"
-    },
-    {
-      "path": "courses/ai_study/2026/slides/BeamerTemplate/theme/beamerthemeCleanEasy.sty",
-      "accessCount": 1,
-      "lastAccessed": 1774142860323,
-      "type": "file"
-    },
-    {
-      "path": "courses/ai_study/2026/slides/BeamerTemplate/theme/beamercolorthemeCleanEasy.sty",
-      "accessCount": 1,
-      "lastAccessed": 1774142860652,
-      "type": "file"
+      "lastAccessed": 1774310298993,
+      "type": "directory"
     }
   ],
   "userDirectives": []
