@@ -18,7 +18,7 @@ author_profile: false
 
 
 ## AI-Generated Courses
-+ [**AI-Generated Data Strueture Course**](./ai_ds/2025/)
++ [**AI-Generated Data Structure Course**](./ai_ds/2025/)
 
 ## Seminars
 + [**Automated Lecture Notes and Slides Generation**](./claude_code/2026/)
