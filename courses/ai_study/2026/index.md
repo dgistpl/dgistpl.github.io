@@ -4,7 +4,7 @@ author_profile: false
 title: "How to Learn Course Content Using AI"
 ---
 
-# Leveraging AI to Take Courses
+# Leveraging AI for Studying 
 
 This seminar introduces how to use **Visual Studio Code** with the **Claude Code extension** to enhance your learning experience in any course.
 

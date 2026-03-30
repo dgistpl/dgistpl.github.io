@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1774481982089,
+  "lastScanned": 1774857579653,
   "projectRoot": "/Users/minseokjeon/dgistpl.github.io",
   "techStack": {
     "languages": [
@@ -60,14 +60,14 @@
       "path": "$MYVIMDIR",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1774481982066,
+      "lastAccessed": 1774857579627,
       "keyFiles": []
     },
     "_data": {
       "path": "_data",
       "purpose": null,
       "fileCount": 5,
-      "lastAccessed": 1774481982067,
+      "lastAccessed": 1774857579627,
       "keyFiles": [
         "authors.yml",
         "navigation.yml",
@@ -80,7 +80,7 @@
       "path": "_includes",
       "purpose": null,
       "fileCount": 38,
-      "lastAccessed": 1774481982073,
+      "lastAccessed": 1774857579632,
       "keyFiles": [
         "analytics.html",
         "archive-single.html",
@@ -93,7 +93,7 @@
       "path": "_layouts",
       "purpose": null,
       "fileCount": 14,
-      "lastAccessed": 1774481982074,
+      "lastAccessed": 1774857579633,
       "keyFiles": [
         "archive-taxonomy.html",
         "archive.html",
@@ -106,7 +106,7 @@
       "path": "_pages",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774481982074,
+      "lastAccessed": 1774857579633,
       "keyFiles": [
         "tag-archive.md"
       ]
@@ -115,7 +115,7 @@
       "path": "_posts",
       "purpose": null,
       "fileCount": 12,
-      "lastAccessed": 1774481982074,
+      "lastAccessed": 1774857579634,
       "keyFiles": [
         "2024-02-03-ep1.md",
         "2024-02-18-ep2.md",
@@ -128,7 +128,7 @@
       "path": "_sass",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774481982075,
+      "lastAccessed": 1774857579634,
       "keyFiles": [
         "minimal-mistakes.scss"
       ]
@@ -137,7 +137,7 @@
       "path": "_site",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1774481982075,
+      "lastAccessed": 1774857579634,
       "keyFiles": [
         "CLAUDE.md",
         "Dockerfile",
@@ -150,14 +150,14 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1774481982076,
+      "lastAccessed": 1774857579634,
       "keyFiles": []
     },
     "courses": {
       "path": "courses",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1774481982076,
+      "lastAccessed": 1774857579635,
       "keyFiles": [
         "index.md"
       ]
@@ -166,7 +166,7 @@
       "path": "cv",
       "purpose": null,
       "fileCount": 15,
-      "lastAccessed": 1774481982076,
+      "lastAccessed": 1774857579635,
       "keyFiles": [
         "cv.aux",
         "cv.fdb_latexmk",
@@ -179,7 +179,7 @@
       "path": "images",
       "purpose": null,
       "fileCount": 30,
-      "lastAccessed": 1774481982077,
+      "lastAccessed": 1774857579635,
       "keyFiles": [
         "25421.jpg",
         "Claudecode.png",
@@ -192,7 +192,7 @@
       "path": "members",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1774481982077,
+      "lastAccessed": 1774857579636,
       "keyFiles": [
         "index.md",
         "minseok.jeon.md"
@@ -202,7 +202,7 @@
       "path": "papers",
       "purpose": null,
       "fileCount": 28,
-      "lastAccessed": 1774481982078,
+      "lastAccessed": 1774857579636,
       "keyFiles": [
         "AI_Usage_Presentation.pdf",
         "ARES.pdf",
@@ -215,7 +215,7 @@
       "path": "publications",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774481982078,
+      "lastAccessed": 1774857579636,
       "keyFiles": [
         "index.md"
       ]
@@ -224,7 +224,7 @@
       "path": "research",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774481982078,
+      "lastAccessed": 1774857579636,
       "keyFiles": [
         "index.md"
       ]
@@ -233,7 +233,7 @@
       "path": "talks",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774481982079,
+      "lastAccessed": 1774857579637,
       "keyFiles": [
         "index.md"
       ]
@@ -242,7 +242,7 @@
       "path": "trips",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774481982079,
+      "lastAccessed": 1774857579637,
       "keyFiles": [
         "index.md"
       ]
@@ -251,15 +251,15 @@
       "path": "_site/assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1774481982080,
+      "lastAccessed": 1774857579638,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "courses/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1774508368852,
+      "path": "courses/ai_study/2026/guide.html",
+      "accessCount": 5,
+      "lastAccessed": 1774857645821,
       "type": "file"
     }
   ],

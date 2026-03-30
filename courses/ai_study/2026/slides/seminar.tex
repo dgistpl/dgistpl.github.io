@@ -324,14 +324,7 @@
 
   \vspace{1em}
   \begin{center}
-    \begin{tikzpicture}[
-      panel/.style={draw=gray!50, fill=gray!5, rounded corners=4pt, minimum height=3cm, align=center}
-    ]
-      \node[panel, minimum width=4.5cm] (editor) at (0,0) {\small\textbf{File Explorer}\\\small\textcolor{gray}{lec1.pdf, lec2.pdf,}\\\small\textcolor{gray}{lec3.pdf, ...}};
-      \node[panel, minimum width=4.5cm, fill=MutedBlue] (chat) at (6,0) {\small\textbf{Claude Code Panel}\\\small\textcolor{gray}{Ask questions here}};
-      \node[above=0.2cm of editor, font=\footnotesize\bfseries, text=gray] {Left};
-      \node[above=0.2cm of chat, font=\footnotesize\bfseries, text=themeblue] {Right};
-    \end{tikzpicture}
+\includegraphics[width=0.5\textwidth]{../figures/vscode.png}
   \end{center}
 \end{frame}
 
@@ -343,7 +336,7 @@
     \colorbox{codebg}{%
       \parbox{0.9\textwidth}{%
         \texttt{\textcolor{codegreen}{This folder contains all the materials for my course.
-        Read all the files and understand the content.}}
+        Read all the files including .pdf and .md files.}}
       }%
     }
   \end{center}
