@@ -261,6 +261,24 @@
       "accessCount": 5,
       "lastAccessed": 1774857645821,
       "type": "file"
+    },
+    {
+      "path": "courses/ai_study/2026/qrcode.png",
+      "accessCount": 1,
+      "lastAccessed": 1774857879785,
+      "type": "file"
+    },
+    {
+      "path": "courses/ai_study/2026/qrcode_setup.png",
+      "accessCount": 1,
+      "lastAccessed": 1774858000196,
+      "type": "file"
+    },
+    {
+      "path": "courses/ai_study/2026/qrcode_guide.png",
+      "accessCount": 1,
+      "lastAccessed": 1774858101367,
+      "type": "file"
     }
   ],
   "userDirectives": []
