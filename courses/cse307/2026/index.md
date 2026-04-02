@@ -45,6 +45,7 @@ author_profile: false
 + (Part 2) Basic Concepts
   + Expressions: [lec5.pdf](slides/lec5.pdf) 
   + Procedures: [lec6.pdf](slides/lec6.pdf)
+  + Lexical Scoping: [lec7.pdf](slides/lec7.pdf)
 
 ### Open Project
 + Open Project Guideline: [open_project_guideline.pdf](slides/open_project_guideline.pdf)
