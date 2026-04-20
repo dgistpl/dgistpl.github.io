@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Resistant Programming Language Generation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="tag tag-ai">AI</span>
+      <h1>AI가 사용할 수 없고 인간만 사용할 수 있는 프로그래밍 언어를 생성하는 함수</h1>
+      <div class="subtitle">Generating Programming Languages Usable by Humans but Not by AI</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p>대규모 언어 모델(LLM)의 코드 생성 능력이 급격히 향상되면서, AI는 기존 프로그래밍 언어로 작성된 코드를 이해하고, 생성하고, 변환하는 데 있어 인간에 근접하거나 이를 초월하는 성능을 보이고 있다. 이로 인해 다음과 같은 근본적 문제가 대두된다.</p>
+
+    <h3>AI 코드 능력의 위협</h3>
+    <ol>
+      <li><strong>자율 무기 및 악성 코드</strong>: 악의적 행위자가 AI를 이용하여 malware, exploit, 자율 공격 시스템을 대량으로 생성할 수 있다.</li>
+      <li><strong>Human-in-the-loop 보장</strong>: Safety-critical 시스템에서 &ldquo;이 코드가 인간에 의해 작성·검증되었는가&rdquo;를 확인할 기술적 수단이 없다.</li>
+      <li><strong>인간 프로그래머의 역할</strong>: 인간만이 수행할 수 있는 프로그래밍 활동의 영역을 기술적으로 정의하고 보존하는 것이 중요하다.</li>
+      <li><strong>AI 능력 통제</strong>: 프로그래밍 능력은 AI의 가장 강력한 능력 중 하나이며, 이를 선택적으로 제한할 수 있다면 AI safety의 중요한 도구가 된다.</li>
+    </ol>
+
+    <h3>현재의 기술적 공백</h3>
+    <p>현재 AI의 코드 능력을 제한하는 접근법은 대부분 <strong>사후적(post-hoc)</strong>이다:</p>
+    <ul>
+      <li><strong>코드 필터링</strong>: 완벽한 필터링은 undecidable하며, 우회가 가능</li>
+      <li><strong>모델 제한</strong>: jailbreak에 취약</li>
+      <li><strong>실행 환경 제한</strong>: 코드 작성 자체는 제한하지 못함</li>
+    </ul>
+    <p><strong>사전적(proactive)</strong>이고 <strong>언어 수준(language-level)</strong>에서의 접근 &mdash; 즉 <strong>AI가 원천적으로 사용할 수 없는 프로그래밍 언어를 설계</strong>하는 것 &mdash; 은 아직 연구되지 않았다.</p>
+
+    <h3>핵심 연구 질문</h3>
+    <p><strong>인간은 사용할 수 있지만 AI(특히 LLM)는 사용할 수 없는 프로그래밍 언어가 존재하는가? 존재한다면, 그러한 언어를 체계적으로 생성하는 함수를 구축할 수 있는가?</strong></p>
+    <p>이 질문은 다음과 같은 인지적·계산적 비대칭에 기반한다:</p>
+    <ul>
+      <li><strong>인간의 강점</strong>: 시각·공간적 추론, 물리적 세계에 대한 직관, 유추에 의한 학습, 소수 예제로부터의 일반화, 사회적·문화적 맥락 이해, 감각 운동 통합</li>
+      <li><strong>LLM의 약점</strong>: 진정한 시각적 이해 부재, 새로운 형식 체계에 대한 few-shot 학습의 한계, 학습 분포 밖의 구문·의미론에 대한 취약성, 장거리 구조적 의존성의 불완전한 추적</li>
+    </ul>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p><strong>인간은 사용할 수 있지만 현재의 AI(LLM)는 사용할 수 없는 프로그래밍 언어를 체계적으로 생성하는 함수</strong> <code>G</code>를 개발한다.</p>
+    <p><code>G : AI<sub>capability</sub> &times; HumanCognition &times; SecurityParam &rarr; PL</code></p>
+    <ul>
+      <li><strong>입력 1 &mdash; AI capability profile</strong>: 대상 AI 시스템의 현재 능력 모델</li>
+      <li><strong>입력 2 &mdash; Human cognition model</strong>: 인간 프로그래머가 활용할 수 있는 인지 능력</li>
+      <li><strong>입력 3 &mdash; Security parameter</strong>: AI-resistance의 강도</li>
+      <li><strong>출력 &mdash; Programming Language</strong>: 문법, 의미론, 타입 시스템, 도구가 완전히 정의된 언어</li>
+    </ul>
+    <p>구체적 목표:</p>
+    <ul>
+      <li><strong>AI-resistance</strong>: AI가 이해·생성·실행 추적할 수 없음 (random baseline 수준)</li>
+      <li><strong>Human-usability</strong>: 합리적 학습 시간 내에 프로그래밍 가능</li>
+      <li><strong>Turing completeness</strong></li>
+      <li><strong>실용성</strong>: 합리적 생산성으로 실제 프로그래밍 작업 수행 가능</li>
+      <li><strong>적응성(Adaptiveness)</strong>: AI 능력 향상 시 더 강한 AI-resistance를 가진 새 언어 생성 가능</li>
+      <li><strong>이론적 기반</strong>: AI-resistance의 형식적 정의와 보장에 대한 이론적 분석</li>
+    </ul>
+
+    <h2>3. 기본 접근 방법 (Basic Approach)</h2>
+
+    <h3>(1) 인간-AI 인지 비대칭의 분류</h3>
+    <h4>축 1: 표현 양식(Modality)</h4>
+    <ul>
+      <li><strong>LLM의 한계</strong>: 텍스트 토큰의 순차적 처리에 특화. 2D/3D 공간 구조는 직접 처리 불가</li>
+      <li><strong>인간의 강점</strong>: 시각적 패턴 인식, 공간적 추론, 다감각 통합</li>
+    </ul>
+    <h4>축 2: 분포 의존성(Distribution Dependence)</h4>
+    <ul>
+      <li><strong>LLM의 한계</strong>: 학습 데이터 분포에 강하게 의존</li>
+      <li><strong>인간의 강점</strong>: 유추, 추상적 원리 이해, 소수 예제로부터의 일반화</li>
+    </ul>
+    <h4>축 3: 형식적 추론(Formal Reasoning)</h4>
+    <ul>
+      <li><strong>LLM의 한계</strong>: novel 형식 체계에 대한 엄밀한 추론이 약함</li>
+      <li><strong>인간의 강점</strong>: 형식적 규칙을 읽고 이해하고 적용하는 능력</li>
+    </ul>
+    <h4>축 4: 신체성 / 물리적 세계(Embodiment)</h4>
+    <ul>
+      <li><strong>LLM의 한계</strong>: 물리적 세계와의 직접적 상호작용 부재</li>
+      <li><strong>인간의 강점</strong>: 물리적 세계에 대한 풍부한 직관</li>
+    </ul>
+    <h4>축 5: 사회적·문화적 지식(Social/Cultural Knowledge)</h4>
+    <ul>
+      <li><strong>LLM의 한계</strong>: implicit/tacit 지식, 로컬 문화 추론 불가</li>
+      <li><strong>인간의 강점</strong>: 공유된 문화적 맥락, 암묵적 지식에 대한 이해</li>
+    </ul>
+
+    <h3>(2) AI-Resistant 언어 특성의 설계 공간</h3>
+    <p><strong>Feature A: 비순차적 구문(Non-sequential Syntax)</strong></p>
+    <ul>
+      <li>프로그램이 <strong>2D 그리드, 그래프, 또는 다이어그램</strong> 으로 작성</li>
+      <li>AI-resistance 근거: LLM의 토크나이저와 attention은 1D 순차 입력에 최적화</li>
+    </ul>
+    <p><strong>Feature B: 동적 구문 변환(Dynamic Syntax Mutation)</strong></p>
+    <ul>
+      <li>프로그램의 구문 규칙이 <strong>실행 중에 변경</strong>되거나 <strong>프로그램 자체에 의해 재정의</strong>됨</li>
+    </ul>
+    <p><strong>Feature C: 비관습적 제어 흐름(Unconventional Control Flow)</strong></p>
+    <ul>
+      <li>물리 시뮬레이션 기반 실행, 생태학적 모델, 음악적 구조 등</li>
+    </ul>
+    <p><strong>Feature D: 암호학적 구문 요소(Cryptographic Syntactic Elements)</strong></p>
+    <ul>
+      <li>시각적 CAPTCHA 형태로 인코딩, 물리적 토큰(하드웨어 키) 필요</li>
+    </ul>
+    <p><strong>Feature E: 의미론적 접지(Semantic Grounding)</strong></p>
+    <ul>
+      <li>프로그램의 의미가 외부 세계의 상태나 물리적 속성에 의존</li>
+    </ul>
+    <p><strong>Feature F: 주기적 언어 진화(Periodic Language Evolution)</strong></p>
+    <ul>
+      <li>언어의 구문·의미론이 <strong>정기적으로 변경</strong>됨</li>
+    </ul>
+
+    <h3>(3) 생성 함수 G의 설계</h3>
+    <ol>
+      <li><strong>AI capability probing</strong>: 대상 AI 시스템의 현재 능력을 체계적으로 측정</li>
+      <li><strong>인간-AI gap 식별</strong>: 각 비대칭 축에서 현재 gap을 측정</li>
+      <li><strong>Feature composition</strong>: gap에 기반하여 language feature의 조합을 결정</li>
+      <li><strong>언어 생성</strong>: concrete 언어 사양을 생성 (BNF/EBNF, operational semantics, 타입 규칙)</li>
+      <li><strong>AI-resistance 검증</strong></li>
+      <li><strong>Human-usability 검증</strong></li>
+    </ol>
+
+    <h3>(4) 형식적 프레임워크</h3>
+    <p><strong>정의: (&epsilon;, &delta;)-AI-resistance</strong></p>
+    <ul>
+      <li>언어 <code>L</code>이 AI 시스템 <code>A</code>에 대해 (&epsilon;, &delta;)-AI-resistant &hArr; <code>A</code>가 <code>L</code>로 작성된 프로그래밍 작업을 수행할 때, 성공률이 random baseline + &epsilon; 이하 (확률 1 - &delta; 이상)</li>
+    </ul>
+    <p><strong>정의: Human-usability</strong></p>
+    <ul>
+      <li>언어 <code>L</code>이 (&tau;, &rho;)-human-usable &hArr; 프로그래밍 경험이 있는 인간이 &tau; 시간 이내의 학습 후 &rho; 이상의 성공률로 작업 수행 가능</li>
+    </ul>
+    <p><strong>정의: AI-resistance margin</strong></p>
+    <ul>
+      <li><code>margin(L, A) = HumanPerformance(L) - AIPerformance(L, A)</code></li>
+    </ul>
+
+    <h3>(5) 이론적 한계 분석</h3>
+    <ul>
+      <li><strong>존재성</strong>: 원리적으로 존재하는가?</li>
+      <li><strong>AI 적응의 한계</strong>: PAC learning의 sample complexity와 관련</li>
+      <li><strong>Arms race 역학</strong>: 균형점(equilibrium)이 존재하는가?</li>
+      <li><strong>Fundamental limit</strong>: AI-resistance를 높이면 human-usability도 감소하는 <strong>Pareto frontier</strong>의 특성 분석</li>
+    </ul>
+
+    <h2>4. 후보 벤치마크 (Candidate Benchmarks)</h2>
+
+    <h3>AI 코드 능력 평가 (AI-resistance 측정)</h3>
+    <ul>
+      <li><strong>HumanEval</strong> [Chen et al., 2021] &mdash; 164개 Python 프로그래밍 문제</li>
+      <li><strong>MBPP</strong> [Austin et al., 2021] &mdash; 974개 문제</li>
+      <li><strong>APPS</strong> [Hendrycks et al., NeurIPS 2021]</li>
+      <li><strong>SWE-bench</strong> [Jimenez et al., 2024]</li>
+      <li><strong>CodeContests</strong> [Li et al., 2022]</li>
+    </ul>
+
+    <h3>인간 사용성 평가</h3>
+    <ul>
+      <li><strong>NASA-TLX</strong> [Hart &amp; Staveland, 1988] &mdash; Cognitive load 측정</li>
+      <li><strong>학습 곡선</strong>: 시간에 따른 task completion rate</li>
+      <li><strong>표준 프로그래밍 과제</strong>: FizzBuzz, sorting, tree traversal, simple web server</li>
+    </ul>
+
+    <h3>Novel 언어 학습 능력 평가</h3>
+    <ul>
+      <li><strong>BabyLM</strong> [Warstadt et al., 2023]</li>
+      <li><strong>ARC</strong> [Chollet, 2019] &mdash; 추상적 추론 능력 평가</li>
+      <li><strong>CAPTCHA 벤치마크</strong></li>
+    </ul>
+
+    <h3>Esolang 벤치마크</h3>
+    <ul>
+      <li><strong>Befunge-93/98, Piet, Malbolge, Whitespace, Chef, Shakespeare</strong></li>
+    </ul>
+
+    <h3>AI 시스템 (AI-resistance 평가 대상)</h3>
+    <ul>
+      <li><strong>GPT-4 / GPT-4o, Claude 3.5 Sonnet / Claude Opus, Code Llama, StarCoder 2, DeepSeek-Coder, Gemini</strong></li>
+    </ul>
+
+    <h2>5. 후보 베이스라인 (Candidate Baselines)</h2>
+
+    <h3>5.1 기존 프로그래밍 언어 (AI-resistance 없음)</h3>
+    <ul>
+      <li><strong>Python, JavaScript, Java, C++</strong> &mdash; AI-resistance &asymp; 0</li>
+      <li><strong>Haskell, Prolog, APL, Forth</strong> &mdash; 비주류 패러다임, 제한적 AI-resistance</li>
+    </ul>
+
+    <h3>5.2 Esolang (의도적 난해함)</h3>
+    <ul>
+      <li><strong>Brainfuck, Befunge, Piet, Malbolge</strong></li>
+    </ul>
+
+    <h3>5.3 시각적/블록 기반 프로그래밍 언어</h3>
+    <ul>
+      <li><strong>Scratch, LabVIEW, Unreal Blueprints</strong></li>
+    </ul>
+
+    <h3>5.4 암호학적 난독화</h3>
+    <ul>
+      <li><strong>Code obfuscation, Indistinguishability obfuscation, Homomorphic encryption</strong></li>
+    </ul>
+
+    <h3>5.5 CAPTCHA / Human verification</h3>
+    <ul>
+      <li><strong>reCAPTCHA, PoW (Proof of Work)</strong></li>
+    </ul>
+
+    <h3>5.6 AI Safety / Capability Control</h3>
+    <ul>
+      <li><strong>AI sandboxing, Tool AI, Corrigibility</strong></li>
+    </ul>
+
+    <h3>평가 지표</h3>
+    <h4>AI-resistance</h4>
+    <ul>
+      <li><strong>코드 생성 정확도</strong>: pass@k (낮을수록 resistant)</li>
+      <li><strong>코드 이해 정확도</strong>, <strong>프로그램 실행 추적 정확도</strong></li>
+      <li><strong>AI-resistance margin</strong>: <code>HumanPerformance - AIPerformance</code></li>
+    </ul>
+    <h4>Human-usability</h4>
+    <ul>
+      <li><strong>학습 시간, Task completion rate, Cognitive load (NASA-TLX), 프로그래밍 생산성</strong></li>
+    </ul>
+    <h4>언어 품질</h4>
+    <ul>
+      <li><strong>Turing completeness, 표현력, 도구 지원</strong></li>
+    </ul>
+    <h4>적응성</h4>
+    <ul>
+      <li><strong>AI fine-tuning resistance, 진화 비용</strong></li>
+    </ul>
+
+    <hr>
+
+    <h2>연구 지형 요약 (Research Landscape Summary)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>축</th><th>대표 연구</th><th>AI-resistant</th><th>Human-usable</th><th>체계적 생성</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>주류 PL</td><td>Python, Java, C++</td><td>X</td><td>O</td><td>N/A</td><td>AI가 완전 사용 가능</td></tr>
+          <tr><td>Esolang</td><td>Brainfuck, Befunge, Piet</td><td>&#9651; (우연)</td><td>X</td><td>X</td><td>인간도 사용 어려움</td></tr>
+          <tr><td>시각적 PL</td><td>Scratch, LabVIEW</td><td>&#9651;</td><td>O</td><td>X</td><td>Multimodal AI에 취약</td></tr>
+          <tr><td>코드 난독화</td><td>Obfuscation, HE</td><td>O</td><td>X</td><td>&#9651;</td><td>인간도 이해 불가</td></tr>
+          <tr><td>CAPTCHA</td><td>reCAPTCHA</td><td>O (검증)</td><td>O</td><td>O</td><td>프로그래밍 아닌 검증</td></tr>
+          <tr><td>AI Safety</td><td>Sandboxing, corrigibility</td><td>&#9651;</td><td>N/A</td><td>X</td><td>일반 통제, PL 무관</td></tr>
+          <tr><td><strong>본 연구</strong></td><td>&mdash;</td><td><strong>O</strong></td><td><strong>O</strong></td><td><strong>O</strong></td><td><strong>새로운 연구 영역</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>본 연구는 <strong>프로그래밍 언어 설계</strong>, <strong>AI 안전(safety)</strong>, <strong>인지 과학(cognitive science)</strong>, <strong>암호학(cryptography)</strong> 의 교차점에 위치하는 새로운 연구 영역을 개척한다. 핵심 기여는 단일 AI-resistant 언어의 설계가 아니라, <strong>AI의 능력 변화에 적응하여 지속적으로 새로운 AI-resistant 언어를 생성하는 함수</strong> <code>G</code>의 구축이다.</p>
+
+    <h3>주요 Open Question</h3>
+    <ul>
+      <li><strong>근본적 존재성</strong>: Turing-complete이면서 인간은 실용적으로 사용 가능하지만 AI는 사용 불가능한 언어가 원리적으로 존재하는가?</li>
+      <li><strong>Arms race의 결말</strong>: 인간의 인지 능력이라는 상한 때문에 결국 AI가 승리하는가? 아니면 인간의 신체성(embodiment)이 영구적 비대칭을 제공하는가?</li>
+      <li><strong>Multimodal AI의 영향</strong>: 시각적 추론 능력을 획득하면 축 1 기반 AI-resistance가 무력화되는가?</li>
+      <li><strong>실용성과 AI-resistance의 trade-off</strong>: 산업적으로 수용 가능한 생산성을 유지하면서 달성 가능한 최대 AI-resistance는?</li>
+      <li><strong>법적·윤리적 함의</strong>: Safety-critical 시스템에 대한 규제 프레임워크와의 연결</li>
+      <li><strong>인간의 적응 가능성</strong>: 비관습적 프로그래밍 언어를 &ldquo;합리적 시간 내에&rdquo; 배울 수 있는가?</li>
+    </ul>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLX Lab — Research Problem Bank</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --text-secondary: #555;
+      --accent-gdl: #2563eb;
+      --accent-tunnel: #7c3aed;
+      --accent-ai: #dc2626;
+      --border: #e5e7eb;
+      --tag-gdl: #dbeafe;
+      --tag-tunnel: #ede9fe;
+      --tag-ai: #fee2e2;
+      --hover-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    main {
+      max-width: 100%;
+      padding: 40px 0 80px;
+    }
+
+    .research-line {
+      margin-bottom: 50px;
+    }
+
+    .line-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 0 40px 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .line-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .line-icon.gdl { background: var(--tag-gdl); }
+    .line-icon.tunnel { background: var(--tag-tunnel); }
+    .line-icon.ai { background: var(--tag-ai); }
+
+    .line-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .line-header .line-count {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-left: auto;
+    }
+
+    /* Horizontal scrolling cards */
+    .cards-scroll-wrapper {
+      position: relative;
+      padding: 0 40px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 16px;
+      -ms-overflow-style: none;
+      scrollbar-width: thin;
+      scrollbar-color: #d1d5db transparent;
+    }
+
+    .cards::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .cards::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cards::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 3px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      min-width: 340px;
+      max-width: 340px;
+      scroll-snap-align: start;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      flex-shrink: 0;
+    }
+
+    .card:hover {
+      box-shadow: var(--hover-shadow);
+      transform: translateY(-3px);
+    }
+
+    .card:hover.gdl-border { border-color: var(--accent-gdl); }
+    .card:hover.tunnel-border { border-color: var(--accent-tunnel); }
+    .card:hover.ai-border { border-color: var(--accent-ai); }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+
+    .card-tag.gdl { background: var(--tag-gdl); color: var(--accent-gdl); }
+    .card-tag.tunnel { background: var(--tag-tunnel); color: var(--accent-tunnel); }
+    .card-tag.ai { background: var(--tag-ai); color: var(--accent-ai); }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .card .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .card .description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex-grow: 1;
+    }
+
+    .card .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .keyword {
+      font-size: 0.72rem;
+      background: #f3f4f6;
+      color: #6b7280;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .card .goal-list {
+      margin-top: 12px;
+      padding-left: 18px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .card .goal-list li {
+      margin-bottom: 4px;
+    }
+
+    .card .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-gdl);
+      text-decoration: none;
+    }
+
+    .card.tunnel-border .read-more { color: var(--accent-tunnel); }
+    .card.ai-border .read-more { color: var(--accent-ai); }
+
+    .read-more .arrow {
+      transition: transform 0.2s;
+    }
+
+    .card:hover .read-more .arrow {
+      transform: translateX(3px);
+    }
+
+    /* Scroll hint fade */
+    .cards-scroll-wrapper::after {
+      content: '';
+      position: absolute;
+      right: 40px;
+      top: 0;
+      bottom: 16px;
+      width: 60px;
+      background: linear-gradient(to right, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.6rem; }
+      .stats { gap: 20px; }
+      .stat-number { font-size: 1.4rem; }
+      .line-header { padding: 0 16px 12px; }
+      .cards-scroll-wrapper { padding: 0 16px; }
+      .card { min-width: 300px; max-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>PLX Lab &mdash; Research Problem Bank</h1>
+  <p>A curated collection of open research problems at the intersection of programming languages, graph learning, program analysis, and AI safety.</p>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">10</div>
+      <div class="stat-label">Problems</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Research Lines</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Core Systems</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ Research Line 1: GDL / PL4XGL ============ -->
+  <section class="research-line">
+    <div class="line-header">
+      <div class="line-icon gdl">&#9670;</div>
+      <h2>GDL &amp; PL4XGL &mdash; Explainable Graph Learning</h2>
+      <span class="line-count">6 problems</span>
+    </div>
+    <div class="cards-scroll-wrapper">
+      <div class="cards">
+
+        <a class="card gdl-border" href="pages/scalable-pl4xgl.html">
+          <span class="card-tag gdl">GDL / PL4XGL</span>
+          <h3>Scalable PL4XGL</h3>
+          <div class="subtitle">대규모 그래프를 위한 확장 가능한 PL4XGL</div>
+          <div class="description">
+            PL4XGL은 GDL program 기반의 symbolic, inherently interpretable 그래프 학습 기법이나, HIV(41K 분자)에서 training timeout, Pubmed에서 170&times; 느린 classification 등 심각한 확장성 문제를 가진다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">scalability</span>
+            <span class="keyword">program synthesis</span>
+            <span class="keyword">subgraph isomorphism</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card gdl-border" href="pages/transductive-pl4xgl.html">
+          <span class="card-tag gdl">GDL / PL4XGL</span>
+          <h3>Transductive PL4XGL</h3>
+          <div class="subtitle">트랜스덕티브 그래프 학습을 위한 PL4XGL</div>
+          <div class="description">
+            PL4XGL은 본질적으로 inductive 방식으로 설계되어, transductive 설정에서 GCN 대비 10~15%p 낮은 정확도를 보인다. GDL을 homophily/aggregate 술어로 확장하고 label propagation을 통합한다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">transductive learning</span>
+            <span class="keyword">label propagation</span>
+            <span class="keyword">homophily</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card gdl-border" href="pages/interpretable-graph-classification.html">
+          <span class="card-tag gdl">GDL / PL4XGL</span>
+          <h3>Interpretable Graph Classification</h3>
+          <div class="subtitle">해석 가능한 그래프 분류 (ProgNet)</div>
+          <div class="description">
+            GDL program 기반의 shared vocabulary와 decomposable evidence composition network로 GNN 수준의 정확도와 faithful한 설명을 동시에 달성하는 ProgNet 프레임워크.
+          </div>
+          <div class="keywords">
+            <span class="keyword">interpretability</span>
+            <span class="keyword">graph classification</span>
+            <span class="keyword">vocabulary learning</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card gdl-border" href="pages/gdl-embedding-nn.html">
+          <span class="card-tag gdl">GDL / PL4XGL</span>
+          <h3>GDL-Based Embeddings for NN</h3>
+          <div class="subtitle">GDL Program 기반 임베딩과 신경망</div>
+          <div class="description">
+            GDL program 집합을 feature 추출기로 사용하여 해석 가능한 embedding을 생성하고, 이 embedding 위에서 표준 NN으로 대규모 그래프 학습을 수행한다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">embedding</span>
+            <span class="keyword">scalability</span>
+            <span class="keyword">transfer learning</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card gdl-border" href="pages/gdl-gnn-explanation.html">
+          <span class="card-tag gdl">GDL / PL4XGL</span>
+          <h3>GDL-Based GNN Explanation</h3>
+          <div class="subtitle">GDL 기반 GNN 설명 기법</div>
+          <div class="description">
+            Subgraph 대신 GDL program을 설명 단위로 사용하여 interval-aware, dataset-level 재사용 가능, model-agnostic한 GNN 설명 프레임워크를 개발한다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">GNN explanation</span>
+            <span class="keyword">faithfulness</span>
+            <span class="keyword">model-agnostic</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card gdl-border" href="pages/gdl-graph-data-mining.html">
+          <span class="card-tag gdl">GDL / PL4XGL</span>
+          <h3>Graph Data Mining with GDL</h3>
+          <div class="subtitle">GDL 기반 그래프 데이터마이닝</div>
+          <div class="description">
+            GDL을 패턴 언어로 사용하여 interval-aware 패턴을 자동으로 발견하는 마이닝 프레임워크. 구조 중심 mining과 제약 기반 mining의 교차점을 메운다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">pattern mining</span>
+            <span class="keyword">frequent subgraph</span>
+            <span class="keyword">interval predicates</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Research Line 2: Context Tunneling ============ -->
+  <section class="research-line">
+    <div class="line-header">
+      <div class="line-icon tunnel">&#9672;</div>
+      <h2>Context Tunneling &mdash; Precise Program Analysis</h2>
+      <span class="line-count">3 problems</span>
+    </div>
+    <div class="cards-scroll-wrapper">
+      <div class="cards">
+
+        <a class="card tunnel-border" href="pages/context-tunneling-python.html">
+          <span class="card-tag tunnel">Context Tunneling</span>
+          <h3>Context Tunneling for Python</h3>
+          <div class="subtitle">Python을 위한 컨텍스트 터널링</div>
+          <div class="description">
+            Context tunneling을 Python에 확장. 동적 타이핑, first-class 함수, decorator, generator 등 Python 고유 특성에 맞는 context-sensitivity flavor와 atomic feature를 설계한다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">Python</span>
+            <span class="keyword">points-to analysis</span>
+            <span class="keyword">dynamic language</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card tunnel-border" href="pages/optimal-tunneling-abstraction.html">
+          <span class="card-tag tunnel">Context Tunneling</span>
+          <h3>Optimal Tunneling Abstraction</h3>
+          <div class="subtitle">주어진 프로그램과 k에 대한 최적 터널링</div>
+          <div class="description">
+            주어진 프로그램 P와 k에 대해 최적 또는 근-최적 tunneling relation을 효율적으로 찾는 알고리즘. Non-monotonic 공간에서의 최적화 문제를 정면으로 해결한다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">optimality</span>
+            <span class="keyword">non-monotonicity</span>
+            <span class="keyword">combinatorial optimization</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card tunnel-border" href="pages/simple-context-tunneling.html">
+          <span class="card-tag tunnel">Context Tunneling</span>
+          <h3>Simple &amp; Principled Tunneling</h3>
+          <div class="subtitle">단순하고 원칙적인 컨텍스트 터널링</div>
+          <div class="description">
+            프로그램 분석의 이론적 성질로부터 직접 유도되는 단순한 tunneling 규칙. 한 문장으로 기술, 30줄로 구현, 학습 불필요. 복잡한 data-driven 접근의 대안.
+          </div>
+          <div class="keywords">
+            <span class="keyword">simplicity</span>
+            <span class="keyword">principled design</span>
+            <span class="keyword">easy-to-implement</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Research Line 3: AI-Resistant PL ============ -->
+  <section class="research-line">
+    <div class="line-header">
+      <div class="line-icon ai">&#9673;</div>
+      <h2>AI-Resistant Programming Languages</h2>
+      <span class="line-count">1 problem</span>
+    </div>
+    <div class="cards-scroll-wrapper">
+      <div class="cards">
+
+        <a class="card ai-border" href="pages/ai-resistant-pl.html">
+          <span class="card-tag ai">AI &amp; PL</span>
+          <h3>Generating AI-Resistant Programming Languages</h3>
+          <div class="subtitle">AI가 사용할 수 없고 인간만 사용할 수 있는 프로그래밍 언어 생성</div>
+          <div class="description">
+            인간-AI 인지 비대칭을 체계적으로 활용하여, AI는 사용할 수 없지만 인간은 사용할 수 있는 프로그래밍 언어를 지속적으로 생성하는 함수 G를 개발한다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">AI safety</span>
+            <span class="keyword">language design</span>
+            <span class="keyword">cognitive science</span>
+            <span class="keyword">capability control</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>PLX Lab &mdash; Programming Languages &amp; Explainability Research Group</p>
+  <p style="margin-top: 6px; font-size: 0.8rem; opacity: 0.6;">Last updated: April 2026</p>
+</footer>
+
+</body>
+</html>

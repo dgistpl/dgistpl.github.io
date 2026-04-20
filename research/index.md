@@ -85,6 +85,12 @@ Our research group aims to develop programming language technologies for address
     <div class="project-item">• DSL-based project-specific fault localization using fault patterns</div>
     <div class="project-item">• DSL-based data-driven program analysis techniques</div>
   </div>
+  <div class="research-projects" style="margin-top:10px; background-color:#fff7ed;">
+    <strong>Problems (<a href="/ProblemBank/">Problem Bank</a>):</strong>
+    <div class="project-item">• <a href="/ProblemBank/pages/context-tunneling-python.html">Context Tunneling for Python</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/optimal-tunneling-abstraction.html">Optimal Tunneling Abstraction</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/simple-context-tunneling.html">Simple &amp; Principled Context Tunneling</a></div>
+  </div>
 </div>
 
 <div class="research-area">
@@ -103,6 +109,16 @@ Our research group aims to develop programming language technologies for address
     <strong>Key Projects:</strong>
     <div class="project-item">• DSL-based explainable machine learning</div>
     <div class="project-item">• Graph-based heuristics for program analysis</div>
+  </div>
+  <div class="research-projects" style="margin-top:10px; background-color:#fff7ed;">
+    <strong>Problems (<a href="/ProblemBank/">Problem Bank</a>):</strong>
+    <div class="project-item">• <a href="/ProblemBank/pages/scalable-pl4xgl.html">Scalable PL4XGL for Very Large Graphs</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/transductive-pl4xgl.html">Transductive PL4XGL</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/interpretable-graph-classification.html">Interpretable Graph Classification (ProgNet)</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/gdl-embedding-nn.html">GDL-Based Embeddings for Neural Networks</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/gdl-gnn-explanation.html">GDL-Based GNN Explanation</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/gdl-graph-data-mining.html">Graph Data Mining with GDL</a></div>
+    <div class="project-item">• <a href="/ProblemBank/pages/ai-resistant-pl.html">Generating AI-Resistant Programming Languages</a></div>
   </div>
 </div>
 
@@ -131,6 +147,9 @@ Our research group aims to develop programming language technologies for address
     </a>
     <a href="/publications/" class="btn btn--info" style="margin-left: 10px;">
       <i class="fas fa-book"></i> Publications
+    </a>
+    <a href="/ProblemBank/" class="btn btn--warning" style="margin-left: 10px;">
+      <i class="fas fa-lightbulb"></i> Problem Bank
     </a>
   </div>
 </div>

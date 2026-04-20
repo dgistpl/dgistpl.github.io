@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Tunneling for Python</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="tag tag-tunneling">Tunneling</span>
+      <h1>Python을 위한 컨텍스트 터널링</h1>
+      <div class="subtitle">Context Tunneling for Python</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p><strong>Points-to analysis</strong>는 프로그램의 포인터 변수가 런타임에 어떤 객체를 가리킬 수 있는지를 정적으로 근사하는 기본 프로그램 분석 기법이다. 특히 <strong>context-sensitivity</strong> &mdash; 동일 메서드에 대해 서로 다른 호출 문맥을 구분하여 분석하는 기법 &mdash; 는 분석의 정밀도와 확장성에 가장 큰 영향을 미치는 단일 요인이다.</p>
+    <p>Context tunneling [Jeon, Jeong, Oh, <em>OOPSLA 2018</em>]은 기존의 <code>k</code>-limited context-sensitive analysis가 모든 호출 지점에서 무조건적으로 context를 갱신하여 중요한 context element를 덜 중요한 것으로 덮어쓰는 문제를 해결하는 기법이다. Java points-to analysis에서 1-context-sensitive + tunneling이 2-context-sensitive를 네 가지 flavor 모두에서 outperform하는 것으로 입증되었다.</p>
+    <p>그러나 context tunneling은 <strong>Java 전용으로 설계·평가</strong>되었으며, <strong>Python</strong>에 대한 연구는 전무하다.</p>
+
+    <h3>Python의 언어적 특성과 분석 난제</h3>
+    <ol>
+      <li><strong>동적 타이핑(Dynamic Typing)</strong>: Python은 변수에 타입이 없고 런타임에 임의의 객체를 할당할 수 있다. Java에서는 정적 타입 정보가 points-to analysis의 강력한 필터 역할을 하지만, Python에서는 이 필터가 부재하여 points-to set이 훨씬 크고 분석이 본질적으로 더 어렵다.</li>
+      <li><strong>First-class 함수와 고차 함수</strong>: Python에서 함수는 first-class 객체이며, <code>map</code>, <code>filter</code>, <code>sorted(key=...)</code>, decorator 등 고차 함수 패턴이 지배적이다.</li>
+      <li><strong>Duck typing과 동적 디스패치</strong>: Python의 메서드 해석은 MRO(Method Resolution Order)를 따르며, <code>__getattr__</code>, <code>__getattribute__</code>, descriptor protocol 등 동적 메커니즘이 호출 대상을 결정한다.</li>
+      <li><strong>Decorator, 클래스 메타프로그래밍</strong>: <code>@property</code>, <code>@staticmethod</code>, <code>@classmethod</code>, 사용자 정의 decorator 등은 함수를 감싸는(wrapper) 패턴을 생성한다. 이 wrapper chain에서 context가 빠르게 소진된다.</li>
+      <li><strong>Generator, async/await, comprehension</strong>: Python 고유의 제어 흐름을 생성한다.</li>
+      <li><strong>모듈 시스템과 import 메커니즘</strong>: Python의 <code>import</code>는 런타임에 모듈을 로드하고 실행하는 동적 연산이다.</li>
+      <li><strong>내장 함수와 C 확장</strong>: <code>len()</code>, <code>print()</code>, <code>sorted()</code> 등 built-in 함수와 NumPy, Pandas 등의 C 확장 모듈은 정적 분석이 내부를 볼 수 없는 opaque 호출이다.</li>
+    </ol>
+
+    <h3>기존 Python 정적 분석의 한계</h3>
+    <ul>
+      <li><strong>Pytype</strong> (Google): flow-sensitive하지만 context-insensitive에 가까운 타입 추론</li>
+      <li><strong>Pyre</strong> (Meta): gradual typing 기반, 전체 프로그램 분석이 아닌 모듈 단위</li>
+      <li><strong>Mypy</strong>: 타입 검사 도구이지 points-to analysis가 아님</li>
+      <li><strong>Scalpel</strong> [Li et al., ASE 2022]: Python의 call graph 구축 + data-flow 분석, 제한적 context-sensitivity</li>
+      <li><strong>PyCG</strong> [Salis et al., ICSE 2021]: Python call graph 생성, context-insensitive</li>
+      <li><strong>YOGI / Jedi</strong>: IDE 자동 완성용 추론, 정밀도보다 속도 우선</li>
+    </ul>
+
+    <h3>연구 공백</h3>
+    <p>Context tunneling은 Java에서 <code>k</code>-context-sensitive analysis의 정밀도와 확장성을 동시에 크게 향상시켰다. Python은 동적 타이핑으로 인해 context-sensitivity가 더욱 중요하지만, (a) Python용 체계적 <code>k</code>-context-sensitive points-to analysis 프레임워크가 부재하고, (b) Python의 고유 언어 특성에 맞는 context tunneling 설계가 연구되지 않았으며, (c) Python 코드베이스에서 tunneling heuristic을 학습하기 위한 atomic feature와 data-driven 알고리즘이 개발되지 않았다.</p>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>Context tunneling을 <strong>Python points-to analysis</strong>에 확장하여, Python의 고유 언어 특성에 맞는 context tunneling 프레임워크를 설계·구현·평가한다.</p>
+    <ul>
+      <li><strong>Python용 context-sensitive points-to analysis 프레임워크</strong></li>
+      <li><strong>Python용 context tunneling</strong>: first-class 함수, decorator chain, generator 등 Python 고유 패턴에서 중요한 context element를 보존</li>
+      <li><strong>Python용 atomic feature 및 data-driven 학습</strong></li>
+      <li><strong>정밀도 향상</strong>: 1-context-sensitive + tunneling이 2-context-sensitive를 outperform하는 Java 결과를 Python에서 재현</li>
+      <li><strong>실용적 downstream 효과</strong>: 타입 추론 정확도, 버그 탐지, IDE 자동 완성 정밀도 등에서 측정 가능한 개선</li>
+    </ul>
+
+    <h2>3. 기본 접근 방법 (Basic Approach)</h2>
+
+    <h3>(1) Python용 context-sensitive points-to analysis 설계</h3>
+    <p><strong>프로그램 모델</strong>: Java의 5가지 instruction 유형을 Python에 맞게 확장한다.</p>
+    <ul>
+      <li><strong>Allocation</strong>: <code>x = C()</code>, <code>x = [...]</code>, <code>x = {...}</code>, <code>x = lambda: ...</code>, <code>x = (yield ...)</code> 등</li>
+      <li><strong>Move</strong>: <code>x = y</code>, unpacking <code>a, b = t</code>, starred <code>*args</code></li>
+      <li><strong>Load/Store</strong>: attribute access <code>x.f</code>, subscript <code>x[i]</code>, module attribute <code>mod.attr</code></li>
+      <li><strong>Invocation</strong>: <code>x = f(args)</code>, <code>x = obj.m(args)</code>, <code>x = cls(args)</code></li>
+      <li><strong>Python 고유</strong>: decorator application <code>@dec</code>, comprehension, <code>import</code>, <code>yield</code>/<code>yield from</code>, <code>await</code></li>
+    </ul>
+    <p><strong>Context-sensitivity flavor 정의</strong>:</p>
+    <ul>
+      <li><strong>Call-site-sensitivity</strong>: Java와 동일하지만, decorator application site, comprehension entry 등도 call-site에 포함</li>
+      <li><strong>Object-sensitivity</strong>: Python에서 모든 것이 객체이므로, 함수 객체의 allocation site가 context element가 됨</li>
+      <li><strong>Function-origin-sensitivity</strong> (Python 특화): First-class 함수의 정의 위치(definition site)를 context element로 사용</li>
+      <li><strong>Decorator-aware sensitivity</strong> (Python 특화): Decorator chain에서 원래 함수의 context를 보존하는 특화 flavor</li>
+    </ul>
+
+    <h3>(2) Python용 context tunneling 설계</h3>
+    <p><strong>Python 특화 tunneling 패턴</strong>:</p>
+    <ul>
+      <li><strong>Decorator tunneling</strong>: <code>@decorator</code>로 감싸진 함수 호출 시, wrapper 함수의 context가 아닌 원래 함수 정의의 context를 보존</li>
+      <li><strong>고차 함수 tunneling</strong>: <code>map(f, lst)</code> 호출에서 <code>f</code>의 context가 <code>map</code> 내부의 반복 호출로 유실되는 것을 방지</li>
+      <li><strong><code>__init__</code> / <code>__new__</code> tunneling</strong>: 생성자 체인에서 부모 클래스의 <code>__init__</code> 호출 시 context 보존</li>
+      <li><strong><code>super()</code> tunneling</strong>: <code>super().method()</code> 호출에서 원래 호출자의 context를 보존</li>
+      <li><strong>Generator/async tunneling</strong>: Generator의 <code>next()</code>/<code>send()</code> 호출 시 generator를 생성한 context를 보존</li>
+      <li><strong>Comprehension tunneling</strong>: comprehension은 내부적으로 별도 scope를 생성하지만, 상위 scope의 context를 유지해야 정밀한 분석이 가능</li>
+    </ul>
+
+    <h3>(3) Python용 atomic feature 설계</h3>
+    <h4>Class A: 시그니처/이름 기반 feature</h4>
+    <ul>
+      <li>A1: <code>__init__</code> 포함 (constructor)</li>
+      <li>A2: <code>__</code> 로 시작·끝남 (dunder method)</li>
+      <li>A3: <code>_</code> 로 시작 (private convention)</li>
+      <li>A4: <code>get</code>/<code>set</code> 포함 (accessor pattern)</li>
+      <li>A5: <code>test</code> 포함 (test method)</li>
+      <li>A6: <code>wrapper</code> / <code>inner</code> / <code>wrapped</code> 포함</li>
+      <li>A7: <code>callback</code> / <code>handler</code> 포함</li>
+      <li>A8: <code>lambda</code> (anonymous function)</li>
+      <li>A9: <code>self</code> 매개변수 존재 (instance method)</li>
+      <li>A10: <code>cls</code> 매개변수 존재 (class method)</li>
+    </ul>
+    <h4>Class B: 구조적 특성 feature</h4>
+    <ul>
+      <li>B1: Decorator가 적용된 함수</li>
+      <li>B2: <code>*args</code> 또는 <code>**kwargs</code> 매개변수 포함</li>
+      <li>B3: <code>yield</code> / <code>yield from</code> 포함 (generator)</li>
+      <li>B4: <code>async</code> 함수</li>
+      <li>B5: Closure (자유 변수 참조)</li>
+      <li>B6: 중첩 함수 (nested function definition)</li>
+      <li>B7: <code>super()</code> 호출 포함</li>
+      <li>B8: Heap allocation 포함 (<code>C()</code>, <code>[]</code>, <code>{}</code>)</li>
+      <li>B9: 단일 return 문만 포함 (wrapper/identity 패턴)</li>
+      <li>B10: <code>self.attr = ...</code> 형태의 attribute 초기화 포함</li>
+      <li>B11: Class 내부 메서드 vs. module-level 함수</li>
+      <li>B12: <code>@staticmethod</code> / <code>@classmethod</code></li>
+      <li>B13: <code>@property</code></li>
+      <li>B14: 다중 호출 대상 (polymorphic call) 포함</li>
+      <li>B15: 재귀 호출 포함</li>
+    </ul>
+    <h4>Class C: Python 생태계 특화 feature</h4>
+    <ul>
+      <li>C1: 표준 라이브러리 함수 (<code>os</code>, <code>sys</code>, <code>collections</code> 등)</li>
+      <li>C2: 타입 힌트 annotated 함수</li>
+      <li>C3: <code>@dataclass</code> 등 코드 생성 decorator</li>
+      <li>C4: <code>functools.wraps</code> 사용 (올바른 wrapper 패턴)</li>
+      <li>C5: <code>abc.abstractmethod</code> (추상 메서드)</li>
+    </ul>
+
+    <h3>(4) Data-driven 학습 알고리즘</h3>
+    <ul>
+      <li><strong>학습 목표</strong>: Boolean formula <code>&Pi; = &langle;f<sub>1</sub>, f<sub>2</sub>&rangle;</code> 학습</li>
+      <li><strong>Non-greedy 탐색</strong>: 원 논문의 핵심 &mdash; non-monotonic 공간에서 장기적 이득을 추구하는 전략을 그대로 적용</li>
+      <li><strong>비용 제약</strong>: tunneling이 baseline보다 비용이 높지 않도록 보장</li>
+    </ul>
+
+    <h3>(5) Python 특화 도전의 해결</h3>
+    <ul>
+      <li><strong>동적 feature의 정적 근사</strong>: Duck typing으로 인해 call target이 불확실한 경우, 보수적으로 tunneling을 비활성화하는 fallback 전략</li>
+      <li><strong>Opaque 호출 처리</strong>: C 확장 / built-in 함수에 대한 tunneling 정책을 수동 모델링 + 학습된 heuristic으로 혼합</li>
+      <li><strong>점진적 분석</strong>: Python의 대화형 개발 패턴(REPL, Jupyter)에 맞는 incremental analysis 지원</li>
+      <li><strong>Gradual typing 활용</strong>: 타입 힌트가 있는 코드에서는 타입 정보를 활용하여 points-to set을 필터링</li>
+    </ul>
+
+    <h3>(6) 구현</h3>
+    <ul>
+      <li><strong>분석 프레임워크</strong>: Doop 스타일의 Datalog 기반 선언적 분석을 Python용으로 설계</li>
+      <li><strong>Python AST/IR</strong>: CPython bytecode 또는 typed AST를 분석의 입력으로 사용</li>
+      <li><strong>Fact 생성</strong>: Python 소스 코드에서 Datalog fact를 추출하는 front-end 개발</li>
+    </ul>
+
+    <h2>4. 후보 벤치마크 (Candidate Benchmarks)</h2>
+
+    <h3>Python 벤치마크 스위트</h3>
+    <h4>소규모 / 학습용</h4>
+    <ul>
+      <li><strong>micro-benchmark</strong>: 각 패턴(decorator, 고차 함수, generator 등)을 isolate하여 테스트하는 합성 프로그램</li>
+      <li><strong>Pyperformance</strong> (CPython 공식 벤치마크): richards, deltablue, raytrace, chaos, nbody 등</li>
+    </ul>
+    <h4>중규모 / 실세계 라이브러리</h4>
+    <ul>
+      <li><strong>Requests</strong> (~14K LoC): HTTP 라이브러리, session/adapter 패턴</li>
+      <li><strong>Flask</strong> (~12K LoC): 웹 프레임워크, decorator 기반 라우팅</li>
+      <li><strong>Click</strong> (~10K LoC): CLI 프레임워크, 중첩 decorator 패턴이 지배적</li>
+      <li><strong>Pydantic</strong> (~20K LoC): 데이터 검증, metaclass + descriptor + decorator 결합</li>
+      <li><strong>SQLAlchemy</strong> (~100K LoC): ORM, 복잡한 메타프로그래밍</li>
+      <li><strong>Celery</strong> (~50K LoC): 분산 task queue, decorator 기반 task 정의</li>
+    </ul>
+    <h4>대규모 / 확장성 테스트</h4>
+    <ul>
+      <li><strong>Django</strong> (~250K LoC): 대규모 웹 프레임워크</li>
+      <li><strong>CPython stdlib</strong> (~300K LoC)</li>
+      <li><strong>Matplotlib</strong> (~150K LoC)</li>
+      <li><strong>Scikit-learn</strong> (~200K LoC)</li>
+    </ul>
+
+    <h3>Downstream task 평가용</h3>
+    <ul>
+      <li><strong>Typeshed</strong>: type stub 저장소 &mdash; 타입 추론 정확도의 ground truth</li>
+      <li><strong>MyPy test suite</strong></li>
+      <li><strong>BugsInPy</strong> [Widyasari et al., FSE 2020]: Python 실제 버그 데이터셋</li>
+      <li><strong>PyPI type-annotated 패키지</strong></li>
+    </ul>
+
+    <h3>Call graph 품질 평가</h3>
+    <ul>
+      <li><strong>PyCG benchmark</strong> [Salis et al., ICSE 2021]</li>
+      <li><strong>HeaderGen benchmark</strong> [Mir et al., MSR 2023]</li>
+    </ul>
+
+    <h2>5. 후보 베이스라인 (Candidate Baselines)</h2>
+
+    <h3>5.1 Context-insensitive Python 분석 (하한 기준)</h3>
+    <ul>
+      <li><strong>PyCG</strong> [Salis et al., ICSE 2021]</li>
+      <li><strong>Scalpel</strong> [Li et al., ASE 2022]</li>
+      <li><strong>Pytype</strong> (Google)</li>
+      <li><strong>Pyre</strong> (Meta)</li>
+      <li><strong>Code2flow, Depend</strong></li>
+    </ul>
+
+    <h3>5.2 Context-sensitive Python 분석 (직접 비교 대상)</h3>
+    <ul>
+      <li><strong><code>k</code>-CFA for Python</strong> (구현 필요)</li>
+      <li><strong><code>k</code>-object-sensitive for Python</strong> (구현 필요)</li>
+      <li><em>현재 Python에서 체계적 <code>k</code>-context-sensitive points-to analysis를 수행하는 공개 도구가 거의 없어, baseline 자체를 구축해야 할 가능성이 높음</em></li>
+    </ul>
+
+    <h3>5.3 Java용 context tunneling (원 기법과의 대응 비교)</h3>
+    <ul>
+      <li><strong>Context Tunneling (Java)</strong> [Jeon, Jeong, Oh, <em>OOPSLA 2018</em>]</li>
+      <li><strong>Doop framework</strong> [Bravenboer &amp; Smaragdakis, 2009]</li>
+    </ul>
+
+    <h3>5.4 Data-driven program analysis</h3>
+    <ul>
+      <li><strong>Zipper</strong> [Li et al., OOPSLA 2018]</li>
+      <li><strong>Scaler</strong> [Li et al., OOPSLA 2018]</li>
+      <li><strong>Turner</strong> [Jeon &amp; Oh, PLDI 2022]</li>
+      <li><strong>Data-driven context-sensitivity</strong> [Jeong et al., OOPSLA 2017]</li>
+      <li><strong>BEAN</strong> [Tan et al., ISSTA 2016]</li>
+    </ul>
+
+    <h3>5.5 동적 언어 정적 분석</h3>
+    <ul>
+      <li><strong>TAJS</strong> [Jensen et al., SAS 2009] &mdash; JavaScript type analysis</li>
+      <li><strong>SAFE</strong> [Lee et al., PLDI 2012]</li>
+      <li><strong>Phasar</strong> [Schubert et al., TACAS 2019]</li>
+      <li><strong>Wala</strong> (Python support)</li>
+    </ul>
+
+    <h3>5.6 Python 타입 추론 (downstream 비교)</h3>
+    <ul>
+      <li><strong>Mypy, Pyright, Pytype</strong></li>
+      <li><strong>Type4Py</strong> [Mir et al., ICSE 2022]</li>
+      <li><strong>TypeWriter</strong> [Pradel et al., FSE 2020]</li>
+    </ul>
+
+    <h3>평가 지표</h3>
+    <h4>분석 정밀도</h4>
+    <ul>
+      <li><strong>May-fail casts</strong> (또는 Python 대응: 타입 오류 경고 수)</li>
+      <li><strong>Poly virtual calls</strong></li>
+      <li><strong>Points-to set 크기</strong></li>
+      <li><strong>Call graph edges</strong></li>
+    </ul>
+    <h4>분석 비용</h4>
+    <ul>
+      <li><strong>Analysis time</strong>, <strong>Reachable methods</strong>, <strong>Call graph edges</strong></li>
+    </ul>
+    <h4>Downstream task</h4>
+    <ul>
+      <li><strong>타입 추론 정확도</strong>, <strong>버그 탐지</strong>, <strong>Call graph 품질</strong></li>
+    </ul>
+    <h4>Context tunneling 특화</h4>
+    <ul>
+      <li><strong><code>k</code>-CFA 대비 향상</strong>: 1-CFA+T vs. 1-CFA vs. 2-CFA 비교</li>
+      <li><strong>학습된 heuristic의 일반화</strong></li>
+      <li><strong>학습 비용</strong></li>
+    </ul>
+
+    <hr>
+
+    <h2>연구 지형 요약 (Research Landscape Summary)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>축</th><th>대표 연구</th><th>언어</th><th>Context-sensitive</th><th>Tunneling</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Context tunneling</td><td>Jeon et al. [OOPSLA 2018]</td><td>Java</td><td>O</td><td>O</td><td>본 연구의 원 기법</td></tr>
+          <tr><td>Data-driven ctx-sensitivity</td><td>Jeong et al., Zipper, Scaler, Turner</td><td>Java</td><td>O</td><td>X</td><td>학습 알고리즘 참고</td></tr>
+          <tr><td>Python call graph</td><td>PyCG, Scalpel</td><td>Python</td><td>X</td><td>X</td><td>Context-insensitive</td></tr>
+          <tr><td>Python 타입 추론</td><td>Pytype, Pyre, Mypy</td><td>Python</td><td>&#9651;</td><td>X</td><td>Interprocedural 제한적</td></tr>
+          <tr><td>동적 언어 정적 분석</td><td>TAJS, SAFE</td><td>JavaScript</td><td>O</td><td>X</td><td>유사 동적 언어 참고</td></tr>
+          <tr><td><strong>본 연구</strong></td><td>&mdash;</td><td><strong>Python</strong></td><td><strong>O</strong></td><td><strong>O</strong></td><td><strong>Python 최초 context tunneling</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>주요 Open Question</h3>
+    <ul>
+      <li><strong>Python에서 어떤 context-sensitivity flavor가 가장 효과적인가?</strong> Java에서는 object-sensitivity가 우세하지만, first-class 함수가 지배적인 Python에서는 function-origin-sensitivity가 더 나을 수 있음</li>
+      <li><strong>동적 언어에서 context tunneling의 non-monotonicity가 더 심한가?</strong></li>
+      <li><strong>Decorator chain의 최적 tunneling 전략은?</strong></li>
+      <li><strong>Opaque 호출(C 확장)에 대한 tunneling 정책은 학습 가능한가?</strong></li>
+      <li><strong>학습된 heuristic의 cross-project 일반화</strong>: Flask에서 학습한 heuristic이 Django에서도 동작하는가</li>
+    </ul>
+
+  </main>
+</body>
+</html>

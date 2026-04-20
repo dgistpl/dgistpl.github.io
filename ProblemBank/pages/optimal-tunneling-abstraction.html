@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimal Tunneling Abstraction</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="tag tag-tunneling">Tunneling</span>
+      <h1>주어진 프로그램과 k에 대한 최적 터널링 추상화 알고리즘</h1>
+      <div class="subtitle">Optimal Tunneling Abstraction for a Given Program and k</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p>Context tunneling [Jeon, Jeong, Oh, <em>OOPSLA 2018</em>]은 <code>k</code>-limited context-sensitive points-to analysis에서 중요한 context element만을 선택적으로 유지하여 정밀도와 확장성을 동시에 향상시키는 기법이다. 핵심은 <strong>tunneling relation</strong> <code>T &sube; M &times; M</code>을 적절히 선택하는 것이다.</p>
+
+    <h3>현재 접근법의 한계</h3>
+    <ol>
+      <li><strong>Heuristic의 간접성(Indirection)</strong>: 학습 알고리즘은 <strong>주어진 프로그램에 대한 최적 <code>T</code>를 직접 찾는 것이 아니라</strong>, atomic feature의 boolean formula를 통해 <code>T</code>를 간접적으로 생성한다. Boolean formula로 표현 가능한 tunneling relation은 전체 공간의 극히 일부이다.</li>
+      <li><strong>최적성 보장 부재</strong>: Non-greedy 알고리즘은 greedy보다 나은 결과를 내지만, <strong>global optimum을 보장하지 않는다</strong>.</li>
+      <li><strong>Non-monotonicity의 미해결</strong>: <code>T &sube; T'</code>이라 해서 <code>proved(F<sub>P</sub>(T)) &sube; proved(F<sub>P</sub>(T'))</code>가 성립하지 않음. <strong>Non-monotonic 공간에서 최적해를 효율적으로 찾는 알고리즘적 문제 자체는 미해결</strong>이다.</li>
+      <li><strong>Program-specific vs. general heuristic의 gap</strong>: General heuristic이 program-specific optimum에 도달하지 못함을 시사한다.</li>
+    </ol>
+
+    <h3>문제의 형식화</h3>
+    <p><code>T* = argmax<sub>T</sub> |proved(F<sub>P</sub>(T))| s.t. cost(F<sub>P</sub>(T)) &le; cost(F<sub>P</sub>(&empty;))</code></p>
+    <p>이 문제의 난이도:</p>
+    <ul>
+      <li><strong>공간 크기</strong>: <code>2<sup>|M<sub>P</sub>|<sup>2</sup></sup></code>. DaCapo 프로그램에서 reachable methods가 수천~수만 개이므로, 공간 크기는 <code>2<sup>10<sup>6</sup></sup></code> 이상</li>
+      <li><strong>Non-monotonicity</strong>: 표준 기법이 직접 적용 불가</li>
+      <li><strong>평가 비용</strong>: 단일 <code>T</code>에 대한 계산이 전체 points-to analysis 실행을 요구</li>
+    </ul>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>주어진 프로그램 <code>P</code>와 context depth <code>k</code>에 대해, <strong>최적 또는 근-최적(near-optimal)의 tunneling relation <code>T*</code>를 효율적으로 찾는 알고리즘</strong>을 개발한다.</p>
+    <ul>
+      <li><strong>최적성</strong>: 근사 비율(approximation ratio)을 보장</li>
+      <li><strong>효율성</strong>: 합리적 시간 내에 해를 찾음</li>
+      <li><strong>비용 제약 준수</strong></li>
+      <li><strong>이론적 분석</strong>: NP-hardness 증명 또는 polynomial-time 알고리즘</li>
+      <li><strong>실험적 검증</strong>: program-specific optimal과 general heuristic의 gap 정량화</li>
+    </ul>
+
+    <h2>3. 기본 접근 방법 (Basic Approach)</h2>
+
+    <h3>(1) 문제의 구조 분석</h3>
+    <ul>
+      <li><strong>Non-monotonicity의 원인 규명</strong>: tunneling이 call graph의 구조 자체를 변경하기 때문에 발생</li>
+      <li><strong>Near-monotone 부분 공간 식별</strong></li>
+      <li><strong>계산 복잡도 분석</strong>: NP-hardness 증명, 근사 비율에 대한 hardness 결과</li>
+    </ul>
+
+    <h3>(2) Exact 알고리즘</h3>
+    <ul>
+      <li><strong>Constraint-based formulation</strong>: MaxSAT / ILP로 풀기</li>
+      <li><strong>CEGAR 스타일</strong>: 초기 <code>T = &empty;</code>에서 시작, targeted refinement로 점진 확장</li>
+      <li><strong>Branch-and-bound with non-monotone pruning</strong>: impact-based pruning, symmetry breaking</li>
+    </ul>
+
+    <h3>(3) 근사 알고리즘</h3>
+    <ul>
+      <li><strong>Greedy 변형 with lookahead</strong></li>
+      <li><strong>Local search / metaheuristic</strong>: simulated annealing, genetic algorithm, tabu search</li>
+      <li><strong>Decomposition 기반 접근</strong>: SCC decomposition, hierarchical decomposition, independent pair identification</li>
+      <li><strong>Bayesian optimization</strong>: Gaussian process surrogate model</li>
+      <li><strong>Reinforcement learning</strong>: policy gradient 또는 DQN으로 메서드 pair 선택 정책을 학습</li>
+    </ul>
+
+    <h3>(4) 공간 축소 기법</h3>
+    <ul>
+      <li><strong>Irrelevant pair pruning</strong></li>
+      <li><strong>Must-tunnel / must-not-tunnel pair identification</strong></li>
+      <li><strong>Sensitivity-guided reduction</strong></li>
+      <li><strong>Call graph structure-based filtering</strong></li>
+      <li><strong>Dominance-based pruning</strong></li>
+    </ul>
+
+    <h3>(5) 분석 비용 절감</h3>
+    <ul>
+      <li><strong>Incremental analysis</strong></li>
+      <li><strong>Abstract evaluation</strong></li>
+      <li><strong>Caching and reuse</strong></li>
+      <li><strong>Parallel evaluation</strong></li>
+    </ul>
+
+    <h3>(6) 이론적 분석</h3>
+    <ul>
+      <li><strong>Complexity</strong>: NP-hardness 또는 polynomial solvability 증명</li>
+      <li><strong>Approximation</strong>: 다항 시간 근사 알고리즘의 존재 여부와 근사 비율</li>
+      <li><strong>Structure of non-monotonicity</strong></li>
+      <li><strong>Submodularity / supermodularity</strong> 분석</li>
+    </ul>
+
+    <h2>4. 후보 벤치마크 (Candidate Benchmarks)</h2>
+
+    <h3>DaCapo 스위트 (원 논문과의 직접 비교)</h3>
+    <ul>
+      <li><strong>Training set</strong>: luindex, lusearch, antlr, pmd</li>
+      <li><strong>Test set</strong>: eclipse, xalan, fop, chart, bloat, jython</li>
+    </ul>
+
+    <h3>원 논문 외 Java 벤치마크</h3>
+    <ul>
+      <li><strong>JPC, Checkstyle, Soot test suite, SPECjvm2008</strong></li>
+    </ul>
+
+    <h3>소규모 합성 프로그램 (exact 알고리즘 검증용)</h3>
+    <ul>
+      <li><strong>원 논문 Figure 1, 2의 예제</strong></li>
+      <li><strong>Synthetic call graph benchmarks</strong> &mdash; 제어된 크기와 구조</li>
+      <li><strong>Non-monotonicity stress test</strong></li>
+    </ul>
+
+    <h3>대규모 확장성 테스트</h3>
+    <ul>
+      <li><strong>OpenJDK, Spring Framework, Apache Commons</strong></li>
+    </ul>
+
+    <h2>5. 후보 베이스라인 (Candidate Baselines)</h2>
+
+    <h3>5.1 원 논문의 data-driven heuristic (핵심 비교 대상)</h3>
+    <ul>
+      <li><strong>Context Tunneling heuristic</strong> [Jeon, Jeong, Oh, <em>OOPSLA 2018</em>]</li>
+      <li><strong>Greedy variant</strong> (원 논문 &sect;5.2)</li>
+    </ul>
+
+    <h3>5.2 Tunneling 없는 baseline (하한 기준)</h3>
+    <ul>
+      <li><strong><code>k</code>-CFA</strong> (<code>k</code> = 1, 2): 4가지 flavor 모두</li>
+      <li><strong>Context-insensitive analysis</strong></li>
+    </ul>
+
+    <h3>5.3 Data-driven program analysis의 학습 알고리즘</h3>
+    <ul>
+      <li><strong>Jeong et al. [OOPSLA 2017]</strong> &mdash; monotone 공간에서 동작</li>
+      <li><strong>Liang et al. [POPL 2011]</strong></li>
+      <li><strong>Oh et al. [OOPSLA 2015]</strong></li>
+      <li><strong>Chae et al. [OOPSLA 2017]</strong></li>
+    </ul>
+
+    <h3>5.4 Context-sensitivity 선택 기법</h3>
+    <ul>
+      <li><strong>Zipper, Scaler, Turner, BEAN</strong></li>
+      <li><strong>Selective context-sensitivity</strong></li>
+    </ul>
+
+    <h3>5.5 비단조적(non-monotone) 최적화 기법</h3>
+    <ul>
+      <li><strong>Non-monotone submodular maximization</strong> [Buchbinder et al., FOCS 2012]</li>
+      <li><strong>Black-box combinatorial optimization</strong></li>
+      <li><strong>MaxSAT solvers</strong>: RC2, Open-WBO, MaxHS</li>
+      <li><strong>ILP solvers</strong>: Gurobi, CPLEX</li>
+    </ul>
+
+    <h3>평가 지표</h3>
+    <h4>최적성 관련</h4>
+    <ul>
+      <li><strong>Optimality gap</strong>: exact 해 대비 근사 해의 gap</li>
+      <li><strong>Optimality ratio</strong></li>
+      <li><strong>Heuristic gap</strong>: 원 논문 heuristic과 optimal의 gap</li>
+    </ul>
+    <h4>비용 관련</h4>
+    <ul>
+      <li><strong>알고리즘 실행 시간</strong></li>
+      <li><strong>분석 평가 횟수</strong>: sample efficiency</li>
+      <li><strong>비용 제약 준수 여부</strong></li>
+    </ul>
+    <h4>분석 결과</h4>
+    <ul>
+      <li><strong>May-fail casts, analysis time, call-graph edges, reachable methods</strong></li>
+      <li><strong>Tunneling relation 크기</strong>: <code>|T*|</code></li>
+      <li><strong>Non-monotonicity 지표</strong></li>
+    </ul>
+
+    <hr>
+
+    <h2>연구 지형 요약 (Research Landscape Summary)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>축</th><th>대표 연구</th><th>최적성 보장</th><th>Non-monotone 대응</th><th>Program-specific</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Data-driven tunneling heuristic</td><td>Jeon et al. [OOPSLA 2018]</td><td>X</td><td>&#9651;</td><td>X (general)</td><td>원 논문, 개선 대상</td></tr>
+          <tr><td>Monotone parameter learning</td><td>Jeong et al. [2017], Liang et al.</td><td>&#9651;</td><td>X</td><td>X</td><td>Non-monotone에 부적합</td></tr>
+          <tr><td>Context-sensitivity 선택</td><td>Zipper, Scaler, Turner</td><td>X</td><td>&#9651;</td><td>&#9651;</td><td>Orthogonal한 최적화</td></tr>
+          <tr><td>Non-monotone submodular opt</td><td>Buchbinder et al. [FOCS 2012]</td><td>O (이론적)</td><td>O</td><td>O</td><td>범용, 구조 미활용</td></tr>
+          <tr><td><strong>본 연구</strong></td><td>&mdash;</td><td><strong>O</strong></td><td><strong>O</strong></td><td><strong>O</strong></td><td><strong>문제 특수 구조 활용</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>주요 Open Question</h3>
+    <ul>
+      <li><strong>최적 tunneling 문제는 NP-hard인가?</strong></li>
+      <li><strong>Non-monotonicity는 실제로 얼마나 심각한가?</strong></li>
+      <li><strong>Program-specific optimal과 general heuristic의 gap은 얼마나 큰가?</strong></li>
+      <li><strong>Exact 알고리즘이 실용적 크기의 프로그램에서 동작 가능한가?</strong></li>
+      <li><strong>Incremental evaluation은 얼마나 효과적인가?</strong></li>
+      <li><strong>최적 <code>T*</code>의 구조적 패턴은?</strong></li>
+    </ul>
+
+  </main>
+</body>
+</html>

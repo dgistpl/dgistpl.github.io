@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command -v pdftotext)",
+      "Read(//usr/**)",
+      "Read(//c/Program Files/**)",
+      "Bash(pdftotext -layout \"c:/Users/minse/research/ProblemBank/paper/GDL.pdf\" \"c:/Users/minse/research/ProblemBank/paper/GDL.txt\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\minse\\research\\ProblemBank"
+    ]
+  }
+}

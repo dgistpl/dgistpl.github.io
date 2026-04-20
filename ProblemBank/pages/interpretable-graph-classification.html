@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interpretable Graph Classification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="tag tag-gdl">GDL</span>
+      <h1>해석 가능한 그래프 분류</h1>
+      <div class="subtitle">Interpretable Graph Classification</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p>그래프는 분자 구조, 소셜 네트워크, 프로그램 실행 추적, 지식 베이스 등 다양한 실세계 데이터를 자연스럽게 표현하는 기본 자료구조이다. 특히 신약 개발과 같이 의사결정이 중요한 도메인에서는 <strong>정확한 예측</strong>뿐만 아니라 <strong>명확한 설명</strong>이 함께 요구된다.</p>
+    <p>현재 그래프 분류의 주류 방법인 <strong>GNN(Graph Neural Network)</strong> 은 높은 정확도를 보여주지만 블랙박스로 동작한다. 예측의 근거가 연속적인(continuous) 임베딩에 얽혀 있어서, 어떤 구조적 패턴이 예측을 이끌었는지 명시적으로 식별하기 어렵다.</p>
+    <p>이를 해결하기 위해 다양한 explainable/interpretable GNN 기법들이 제안되었으나 다음과 같은 한계가 있다.</p>
+    <ul>
+      <li><strong>정확도 vs. 설명 품질 trade-off</strong>: 강한 GNN 인코더의 정확도를 유지하는 방법(예: SubgraphX, GSAT)은 약하거나 불안정한 설명을 제공하는 반면, 본질적으로 해석 가능한 방법(예: PL4XGL)은 예측 정확도를 희생한다.</li>
+      <li><strong>Instance-level isolation</strong>: 설명 구조가 인스턴스별로 독립적으로 생성되어, 데이터셋 전체에서 공유·재사용 가능한 구조적 vocabulary를 학습하지 못한다. 이로 인해 태스크의 일반화된 로직을 포착하지 못하고 설명이 불안정해진다.</li>
+    </ul>
+    <p>즉, <strong>&ldquo;설명 구조가 예측 메커니즘의 first-class, 재사용 가능한 구성요소&rdquo;로 다뤄지지 않는 것</strong>이 공통된 한계이다.</p>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>다음을 동시에 만족하는 interpretable graph classification framework를 설계한다.</p>
+    <ul>
+      <li><strong>높은 예측 정확도</strong>: 최신 GNN 수준의 분류 성능</li>
+      <li><strong>Faithful한 설명</strong>: 예측 logit이 인간이 이해할 수 있는 구조적 증거 단위로 명시적으로 분해되어야 함</li>
+      <li><strong>Dataset-level 재사용성</strong>: 인스턴스별 독립적 설명이 아닌, 데이터셋 전반에서 공유되고 재사용 가능한 구조적 vocabulary 기반 설명 제공</li>
+    </ul>
+
+    <h2>3. 기본 접근 방법 (Basic Approach)</h2>
+    <p><strong>ProgNet</strong>은 neural representation learning과 명시적인 program-level evidence space를 통합하는 프레임워크이다. 세 가지 핵심 아이디어로 구성된다.</p>
+
+    <h3>(1) Declarative program 기반 evidence interface</h3>
+    <ul>
+      <li>각 그래프를 <strong>GDL(Graph Description Language)</strong> 로 작성된 human-interpretable program들의 shared vocabulary로 표현</li>
+      <li>GDL program <code>P = (&delta;<sub>V</sub>, &delta;<sub>E</sub>, &tau;)</code> = 노드 기술(<code>node x &lt;&phi;&gt;</code>), 엣지 기술(<code>edge (x,y) &lt;&phi;&gt;</code>), 그리고 <strong>target symbol</strong> <code>&tau; &isin; {node x, edge (x,y), graph}</code> 로 구성 [PL4XGL, PLDI 2024]</li>
+      <li>Feature value constraint <code>&lt;&phi;&gt;</code>는 <code>d</code>차원 interval vector이며 <code>[-&infin;, ub]</code> / <code>[lb, &infin;]</code>와 같은 open bound 지원 (예: <code>&lt;[3.0, 4.0]&gt;</code>, <code>&lt;[12, &infin;]&gt;</code>)</li>
+      <li>단순 subgraph는 GDL의 특수 케이스 (interval 폭이 0인 경우)이며, GDL은 subgraph보다 <strong>엄격히 더 표현력이 강함</strong> (증명: [PL4XGL &sect;7.2])</li>
+      <li>그래프 <code>G</code>가 program <code>P</code>를 만족하는지 여부(activation <code>e<sub>P</sub>(G) &isin; {0,1}</code>)가 evidence 단위가 됨</li>
+      <li>ProgNet은 graph classification에 집중하므로 <code>&tau; = graph</code>에 해당하는 program들만 사용 (GDL 자체는 node/edge 분류 target도 지원)</li>
+    </ul>
+
+    <h3>(2) Diversity-preserving vocabulary 구축</h3>
+    <ul>
+      <li>학습 그래프에서 candidate program들을 추출한 뒤, greedy selection으로 compact하면서도 representative한 vocabulary <code>Q</code>를 구성</li>
+      <li>선택 기준: <strong>uncovered data에 대한 marginal precision</strong> 최대화</li>
+      <li>이를 통해 coverage는 최대화하고 redundancy는 최소화하는 vocabulary 생성</li>
+    </ul>
+
+    <h3>(3) Decomposable evidence composition network</h3>
+    <ul>
+      <li>그래프 임베딩 <code>h<sub>G</sub></code>, program 임베딩 <code>h<sub>P</sub></code>, 클래스 프로토타입 <code>v<sub>c</sub></code> 사이의 삼자 상호작용을 모델링</li>
+      <li>클래스 <code>c</code>에 대한 logit: <code>f<sub>c</sub>(G) = &sum;<sub>P &isin; Q</sub> e<sub>P</sub>(G) &middot; (v<sub>c</sub><sup>T</sup> h<sub>P</sub>) &middot; (h<sub>G</sub><sup>T</sup> W h<sub>P</sub>)</code></li>
+      <li><strong>Decomposability</strong>: logit이 program별 기여도의 합으로 자연스럽게 분해됨 &rarr; faithful attribution 가능</li>
+      <li><strong>Contextuality</strong>: 동일 program의 중요도가 그래프별로 adaptive하게 가중됨</li>
+      <li><strong>Consistency</strong>: 공유된 program embedding으로 데이터셋 전반의 재사용·비교 가능성 확보</li>
+    </ul>
+
+    <h3>설명 생성</h3>
+    <ul>
+      <li><strong>Program-level attribution</strong>: <code>&alpha;(G, &ccirc;, P) = e<sub>P</sub>(G) &middot; (v<sub>&ccirc;</sub><sup>T</sup> h<sub>P</sub>) &middot; (h<sub>G</sub><sup>T</sup> W h<sub>P</sub>)</code></li>
+      <li><strong>Evidence subgraph 추출</strong>: attribution이 높은 program들을 모두 만족시키는 최소 subgraph <code>G' &sube; G</code>를 iterative refinement로 추출</li>
+    </ul>
+
+    <h2>4. 후보 벤치마크 (Candidate Benchmarks)</h2>
+    <p>8개의 대표적인 graph classification 벤치마크에서 실험한다.</p>
+
+    <h3>분자(Molecular) 데이터셋 &mdash; 신약 개발과 연결, 정확도·설명성 모두 중요</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>데이터셋</th><th># Graphs</th><th># Avg nodes</th><th># Labels</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>NCI1</strong></td><td>4,110</td><td>29.8</td><td>2</td><td>항암 활성</td></tr>
+          <tr><td><strong>PTC (MR)</strong></td><td>344</td><td>14.2</td><td>2</td><td>독성</td></tr>
+          <tr><td><strong>MUTAG</strong></td><td>188</td><td>17.9</td><td>2</td><td>돌연변이 유발성</td></tr>
+          <tr><td><strong>PROTEINS</strong></td><td>1,113</td><td>39.0</td><td>2</td><td>효소/비효소</td></tr>
+          <tr><td><strong>BBBP</strong></td><td>2,039</td><td>24.0</td><td>2</td><td>혈액-뇌 장벽 투과</td></tr>
+          <tr><td><strong>BACE</strong></td><td>1,513</td><td>34.0</td><td>2</td><td>BACE-1 저해제</td></tr>
+          <tr><td><strong>Mutagenicity</strong></td><td>4,337</td><td>30.3</td><td>2</td><td>돌연변이 유발성</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>합성(Synthetic) 데이터셋 &mdash; 설명 품질 평가 전용</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>데이터셋</th><th># Graphs</th><th># Avg nodes</th><th># Labels</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>BA-2Motifs</strong></td><td>1,000</td><td>25.0</td><td>2</td><td>House-shaped motif 포함 여부</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>5. 후보 베이스라인 (Candidate Baselines)</h2>
+    <p>세 가지 유형의 기존 접근법을 대표하는 방법들과 비교한다.</p>
+
+    <h3>(1) Traditional GNN + Post-hoc explainer</h3>
+    <ul>
+      <li><strong>GCN</strong> [Kipf &amp; Welling, 2017]: first-order spectral graph convolution</li>
+      <li><strong>GIN</strong> [Xu et al., 2019]: sum aggregation + MLP</li>
+      <li><strong>GAT</strong> [Veli&ccaron;kovi&cacute; et al., 2018]: attention 기반 neighbor weighting</li>
+      <li><strong>SubgraphX</strong> [Yuan et al., 2021]: 예측 이후 responsible subgraph를 생성하는 state-of-the-art post-hoc 설명 방법</li>
+    </ul>
+
+    <h3>(2) Rationale-based (intrinsic)</h3>
+    <ul>
+      <li><strong>GSAT</strong> [Miao et al., 2022]: stochastic attention과 information bottleneck 원리를 이용하여 task-relevant subgraph를 rationale로 식별</li>
+    </ul>
+
+    <h3>(3) Symbolic / inherently interpretable</h3>
+    <ul>
+      <li><strong>PL4XGL</strong> [Jeon, Park, Oh, <em>PLDI 2024</em>]: GDL program들의 집합 <code>M &sube; L &times; P &times; [0,1]</code> 로 구성된 symbolic 모델. 입력 그래프에 대해 best-scored program을 선택하여 label과 함께 그 program을 explanation으로 제공. <strong>Fidelity가 구조적으로 0 보장</strong> (Theorem 6.1) &mdash; classification이 program에 의해 수행되었으므로 program을 만족하는 subgraph로도 같은 label 예측. Learning은 top-down(가장 일반 &rarr; 특수)과 bottom-up(가장 구체 &rarr; 일반) <strong>program synthesis</strong>로 수행. 그러나 (i) 신경망을 사용하지 않아 표현력 한계 (homophily, aggregate 속성 기술 불가), (ii) HIV 같은 대형 데이터셋에서 training timeout, (iii) citation network (Cora/Citeseer/Pubmed)에서 정확도 하락 &mdash; 이러한 한계를 ProgNet은 GNN과 결합으로 극복</li>
+    </ul>
+
+    <h3>평가 지표</h3>
+    <ul>
+      <li><strong>Accuracy</strong> (높을수록 좋음)</li>
+      <li><strong>Fidelity</strong> [Yuan et al., 2022] (낮을수록 좋음): 설명 subgraph만 모델에 입력했을 때 원래 예측이 유지되는 정도로 설명의 faithfulness를 측정</li>
+      <li><strong>Vocabulary Coverage / Diversity</strong> (pairwise Jaccard diversity): vocabulary 구축 전략의 적절성 평가</li>
+    </ul>
+
+    <h2>6. 참고 논문 리스트 (References)</h2>
+
+    <h3>GNN 기초 모델</h3>
+    <ul>
+      <li><strong>GCN</strong> &mdash; Kipf &amp; Welling. <em>Semi-Supervised Classification with Graph Convolutional Networks.</em> ICLR 2017.</li>
+      <li><strong>GIN</strong> &mdash; Xu, Hu, Leskovec, Jegelka. <em>How Powerful are Graph Neural Networks?</em> ICLR 2019.</li>
+      <li><strong>GAT</strong> &mdash; Veli&ccaron;kovi&cacute; et al. <em>Graph Attention Networks.</em> ICLR 2018.</li>
+      <li><strong>GraphSAGE</strong> &mdash; Hamilton, Ying, Leskovec. <em>Inductive Representation Learning on Large Graphs.</em> NeurIPS 2017.</li>
+      <li><strong>Spectral GCN</strong> &mdash; Defferrard, Bresson, Vandergheynst. <em>Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering.</em> NeurIPS 2016.</li>
+      <li><strong>Deformable GCN</strong> &mdash; Park et al. <em>Deformable Graph Convolutional Networks.</em> AAAI 2022.</li>
+      <li><strong>Graph Pooling</strong> &mdash; Grattarola, Zambon, Bianchi, Alippi. <em>Understanding Pooling in Graph Neural Networks.</em> IEEE TNNLS 2024.</li>
+    </ul>
+
+    <h3>Explainable / Interpretable Graph Learning</h3>
+    <ul>
+      <li><strong>SubgraphX</strong> &mdash; Yuan, Yu, Wang, Li, Ji. <em>On Explainability of Graph Neural Networks via Subgraph Explorations.</em> ICML 2021. <em>(post-hoc)</em></li>
+      <li><strong>GNNExplainer</strong> &mdash; Ying, Bourgeois, You, Zitnik, Leskovec. <em>GNNExplainer: Generating Explanations for Graph Neural Networks.</em> NeurIPS 2019. <em>(post-hoc)</em></li>
+      <li><strong>PGExplainer</strong> &mdash; Luo et al. <em>Parameterized Explainer for Graph Neural Network.</em> NeurIPS 2020. <em>(post-hoc)</em></li>
+      <li><strong>GraphLIME</strong> &mdash; Huang et al. <em>GraphLIME: Local Interpretable Model Explanations for Graph Neural Networks.</em> IEEE TKDE 2022. <em>(surrogate)</em></li>
+      <li><strong>GraphChef</strong> &mdash; M&uuml;ller, Faber, Martinkus, Wattenhofer. <em>GraphChef: Learning the Recipe of Your Dataset.</em> ICML IMLH Workshop 2023. <em>(surrogate)</em></li>
+      <li><strong>GSAT</strong> &mdash; Miao, Liu, Li. <em>Interpretable and Generalizable Graph Learning via Stochastic Attention Mechanism.</em> ICML 2022. <em>(rationale)</em></li>
+      <li><strong>Rationalizing Neural Predictions</strong> &mdash; Lei, Barzilay, Jaakkola. CoRR 2016. <em>(rationale의 원류)</em></li>
+      <li><strong>VGIB</strong> &mdash; Yu, Cao, He. <em>Improving Subgraph Recognition with Variational Graph Information Bottleneck.</em> arXiv 2022.</li>
+      <li><strong>PL4XGL</strong> &mdash; Jeon, Park, Oh. <em>PL4XGL: A Programming Language Approach to Explainable Graph Learning.</em> PLDI 2024. <em>(symbolic, GDL 기반)</em></li>
+    </ul>
+
+    <h3>Graph Pattern Description Languages</h3>
+    <ul>
+      <li><strong>Cypher</strong> &mdash; Francis et al. <em>Cypher: An Evolving Query Language for Property Graphs.</em> SIGMOD 2018.</li>
+      <li><strong>Graphiti</strong> &mdash; He, Fang, Dillig, Wang. <em>Graphiti: Bridging Graph and Relational Database Queries.</em> PLDI 2025.</li>
+      <li><strong>GraphQ IR</strong> &mdash; Nie et al. <em>GraphQ IR: Unifying the Semantic Parsing of Graph Query Languages with One Intermediate Representation.</em> arXiv 2022.</li>
+      <li><strong>Object Graph Programming</strong> &mdash; Thimmaiah, Lampropoulos, Rossbach, Gligoric. ICSE 2024.</li>
+      <li><strong>Graph-cutting</strong> &mdash; Mang, Ba, He, Rigger. <em>Finding Logic Bugs in Graph-processing Systems via Graph-cutting.</em> SIGMOD 2025.</li>
+    </ul>
+
+    <h3>Graph Pattern Mining</h3>
+    <ul>
+      <li><strong>Approximate Graph Pattern Mining</strong> &mdash; Arpaci-Dusseau, Zhou, Chen. arXiv 2024.</li>
+      <li><strong>GraphINC</strong> &mdash; Hussein et al. <em>GraphINC: Graph Pattern Mining at Network Speed.</em> SIGMOD 2023.</li>
+    </ul>
+
+    <h3>응용: 신약 개발 / 분자 특성 예측</h3>
+    <ul>
+      <li>Li et al. <em>An adaptive graph learning method for automated molecular interactions and properties predictions.</em> Nature Machine Intelligence 2022.</li>
+      <li>Liu et al. <em>Interpretable Chirality-Aware Graph Neural Network for Quantitative Structure Activity Relationship Modeling in Drug Discovery.</em> bioRxiv 2022.</li>
+      <li>Sun et al. <em>Graph convolutional networks for computational drug development and discovery.</em> Briefings in Bioinformatics 2019.</li>
+      <li>Xiong et al. <em>Graph neural networks for automated de novo drug design.</em> Drug Discovery Today 2021.</li>
+    </ul>
+
+    <h3>MUTAG 데이터셋 도메인 근거</h3>
+    <ul>
+      <li>Debnath et al. <em>Structure-activity relationship of mutagenic aromatic and heteroaromatic nitro compounds.</em> Journal of Medicinal Chemistry 1991. <em>(carbon ring / NO&sub2; group과 mutagenicity의 관계)</em></li>
+    </ul>
+
+    <h3>Survey</h3>
+    <ul>
+      <li>Kakkad, Jannu, Sharma, Aggarwal, Medya. <em>A Survey on Explainability of Graph Neural Networks.</em> arXiv 2023.</li>
+      <li>Yuan, Yu, Gui, Ji. <em>Explainability in Graph Neural Networks: A Taxonomic Survey.</em> IEEE TPAMI 2022. <em>(Fidelity 지표의 출처)</em></li>
+      <li>Wu, Pan, Chen, Long, Zhang, Yu. <em>A Comprehensive Survey on Graph Neural Networks.</em> IEEE TNNLS 2021.</li>
+      <li>Zhou, Cui, Zhang, Yang, Liu, Sun. <em>Graph Neural Networks: A Review of Methods and Applications.</em> CoRR 2018.</li>
+    </ul>
+
+  </main>
+</body>
+</html>

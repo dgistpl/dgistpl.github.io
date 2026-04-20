@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Data Mining with GDL</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="tag tag-gdl">GDL</span>
+      <h1>GDL 기반 그래프 데이터마이닝</h1>
+      <div class="subtitle">Graph Data Mining with GDL</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p><strong>그래프 데이터마이닝(Graph Data Mining)</strong>, 특히 <strong>그래프 패턴 마이닝(Graph Pattern Mining)</strong> 은 대규모 그래프 데이터셋에서 빈번하게 등장하거나 의미 있는 <strong>구조적 패턴</strong>을 자동으로 발견하는 문제이다.</p>
+    <p>기존의 그래프 패턴 마이닝은 대부분 <strong>subgraph(부분 그래프)</strong> 를 패턴의 표현 언어로 사용해 왔다. 그러나 subgraph를 패턴 언어로 사용하는 접근법은 다음과 같은 <strong>표현력의 한계</strong>를 가진다.</p>
+    <ul>
+      <li><strong>Rigid 값 일치 요구</strong>: Subgraph는 노드·엣지의 feature 값을 &ldquo;동일한 값&rdquo;으로만 매칭한다. &ldquo;탄소 개수가 3~5개인 고리 구조&rdquo;처럼 <strong>범위(range)</strong> 로 정의되는 패턴은 subgraph로 직접 표현할 수 없다.</li>
+      <li><strong>폭발적인 패턴 수</strong>: 값이 다른 유사 패턴들이 모두 서로 다른 subgraph로 구분되어 집계된다.</li>
+      <li><strong>실세계 패턴 누락</strong>: 의미 있는 패턴은 종종 feature 값의 <strong>범위</strong>와 <strong>위상(topology)</strong> 의 조합으로 기술되기 때문이다.</li>
+    </ul>
+    <p>한편 다른 방향에서는 풍부한 제약을 가진 <strong>질의 언어(query language)</strong> 들이 발전해 왔다. Cypher, GQL, SPARQL, PGQL 등은 property 값에 대한 비교·범위 술어를 지원한다. 그러나 이들은 사용자가 <strong>수동으로 패턴을 지정하는 질의</strong> 목적이지, 데이터에서 <strong>자동으로 의미 있는 패턴을 발견하는 mining</strong> 목적이 아니다.</p>
+    <p>최근 PL4XGL이 제안한 <strong>GDL(Graph Description Language)</strong> 은 feature 값을 <strong>interval(구간)</strong> 로 기술할 수 있고, 위상 구조도 함께 표현할 수 있는 declarative 그래프 패턴 기술 언어이다. GDL은 <strong>classification 전용 evidence로만 활용</strong>되었을 뿐, 일반적인 그래프 데이터마이닝의 패턴 언어로서는 아직 탐구되지 않았다. PL4XGL 저자들 본인이 &sect;8에서 <em>&ldquo;GDL is strictly more expressive than subgraphs; GDL can be employed in graph data mining&rdquo;</em> 이라고 명시적으로 제안하였다.</p>
+    <p>즉 다음 삼각의 교차점에 해당하는 연구 지형이 비어 있다:</p>
+    <ul>
+      <li><em>(a) 구조 중심 mining</em> (gSpan, Peregrine, GraphPi) &mdash; discrete label만</li>
+      <li><em>(b) 풍부한 술어의 querying</em> (Cypher, GQL, SPARQL) &mdash; 자동 mining 부재</li>
+      <li><em>(c) 제약 기반 mining</em> (gPrune, weighted FSM) &mdash; 연속 feature interval 미지원</li>
+    </ul>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>Subgraph 대신 <strong>GDL을 패턴 언어로 사용하는 그래프 데이터마이닝 프레임워크</strong>를 개발한다.</p>
+    <ul>
+      <li><strong>표현력 향상</strong>: feature 값의 구간 제약을 포함한 풍부한 패턴을 발견</li>
+      <li><strong>일반화된 패턴 발견</strong>: 유사 패턴을 하나의 일반화된 GDL program으로 통합</li>
+      <li><strong>Compact한 패턴 집합</strong>: subgraph 기반에서 발생하는 중복·폭발 문제를 완화</li>
+      <li><strong>확장성 확보</strong>: Peregrine/GraphPi/AutoMine 수준의 systems 성능 목표</li>
+      <li><strong>근사 보장</strong>: ASAP/Arya 계열처럼 <code>(&epsilon;, &delta;)</code>-근사 지원 모드 제공</li>
+    </ul>
+
+    <h2>3. 기본 접근 방법 (Basic Approach)</h2>
+    <p>기존의 subgraph 기반 패턴 마이닝을 <strong>GDL program 공간으로 lift</strong>하는 것이 핵심 아이디어이다.</p>
+
+    <h3>(1) GDL 패턴 공간의 정의</h3>
+    <ul>
+      <li>GDL program <code>P = (&delta;<sub>V</sub>, &delta;<sub>E</sub>, &tau;)</code>: 노드/엣지 기술 + target symbol <code>&tau;</code></li>
+      <li>패턴의 <strong>semantics</strong>를 target에 따라 정의</li>
+      <li><strong>Generality order</strong> <code>P<sub>1</sub> &sqsubseteq; P<sub>2</sub></code> &mdash; PL4XGL의 합성 알고리즘이 이용하는 핵심 관계</li>
+      <li><strong>Canonical form</strong>: gSpan의 DFS code를 interval-augmented 형태로 확장</li>
+    </ul>
+
+    <h3>(2) GDL 패턴 마이닝 알고리즘</h3>
+    <ul>
+      <li><strong>Candidate generation</strong>:
+        <ul>
+          <li><strong>Top-down synthesis</strong> [PL4XGL &sect;5.2]: 가장 일반적인 program으로부터 시작 &rarr; specializing</li>
+          <li><strong>Bottom-up synthesis</strong> [PL4XGL &sect;5.3]: 가장 구체적 program으로부터 시작 &rarr; generalizing</li>
+        </ul>
+      </li>
+      <li><strong>Interval generalization</strong>: 서로 다른 feature 값을 가진 유사 패턴들을 하나의 interval 제약으로 일반화</li>
+      <li><strong>Pattern growth</strong>: gSpan의 rightmost-extension을 GDL 공간에 이식</li>
+      <li><strong>Support / frequency 정의</strong>: 일반화된 support 계산. MNI support 정의도 interval 공간으로 확장</li>
+      <li><strong>Pruning</strong>:
+        <ul>
+          <li><strong>Anti-monotonic pruning</strong>: GDL 패턴 간의 subsumption 관계를 활용</li>
+          <li><strong>Closedness / maximality</strong>: CloseGraph 스타일의 closed GDL pattern 개념 도입</li>
+          <li><strong>Symmetry breaking</strong>: GraphZero 계열의 자동 동형성 제거 기법 적용</li>
+        </ul>
+      </li>
+      <li><strong>Essential-only mining</strong>: PL4XGL의 관찰에 따르면 실제 classification에 사용된 program은 전체의 <strong>~5%</strong> 에 불과</li>
+    </ul>
+
+    <h3>(3) 패턴 품질 평가 및 선택</h3>
+    <ul>
+      <li><strong>Coverage</strong>: 데이터셋을 얼마나 설명하는가</li>
+      <li><strong>Diversity</strong>: 패턴 간 semantic overlap (pairwise Jaccard diversity)</li>
+      <li><strong>Precision / Discriminativeness</strong>: label이 있는 경우 특정 클래스에 대한 판별력</li>
+      <li><strong>Interpretability</strong>: 패턴 크기, interval 폭 등</li>
+    </ul>
+
+    <h3>(4) 확장성</h3>
+    <ul>
+      <li><strong>Approximate mode</strong>: ASAP / Arya 계열의 color-coding + neighborhood sampling을 interval 패턴으로 확장</li>
+      <li><strong>Systems 수준 최적화</strong>: AutoMine 스타일 query-to-code compilation, Pangolin 스타일 GPU 병렬화</li>
+    </ul>
+
+    <h2>4. 후보 벤치마크 (Candidate Benchmarks)</h2>
+
+    <h3>Graph-level 패턴 평가</h3>
+    <ul>
+      <li><strong>MUTAG, PTC (MR), NCI1, NCI109, Mutagenicity, BBBP, BACE, PROTEINS, DD, ENZYMES</strong></li>
+      <li><strong>OGB-MolHIV, OGB-MolPCBA, ZINC</strong></li>
+      <li><strong>HIV</strong> &mdash; PL4XGL이 training timeout으로 실패한 데이터</li>
+    </ul>
+
+    <h3>Node-level 패턴 평가</h3>
+    <ul>
+      <li><strong>BA-Shapes, Tree-Cycles</strong> &mdash; 합성 데이터, 명시된 motif</li>
+      <li><strong>Wisconsin, Texas, Cornell</strong></li>
+      <li><strong>Cora, Citeseer, Pubmed</strong></li>
+      <li><strong>BA-2Motifs</strong></li>
+    </ul>
+
+    <h3>Frequent subgraph mining 전통 벤치마크</h3>
+    <ul>
+      <li><strong>Mico, Patents, Youtube, CiteSeer, Yeast</strong></li>
+      <li><strong>AIDS, DBLP, Cora</strong></li>
+      <li><strong>PubChem, ChEMBL</strong> &mdash; 수백만~수천만 규모</li>
+      <li><strong>LDBC Social Network Benchmark (SNB)</strong></li>
+      <li><strong>GMark</strong>, <strong>GraphChallenge</strong></li>
+    </ul>
+
+    <h3>소셜 / 웹 대규모 그래프</h3>
+    <ul>
+      <li><strong>SNAP</strong>: LiveJournal, Orkut, Friendster, Pokec, Reddit</li>
+      <li><strong>OGBN-Arxiv / Products / Papers100M</strong></li>
+    </ul>
+
+    <h3>프로그램 분석 / 보안</h3>
+    <ul>
+      <li><strong>Devign, Big-Vul, Reveal, VulDeePecker</strong></li>
+      <li><strong>Joern / CPG</strong></li>
+      <li><strong>Android malware call-graph datasets</strong></li>
+    </ul>
+
+    <h3>사기 / 금융</h3>
+    <ul>
+      <li><strong>Elliptic Bitcoin, YelpChi, Amazon Fraud, DGraph-Fin</strong></li>
+      <li><strong>AML synthetic</strong></li>
+    </ul>
+
+    <h2>5. 후보 베이스라인 (Candidate Baselines)</h2>
+
+    <h3>5.1 Classical Frequent Subgraph Mining</h3>
+    <ul>
+      <li><strong>AGM</strong> [Inokuchi, Washio &amp; Motoda, PKDD 2000]</li>
+      <li><strong>FSG</strong> [Kuramochi &amp; Karypis, ICDM 2001]</li>
+      <li><strong>gSpan</strong> [Yan &amp; Han, ICDM 2002] &mdash; DFS code + rightmost extension의 고전</li>
+      <li><strong>CloseGraph</strong> [Yan &amp; Han, KDD 2003]</li>
+      <li><strong>FFSM</strong> [Huan, Wang &amp; Prins, ICDM 2003]</li>
+      <li><strong>Gaston</strong> [Nijssen &amp; Kok, KDD 2004]</li>
+      <li><strong>MoFa</strong> [Borgelt &amp; Berthold, ICDM 2002]</li>
+    </ul>
+
+    <h3>5.2 Scalable / Parallel / Distributed Systems</h3>
+    <ul>
+      <li><strong>Arabesque</strong> [Teixeira et al., SOSP 2015]</li>
+      <li><strong>RStream</strong> [Wang et al., OSDI 2018]</li>
+      <li><strong>Fractal</strong> [Dias et al., SIGMOD 2019]</li>
+      <li><strong>AutoMine</strong> [Mawhirter &amp; Wu, SOSP 2019]</li>
+      <li><strong>Peregrine</strong> [Jamshidi, Mahadasa &amp; Vora, EuroSys 2020] &mdash; <strong>가장 중요한 modern baseline</strong></li>
+      <li><strong>Pangolin</strong> [Chen et al., VLDB 2020]</li>
+      <li><strong>GraphZero</strong> [Mawhirter et al., MICRO 2021]</li>
+      <li><strong>GraphPi</strong> [Shi et al., SC 2020] &mdash; 최고 속도</li>
+      <li><strong>Sandslash</strong> [Chen, Prountzos et al., ICS 2021]</li>
+      <li><strong>GraphINC</strong> [Hussein et al., SIGMOD 2023]</li>
+      <li><strong>GraphMini / G2Miner / SumPA</strong> (2022&ndash;2023)</li>
+    </ul>
+
+    <h3>5.3 Approximate &amp; Sampling-Based Mining</h3>
+    <ul>
+      <li><strong>ASAP</strong> [Iyer et al., OSDI 2018]</li>
+      <li><strong>Arya</strong> [Arpaci-Dusseau et al., arXiv 2024]</li>
+      <li><strong>Motivo</strong> [Bressan, Leucci, Panconesi, VLDB 2019]</li>
+      <li><strong>MOSS-5</strong> [Wang et al., IEEE TKDE 2018]</li>
+      <li><strong>GUISE / MFinder</strong></li>
+    </ul>
+
+    <h3>5.4 Motif / Graphlet Counting</h3>
+    <ul>
+      <li><strong>Network motifs</strong> [Milo et al., <em>Science</em> 2002]</li>
+      <li><strong>ESU / FANMOD</strong> [Wernicke, Bioinformatics 2006]</li>
+      <li><strong>ORCA</strong> [Ho&ccaron;evar &amp; Dem&scaron;ar, Bioinformatics 2014]</li>
+      <li><strong>PGD</strong> [Ahmed et al., IEEE TKDE 2016]</li>
+      <li><strong>ESCAPE</strong> [Pinar, Seshadhri, Vishal, WWW 2017]</li>
+    </ul>
+
+    <h3>5.5 Neural / Learning-Based Pattern Mining</h3>
+    <ul>
+      <li><strong>SPMiner</strong> [Ying et al., NeurIPS 2020] &mdash; <strong>가장 중요한 neural baseline</strong></li>
+      <li><strong>NeuroMatch</strong> [Ying et al., arXiv 2020]</li>
+      <li><strong>GNN-based subgraph counting</strong> [Chen et al., NeurIPS 2020]</li>
+      <li><strong>GSN</strong> [Bouritsas et al., IEEE TPAMI 2023]</li>
+      <li><strong>ID-GNN</strong> [You et al., AAAI 2021]</li>
+    </ul>
+
+    <h3>5.6 Pattern Languages Beyond Plain Subgraphs</h3>
+    <ul>
+      <li><strong>Cypher</strong> [Francis et al., SIGMOD 2018]</li>
+      <li><strong>GQL</strong> [ISO/IEC 39075:2024]</li>
+      <li><strong>SPARQL 1.1</strong></li>
+      <li><strong>RPQ / CRPQ</strong></li>
+      <li><strong>PGQL</strong> [van Rest et al., GRADES 2016]</li>
+    </ul>
+
+    <h3>5.7 Constraint-Based / Quantitative Mining</h3>
+    <ul>
+      <li><strong>gPrune</strong> [Zhu, Yan, Han, Yu, VLDB 2007] &mdash; GDL의 직접적 선행 연구</li>
+      <li><strong>Weighted / Quantitative FSM</strong></li>
+      <li><strong>SUBDUE</strong> [Holder &amp; Cook, 1994&ndash;2009]</li>
+    </ul>
+
+    <h3>5.8 GDL/Declarative 기반 (직접 비교 대상)</h3>
+    <ul>
+      <li><strong>PL4XGL</strong> [Jeon, Park, Oh, <em>PLDI 2024</em>] &mdash; GDL 언어의 원출처. 저자들이 &ldquo;GDL can be employed in graph data mining&rdquo; 을 직접 제안. 그러나 mining이 <strong>classification 목적으로 특화</strong>되어 있고, <strong>일반 FSM의 frequency/support/closedness 개념은 없음</strong></li>
+    </ul>
+
+    <h3>평가 지표</h3>
+    <ul>
+      <li><strong>Coverage / Support</strong></li>
+      <li><strong>Diversity (pairwise Jaccard)</strong></li>
+      <li><strong>Compression ratio</strong>: subgraph 대비 패턴 수 감소</li>
+      <li><strong>Downstream task accuracy</strong></li>
+      <li><strong>Runtime / Scalability</strong></li>
+      <li><strong>Approximation error</strong></li>
+      <li><strong>Interpretability</strong></li>
+    </ul>
+
+    <hr>
+
+    <h2>연구 지형 요약 (Research Landscape Summary)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>축</th><th>대표 연구</th><th>한계</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>(a) 구조 중심 exact mining</td><td>gSpan, Peregrine, GraphPi, AutoMine</td><td>discrete label만, 값 범위 불가</td></tr>
+          <tr><td>(b) 풍부한 술어 querying</td><td>Cypher, GQL, SPARQL</td><td>자동 mining 부재</td></tr>
+          <tr><td>(c) 제약 기반 mining</td><td>gPrune, weighted FSM</td><td>연속 feature interval native 미지원</td></tr>
+          <tr><td>(d) Approximate mining</td><td>ASAP, Arya, Motivo</td><td>주로 counting, pattern language는 subgraph</td></tr>
+          <tr><td>(e) Neural mining</td><td>SPMiner, NeuroMatch</td><td>discrete label 중심, 해석성 제한</td></tr>
+          <tr><td>(f) GDL symbolic classification</td><td>PL4XGL</td><td>classification 전용, 일반 mining 개념 없음</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>GDL 기반 mining은 (a)&middot;(b)&middot;(c)의 교집합</strong>에 해당하는 영역을 겨냥한다.</p>
+
+    <h3>GDL 확장 방향</h3>
+    <ul>
+      <li><strong>Homophily / heterophily 기술</strong></li>
+      <li><strong>Aggregate 술어</strong>: &ldquo;oxygen 개수 &gt; chlorine 개수&rdquo;, &ldquo;이웃 degree 합 &ge; k&rdquo;</li>
+      <li><strong>Recursive / path 패턴</strong>: RPQ 스타일의 경로 술어</li>
+      <li><strong>수치 비교</strong>: 두 노드 변수 간 feature 값 비교 (<code>x.f &le; y.f</code>)</li>
+    </ul>
+
+  </main>
+</body>
+</html>
