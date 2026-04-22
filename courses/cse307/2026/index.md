@@ -47,6 +47,7 @@ author_profile: false
   + Procedures: [lec6.pdf](slides/lec6.pdf)
   + Lexical Scoping: [lec7.pdf](slides/lec7.pdf)
   + States: [lec8.pdf](slides/lec8.pdf)
+  + Records, Pointers, and gabage collection: [lec9.pdf](slides/lec9.pdf)
 
 ### Open Project
 + Open Project Guideline: [open_project_guideline.pdf](slides/open_project_guideline.pdf)
