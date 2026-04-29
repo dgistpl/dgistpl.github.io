@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776726693858,
+  "lastScanned": 1777420771123,
   "projectRoot": "/Users/minseokjeon/dgistpl.github.io",
   "techStack": {
     "languages": [
@@ -60,14 +60,14 @@
       "path": "$MYVIMDIR",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776726693840,
+      "lastAccessed": 1777420771100,
       "keyFiles": []
     },
     "ProblemBank": {
       "path": "ProblemBank",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1776726693840,
+      "lastAccessed": 1777420771100,
       "keyFiles": [
         "index.html"
       ]
@@ -76,7 +76,7 @@
       "path": "_data",
       "purpose": null,
       "fileCount": 5,
-      "lastAccessed": 1776726693842,
+      "lastAccessed": 1777420771104,
       "keyFiles": [
         "authors.yml",
         "navigation.yml",
@@ -89,7 +89,7 @@
       "path": "_includes",
       "purpose": null,
       "fileCount": 38,
-      "lastAccessed": 1776726693843,
+      "lastAccessed": 1777420771104,
       "keyFiles": [
         "analytics.html",
         "archive-single.html",
@@ -102,7 +102,7 @@
       "path": "_layouts",
       "purpose": null,
       "fileCount": 14,
-      "lastAccessed": 1776726693843,
+      "lastAccessed": 1777420771104,
       "keyFiles": [
         "archive-taxonomy.html",
         "archive.html",
@@ -115,7 +115,7 @@
       "path": "_pages",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776726693843,
+      "lastAccessed": 1777420771104,
       "keyFiles": [
         "tag-archive.md"
       ]
@@ -124,7 +124,7 @@
       "path": "_posts",
       "purpose": null,
       "fileCount": 12,
-      "lastAccessed": 1776726693844,
+      "lastAccessed": 1777420771105,
       "keyFiles": [
         "2024-02-03-ep1.md",
         "2024-02-18-ep2.md",
@@ -137,7 +137,7 @@
       "path": "_sass",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776726693844,
+      "lastAccessed": 1777420771105,
       "keyFiles": [
         "minimal-mistakes.scss"
       ]
@@ -146,7 +146,7 @@
       "path": "_site",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1776726693844,
+      "lastAccessed": 1777420771105,
       "keyFiles": [
         "CLAUDE.md",
         "Dockerfile",
@@ -159,14 +159,14 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1776726693844,
+      "lastAccessed": 1777420771105,
       "keyFiles": []
     },
     "courses": {
       "path": "courses",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1776726693845,
+      "lastAccessed": 1777420771106,
       "keyFiles": [
         "index.md"
       ]
@@ -175,7 +175,7 @@
       "path": "cv",
       "purpose": null,
       "fileCount": 15,
-      "lastAccessed": 1776726693845,
+      "lastAccessed": 1777420771106,
       "keyFiles": [
         "cv.aux",
         "cv.fdb_latexmk",
@@ -188,7 +188,7 @@
       "path": "images",
       "purpose": null,
       "fileCount": 30,
-      "lastAccessed": 1776726693845,
+      "lastAccessed": 1777420771106,
       "keyFiles": [
         "25421.jpg",
         "Claudecode.png",
@@ -201,7 +201,7 @@
       "path": "members",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1776726693845,
+      "lastAccessed": 1777420771106,
       "keyFiles": [
         "index.md",
         "minseok.jeon.md"
@@ -211,7 +211,7 @@
       "path": "papers",
       "purpose": null,
       "fileCount": 28,
-      "lastAccessed": 1776726693845,
+      "lastAccessed": 1777420771107,
       "keyFiles": [
         "AI_Usage_Presentation.pdf",
         "ARES.pdf",
@@ -224,7 +224,7 @@
       "path": "publications",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776726693846,
+      "lastAccessed": 1777420771107,
       "keyFiles": [
         "index.md"
       ]
@@ -233,7 +233,7 @@
       "path": "research",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776726693846,
+      "lastAccessed": 1777420771107,
       "keyFiles": [
         "index.md"
       ]
@@ -242,7 +242,7 @@
       "path": "talks",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776726693846,
+      "lastAccessed": 1777420771107,
       "keyFiles": [
         "index.md"
       ]
@@ -251,7 +251,7 @@
       "path": "trips",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776726693847,
+      "lastAccessed": 1777420771107,
       "keyFiles": [
         "index.md"
       ]
@@ -260,52 +260,16 @@
       "path": "_site/assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1776726693847,
+      "lastAccessed": 1777420771108,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "research/index.md",
-      "accessCount": 5,
-      "lastAccessed": 1776727212292,
+      "path": "courses/cse307/2026/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1777420984527,
       "type": "file"
-    },
-    {
-      "path": "_data/navigation.yml",
-      "accessCount": 5,
-      "lastAccessed": 1776727287220,
-      "type": "file"
-    },
-    {
-      "path": "ProblemBank/index.html",
-      "accessCount": 2,
-      "lastAccessed": 1776726924967,
-      "type": "file"
-    },
-    {
-      "path": "_config.yml",
-      "accessCount": 2,
-      "lastAccessed": 1776726949469,
-      "type": "file"
-    },
-    {
-      "path": "ProblemBank/pages/style.css",
-      "accessCount": 1,
-      "lastAccessed": 1776726885079,
-      "type": "file"
-    },
-    {
-      "path": "ProblemBank/pages/scalable-pl4xgl.html",
-      "accessCount": 1,
-      "lastAccessed": 1776726885460,
-      "type": "file"
-    },
-    {
-      "path": "ProblemBank/pages",
-      "accessCount": 1,
-      "lastAccessed": 1776726965978,
-      "type": "directory"
     }
   ],
   "userDirectives": []
