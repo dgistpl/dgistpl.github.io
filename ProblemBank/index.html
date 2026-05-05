@@ -248,6 +248,66 @@
       text-decoration: none;
     }
 
+    /* Active / In-Progress marker */
+    .card.active {
+      border-width: 2px;
+      box-shadow: 0 0 0 1px rgba(16,185,129,0.25), 0 4px 14px rgba(16,185,129,0.15);
+      position: relative;
+    }
+
+    .card.active::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #10b981, #059669);
+      border-radius: 12px 12px 0 0;
+    }
+
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .card-header-row .card-tag {
+      margin-bottom: 0;
+    }
+
+    .active-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #d1fae5;
+      color: #065f46;
+      width: fit-content;
+    }
+
+    .active-badge .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16,185,129,0.7);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.7); }
+      70%  { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+      100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+    }
+
+    .stat-active .stat-number { color: #10b981; }
+
     .card.tunnel-border .read-more { color: var(--accent-tunnel); }
     .card.ai-border .read-more { color: var(--accent-ai); }
 
@@ -303,9 +363,9 @@
       <div class="stat-number">3</div>
       <div class="stat-label">Research Lines</div>
     </div>
-    <div class="stat">
-      <div class="stat-number">5</div>
-      <div class="stat-label">Core Systems</div>
+    <div class="stat stat-active">
+      <div class="stat-number">4</div>
+      <div class="stat-label">In Progress</div>
     </div>
   </div>
 </header>
@@ -322,8 +382,11 @@
     <div class="cards-scroll-wrapper">
       <div class="cards">
 
-        <a class="card gdl-border" href="pages/scalable-pl4xgl.html">
-          <span class="card-tag gdl">GDL / PL4XGL</span>
+        <a class="card gdl-border active" href="pages/scalable-pl4xgl.html">
+          <div class="card-header-row">
+            <span class="card-tag gdl">GDL / PL4XGL</span>
+            <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+          </div>
           <h3>Scalable PL4XGL</h3>
           <div class="subtitle">대규모 그래프를 위한 확장 가능한 PL4XGL</div>
           <div class="description">
@@ -337,8 +400,11 @@
           <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
         </a>
 
-        <a class="card gdl-border" href="pages/transductive-pl4xgl.html">
-          <span class="card-tag gdl">GDL / PL4XGL</span>
+        <a class="card gdl-border active" href="pages/transductive-pl4xgl.html">
+          <div class="card-header-row">
+            <span class="card-tag gdl">GDL / PL4XGL</span>
+            <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+          </div>
           <h3>Transductive PL4XGL</h3>
           <div class="subtitle">트랜스덕티브 그래프 학습을 위한 PL4XGL</div>
           <div class="description">
@@ -352,8 +418,11 @@
           <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
         </a>
 
-        <a class="card gdl-border" href="pages/interpretable-graph-classification.html">
-          <span class="card-tag gdl">GDL / PL4XGL</span>
+        <a class="card gdl-border active" href="pages/interpretable-graph-classification.html">
+          <div class="card-header-row">
+            <span class="card-tag gdl">GDL / PL4XGL</span>
+            <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+          </div>
           <h3>Interpretable Graph Classification</h3>
           <div class="subtitle">해석 가능한 그래프 분류 (ProgNet)</div>
           <div class="description">
@@ -426,8 +495,11 @@
     <div class="cards-scroll-wrapper">
       <div class="cards">
 
-        <a class="card tunnel-border" href="pages/context-tunneling-python.html">
-          <span class="card-tag tunnel">Context Tunneling</span>
+        <a class="card tunnel-border active" href="pages/context-tunneling-python.html">
+          <div class="card-header-row">
+            <span class="card-tag tunnel">Context Tunneling</span>
+            <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+          </div>
           <h3>Context Tunneling for Python</h3>
           <div class="subtitle">Python을 위한 컨텍스트 터널링</div>
           <div class="description">
