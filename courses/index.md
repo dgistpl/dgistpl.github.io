@@ -25,5 +25,7 @@ author_profile: false
  
 + [**How to Learn Course Content Using AI**](./ai_study/2026/)
 
++ [**AI-Assist Technical Writing**](./ai_writing/2026/)
+
   
 
