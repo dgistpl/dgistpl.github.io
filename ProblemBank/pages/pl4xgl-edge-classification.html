@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PL4XGL for Edge Classification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header is-active">
+    <div class="container">
+      <div class="tag-row">
+        <span class="tag tag-gdl">GDL</span>
+        <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+      </div>
+      <h1>엣지 분류를 위한 PL4XGL</h1>
+      <div class="subtitle">PL4XGL for Edge Classification</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p><strong>엣지 분류(Edge Classification)</strong> 는 그래프의 각 엣지에 대해 label을 예측하는 문제이다. 대표적인 형태로 (i) <strong>링크 예측(link prediction)</strong> &mdash; 두 노드 사이에 엣지가 존재하는지 여부의 이진 분류, (ii) <strong>엣지 타입 분류(edge type classification)</strong> &mdash; 지식 그래프의 관계 종류, 단백질 상호작용의 종류 등 다중 클래스 분류, (iii) <strong>이상 엣지 탐지(anomalous edge detection)</strong> &mdash; 금융 거래 그래프의 fraud 엣지, 소셜 네트워크의 spam 엣지 식별 등이 있다. 추천 시스템, 지식 그래프 보강, 단백질 상호작용 예측, 보안 분석 등 결정의 근거가 중요한 도메인 전반에서 핵심 과제로 다뤄진다.</p>
+    <p>현재 엣지 분류의 주류 방법은 <strong>GNN 기반 접근</strong>이다. 두 endpoint 노드 임베딩 <code>h<sub>u</sub>, h<sub>v</sub></code> 를 GNN으로 학습한 뒤, 이를 결합하여 (concat, Hadamard product, MLP 등) 엣지 label을 예측한다. R-GCN [Schlichtkrull et al., ESWC 2018], CompGCN [Vashishth et al., ICLR 2020], SEAL [Zhang &amp; Chen, NeurIPS 2018] 등이 대표적이다. 이들은 높은 정확도를 보이지만 <strong>black-box</strong>이며, &ldquo;왜 이 두 노드 사이에 이 엣지가 존재한다고 예측하는가&rdquo; 에 대한 명시적 근거를 제공하지 못한다.</p>
+    <p>PL4XGL [Jeon, Park, Oh, <em>PLDI 2024</em>]은 GDL(Graph Description Language) program 집합을 분류기로 사용하는 <strong>symbolic, inherently interpretable</strong> 그래프 학습 기법이다. Fidelity = 0의 구조적 보장(Theorem 6.1)과 GDL의 human-readable 설명을 동시에 제공한다. 그러나 PL4XGL의 분류 단위는 <strong>노드</strong>(transductive node classification) 또는 <strong>전체 그래프</strong>(inductive graph classification)로 한정되어 있으며, <strong>엣지를 분류 단위로 다루지 않는다</strong>.</p>
+
+    <h3>PL4XGL의 엣지 분류 한계</h3>
+    <ol>
+      <li><strong>분류 단위 불일치</strong>: PL4XGL의 GDL program은 단일 노드의 ego-subgraph를 기술하도록 설계되었다. 엣지 <code>(u, v)</code> 의 분류를 위해서는 두 endpoint <code>u, v</code> 의 <strong>결합 구조와 이들 사이의 관계적 맥락</strong>을 함께 표현해야 하지만, GDL은 이를 first-class로 지원하지 않는다.</li>
+      <li><strong>관계적 패턴 미표현</strong>: 엣지 <code>(u, v)</code> 의 의미는 종종 <code>u</code>와 <code>v</code>의 <strong>공통 이웃</strong>(Adamic-Adar, Common Neighbors), <strong>경로 패턴</strong>(meta-path), <strong>커뮤니티 동질성</strong>에 의해 결정된다. 예를 들어 &ldquo;두 단백질이 같은 complex에 속한다&rdquo; 는 link prediction의 핵심 신호이지만, 현재 GDL은 두 노드의 결합 통계를 기술하는 술어를 갖지 않는다.</li>
+      <li><strong>비대칭 / 방향 엣지 미지원</strong>: 지식 그래프의 관계는 본질적으로 <strong>비대칭(asymmetric)</strong> 이다 (예: <code>(파리, capitalOf, 프랑스)</code> 는 성립하지만 역방향은 다른 의미). PL4XGL은 무방향 그래프 가정 하에 설계되어, 엣지의 방향성과 비대칭 패턴을 다루지 못한다.</li>
+      <li><strong>Negative sampling 부재</strong>: 링크 예측은 본질적으로 <strong>positive 엣지(존재) vs. negative 엣지(부재)</strong> 의 이진 분류이며, negative 엣지는 명시적 sampling으로 생성된다. PL4XGL의 per-instance synthesis는 positive 인스턴스에서만 program을 합성하므로, &ldquo;어떤 패턴이 엣지의 부재를 시사하는가&rdquo; 를 학습할 수단이 없다.</li>
+      <li><strong>다중 관계 타입 폭발</strong>: 지식 그래프(FB15k-237: 237 관계, WN18RR: 11 관계, OGB-BioKG: 51 관계)는 수십~수백 종의 엣지 타입을 가진다. PL4XGL을 그대로 적용하면 각 관계 타입마다 독립적으로 program을 합성해야 하므로 <strong>비용이 관계 수에 선형 이상으로 증가</strong>하며, 관계 간 공유 가능한 구조적 패턴을 활용하지 못한다.</li>
+      <li><strong>Edge feature 미통합</strong>: 실세계 엣지는 종종 자체 feature를 가진다 (거래 금액, 상호작용 강도, timestamp 등). PL4XGL의 GDL은 노드 feature에 대한 interval 술어만 지원하며, 엣지 feature를 first-class로 다루지 않는다.</li>
+    </ol>
+
+    <h3>연구 공백</h3>
+    <p>GNN 기반 엣지 분류는 높은 정확도를 보이지만 설명이 black-box이다. 기존 link prediction explainer (PGExplainer, GNNExplainer를 엣지로 확장)는 post-hoc이며 faithfulness 보장이 없다. 반면 PL4XGL은 <strong>Fidelity = 0 보장</strong>을 가지지만 분류 단위가 엣지가 아니다.</p>
+    <p>즉 <strong>&ldquo;엣지 분류에서 inherently interpretable하면서도 GNN 수준의 정확도를 달성하는 방법&rdquo;</strong> 은 현재 부재하다. PL4XGL의 해석 가능성 보장을 유지하면서 엣지 분류의 핵심 원리 &mdash; 두 endpoint의 결합 구조, 관계적 패턴, 방향성, negative sampling, 다중 관계 타입, edge feature &mdash; 를 GDL 수준에서 통합하는 것이 이 공백을 메우는 방향이다.</p>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>PL4XGL의 <strong>해석 가능성 보장(Fidelity = 0, GDL의 human-readable 설명)</strong> 을 유지하면서, <strong>엣지 분류 설정</strong>에서 GNN 수준의 정확도를 달성하는 프레임워크를 설계한다.</p>
+    <ul>
+      <li><strong>엣지 단위 분류 정확도</strong>: 링크 예측(OGB-DDI, OGB-Collab, OGB-Citation2), 관계 예측(FB15k-237, WN18RR), 이상 엣지 탐지(Elliptic, T-Finance) 등에서 SEAL, R-GCN, CompGCN 수준의 성능 달성</li>
+      <li><strong>해석 가능성 보존</strong>: 엣지 예측의 근거가 GDL program으로 명시적으로 제시되어, Fidelity = 0 또는 이에 근접한 보장 유지</li>
+      <li><strong>관계적 GDL 확장</strong>: 두 endpoint의 결합 ego-subgraph, 공통 이웃 통계, 경로 패턴, 커뮤니티 멤버십 등을 표현하는 <strong>edge-centric GDL 술어</strong> 도입</li>
+      <li><strong>방향성 / 비대칭 지원</strong>: 방향 엣지와 비대칭 관계를 GDL 수준에서 직접 기술 가능</li>
+      <li><strong>Negative-aware synthesis</strong>: positive 엣지뿐 아니라 sampled negative 엣지에서도 program을 합성하여 &ldquo;엣지 부재의 신호&rdquo; 를 학습</li>
+      <li><strong>다중 관계 타입 효율성</strong>: 관계 간 공유 가능한 program library를 학습하여 관계 수에 대한 비용 증가를 sub-linear로 억제</li>
+      <li><strong>Edge feature 통합</strong>: 엣지 자체의 feature(금액, 시간, 강도)에 대한 interval 술어를 first-class로 지원</li>
+      <li><strong>확장성</strong>: 수백만 엣지 규모의 그래프(OGB-Citation2: 30M 엣지)에서 합리적 시간 내 학습·추론</li>
+    </ul>
+
+  </main>
+</body>
+</html>
