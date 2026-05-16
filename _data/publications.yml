@@ -1,3 +1,15 @@
+- year: 2026
+  papers:
+    - title: "ProgNet: Program-Grounded Evidence Composition for Interpretable Graph Classification (Accepted)"
+      authors: "<u>Minseok Jeon*</u>, Seunghyun Park, Jun-Gi Jang"
+      venue: "KDD 2026: 32nd SIGKDD Conference on Knowledge Discovery and Data Mining"
+      # links:
+      #   - type: "PDF"
+      #     url: "/papers/ProgNet.pdf"
+      #   - type: "ACM DL"
+      #     url: "https://dl.acm.org/doi/10.1145/3720526"
+
+
 - year: 2025
   papers:
     - title: "PAFL: Enhancing Fault Localizers by Leveraging Project-Specific Fault Patterns"
