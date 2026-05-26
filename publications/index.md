@@ -34,6 +34,15 @@ permalink: /publications/
   font-size: 0.95em;
 }
 
+.pub-venue a {
+  color: #2196F3;
+  text-decoration: none;
+}
+
+.pub-venue a:hover {
+  text-decoration: underline;
+}
+
 .pub-links {
   margin-top: 10px;
 }
@@ -77,7 +86,13 @@ permalink: /publications/
   <div class="publication-item">
     <div class="pub-title">{{ paper.title }}</div>
     <div class="pub-authors">{{ paper.authors }}</div>
-    <div class="pub-venue">{{ paper.venue }}</div>
+    <div class="pub-venue">
+      {% if paper.venue_url %}
+        <a href="{{ paper.venue_url }}" target="_blank" rel="noopener">{{ paper.venue }}</a>
+      {% else %}
+        {{ paper.venue }}
+      {% endif %}
+    </div>
     <div class="pub-links">
       {% for link in paper.links %}
       <a href="{{ link.url }}">{{ link.type }}</a>
