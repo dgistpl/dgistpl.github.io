@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automating Routine Work with AI — Case Study</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f4f6f9;
+      --card:        #ffffff;
+      --text:        #1e2328;
+      --text-light:  #5a6370;
+      --accent:      #0ea5e9;
+      --accent-light:#e0f2fe;
+      --accent-dark: #0369a1;
+      --code-bg:     #1e1e2e;
+      --code-text:   #cdd6f4;
+      --code-green:  #a6e3a1;
+      --code-yellow: #f9e2af;
+      --code-pink:   #f38ba8;
+      --code-blue:   #89b4fa;
+      --border:      #e2e6eb;
+      --radius:      12px;
+      --shadow:      0 2px 12px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+      color: #fff;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 56px 40px 48px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.02em; }
+    .hero p  { font-size: 1.08rem; opacity: .88; max-width: 640px; margin: 0 auto; }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 44px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 1.3rem; }
+    .section-sub { color: var(--text-light); font-size: .92rem; margin-bottom: 20px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .card-header {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header h3 { font-size: 1.05rem; font-weight: 600; }
+    .card-body { padding: 20px 24px; }
+
+    /* ── Step list ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content { padding-top: 6px; flex: 1; }
+    .step-content p { margin-bottom: 12px; }
+    .step-content strong { font-weight: 600; }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0 16px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: #181825;
+    }
+    .code-header .lang-tag {
+      font-size: .75rem;
+      color: #585b70;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .copy-btn:hover { background: #313244; border-color: #585b70; }
+    .copy-btn.copied { color: var(--code-green); border-color: var(--code-green); }
+    pre {
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 0;
+    }
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: .85rem;
+      color: var(--code-text);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+    p code, li code {
+      background: #eef2f7;
+      color: #0369a1;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: .82rem;
+      white-space: normal;
+    }
+
+    /* ── Prompt block ── */
+    .prompt-block {
+      background: #f8fafc;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 14px 0;
+    }
+    .prompt-block h4 {
+      color: var(--accent-dark);
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt-content {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: .9rem;
+      line-height: 1.6;
+      position: relative;
+    }
+    .prompt-content .copy-btn-sm {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text-light);
+      border-radius: 5px;
+      padding: 1px 8px;
+      font-size: .68rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .prompt-content .copy-btn-sm:hover { background: #f1f5f9; }
+    .prompt-content .copy-btn-sm.copied { color: #059669; border-color: #6ee7b7; }
+    .prompt-content .ko { color: var(--text); }
+
+    /* ── Info / Tip / Warning boxes ── */
+    .info-box, .tip-box, .warn-box {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: .9rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .info-box  { background: #eef2ff; border: 1px solid #c7d2fe; }
+    .tip-box   { background: #ecfdf5; border: 1px solid #6ee7b7; }
+    .warn-box  { background: #fef3c7; border: 1px solid #fcd34d; }
+    .info-box .box-icon  { color: #4f46e5; font-size: 1.1rem; flex-shrink:0; }
+    .tip-box  .box-icon  { color: #059669; font-size: 1.1rem; flex-shrink:0; }
+    .warn-box .box-icon  { color: #d97706; font-size: 1.1rem; flex-shrink:0; }
+
+    /* ── Principle / example cards ── */
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    @media (max-width: 700px) {
+      .example-grid { grid-template-columns: 1fr; }
+    }
+    .example-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s;
+    }
+    .example-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+    .example-card .example-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-bottom: 10px;
+    }
+    .example-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .example-card p { font-size: .88rem; color: var(--text-light); }
+
+    /* ── Phase timeline ── */
+    .phase {
+      display: flex;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase:last-child { border-bottom: none; }
+    .phase-badge {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .phase-body h4 { font-size: 1.02rem; font-weight: 700; margin-bottom: 4px; }
+    .phase-body p { font-size: .9rem; color: var(--text-light); margin: 0; }
+
+    /* ── Output preview ── */
+    .output-preview {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+    .output-preview h5 {
+      font-size: .82rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .file-tree {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .85rem;
+      line-height: 1.8;
+    }
+    .file-tree .folder { color: #2563eb; font-weight: 600; }
+    .file-tree .file { color: var(--text); }
+    .file-tree .cmt { color: var(--text-light); }
+
+    /* ── Footer ── */
+    .page-footer {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .82rem;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .page-footer a { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 24px 36px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-body, .card-header { padding: 16px; }
+      .step { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───────────── HERO ───────────── -->
+<div class="hero">
+  <div class="badge">Case Study Walkthrough</div>
+  <h1>Automating Routine Work with AI</h1>
+  <p>How a repetitive, click-by-click office task &mdash; DGIST receipt (expense) processing &mdash; was automated end-to-end using Claude with Computer Use. Built from the actual prompts used during the session.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <p style="text-align:center; margin-top:-18px; margin-bottom: 26px;">
+    <a href="/courses/work_automation/2026/"><strong>&larr; Back to Seminar Page</strong></a>
+  </p>
+
+  <!-- ── Overview ── -->
+  <div class="section-title"><span class="icon">&#128221;</span> The Task</div>
+  <p class="section-sub">Receipt processing on the DGIST portal is a perfect automation target: it is <strong>repetitive</strong>, <strong>rule-based</strong>, and done entirely by clicking buttons in a fixed order on a web page.</p>
+
+  <div class="card">
+    <div class="card-body" style="text-align:center; padding: 30px;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: .95rem;">
+        <div style="background: var(--accent-light); border-radius: 10px; padding: 16px 20px; font-weight: 600; color: var(--accent-dark);">
+          &#9993;&#65039; Emails &amp; Receipts<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">download &amp; extract info</span>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
+        <div style="background: #ede9fe; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #6d28d9;">
+          &#129302; Claude (Computer Use)<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">clicks the portal for you</span>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
+        <div style="background: #ecfdf5; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #065f46;">
+          &#9989; Submitted Claim<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">with proof attached</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Five principles ── -->
+  <div class="section-title"><span class="icon">&#127919;</span> Five Principles Behind the Workflow</div>
+  <p class="section-sub">Before the steps, here is <em>why</em> the workflow is shaped the way it is. These transfer to almost any GUI-automation task.</p>
+
+  <div class="example-grid">
+    <div class="example-card">
+      <span class="example-tag">Principle 1</span>
+      <h4>Keep the human in the loop where it matters</h4>
+      <p>Login and security steps stay <strong>manual</strong>. The script opens the login page; you log in yourself. Never hand credentials to automation.</p>
+    </div>
+    <div class="example-card">
+      <span class="example-tag">Principle 2</span>
+      <h4>Build incrementally with screenshots</h4>
+      <p>Don't describe the whole flow at once. Drive one screen at a time: take a screenshot, tell Claude which button to click, verify, repeat.</p>
+    </div>
+    <div class="example-card">
+      <span class="example-tag">Principle 3</span>
+      <h4>Separate concerns into files</h4>
+      <p><code>login.py</code> handles the session, <code>work.py</code> does the task, <code>config.py</code> holds the inputs. Each piece is testable on its own.</p>
+    </div>
+    <div class="example-card">
+      <span class="example-tag">Principle 4</span>
+      <h4>Parameterize, don't hard-code</h4>
+      <p>Employee numbers, approval numbers, and file paths become <strong>inputs</strong> in <code>config.py</code>, so the same script handles every receipt.</p>
+    </div>
+    <div class="example-card">
+      <span class="example-tag">Principle 5</span>
+      <h4>Fail loudly</h4>
+      <p>If a required input can't be extracted, the script <strong>stops</strong> instead of silently submitting a wrong claim.</p>
+    </div>
+    <div class="example-card">
+      <span class="example-tag">Principle 6</span>
+      <h4>Verify end-to-end</h4>
+      <p>After building the parts, run the whole pipeline &mdash; login &rarr; download &rarr; process &mdash; and watch it work before trusting it.</p>
+    </div>
+  </div>
+
+  <!-- ── The phases ── -->
+  <div class="section-title"><span class="icon">&#128506;&#65039;</span> The Workflow at a Glance</div>
+  <p class="section-sub">The session naturally broke into four phases. Each phase below links to the prompts that drove it.</p>
+
+  <div class="card">
+    <div class="card-body" style="padding: 8px 24px;">
+      <div class="phase">
+        <div class="phase-badge">A</div>
+        <div class="phase-body">
+          <h4>Set up a persistent browser session</h4>
+          <p>Open the login page, log in manually, and keep the session alive so the work script can reuse it.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-badge">B</div>
+        <div class="phase-body">
+          <h4>Teach the click sequence, one screen at a time</h4>
+          <p>Use screenshots to define exactly which button to press on each portal page until the full claim is filled in.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-badge">C</div>
+        <div class="phase-body">
+          <h4>Gather the inputs automatically</h4>
+          <p>Download the relevant Gmail messages &amp; attachments, then extract the approval number from the receipt image.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-badge">D</div>
+        <div class="phase-body">
+          <h4>Parameterize &amp; verify the whole pipeline</h4>
+          <p>Move inputs into <code>config.py</code>, fail on missing data, and run login &rarr; download &rarr; process end-to-end.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PHASE A ══════════ -->
+  <div class="section-title"><span class="icon">&#128274;</span> Phase A &middot; Persistent Browser Session</div>
+  <p class="section-sub">Get a working, logged-in browser that the automation can drive &mdash; with the login itself done by hand.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>State the task and keep login manual.</strong> Describe the repetitive task and explicitly say which part you'll do yourself.</p>
+            <div class="prompt-block">
+              <h4>&#128172; Opening prompt</h4>
+              <div class="prompt-content">
+                <button class="copy-btn-sm" onclick="copyText(this, 'Computer use를 사용하여 업무 자동화를 하고싶어. 내가 하는 업무는 영수증 처리를 하는 업무이고, 인터넷 창에서 버튼들을 순서대로 눌러야 해. 이를 자동화해주는 스크립트를 만들어줘. 1. 로그인 페이지에서 로그인을 해야 해 — 창을 띄워주면 이는 내가 수동으로 할게. 2. 로그인 후 업무 페이지로 접속. 여기까지 만들어주면 다음 단계부터는 스크린샷을 통해 어떤 버튼을 눌러야 할지 설명할게.')">Copy</button>
+                <span class="ko">"Computer use를 사용하여 <strong>업무 자동화</strong>를 하고 싶어. 내 업무는 영수증 처리이고, 인터넷 창에서 버튼들을 순서대로 눌러야 해 &mdash; 이를 자동화하는 스크립트를 만들어줘.<br>1. 로그인 페이지를 <strong>창으로 띄워줘 (로그인은 내가 수동으로 할게)</strong>.<br>2. 로그인 후 업무 페이지로 접속.<br>여기까지 만들어주면, 다음부터는 <strong>스크린샷</strong>으로 어떤 버튼을 눌러야 할지 설명할게."</span>
+              </div>
+            </div>
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>Notice how the very first prompt sets the collaboration contract: <em>"I log in, you take screenshots and I'll guide the clicks."</em> This framing is what makes the rest of the session go smoothly.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Correct the target page.</strong> The post-login URL was wrong, so it was fixed in one short instruction.</p>
+            <div class="prompt-block">
+              <h4>&#128172; Follow-up</h4>
+              <div class="prompt-content">
+                <button class="copy-btn-sm" onclick="copyText(this, '로그인 완료했어. 로그인 후 메인 페이지가 아니라 실제 업무 페이지(영수증 신청 화면) URL로 접속하도록 수정해줘.')">Copy</button>
+                <span class="ko">"로그인 완료했어. 로그인 후 <strong>메인 페이지가 아니라 실제 업무 페이지</strong>(영수증 신청 화면)로 접속하도록 수정해줘."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Split login from work, and persist the session.</strong> A recurring early problem: after manual login, the session wasn't being saved, so the work script saw a logged-out browser.</p>
+            <div class="prompt-block">
+              <h4>&#128172; Two key fixes</h4>
+              <div class="prompt-content" style="margin-bottom:10px;">
+                <button class="copy-btn-sm" onclick="copyText(this, '로그인용 .py와 업무용 .py를 분리해줘.')">Copy</button>
+                <span class="ko">"<strong>로그인용 <code>login.py</code>와 업무용 <code>work.py</code>를 분리</strong>해줘."</span>
+              </div>
+              <div class="prompt-content">
+                <button class="copy-btn-sm" onclick="copyText(this, '현재 로그인 후 정보(세션/쿠키)가 저장되지 않고 있어. 로그인 상태를 유지해서 work.py가 같은 세션을 재사용하도록 해줘.')">Copy</button>
+                <span class="ko">"현재 로그인 후 <strong>세션/쿠키가 저장되지 않고 있어.</strong> 로그인 상태를 유지해서 <code>work.py</code>가 같은 세션을 재사용하도록 해줘."</span>
+              </div>
+            </div>
+            <div class="warn-box">
+              <span class="box-icon">&#9888;</span>
+              <span><strong>The most common Computer-Use pitfall:</strong> the login window and the automation run in different browser contexts. Persisting the user-data directory (cookies/session) so both scripts share one profile is what fixes "실행했을 때 아무런 변화가 없어" (nothing happens when I run it).</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PHASE B ══════════ -->
+  <div class="section-title"><span class="icon">&#128433;&#65039;</span> Phase B &middot; Teach the Click Sequence</div>
+  <p class="section-sub">This is the heart of the session. Each portal screen is handled with a screenshot + a precise instruction. Below are the recurring patterns rather than all 30+ clicks.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>One screen, one screenshot, one instruction.</strong> The whole expense form was built up like this &mdash; selecting payers, project code, budget item, bank account, card-approval lookup, attaching proof, and saving.</p>
+            <div class="prompt-block">
+              <h4>&#128247; Representative screen prompts (each sent with a screenshot)</h4>
+              <div class="prompt-content" style="margin-bottom:10px;">
+                <span class="ko">"이 화면에서 <strong>결제자 옆의 돋보기</strong>를 눌러야 해."</span>
+              </div>
+              <div class="prompt-content" style="margin-bottom:10px;">
+                <span class="ko">"<strong>'전체' 체크박스</strong>를 클릭 &rarr; 이름/직원번호 칸에 <strong>'250225'</strong> 입력 &rarr; 엔터 &rarr; 첫 번째 결과를 <strong>더블 클릭</strong>."</span>
+              </div>
+              <div class="prompt-content" style="margin-bottom:10px;">
+                <span class="ko">"<strong>'사업명' 옆 돋보기</strong>를 클릭 &rarr; 사업코드 <strong>'20260515'</strong>를 더블 클릭."</span>
+              </div>
+              <div class="prompt-content">
+                <span class="ko">"예산선택 팝업에서 <strong>예산과목명 &rarr; '기본경비_사업관리비'</strong>, <strong>지출계획 &rarr; '신임 교원 멘토링 운영'</strong> 선택."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>When a click fails, describe the UI more precisely.</strong> Several screens needed a second, sharper instruction &mdash; this is normal and expected.</p>
+            <div class="prompt-block">
+              <h4>&#128295; Disambiguating a stubborn control</h4>
+              <div class="prompt-content">
+                <button class="copy-btn-sm" onclick="copyText(this, '결제구분 옆의 \'선택\' 버튼을 누르지 말고, 그 사이에 있는 아래 화살표(드롭다운)를 클릭한 뒤 \'법인카드\'를 선택해야 해.')">Copy</button>
+                <span class="ko">"<strong>'선택' 버튼을 누르지 말고</strong>, 그 옆의 <strong>아래 화살표(드롭다운)</strong>를 클릭한 뒤 <strong>'법인카드'</strong>를 선택해야 해."</span>
+              </div>
+            </div>
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span><strong>Pattern:</strong> if Claude clicks the wrong nearby element, don't just say "it didn't work" &mdash; say <em>which</em> element to avoid and <em>which</em> to use ("not the Select button, the down-arrow beside it"). Spatial, exclusionary descriptions resolve most misclicks.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Help Claude notice pop-ups.</strong> A few times the automation didn't realize a new window had opened. A one-line nudge fixed it.</p>
+            <div class="prompt-block">
+              <h4>&#128172; Pop-up awareness</h4>
+              <div class="prompt-content">
+                <span class="ko">"<strong>사업명 관련 팝업창이 열렸는데</strong>, 네가 인지하지 못하고 있어. 그 팝업을 대상으로 동작해줘."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <p><strong>Respect ordering constraints the UI imposes.</strong> The portal required <em>saving first</em> before proof could be attached &mdash; a real-world quirk discovered mid-flow.</p>
+            <div class="prompt-block">
+              <h4>&#128172; Save-then-attach</h4>
+              <div class="prompt-content">
+                <span class="ko">"저장을 먼저 해야 증빙을 올릴 수 있네. <strong>'저장'을 누른 뒤, '증빙' 버튼</strong>을 눌러 회의록 파일을 첨부하고 다시 저장해줘."</span>
+              </div>
+            </div>
+            <div class="info-box">
+              <span class="box-icon">&#8505;</span>
+              <span>The card-approval lookup is the trickiest screen: type the approval number (e.g. <code>74955789</code>) &rarr; Enter &rarr; double-click the matching row. A "real user" (실 사용자) field was also added later via the same magnifier &rarr; search &rarr; double-click pattern.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PHASE C ══════════ -->
+  <div class="section-title"><span class="icon">&#128229;</span> Phase C &middot; Gather the Inputs Automatically</div>
+  <p class="section-sub">Instead of typing each receipt's data by hand, the inputs are pulled straight from email and the receipt image.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Download the relevant emails &amp; attachments.</strong></p>
+            <div class="prompt-block">
+              <h4>&#9993;&#65039; Gmail download script</h4>
+              <div class="prompt-content">
+                <button class="copy-btn-sm" onclick="copyText(this, 'Gmail에서 특정 날짜에 온 메일 중 \'신임교원멘토링\' 관련 메일들의 내용과 첨부파일을 다운로드받는 파이썬 스크립트를 작성해줘. 각 건의 폴더 이름을 case_1, case_2, ... 로 저장해줘.')">Copy</button>
+                <span class="ko">"Gmail에서 특정 날짜에 온 <strong>'신임교원멘토링'</strong> 관련 메일들의 내용과 <strong>첨부파일을 다운로드</strong>하는 파이썬 스크립트를 작성해줘. 각 건의 폴더를 <strong><code>case_1</code>, <code>case_2</code>, ...</strong> 로 저장해줘."</span>
+              </div>
+            </div>
+            <div class="output-preview">
+              <h5>Resulting structure:</h5>
+              <div class="file-tree">
+                <span class="folder">downloads/</span><br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="folder">case_1/</span> <span class="cmt">&mdash; one receipt claim</span><br>
+                &nbsp;&nbsp;&#9474;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">body.txt</span><br>
+                &nbsp;&nbsp;&#9474;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">receipt.jpg</span><br>
+                &nbsp;&nbsp;&#9474;&nbsp;&nbsp;&#9492;&#9472;&#9472; <span class="file">회의록.hwp</span><br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="folder">case_2/</span><br>
+                &nbsp;&nbsp;&#9492;&#9472;&#9472; <span class="file">...</span><br>
+              </div>
+            </div>
+            <div class="warn-box">
+              <span class="box-icon">&#9888;</span>
+              <span>The Gmail API needs a one-time <strong>OAuth setup</strong> (a <code>credentials.json</code> from Google Cloud + adding yourself as a test user to clear the <code>access_denied</code> screen). Claude can walk you through the Cloud console screens.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Extract data from the attachments.</strong> Read images out of the <code>.hwp</code> meeting minutes, and pull the approval number directly from the receipt.</p>
+            <div class="prompt-block">
+              <h4>&#128269; Extraction prompts</h4>
+              <div class="prompt-content" style="margin-bottom:10px;">
+                <span class="ko">"<strong>회의록.hwp에 들어 있는 사진</strong>을 추출해서 볼 수 있어?"</span>
+              </div>
+              <div class="prompt-content">
+                <span class="ko">"<strong>영수증에서 승인번호를 추출</strong>해줘."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PHASE D ══════════ -->
+  <div class="section-title"><span class="icon">&#9881;&#65039;</span> Phase D &middot; Parameterize &amp; Verify</div>
+  <p class="section-sub">Turn the one-off script into a reusable tool, and confirm the whole pipeline works.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Move inputs into a config file &mdash; and fail if they're missing.</strong></p>
+            <div class="prompt-block">
+              <h4>&#128196; Config + fail-fast</h4>
+              <div class="prompt-content">
+                <button class="copy-btn-sm" onclick="copyText(this, 'work.py가 직원번호, 승인번호, 파일경로를 입력으로 받게 해줘. 이 값들을 config.py에 두고 work.py가 config.py를 읽어 실행하도록 해줘. config.py가 제대로 작성되지 않았을 때(직원번호/승인번호/파일경로 추출 실패)에는 실패로 처리해줘.')">Copy</button>
+                <span class="ko">"<code>work.py</code>가 <strong>직원번호 · 승인번호 · 파일경로</strong>를 입력으로 받게 해줘. 이 값들을 <strong><code>config.py</code></strong>에 두고 <code>work.py</code>가 이를 읽어 실행하도록 해줘. <strong>값 추출에 실패하면 (잘못 작성되면) 실패로 처리</strong>해줘."</span>
+              </div>
+            </div>
+            <div class="output-preview">
+              <h5>Final project shape:</h5>
+              <div class="file-tree">
+                <span class="folder">receipt-automation/</span><br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">login.py</span> <span class="cmt">&mdash; opens login window, saves session</span><br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">work.py</span> <span class="cmt">&mdash; drives the portal, reads config.py</span><br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">config.py</span> <span class="cmt">&mdash; 직원번호 / 승인번호 / 파일경로</span><br>
+                &nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="file">download_mail.py</span> <span class="cmt">&mdash; Gmail &rarr; case_N folders</span><br>
+                &nbsp;&nbsp;&#9492;&#9472;&#9472; <span class="folder">downloads/</span> <span class="cmt">&mdash; case_1, case_2, ...</span><br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Run and verify the full pipeline.</strong></p>
+            <div class="prompt-block">
+              <h4>&#9989; End-to-end check</h4>
+              <div class="prompt-content">
+                <button class="copy-btn-sm" onclick="copyText(this, '로그인 → 이메일 다운로드 → 영수증 처리, 모든 과정을 한 번 더 실행해서 검증해줘.')">Copy</button>
+                <span class="ko">"<strong>로그인 &rarr; 이메일 다운로드 &rarr; 영수증 처리</strong>, 모든 과정을 한 번 더 실행해서 <strong>검증</strong>해줘."</span>
+              </div>
+            </div>
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>"너가 한번 해봐" (you try it yourself) &mdash; once the steps are solid, let Claude run the entire flow unattended while you watch, then iterate on whatever breaks.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Takeaways ── -->
+  <div class="section-title"><span class="icon">&#127775;</span> How to Apply This to Your Own Work</div>
+  <p class="section-sub">A checklist for turning any of your repetitive tasks into an automation.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div style="display: grid; gap: 18px;">
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #e0f2fe; display:flex; align-items:center; justify-content:center; font-weight:700; color:#0369a1; font-size:.9rem;">1</div>
+          <div>
+            <strong>Pick a task that is repetitive and rule-based</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">The best first target is something you do the same way every time &mdash; forms, data entry, downloading and filing attachments.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #ede9fe; display:flex; align-items:center; justify-content:center; font-weight:700; color:#6d28d9; font-size:.9rem;">2</div>
+          <div>
+            <strong>Demonstrate, don't specify</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Walk through the task once with screenshots and plain-language instructions. You don't need to know the page's HTML &mdash; just describe what you see.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #ecfdf5; display:flex; align-items:center; justify-content:center; font-weight:700; color:#059669; font-size:.9rem;">3</div>
+          <div>
+            <strong>Keep credentials and irreversible actions manual</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Log in yourself; review before the final "submit". Automation fills the form &mdash; you stay responsible for sending it.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fef3c7; display:flex; align-items:center; justify-content:center; font-weight:700; color:#d97706; font-size:.9rem;">4</div>
+          <div>
+            <strong>Expect iteration on tricky controls</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Dropdowns, pop-ups, and look-alike buttons may take a second, more precise instruction. That back-and-forth is the normal cost of building a reliable script.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fce7f3; display:flex; align-items:center; justify-content:center; font-weight:700; color:#db2777; font-size:.9rem;">5</div>
+          <div>
+            <strong>Generalize once it works for one case</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Pull the changing values into a config file, make missing data a hard error, then reuse the same script for every case (<code>case_1</code>, <code>case_2</code>, ...).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="page-footer">
+    <p><a href="/courses/work_automation/2026/">&larr; Back to Seminar Page</a> &nbsp;&middot;&nbsp; <a href="/courses/">All Courses</a></p>
+    <p style="margin-top:10px">PLX Lab &middot; DGIST &middot; Prof. Minseok Jeon &middot; 2026</p>
+  </div>
+
+</div>
+
+<!-- ── Scripts ── -->
+<script>
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+</script>
+</body>
+</html>
