@@ -41,6 +41,17 @@
       fallbackToLocalStorage();
     }
   }
+
+  // Wait for anonymous auth to complete before writing (rules require auth != null)
+  function waitForAuth(callback, maxAttempts = 50, attempt = 1) {
+    if (window.firebaseAuthReady) {
+      callback();
+    } else if (attempt < maxAttempts) {
+      setTimeout(() => waitForAuth(callback, maxAttempts, attempt + 1), 100);
+    } else {
+      console.log('Firebase auth not ready, skipping view increment');
+    }
+  }
   
   function initFirebaseViewCounter() {
     try {
@@ -69,17 +80,20 @@
           viewCountElement.textContent = currentCount.toLocaleString();
         }
         
-        // Only increment count if we're actually on this page and haven't viewed it in this session
+        // Only increment count if we're actually on this page and haven't viewed it in this session.
+        // Wait for anonymous auth first, since the DB rules require auth != null to write.
         if (!hasViewedInSession && window.location.pathname === pageUrl) {
-          set(viewRef, increment(1)).then(() => {
-            // Update display with new count
-            if (viewCountElement) {
-              viewCountElement.textContent = (currentCount + 1).toLocaleString();
-            }
-            // Mark as viewed in this session
-            sessionStorage.setItem(sessionKey, 'true');
-          }).catch((error) => {
-            console.error('Error incrementing view count:', error);
+          waitForAuth(() => {
+            set(viewRef, increment(1)).then(() => {
+              // Update display with new count
+              if (viewCountElement) {
+                viewCountElement.textContent = (currentCount + 1).toLocaleString();
+              }
+              // Mark as viewed in this session
+              sessionStorage.setItem(sessionKey, 'true');
+            }).catch((error) => {
+              console.error('Error incrementing view count:', error);
+            });
           });
         }
       }).catch((error) => {
