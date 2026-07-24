@@ -137,7 +137,7 @@ Our research group aims to develop programming language technologies for address
 
 ---
 
-<div style="background-color: #f0f8ff; border: 2px solid #2196F3; border-radius: 8px; padding: 20px; margin: 20px 0;">
+<!-- <div style="background-color: #f0f8ff; border: 2px solid #2196F3; border-radius: 8px; padding: 20px; margin: 20px 0;">
   <h3 style="color: #2196F3; margin-bottom: 15px;">Join Our Research!</h3>
   <p style="margin-bottom: 20px;">We are actively recruiting motivated researchers at all levels who are interested in programming languages, program synthesis, and their applications to software engineering and machine learning.</p>
   
@@ -151,5 +151,5 @@ Our research group aims to develop programming language technologies for address
     <a href="/ProblemBank/" class="btn btn--warning" style="margin-left: 10px;">
       <i class="fas fa-lightbulb"></i> Problem Bank
     </a>
-  </div>
-</div>
+  </div> -->
+<!-- </div> -->
