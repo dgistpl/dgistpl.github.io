@@ -46,37 +46,16 @@ myungjin_yoon:
   position: Undergraduate Intern
   email: ""
 
-gyeongmook_kang:
-  name: Gyeongmook Kang
-  ko-name: 강경묵 
-  avatar: /images/members/dalgu.png
-  position: Undergraduate Intern
-  email: ""
-
-dohyeon_kim:
-  name: Dohyeon Kim
-  ko-name: 김도현 
-  avatar: /images/members/dalgu.png
-  position: Undergraduate Intern
-  email: ""
-
-chowoo_seo:
-  name: Chowoo Seo
-  ko-name: 서초우
-  avatar: /images/members/dalgu.png
-  position: Undergraduate Intern
-  email: ""
-
-minjoon_jang:
-  name: Minjoon_Jang
-  ko-name: 장민준
-  avatar: /images/members/dalgu.png
-  position: Undergraduate Intern
-  email: ""
-
 pyeongahn_jeon:
   name: Pyeongahn_Jeon
   ko-name: 전평안
+  avatar: /images/members/dalgu.png
+  position: Undergraduate Intern
+  email: ""
+
+youngmo_goo:
+  name: Youngmo_Goo 
+  ko-name: 구영모
   avatar: /images/members/dalgu.png
   position: Undergraduate Intern
   email: ""

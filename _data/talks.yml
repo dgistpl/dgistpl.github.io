@@ -1,10 +1,14 @@
+- title: "AI 시대의 교수법(슬라이드 생성부터 수업자료 구성까지)"
+  venue: "대학교육개발센터협의회 하계워크숍, 제주"
+  date: "July 3 2026"
+  year: 2026
+  slides: "/papers/KACTL.pdf"
+
 - title: "AI를 활용한수업자료자동 생성프레임워크"
   venue: "AI 활용 경진대회, DGIST"
   date: "Nov 4 2025"
   year: 2025
   slides: "/papers/AI_Usage_Presentation.pdf"
-
-
 
 - title: "Developing Cost-Effective Combinations of Static Analysis Techniques"
   venue: "Dagstuhl Seminar 25421 (Sound Static Program Analysis in Modern Software Engineering), Dagstuhl, Germany"
