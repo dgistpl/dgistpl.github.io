@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal Extension of ProgNet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header is-active">
+    <div class="container">
+      <div class="tag-row">
+        <span class="tag tag-prognet">ProgNet</span>
+        <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+      </div>
+      <h1>ProgNet 저널 익스텐션</h1>
+      <div class="subtitle">Journal Extension of ProgNet</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p>학회에 제출한 ProgNet [<a href="interpretable-graph-classification.html">Interpretable Graph Classification</a> 참조] 논문을 <strong>저널 버전으로 확장</strong>하는 트랙이다. 관례상 저널 익스텐션은 (a) 원 학회 논문을 명시하고, (b) <strong>아이디어 1개 정도 추가 + 실험 추가</strong>로 약 <strong>30%의 신규 콘텐츠</strong>를 요구한다. 감각적 기준으로 학회 논문 &asymp; 아이디어 3개라면, 저널 익스텐션 &asymp; <strong>4개째 아이디어를 추가</strong>하는 것이다.</p>
+    <p>중요한 제약은 <strong>반드시 ProgNet 자체를 확장</strong>해야 한다는 점이다 &mdash; 뒤에 별도의 뉴럴넷을 붙이는 식의 외형적 확장은 인정되지 않는다.</p>
+    <p>익스텐션 후보 아이디어는 다음과 같다.</p>
+    <ol>
+      <li><strong>셋 구축 정교화</strong>: vocabulary(프로그램 셋)를 만드는 과정을 더 정교하게 개선</li>
+      <li><strong>Latent constraint + similarity</strong>: 레이턴트 벡터에 constraint를 추가하고, 셋 내 엘리먼트 간 <strong>similarity</strong>를 계산·반영</li>
+      <li><strong>Fidelity 보정</strong>: 현재 ProgNet의 fidelity가 기대보다 많이 떨어지는 문제를 보완하는 아이디어</li>
+    </ol>
+    <p>일정 제약도 있다. 저널은 리뷰 사이클이 <strong>약 1년</strong> 소요되므로, 실적 관점에서 <strong>2026년 8월(KDD) 이전 착수</strong>가 목표였다.</p>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>ProgNet 자체를 확장하는 4번째 아이디어를 추가하여 저널 버전을 완성·제출한다.</p>
+    <ul>
+      <li><strong>아이디어 선정</strong>: 후보(셋 구축 정교화 / latent constraint + similarity / fidelity 보정) 중 1개 확정 &mdash; fidelity 보정이 유력 후보</li>
+      <li><strong>실험 확장</strong>: 추가 아이디어에 대한 실험 + 기존 실험 보강으로 약 30% 확장</li>
+      <li><strong>제약 준수</strong>: ProgNet 프레임워크 내부의 확장으로 구성 (외부 모듈 부착 방식 배제)</li>
+      <li><strong>일정</strong>: 조기 착수 후 저널 제출, 리뷰 사이클(~1년) 동안 다른 후속 방향들과 병행</li>
+    </ul>
+
+  </main>
+</body>
+</html>

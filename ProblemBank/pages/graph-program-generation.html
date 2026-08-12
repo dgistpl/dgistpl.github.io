@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Generation: Beyond Mining</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="tag-row">
+        <span class="tag tag-prognet">ProgNet</span>
+      </div>
+      <h1>프로그램 제너레이션 &mdash; 마이닝을 넘어서</h1>
+      <div class="subtitle">Program Generation: Beyond Mining</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p><strong>마이닝(mining)</strong> 은 데이터에 이미 존재하는 패턴을 뽑아오는 것이고, <strong>제너레이션(generation)</strong> 은 없던 것을 리얼리스틱하게 새로 만들어내는 것이다. ProgNet [<a href="interpretable-graph-classification.html">Interpretable Graph Classification</a> 참조]을 포함한 지금까지의 GDL program 기반 연구는 전부 <strong>마이닝</strong>에 해당한다.</p>
+    <p>마이닝-only 접근에는 두 가지 한계가 있다.</p>
+    <ol>
+      <li><strong>다이버시티 제한</strong>: vocabulary가 데이터에 실제로 등장한 패턴으로 한정된다. 데이터에 나타나지 않았지만 분류에 유용할 수 있는 프로그램은 셋에 들어올 수 없다.</li>
+      <li><strong>다운스트림 미고려</strong>: 셋을 구축하는 과정이 다운스트림(분류) 태스크를 고려하지 않는다 &mdash; 현재 ProgNet의 대표적 약점이다.</li>
+    </ol>
+    <p>핵심 아이디어는 프로그램을 <strong>마이닝 대신 제너레이션으로</strong> 만들어보는 것이다. 마이닝 결과를 타겟/레이블처럼 주고 그것을 만들어내는 <strong>제너레이터</strong>를 학습하면, 마이닝으로 추출한 것 외에 <strong>더 다양한 형태</strong>의 프로그램을 생성할 수 있다. 셋이 풍성해지고, 그중 좋은 것을 골라 쓰면 성능이 어디서든 올라갈 여지가 생긴다.</p>
+    <p>나아가 <strong>엔드 투 엔드</strong> 구성도 가능하다: 셋에 <strong>학습 가능한 파라미터</strong>(크기 K)를 넣어두고 다운스트림 태스크와 함께 업데이트하며 셋을 만들어 나간다. 이때 <strong>마이닝 결과와 유사하도록 constraint</strong>를 부여하여, 비현실적인 프로그램이 마구 생성되지 않게 가이드한다.</p>
+    <p>이 방향은 다이버시티 향상, 태스크-aware vocabulary 구축, 데이터 증강 등 <strong>확장 여지가 크다</strong>.</p>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>마이닝을 supervision으로 활용하는 <strong>GDL program 제너레이터</strong>를 설계하고, 다운스트림과 결합된 end-to-end 셋 학습으로 확장한다.</p>
+    <ul>
+      <li><strong>제너레이터</strong>: 마이닝 결과를 타겟으로 학습하여, 마이닝 결과를 재현하면서 그보다 다양한 프로그램을 생성</li>
+      <li><strong>리얼리즘 constraint</strong>: 생성된 프로그램이 데이터 분포에서 유의미하도록 마이닝 결과와의 유사성 제약 설계</li>
+      <li><strong>End-to-end 학습</strong>: 크기 K의 학습 가능한 프로그램 셋 파라미터를 다운스트림 loss와 함께 업데이트 &mdash; 다운스트림 미고려 문제 해결</li>
+      <li><strong>평가</strong>: 마이닝-only 대비 셋의 다이버시티와 다운스트림 분류 성능 향상 검증</li>
+    </ul>
+
+  </main>
+</body>
+</html>

@@ -13,10 +13,12 @@
       --accent-gdl: #2563eb;
       --accent-tunnel: #7c3aed;
       --accent-ai: #dc2626;
+      --accent-prognet: #d97706;
       --border: #e5e7eb;
       --tag-gdl: #dbeafe;
       --tag-tunnel: #ede9fe;
       --tag-ai: #fee2e2;
+      --tag-prognet: #fef3c7;
       --hover-shadow: 0 8px 30px rgba(0,0,0,0.12);
     }
 
@@ -103,6 +105,7 @@
     .line-icon.gdl { background: var(--tag-gdl); }
     .line-icon.tunnel { background: var(--tag-tunnel); }
     .line-icon.ai { background: var(--tag-ai); }
+    .line-icon.prognet { background: var(--tag-prognet); }
 
     .line-header h2 {
       font-size: 1.5rem;
@@ -171,6 +174,7 @@
     .card:hover.gdl-border { border-color: var(--accent-gdl); }
     .card:hover.tunnel-border { border-color: var(--accent-tunnel); }
     .card:hover.ai-border { border-color: var(--accent-ai); }
+    .card:hover.prognet-border { border-color: var(--accent-prognet); }
 
     .card-tag {
       display: inline-block;
@@ -187,6 +191,7 @@
     .card-tag.gdl { background: var(--tag-gdl); color: var(--accent-gdl); }
     .card-tag.tunnel { background: var(--tag-tunnel); color: var(--accent-tunnel); }
     .card-tag.ai { background: var(--tag-ai); color: var(--accent-ai); }
+    .card-tag.prognet { background: var(--tag-prognet); color: var(--accent-prognet); }
 
     .card h3 {
       font-size: 1.1rem;
@@ -310,6 +315,7 @@
 
     .card.tunnel-border .read-more { color: var(--accent-tunnel); }
     .card.ai-border .read-more { color: var(--accent-ai); }
+    .card.prognet-border .read-more { color: var(--accent-prognet); }
 
     .read-more .arrow {
       transition: transform 0.2s;
@@ -356,15 +362,15 @@
   <p>A curated collection of open research problems at the intersection of programming languages, graph learning, program analysis, and AI safety.</p>
   <div class="stats">
     <div class="stat">
-      <div class="stat-number">11</div>
+      <div class="stat-number">15</div>
       <div class="stat-label">Problems</div>
     </div>
     <div class="stat">
-      <div class="stat-number">3</div>
+      <div class="stat-number">4</div>
       <div class="stat-label">Research Lines</div>
     </div>
     <div class="stat stat-active">
-      <div class="stat-number">5</div>
+      <div class="stat-number">7</div>
       <div class="stat-label">In Progress</div>
     </div>
   </div>
@@ -503,6 +509,86 @@
     </div>
   </section>
 
+  <!-- ============ Research Line: ProgNet Follow-ups ============ -->
+  <section class="research-line">
+    <div class="line-header">
+      <div class="line-icon prognet">&#9671;</div>
+      <h2>ProgNet Follow-ups &mdash; Generation &amp; Large Graphs</h2>
+      <span class="line-count">4 problems</span>
+    </div>
+    <div class="cards-scroll-wrapper">
+      <div class="cards">
+
+        <a class="card prognet-border active" href="pages/prognet-node-classification.html">
+          <div class="card-header-row">
+            <span class="card-tag prognet">ProgNet</span>
+            <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+          </div>
+          <h3>Node-Level Program Sets for Large Graphs</h3>
+          <div class="subtitle">라지 그래프를 위한 노드별 프로그램 셋</div>
+          <div class="description">
+            하나의 큰 그래프에서 노드별 GDL program 셋을 추출해 노드 분류·링크 프레딕션에 활용한다. 노드 임베딩에 프로그램 셋 정보를 결합하며, 셋 추출 방법과 "좋은 셋"의 기준, 분류 아키텍처 설계가 열린 질문이다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">node classification</span>
+            <span class="keyword">link prediction</span>
+            <span class="keyword">large graphs</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card prognet-border active" href="pages/prognet-journal-extension.html">
+          <div class="card-header-row">
+            <span class="card-tag prognet">ProgNet</span>
+            <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+          </div>
+          <h3>ProgNet Journal Extension</h3>
+          <div class="subtitle">ProgNet 저널 익스텐션</div>
+          <div class="description">
+            학회 버전 ProgNet에 4번째 아이디어(fidelity 보정, latent constraint + similarity, 셋 구축 정교화 등)와 실험을 더해 약 30% 확장하는 저널 트랙. 반드시 ProgNet 자체를 확장해야 하며, 리뷰 사이클은 약 1년이다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">journal extension</span>
+            <span class="keyword">fidelity</span>
+            <span class="keyword">vocabulary refinement</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card prognet-border" href="pages/graph-program-generation.html">
+          <span class="card-tag prognet">ProgNet</span>
+          <h3>Program Generation: Beyond Mining</h3>
+          <div class="subtitle">프로그램 제너레이션 &mdash; 마이닝을 넘어서</div>
+          <div class="description">
+            마이닝 결과를 타겟 삼아 프로그램을 생성하는 제너레이터를 학습해 셋을 더 다양하고 풍성하게 만든다. 학습 가능한 셋 파라미터(크기 K)와 마이닝 유사성 constraint로 다운스트림과 결합한 end-to-end 구성도 가능하다.
+          </div>
+          <div class="keywords">
+            <span class="keyword">program generation</span>
+            <span class="keyword">diversity</span>
+            <span class="keyword">end-to-end</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="card prognet-border" href="pages/universal-graph-vocabulary.html">
+          <span class="card-tag prognet">ProgNet</span>
+          <h3>Universal Primitive Vocabulary &mdash; "Word"</h3>
+          <div class="subtitle">그래프를 위한 다목적 프리미티브 셋</div>
+          <div class="description">
+            랭귀지 모델의 word에 해당하는, 멀티 도메인·멀티 데이터셋에서 재사용 가능한 그래프 프리미티브 program 셋을 구축한다. 일반화 주장을 설득력 있게 설계·평가하는 것 자체가 열린 문제로, 후속 방향 중 최고 난이도.
+          </div>
+          <div class="keywords">
+            <span class="keyword">generalization</span>
+            <span class="keyword">adaptation</span>
+            <span class="keyword">foundation vocabulary</span>
+          </div>
+          <span class="read-more">Read more <span class="arrow">&rarr;</span></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ============ Research Line 2: Context Tunneling ============ -->
   <section class="research-line">
     <div class="line-header">
@@ -599,7 +685,7 @@
 
 <footer>
   <p>PLX Lab &mdash; Programming Languages &amp; Explainability Research Group</p>
-  <p style="margin-top: 6px; font-size: 0.8rem; opacity: 0.6;">Last updated: April 2026</p>
+  <p style="margin-top: 6px; font-size: 0.8rem; opacity: 0.6;">Last updated: August 2026</p>
 </footer>
 
 </body>

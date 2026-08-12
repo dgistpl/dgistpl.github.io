@@ -1,14 +1,16 @@
 - year: 2026
   papers:
-    - title: "ProgNet: Program-Grounded Evidence Composition for Interpretable Graph Classification (Accepted)"
+    - title: "ProgNet: Program-Grounded Evidence Composition for Interpretable Graph Classification"
       authors: "Minseok Jeon, Seunghyun Park, Jun-Gi Jang"
       venue: "KDD 2026: 32nd SIGKDD Conference on Knowledge Discovery and Data Mining"
       venue_url: "https://kdd2026.kdd.org/"
-      # links:
-      #   - type: "PDF"
-      #     url: "/papers/ProgNet.pdf"
-      #   - type: "ACM DL"
-      #     url: "https://dl.acm.org/doi/10.1145/3720526"
+      links:
+        - type: "PDF"
+          url: "/papers/KDD2026.pdf"
+        - type: "ACM DL"
+          url: "https://dl.acm.org/doi/10.1145/3770855.3817844"
+        - type: "Repo"
+          url: "https://github.com/dgistpl/ProgNet"
 
 
 - year: 2025

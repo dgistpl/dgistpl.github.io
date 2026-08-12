@@ -95,6 +95,12 @@ body {
   border: 1px solid rgba(234, 67, 53, 0.35);
 }
 
+.tag-prognet {
+  background: rgba(217, 119, 6, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(217, 119, 6, 0.35);
+}
+
 /* Active / In-Progress badge */
 .tag-row {
   display: flex;

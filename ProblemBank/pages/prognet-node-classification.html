@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node-Level Program Sets for Large-Graph Node Classification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn-wrap">
+    <a href="../index.html" class="back-btn">&larr; Back to Problem Bank</a>
+  </div>
+
+  <header class="page-header is-active">
+    <div class="container">
+      <div class="tag-row">
+        <span class="tag tag-prognet">ProgNet</span>
+        <span class="active-badge"><span class="pulse-dot"></span>In Progress</span>
+      </div>
+      <h1>라지 그래프를 위한 노드별 프로그램 셋</h1>
+      <div class="subtitle">Node-Level Program Sets for Large-Graph Node Classification</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <h2>1. 문제 (Problem)</h2>
+    <p>ProgNet [<a href="interpretable-graph-classification.html">Interpretable Graph Classification</a> 참조]은 <strong>여러 개의 작은 그래프</strong>에 대한 그래프 분류 설정에서 GDL program 기반 vocabulary의 효과를 보였다. 그러나 실세계의 핵심 그래프 데이터 상당수는 인용 네트워크, 소셜 네트워크, 지식 그래프처럼 <strong>하나의 큰 그래프</strong>이며, 중심 태스크는 <strong>노드 분류(node classification)</strong> 와 <strong>링크 프레딕션(link prediction)</strong> 이다.</p>
+    <p>핵심 아이디어는 프로그램 아이디어를 이 설정으로 옮기는 것이다: <strong>노드별로 그 노드를 기술하는 GDL program 셋을 추출</strong>하고, 기존 노드 임베딩 기반 분류에 <strong>노드 임베딩 + 프로그램 셋 정보</strong>를 결합하는 형태로 활용한다.</p>
+    <p>이때 두 가지 <strong>열린 질문</strong>이 있다.</p>
+    <ol>
+      <li><strong>노드에 대한 프로그램 셋을 어떻게 뽑을 것인가</strong> &mdash; 노드의 N-hop 이웃에 기존 마이닝 알고리즘을 적용할 수 있으나, "포함" 관계가 그래프 분류와 <strong>반대</strong>가 된다. 그래프 분류에서는 program이 그래프에 포함되는 형태였다면, 여기서는 <strong>노드가 프로그램(의 매칭)에 포함</strong>되는 형태다.</li>
+      <li><strong>무엇이 좋은 셋인가</strong> &mdash; 노드를 대표하는 의미 있는 정보(엘리먼트)가 무엇이어야 하는지에 대한 기준이 아직 없다.</li>
+    </ol>
+    <p>표현형은 <strong>subgraph + feature range</strong>의 결합이어야 한다. feature가 없으면 프로그램이 subgraph와 동일해져 GDL의 표현력 이점이 사라지므로, <strong>feature가 풍부한 대규모 그래프 데이터</strong>가 필요하다.</p>
+    <p>풀어야 할 과제는 세 가지다.</p>
+    <ol>
+      <li><strong>속도</strong>: 노드 100만~1000만 규모에서는 병렬화가 필수다. 현행 구현(PLD)은 노드 약 4만 개 규모부터 급격히 느려진다.</li>
+      <li><strong>좋은 셋의 선택 기준</strong>: 어떤 프로그램들이 노드를 잘 대표하는가.</li>
+      <li><strong>분류 아키텍처</strong>: 노드별 프로그램 셋을 입력으로 받았을 때, 노드 분류/링크 프레딕션을 위한 아키텍처를 어떻게 설계할 것인가.</li>
+    </ol>
+    <p>이 방향은 미해결 과제인 <strong>구조 + feature-range aware 임베딩</strong> 문제와 직결되어 있다 &mdash; 이 임베딩이 해결되면 본 방향을 바로 진행할 수 있다.</p>
+
+    <h2>2. 목표 (Goal)</h2>
+    <p>하나의 큰 그래프에서 <strong>노드별 GDL program 셋</strong>을 추출하고, 이를 활용한 해석 가능한 노드 분류/링크 프레딕션 프레임워크를 설계한다.</p>
+    <ul>
+      <li><strong>셋 추출 PoC</strong>: 작은 데이터에서 노드별 프로그램 셋을 추출해 보고(N-hop + 마이닝 알고리즘), 결과 분석을 통해 "좋은 셋"의 기준을 정립</li>
+      <li><strong>분류 아키텍처</strong>: 노드 임베딩 + 프로그램 셋 정보를 결합하는 분류/링크 프레딕션 아키텍처 설계</li>
+      <li><strong>확장성</strong>: 수백만 노드 규모에서 동작하는 병렬 마이닝 (구조 + feature-range aware 임베딩 문제 해결 포함)</li>
+      <li><strong>평가</strong>: 노드 분류/링크 프레딕션 벤치마크에서 GNN 베이스라인 대비 경쟁력 있는 정확도 + 프로그램 기반의 해석 가능성 제공</li>
+    </ul>
+
+  </main>
+</body>
+</html>
