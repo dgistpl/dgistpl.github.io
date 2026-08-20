@@ -337,7 +337,7 @@
 <div class="hero">
   <div class="badge">Case Study Walkthrough</div>
   <h1>Automating Routine Work with AI</h1>
-  <p>How a repetitive, click-by-click office task &mdash; DGIST receipt (expense) processing &mdash; was automated end-to-end using Claude with Computer Use. Built from the actual prompts used during the session.</p>
+  <p>How a repetitive, click-by-click office task &mdash; DGIST receipt (expense) processing &mdash; was automated end-to-end using Claude with Playwright. Built from the actual prompts used during the session.</p>
 </div>
 
 <div class="page-wrapper">
@@ -359,8 +359,8 @@
         </div>
         <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
         <div style="background: #ede9fe; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #6d28d9;">
-          &#129302; Claude (Computer Use)<br>
-          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">clicks the portal for you</span>
+          &#129302; Claude + Playwright<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">drives the portal for you</span>
         </div>
         <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
         <div style="background: #ecfdf5; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #065f46;">
@@ -460,8 +460,8 @@
             <div class="prompt-block">
               <h4>&#128172; Opening prompt</h4>
               <div class="prompt-content">
-                <button class="copy-btn-sm" onclick="copyText(this, 'Computer use를 사용하여 업무 자동화를 하고싶어. 내가 하는 업무는 영수증 처리를 하는 업무이고, 인터넷 창에서 버튼들을 순서대로 눌러야 해. 이를 자동화해주는 스크립트를 만들어줘. 1. 로그인 페이지에서 로그인을 해야 해 — 창을 띄워주면 이는 내가 수동으로 할게. 2. 로그인 후 업무 페이지로 접속. 여기까지 만들어주면 다음 단계부터는 스크린샷을 통해 어떤 버튼을 눌러야 할지 설명할게.')">Copy</button>
-                <span class="ko">"Computer use를 사용하여 <strong>업무 자동화</strong>를 하고 싶어. 내 업무는 영수증 처리이고, 인터넷 창에서 버튼들을 순서대로 눌러야 해 &mdash; 이를 자동화하는 스크립트를 만들어줘.<br>1. 로그인 페이지를 <strong>창으로 띄워줘 (로그인은 내가 수동으로 할게)</strong>.<br>2. 로그인 후 업무 페이지로 접속.<br>여기까지 만들어주면, 다음부터는 <strong>스크린샷</strong>으로 어떤 버튼을 눌러야 할지 설명할게."</span>
+                <button class="copy-btn-sm" onclick="copyText(this, 'Playwright를 사용하여 업무 자동화를 하고싶어. 내가 하는 업무는 영수증 처리를 하는 업무이고, 인터넷 창에서 버튼들을 순서대로 눌러야 해. 이를 자동화해주는 파이썬 스크립트를 만들어줘. 1. 로그인 페이지에서 로그인을 해야 해 — 창을 띄워주면 이는 내가 수동으로 할게. 2. 로그인 후 업무 페이지로 접속. 여기까지 만들어주면 다음 단계부터는 스크린샷을 통해 어떤 버튼을 눌러야 할지 설명할게.')">Copy</button>
+                <span class="ko">"Playwright를 사용하여 <strong>업무 자동화</strong>를 하고 싶어. 내 업무는 영수증 처리이고, 인터넷 창에서 버튼들을 순서대로 눌러야 해 &mdash; 이를 자동화하는 스크립트를 만들어줘.<br>1. 로그인 페이지를 <strong>창으로 띄워줘 (로그인은 내가 수동으로 할게)</strong>.<br>2. 로그인 후 업무 페이지로 접속.<br>여기까지 만들어주면, 다음부터는 <strong>스크린샷</strong>으로 어떤 버튼을 눌러야 할지 설명할게."</span>
               </div>
             </div>
             <div class="tip-box">
@@ -502,7 +502,7 @@
             </div>
             <div class="warn-box">
               <span class="box-icon">&#9888;</span>
-              <span><strong>The most common Computer-Use pitfall:</strong> the login window and the automation run in different browser contexts. Persisting the user-data directory (cookies/session) so both scripts share one profile is what fixes "실행했을 때 아무런 변화가 없어" (nothing happens when I run it).</span>
+              <span><strong>The most common Playwright pitfall:</strong> the login window and the automation run in different browser contexts. Using a persistent context (<code>launch_persistent_context</code> with a shared user-data directory) so both scripts share one profile is what fixes "실행했을 때 아무런 변화가 없어" (nothing happens when I run it).</span>
             </div>
           </div>
         </div>

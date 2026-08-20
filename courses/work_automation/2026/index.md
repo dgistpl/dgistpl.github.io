@@ -6,17 +6,18 @@ title: "Automating Routine Work with AI"
 
 # Automating Routine Work
 
-This seminar introduces how to use **Claude with Computer Use** to automate repetitive, click-by-click office tasks — using a real case study of automating **DGIST receipt (expense) processing**.
+How to automate repetitive, click-by-click office tasks using **Claude with Playwright**, shown through two real DGIST case studies.
 
-### Seminar Information
-
-+ **Instructor:** [Minseok Jeon](https://dgistpl.github.io/)
-  + **Email:** [minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr)
++ **Instructor:** [Minseok Jeon](https://dgistpl.github.io/) ([minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr))
 
 ---
 
-## Case Study Walkthrough
+## Case Studies
 
-+ [**A Step-by-Step Walkthrough**](guide.html)
++ [**Purchase Requests by Demonstration**](direct_purchase.html) — *Easy*
 
-This walkthrough is built from the **actual prompts** used during the automation session. It shows the workflow, the key principles, and how to adapt the same approach to your own routine tasks.
+  Demonstrate the task once in Chrome; the AI watches and builds a Playwright script that replays it.
+
++ [**Receipt Processing, Step by Step**](guide.html) — *Advanced*
+
+  Build the automation prompt by prompt: the actual session, its workflow, and the principles behind it.
