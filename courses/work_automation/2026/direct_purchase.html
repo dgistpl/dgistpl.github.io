@@ -337,7 +337,7 @@
 <div class="hero">
   <div class="badge">Case Study Walkthrough #2</div>
   <h1>Automating Purchase Requests by Demonstration</h1>
-  <p>Instead of <em>describing</em> a routine task, we <strong>demonstrated it once</strong> in the browser. The AI observed the demo, reverse-engineered the DGIST portal's purchase-request form, verified every step live, and generated a standalone script that replays the whole workflow.</p>
+  <p>Demonstrate the task <strong>once</strong> in the browser. The AI observes, reverse-engineers the portal form, verifies each step live, and generates a script that replays the workflow.</p>
 </div>
 
 <div class="page-wrapper">
@@ -348,7 +348,7 @@
 
   <!-- ── The Task ── -->
   <div class="section-title"><span class="icon">&#128722;</span> The Task</div>
-  <p class="section-sub">Filing a <strong>직접구매 신청 (direct-purchase request)</strong> on the DGIST portal. Every request repeats the same click-by-click ritual — only a handful of values change each time.</p>
+  <p class="section-sub">Filing a <strong>직접구매 신청</strong> on the DGIST portal — the same clicks every time, only a few values change.</p>
 
   <div class="card">
     <div class="card-body" style="text-align:center; padding: 30px;">
@@ -378,7 +378,7 @@
 
   <!-- ── Setup ── -->
   <div class="section-title"><span class="icon">&#128295;</span> Before You Start: Setup</div>
-  <p class="section-sub">Three things to install — the AI agent, its bridge into your browser, and the runtime for the generated script.</p>
+  <p class="section-sub">Three installs: the agent, the browser bridge, and the script runtime.</p>
 
   <div class="card">
     <div class="card-body">
@@ -401,7 +401,7 @@ claude   # 첫 실행 시 Anthropic 계정으로 로그인</code></pre>
           <div class="step-num">2</div>
           <div class="step-content">
             <p><strong>Claude in Chrome extension</strong> — lets Claude observe and drive your Chrome.</p>
-            <p style="font-size:.9rem;">Chrome Web Store에서 <strong>"Claude in Chrome"</strong>을 설치하고 같은 Anthropic 계정으로 로그인한 뒤, 확장 설정에서 <strong>포탈 사이트 접근 권한</strong>(<code>portal.dgist.ac.kr</code>, <code>auth.dgist.ac.kr</code>)을 허용하세요. 크롬 창을 여러 개 쓰거나 프로필이 여러 개면, 세션 시작 시 Claude가 어느 브라우저에 연결할지 물어봅니다.</p>
+            <p style="font-size:.9rem;">Chrome Web Store에서 <strong>"Claude in Chrome"</strong> 설치 &rarr; 같은 Anthropic 계정으로 로그인 &rarr; 확장 설정에서 <code>portal.dgist.ac.kr</code>, <code>auth.dgist.ac.kr</code> 접근 허용.</p>
           </div>
         </div>
 
@@ -423,7 +423,7 @@ playwright install chromium</code></pre>
 
   <!-- ── The Key Idea ── -->
   <div class="section-title"><span class="icon">&#128161;</span> The Key Idea: Show, Don't Tell</div>
-  <p class="section-sub">Writing a precise spec of a legacy enterprise form is harder than just doing the task once. So the session was framed as <strong>programming by demonstration</strong>.</p>
+  <p class="section-sub">Describing a legacy form precisely is harder than just doing the task once &mdash; so demonstrate it instead.</p>
 
   <div class="prompt-block">
     <h4>&#128172; The prompt — polished from the actual session, ready to copy</h4>
@@ -459,20 +459,20 @@ playwright install chromium</code></pre>
 
   <div class="info-box">
     <span class="box-icon">&#9432;</span>
-    <div>The human performs the task <strong>once, naturally</strong>, in their own browser. The AI (Claude Code + the Chrome extension) inspects the resulting pages, figures out <em>how the form actually works underneath</em>, and only then writes code. No screen recording, no selector hunting by hand.</div>
+    <div>You do the task <strong>once</strong> in your own browser. The AI inspects the pages, figures out how the form works underneath, and only then writes code.</div>
   </div>
 
   <div class="warn-box">
     <span class="box-icon">&#9888;</span>
-    <div><strong>세션 중 사람이 해야 하는 일 세 가지.</strong>
-    ① 로그인 — AI는 비밀번호를 다루지 않으므로 직접 입력합니다.
-    ② 알림창 닫기 — 포탈이 띄우는 네이티브 <code>alert()</code> 창이 떠 있는 동안 자동화가 멈추므로, Claude가 요청하면 직접 닫아주세요 (창에 적힌 문구를 알려주면 대응 로직에 반영됩니다).
-    ③ 최종 제출 — 저장까지 확인한 뒤 발주·결재 버튼은 직접 누릅니다.</div>
+    <div><strong>세션 중 사람이 하는 일 세 가지.</strong>
+    ① 로그인 (AI는 비밀번호를 다루지 않음)
+    ② 알림창 닫기 — <code>alert()</code> 창이 떠 있으면 자동화가 멈추므로 직접 닫고, 문구를 알려주세요
+    ③ 최종 제출(발주·결재) 버튼 클릭.</div>
   </div>
 
   <!-- ── How the session unfolded ── -->
   <div class="section-title"><span class="icon">&#127916;</span> How the Session Unfolded</div>
-  <p class="section-sub">Six phases, from demonstration to a runnable script.</p>
+  <p class="section-sub">From demonstration to a runnable script.</p>
 
   <div class="card">
     <div class="card-body">
@@ -481,7 +481,7 @@ playwright install chromium</code></pre>
         <div class="phase-badge">1</div>
         <div class="phase-body">
           <h4>Human demonstration</h4>
-          <p>The user logged in (the AI never touches passwords) and filed a test purchase request the way they always do: header fields, project search popup, budget popup, one item row, two PDF attachments, save. Then simply said <em>"시범 끝"</em> (demo done).</p>
+          <p>Log in, file a test request the usual way &mdash; header, popups, one item row, attachments, save &mdash; then say <em>"시범 끝"</em>.</p>
         </div>
       </div>
 
@@ -489,7 +489,7 @@ playwright install chromium</code></pre>
         <div class="phase-badge">2</div>
         <div class="phase-body">
           <h4>Reading the end state</h4>
-          <p>From the finished draft, the AI identified the target screen (<code>apcpScPurcAply</code>), took screenshots, and discovered the form lives inside an iframe (<code>basicIndex.do</code>) with ~170 input fields — a classic legacy jQuery/jqGrid enterprise page.</p>
+          <p>From the finished draft, the AI identified the target screen and found the form inside an iframe with ~170 fields &mdash; a classic legacy jQuery/jqGrid page.</p>
         </div>
       </div>
 
@@ -497,7 +497,7 @@ playwright install chromium</code></pre>
         <div class="phase-badge">3</div>
         <div class="phase-body">
           <h4>Reverse-engineering the form</h4>
-          <p>Read-only JavaScript probes mapped every field the demo had touched: header inputs (<code>PURC_NM</code>, <code>VEND_NM</code>, <code>REMK</code>&hellip;), dropdown codes for purchase/payment type, the item grid's column model, and the file-upload control.</p>
+          <p>Read-only probes mapped every field the demo touched: header inputs, dropdown codes, the item grid's columns, and the file-upload control.</p>
         </div>
       </div>
 
@@ -505,7 +505,7 @@ playwright install chromium</code></pre>
         <div class="phase-badge">4</div>
         <div class="phase-body">
           <h4>Live verification — without saving</h4>
-          <p>On a fresh form, the AI replayed each step for real: filled the header, drove both search popups, added a grid row, and confirmed the total auto-computes. Everything was verified in the actual browser <em>before</em> a single line of the final script was written. Nothing was submitted.</p>
+          <p>On a fresh form, the AI replayed each step for real &mdash; header, both popups, a grid row &mdash; before writing any script code. Nothing was submitted.</p>
         </div>
       </div>
 
@@ -513,7 +513,7 @@ playwright install chromium</code></pre>
         <div class="phase-badge">5</div>
         <div class="phase-body">
           <h4>Debugging the surprises</h4>
-          <p>Verification surfaced problems no spec would have mentioned — a save button that only exists if you arrive through the portal menu, a popup that rejects you unless a hidden dropdown is set first, and native <code>alert()</code> dialogs that freeze automation entirely.</p>
+          <p>Verification surfaced problems no spec would mention: a save button that only exists via the portal menu, a popup with a hidden required order, and <code>alert()</code> dialogs that freeze automation.</p>
         </div>
       </div>
 
@@ -521,7 +521,7 @@ playwright install chromium</code></pre>
         <div class="phase-badge">6</div>
         <div class="phase-body">
           <h4>Generating the script</h4>
-          <p>With every step proven, the AI emitted a standalone <strong>Playwright (Python)</strong> script plus a small JSON file for the values that change per request. The script stops at <em>save</em>; the final order button is deliberately left to the human.</p>
+          <p>A standalone <strong>Playwright (Python)</strong> script plus a small JSON for the values that change. It stops at <em>save</em> &mdash; the order button stays human.</p>
         </div>
       </div>
 
@@ -540,7 +540,7 @@ playwright install chromium</code></pre>
           <div class="step-num">1</div>
           <div class="step-content">
             <p><strong>The save button doesn't exist if you open the form by URL.</strong>
-            Navigating directly to the form's address renders a button-less, read-only shell. The portal menu opens the same URL as a <strong>POST</strong> carrying menu-authorization parameters (<code>commonMenuId</code>, <code>commonProgramId</code>). The script replays that POST to get the real form.</p>
+            The portal menu opens the same URL as a <strong>POST</strong> with menu-authorization parameters; the script replays that POST.</p>
           </div>
         </div>
 
@@ -548,7 +548,7 @@ playwright install chromium</code></pre>
           <div class="step-num">2</div>
           <div class="step-content">
             <p><strong>Popups have a hidden required order.</strong>
-            The budget popup looks like four independent dropdowns, but clicking <em>select</em> fails with "지출계획을 선택해 주세요" unless budget category &rarr; spending plan &rarr; account are chosen in sequence — each choice triggers an AJAX cascade that populates the next dropdown.</p>
+            The budget popup's dropdowns must be chosen in sequence (예산과목 &rarr; 지출계획 &rarr; 계정과목) &mdash; each choice populates the next via AJAX.</p>
           </div>
         </div>
 
@@ -556,7 +556,7 @@ playwright install chromium</code></pre>
           <div class="step-num">3</div>
           <div class="step-content">
             <p><strong>The item grid is an inline-edit jqGrid.</strong>
-            The "new row" button injects a row whose cells are live inputs named <code>{rowId}_GD_NM</code>, <code>{rowId}_APLY_UNTPRC</code>, &hellip; — and the row total only computes if you fire the same <code>change</code>/<code>blur</code> events a human keystroke would.</p>
+            New rows are live inputs (<code>{rowId}_GD_NM</code>, &hellip;), and the total only computes if you fire the same <code>change</code>/<code>blur</code> events a keystroke would.</p>
           </div>
         </div>
 
@@ -564,7 +564,7 @@ playwright install chromium</code></pre>
           <div class="step-num">4</div>
           <div class="step-content">
             <p><strong>Native dialogs freeze everything.</strong>
-            The portal loves <code>alert()</code>/<code>confirm()</code>. While one is open, the page is unreachable to automation — mid-session the human had to close a dialog by hand. The generated script auto-accepts and logs every dialog instead.</p>
+            While an <code>alert()</code>/<code>confirm()</code> is open, the page is unreachable. The script auto-accepts and logs every dialog.</p>
           </div>
         </div>
 
@@ -572,7 +572,7 @@ playwright install chromium</code></pre>
           <div class="step-num">5</div>
           <div class="step-content">
             <p><strong>Detail rows only unlock after the first save.</strong>
-            The grid's buttons stay hidden on an unsaved form. The demo's end state revealed the true order: save the header first, then add items, then attach files, then save again.</p>
+            The real order: save the header &rarr; add items &rarr; attach files &rarr; save again.</p>
           </div>
         </div>
 
@@ -582,7 +582,7 @@ playwright install chromium</code></pre>
 
   <!-- ── The Result ── -->
   <div class="section-title"><span class="icon">&#128230;</span> The Result</div>
-  <p class="section-sub">A script anyone in the lab can run — no AI in the loop at execution time.</p>
+  <p class="section-sub">A script anyone can run — no AI needed at execution time.</p>
 
   <div class="output-preview">
     <h5>Generated files</h5>
@@ -613,7 +613,7 @@ python dgist_direct_purchase.py request.json</code></pre>
 
   <div class="tip-box">
     <span class="box-icon">&#10003;</span>
-    <div>The script uses a <strong>persistent browser profile</strong>, so you log in manually once and the session is reused afterwards. It ends by printing the assigned request number and leaving the browser open for review — the final <em>order</em> click stays human.</div>
+    <div>A <strong>persistent browser profile</strong> means you log in once and the session is reused. The script prints the request number and leaves the browser open for review &mdash; the <em>order</em> click stays human.</div>
   </div>
 
   <!-- ── Principles ── -->
@@ -624,22 +624,22 @@ python dgist_direct_purchase.py request.json</code></pre>
     <div class="example-card">
       <span class="example-tag">Principle 1</span>
       <h4>Demonstrate, don't specify</h4>
-      <p>One real demo carries more truth than a page of requirements — the AI extracts the workflow, the field names, and the fixed-vs-variable split from what you actually did.</p>
+      <p>One real demo carries more truth than a page of requirements.</p>
     </div>
     <div class="example-card">
       <span class="example-tag">Principle 2</span>
       <h4>Verify live before codifying</h4>
-      <p>Replay every step in the real browser first. All five surprises above were found <em>before</em> the script existed — not as bug reports afterwards.</p>
+      <p>Replay every step in the real browser first &mdash; the surprises above were found before the script existed.</p>
     </div>
     <div class="example-card">
       <span class="example-tag">Principle 3</span>
       <h4>Keep the human at the boundaries</h4>
-      <p>Passwords are typed by the human; the irreversible final submission is clicked by the human. Automation owns everything in between.</p>
+      <p>Passwords and the final submission stay human. Automation owns everything in between.</p>
     </div>
     <div class="example-card">
       <span class="example-tag">Principle 4</span>
       <h4>Parameterize only what changes</h4>
-      <p>Department, purchase type, project, budget category are frozen into the script. Each run needs just a small JSON: what you bought, from whom, and the receipts.</p>
+      <p>Fixed values go in the script; each run needs just a small JSON &mdash; what you bought, from whom, and the receipts.</p>
     </div>
   </div>
 

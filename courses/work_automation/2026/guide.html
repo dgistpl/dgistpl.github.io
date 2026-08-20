@@ -337,7 +337,7 @@
 <div class="hero">
   <div class="badge">Case Study Walkthrough</div>
   <h1>Automating Routine Work with AI</h1>
-  <p>How a repetitive, click-by-click office task &mdash; DGIST receipt (expense) processing &mdash; was automated end-to-end using Claude with Playwright. Built from the actual prompts used during the session.</p>
+  <p>DGIST receipt (expense) processing, automated with Claude + Playwright. Built from the actual prompts used in the session.</p>
 </div>
 
 <div class="page-wrapper">
@@ -348,7 +348,7 @@
 
   <!-- ── Overview ── -->
   <div class="section-title"><span class="icon">&#128221;</span> The Task</div>
-  <p class="section-sub">Receipt processing on the DGIST portal is a perfect automation target: it is <strong>repetitive</strong>, <strong>rule-based</strong>, and done entirely by clicking buttons in a fixed order on a web page.</p>
+  <p class="section-sub">Repetitive, rule-based, and done by clicking the same buttons in the same order &mdash; a perfect automation target.</p>
 
   <div class="card">
     <div class="card-body" style="text-align:center; padding: 30px;">
@@ -372,8 +372,8 @@
   </div>
 
   <!-- ── Five principles ── -->
-  <div class="section-title"><span class="icon">&#127919;</span> Five Principles Behind the Workflow</div>
-  <p class="section-sub">Before the steps, here is <em>why</em> the workflow is shaped the way it is. These transfer to almost any GUI-automation task.</p>
+  <div class="section-title"><span class="icon">&#127919;</span> Principles Behind the Workflow</div>
+  <p class="section-sub">These transfer to almost any GUI-automation task.</p>
 
   <div class="example-grid">
     <div class="example-card">
@@ -410,7 +410,7 @@
 
   <!-- ── The phases ── -->
   <div class="section-title"><span class="icon">&#128506;&#65039;</span> The Workflow at a Glance</div>
-  <p class="section-sub">The session naturally broke into four phases. Each phase below links to the prompts that drove it.</p>
+  <p class="section-sub">Four phases, each driven by the prompts shown below.</p>
 
   <div class="card">
     <div class="card-body" style="padding: 8px 24px;">
@@ -447,7 +447,7 @@
 
   <!-- ══════════ PHASE A ══════════ -->
   <div class="section-title"><span class="icon">&#128274;</span> Phase A &middot; Persistent Browser Session</div>
-  <p class="section-sub">Get a working, logged-in browser that the automation can drive &mdash; with the login itself done by hand.</p>
+  <p class="section-sub">A logged-in browser the automation can reuse &mdash; the login itself stays manual.</p>
 
   <div class="card">
     <div class="card-body">
@@ -466,7 +466,7 @@
             </div>
             <div class="tip-box">
               <span class="box-icon">&#128161;</span>
-              <span>Notice how the very first prompt sets the collaboration contract: <em>"I log in, you take screenshots and I'll guide the clicks."</em> This framing is what makes the rest of the session go smoothly.</span>
+              <span>The first prompt sets the contract: <em>"I log in; you click as I guide with screenshots."</em></span>
             </div>
           </div>
         </div>
@@ -502,7 +502,7 @@
             </div>
             <div class="warn-box">
               <span class="box-icon">&#9888;</span>
-              <span><strong>The most common Playwright pitfall:</strong> the login window and the automation run in different browser contexts. Using a persistent context (<code>launch_persistent_context</code> with a shared user-data directory) so both scripts share one profile is what fixes "실행했을 때 아무런 변화가 없어" (nothing happens when I run it).</span>
+              <span><strong>The most common pitfall:</strong> login and automation run in different browser contexts. Share one profile with <code>launch_persistent_context</code> &mdash; this fixes "실행했을 때 아무런 변화가 없어".</span>
             </div>
           </div>
         </div>
@@ -513,7 +513,7 @@
 
   <!-- ══════════ PHASE B ══════════ -->
   <div class="section-title"><span class="icon">&#128433;&#65039;</span> Phase B &middot; Teach the Click Sequence</div>
-  <p class="section-sub">This is the heart of the session. Each portal screen is handled with a screenshot + a precise instruction. Below are the recurring patterns rather than all 30+ clicks.</p>
+  <p class="section-sub">One screenshot + one instruction per screen. Below are the recurring patterns, not all 30+ clicks.</p>
 
   <div class="card">
     <div class="card-body">
@@ -554,7 +554,7 @@
             </div>
             <div class="tip-box">
               <span class="box-icon">&#128161;</span>
-              <span><strong>Pattern:</strong> if Claude clicks the wrong nearby element, don't just say "it didn't work" &mdash; say <em>which</em> element to avoid and <em>which</em> to use ("not the Select button, the down-arrow beside it"). Spatial, exclusionary descriptions resolve most misclicks.</span>
+              <span><strong>Pattern:</strong> don't say "it didn't work" &mdash; say <em>which</em> element to avoid and <em>which</em> to use ("not the Select button, the down-arrow beside it").</span>
             </div>
           </div>
         </div>
@@ -595,7 +595,7 @@
 
   <!-- ══════════ PHASE C ══════════ -->
   <div class="section-title"><span class="icon">&#128229;</span> Phase C &middot; Gather the Inputs Automatically</div>
-  <p class="section-sub">Instead of typing each receipt's data by hand, the inputs are pulled straight from email and the receipt image.</p>
+  <p class="section-sub">The inputs come straight from email and the receipt image &mdash; no manual typing.</p>
 
   <div class="card">
     <div class="card-body">
@@ -626,7 +626,7 @@
             </div>
             <div class="warn-box">
               <span class="box-icon">&#9888;</span>
-              <span>The Gmail API needs a one-time <strong>OAuth setup</strong> (a <code>credentials.json</code> from Google Cloud + adding yourself as a test user to clear the <code>access_denied</code> screen). Claude can walk you through the Cloud console screens.</span>
+              <span>The Gmail API needs a one-time <strong>OAuth setup</strong> (<code>credentials.json</code> + test-user registration). Claude can walk you through it.</span>
             </div>
           </div>
         </div>
@@ -653,7 +653,7 @@
 
   <!-- ══════════ PHASE D ══════════ -->
   <div class="section-title"><span class="icon">&#9881;&#65039;</span> Phase D &middot; Parameterize &amp; Verify</div>
-  <p class="section-sub">Turn the one-off script into a reusable tool, and confirm the whole pipeline works.</p>
+  <p class="section-sub">Turn the one-off script into a reusable tool.</p>
 
   <div class="card">
     <div class="card-body">
@@ -697,7 +697,7 @@
             </div>
             <div class="tip-box">
               <span class="box-icon">&#128161;</span>
-              <span>"너가 한번 해봐" (you try it yourself) &mdash; once the steps are solid, let Claude run the entire flow unattended while you watch, then iterate on whatever breaks.</span>
+              <span>"너가 한번 해봐" &mdash; once the steps are solid, let Claude run the whole flow while you watch, then fix whatever breaks.</span>
             </div>
           </div>
         </div>
@@ -708,7 +708,7 @@
 
   <!-- ── Takeaways ── -->
   <div class="section-title"><span class="icon">&#127775;</span> How to Apply This to Your Own Work</div>
-  <p class="section-sub">A checklist for turning any of your repetitive tasks into an automation.</p>
+  <p class="section-sub">A checklist for automating your own task.</p>
 
   <div class="card">
     <div class="card-body">
