@@ -6,6 +6,9 @@ author_profile: false
 <!--img src="images/minseokjeon.png" alt="me" width="160" style="right-margin: 10rem; float: left"/-->
  
 
+## Fall 2026
++ [**CSE205: Theory of Computation**](./cse205/2026/)
+
 ## Spring 2026
 + [**CSE307: Programming Languages**](./cse307/2026/)
 
