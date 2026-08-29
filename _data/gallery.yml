@@ -13,10 +13,32 @@
 - year: 2026
   events:
     - title: "SIGPL Summer School 2026"
-      date: "2026/Aug"
+      date: "2026/Aug/28"
       photos:
         - image: /images/gallery/SIGPL2026_Summer.jpg
           caption: "PLX Lab at SIGPL Summer School 2026"
+
+    - title: "KDD 2026"
+      date: "2026/Aug/9 - 2026/Aug/13"
+      photos:
+        - image: /images/gallery/KDD2026/IMG_5735.jpg
+        - image: /images/gallery/KDD2026/IMG_5740.jpg
+        - image: /images/gallery/KDD2026/IMG_4626.jpg
+        - image: /images/gallery/KDD2026/IMG_4629.jpg
+        - image: /images/gallery/KDD2026/IMG_5744.jpg
+        - image: /images/gallery/KDD2026/IMG_4630.jpg
+        - image: /images/gallery/KDD2026/IMG_4631.jpg
+        - image: /images/gallery/KDD2026/IMG_4635.jpg
+        - image: /images/gallery/KDD2026/IMG_4636.jpg
+        - image: /images/gallery/KDD2026/IMG_5753.jpg
+        - image: /images/gallery/KDD2026/IMG_5754.jpg
+        - image: /images/gallery/KDD2026/IMG_4641.jpg
+        - image: /images/gallery/KDD2026/IMG_4643.jpg
+        - image: /images/gallery/KDD2026/IMG_4644.jpg
+        - image: /images/gallery/KDD2026/IMG_4645.jpg
+        - image: /images/gallery/KDD2026/IMG_4646.jpg
+        - image: /images/gallery/KDD2026/IMG_4654.jpg
+        - image: /images/gallery/KDD2026/IMG_5766.jpg
 
 - year: 2025
   events:

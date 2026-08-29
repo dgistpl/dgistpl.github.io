@@ -15,6 +15,7 @@ permalink: /trips/
 }
 </style>
 
++ KDD 2026 (Knowledge Discovery and Data Mining), Jeju, South Korea. 2026/Aug/9 - 2026/Aug/13. [[photos](/gallery/)]
 + Dagstuhl Seminar 25421 (Sound Static Program Analysis in Modern Software Engineering), Dagstuhl, Germany. 2025/Oct/12 - 2025/Oct/17. [[photo](https://photos.google.com/album/AF1QipO402qTYLNkowx0pn0_xpeR4mChqjXCMDu-Pjee?hl)]
 + PLDI 2024, Copenhagen, Denmark. 2024/June/24 - 2024/June/30.
 + ICSE 2023, Melbourne, Australia. 2023/May/13 - 2023/May/23. [[photos](https://photos.app.goo.gl/uj58LVXgQwAFspe26)]
