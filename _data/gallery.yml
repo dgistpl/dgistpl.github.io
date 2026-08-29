@@ -1,0 +1,27 @@
+# Lab photo gallery, grouped by year (newest first).
+# Store photos in images/gallery/ and add entries here.
+#
+# Format:
+# - year: 2026
+#   events:
+#     - title: "Event name"
+#       date: "2026/Mar/02"          # optional
+#       photos:
+#         - image: /images/gallery/photo.jpg
+#           caption: "Short caption"  # optional
+
+- year: 2026
+  events:
+    - title: "SIGPL Summer School 2026"
+      date: "2026/Aug"
+      photos:
+        - image: /images/gallery/SIGPL2026_Summer.jpg
+          caption: "PLX Lab at SIGPL Summer School 2026"
+
+- year: 2025
+  events:
+    - title: "Dagstuhl Seminar 25421"
+      date: "2025/Oct"
+      photos:
+        - image: /images/25421.jpg
+          caption: "Sound Static Program Analysis in Modern Software Engineering, Dagstuhl, Germany"
