@@ -13,7 +13,7 @@ author_profile: false
 </div>
 
 <div style="text-align: center;">
-<img src="images/logo/black_transparent_.png" alt="PLX@DGIST Logo" width="200">
+<img src="/images/logo_new/plx-logo-web.svg" alt="PLX@DGIST Logo" width="260">
 </div>
 
 Our research group aims to develop programming language technologies for addressing challenges in various computer science domains.
