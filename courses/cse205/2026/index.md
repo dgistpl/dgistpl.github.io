@@ -27,3 +27,5 @@ author_profile: false
 ### Slides
 
 + Course Overview: [lec0.pdf](slides/lec0.pdf)
++ Mathematical Preliminaries: [lec1.pdf](slides/lec1.pdf)
++ Languages and Grammars: [lec2.pdf](slides/lec2.pdf)
