@@ -28,4 +28,5 @@ author_profile: false
 
 + Course Overview: [lec0.pdf](slides/lec0.pdf)
 + Mathematical Preliminaries: [lec1.pdf](slides/lec1.pdf)
-+ Languages and Grammars: [lec2.pdf](slides/lec2.pdf)
++ Languages and Grammars: [lec2.pdf](slides/lec2.pdf) [lecture2_review.pdf](slides/lecture2_review.pdf)
++ Deterministic Finite Automata: [lec3.pdf](slides/lec3.pdf)
