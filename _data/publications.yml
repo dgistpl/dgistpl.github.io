@@ -12,7 +12,7 @@
         - type: "Repo"
           url: "https://github.com/dgistpl/ProgNet"
         - type: "연구후기"
-          url: "https://dgistpl.github.io/ep11/"
+          url: "/ep11/"
 
 - year: 2025
   papers:
@@ -31,7 +31,7 @@
     - title: "PL4XGL: A Programming Language Approach to Explainable Graph Learning"
       authors: "Minseok Jeon, Jihyeok Park, and Hakjoo Oh"
       venue: "PLDI 2024: ACM SIGPLAN Conference on Programming Language Design and Implementation"
-      venue_url: "hhttps://pldi24.sigplan.org/track/pldi-2024-papers"
+      venue_url: "https://pldi24.sigplan.org/track/pldi-2024-papers"
       links:
         - type: "PDF"
           url: "/papers/PLDI24.pdf"
@@ -42,7 +42,7 @@
         - type: "Repo"
           url: "https://github.com/kupl/PL4XGL"
         - type: "연구후기"
-          url: "https://minseokjgit.github.io/ep3/"
+          url: "/ep3/"
 
 - year: 2023
   papers:
@@ -72,7 +72,7 @@
         - type: "Repo"
           url: "https://github.com/kupl/Obj2CFA"
         - type: "연구후기"
-          url: "https://minseokjgit.github.io/ep2/"
+          url: "/ep2/"
 
 - year: 2021
   papers:

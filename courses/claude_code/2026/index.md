@@ -10,7 +10,7 @@ This seminar introduces how to use Claude Code, Anthropic's official CLI tool, f
 
 ### Seminar Information
 
-+ **Instructor:** [Minseok Jeon](https://dgistpl.github.io/)
++ **Instructor:** [Minseok Jeon](/)
   + **Email:** [minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr)
 
 ---
@@ -39,4 +39,4 @@ If you are a intermediate (have used beamer before), follow this guide.
 
 If you are a advanced (currently using beamer, claude code, and editors with AI), follow this guide. 
 
-+ [**Level 3 Guide**](https://dgistpl.github.io/ep9/)
++ [**Level 3 Guide**](/ep9/)

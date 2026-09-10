@@ -7,7 +7,7 @@ author_profile: false
 
 ### Course Information
 
-+ **Instructor:** [Minseok Jeon (전민석)](https://dgistpl.github.io/)
++ **Instructor:** [Minseok Jeon (전민석)](/)
   + **Office:** 211, E7 Bldg
   + **Email:** [minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr)
 

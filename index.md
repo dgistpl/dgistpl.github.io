@@ -23,7 +23,7 @@ Especially, we are interested in :
 + **PL4ML** : Developing programming language technologies for machine learning.
 
 We aim to design domain-specific programming languages (DSLs) that can describe solutions to problems and develop program synthesis algorithms to automatically find these solutions in the DSLs.
-For more detail, please see [Research](https://dgistpl.github.io/research/) and [Publications](https://dgistpl.github.io/publications/).
+For more detail, please see [Research](/research/) and [Publications](/publications/).
 
 
 # Contact Information

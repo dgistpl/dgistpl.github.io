@@ -8,7 +8,7 @@ title: "Automating Routine Work with AI"
 
 How to automate repetitive, click-by-click office tasks using **Claude with Playwright**, shown through two real DGIST case studies.
 
-+ **Instructor:** [Minseok Jeon](https://dgistpl.github.io/) ([minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr))
++ **Instructor:** [Minseok Jeon](/) ([minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr))
 
 ---
 

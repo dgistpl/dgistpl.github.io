@@ -58,11 +58,11 @@ My research focuses on developing domain-specific languages (DSLs) and program s
   + TOSEM: ACM Transactions on Software Engineering and Methodology (2025, 2026)
 
 ## Publications
-Please see [Publications](/publications).
+Please see [Publications](/publications/).
 
 
 ## Research
-Please see [Research](/research).
+Please see [Research](/research/).
 
 
 ## Contact Information
