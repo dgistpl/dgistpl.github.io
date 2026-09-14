@@ -30,4 +30,5 @@ author_profile: false
 + Mathematical Preliminaries: [lec1.pdf](slides/lec1.pdf)
 + Languages and Grammars: [lec2.pdf](slides/lec2.pdf) [lecture2_review.pdf](slides/lecture2_review.pdf)
 + Deterministic Finite Automata: [lec3.pdf](slides/lec3.pdf)
++ Nondeterministic Finite Automata: [lec4.pdf](slides/lec4.pdf)
 + ε-NFA: [lec5.pdf](slides/lec5.pdf)
