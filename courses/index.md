@@ -32,5 +32,7 @@ author_profile: false
 
 + [**AI-Assist Technical Writing**](./ai_writing/2026/)
 
++ [**Building a Personal Homepage with AI**](./ai_homepage/2026/)
+
   
 

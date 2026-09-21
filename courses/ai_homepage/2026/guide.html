@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Build Your Homepage Using AI</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f4f6f9;
+      --card:        #ffffff;
+      --text:        #1e2328;
+      --text-light:  #5a6370;
+      --accent:      #7c3aed;
+      --accent-light:#ede9fe;
+      --accent-dark: #6d28d9;
+      --code-bg:     #1e1e2e;
+      --code-text:   #cdd6f4;
+      --code-green:  #a6e3a1;
+      --code-yellow: #f9e2af;
+      --code-pink:   #f38ba8;
+      --code-blue:   #89b4fa;
+      --border:      #e2e6eb;
+      --radius:      12px;
+      --shadow:      0 2px 12px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      color: #fff;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 56px 40px 48px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.02em; }
+    .hero p  { font-size: 1.08rem; opacity: .88; max-width: 640px; margin: 0 auto; }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 44px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 1.3rem; }
+    .section-sub { color: var(--text-light); font-size: .92rem; margin-bottom: 20px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .card-header {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header h3 { font-size: 1.05rem; font-weight: 600; }
+    .card-body { padding: 20px 24px; }
+
+    /* ── Step list ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .step-num {
+      counter-increment: step;
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content { padding-top: 6px; flex: 1; }
+    .step-content p { margin-bottom: 12px; }
+    .step-content strong { font-weight: 600; }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0 16px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: #181825;
+    }
+    .code-header .lang-tag {
+      font-size: .75rem;
+      color: #585b70;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .copy-btn:hover { background: #313244; border-color: #585b70; }
+    .copy-btn.copied { color: var(--code-green); border-color: var(--code-green); }
+    pre {
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 0;
+    }
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: .85rem;
+      color: var(--code-text);
+      line-height: 1.7;
+    }
+    .c-comment { color: #585b70; font-style: italic; }
+    .c-cmd     { color: var(--code-green); }
+    .c-flag    { color: var(--code-yellow); }
+    .c-str     { color: #fab387; }
+    .c-key     { color: var(--code-blue); }
+
+    /* Inline code outside dark blocks */
+    p code, li code, span code {
+      background: #f1f1f5;
+      color: #d63384;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: .85em;
+    }
+
+    /* ── Prompt block ── */
+    .prompt-block {
+      background: #f8fafc;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .prompt-block h4 {
+      color: var(--accent);
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt-section {
+      margin-bottom: 16px;
+    }
+    .prompt-section:last-child {
+      margin-bottom: 0;
+    }
+    .prompt-label {
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+    .prompt-content {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+    .prompt-content ul { margin: 4px 0 4px 20px; }
+
+    /* ── Info / Tip / Warning boxes ── */
+    .info-box, .tip-box, .warn-box {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: .9rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .info-box  { background: #eef2ff; border: 1px solid #c7d2fe; }
+    .tip-box   { background: #ecfdf5; border: 1px solid #6ee7b7; }
+    .warn-box  { background: #fef3c7; border: 1px solid #fcd34d; }
+    .info-box .box-icon  { color: #4f46e5; font-size: 1.1rem; flex-shrink:0; }
+    .tip-box  .box-icon  { color: #059669; font-size: 1.1rem; flex-shrink:0; }
+    .warn-box .box-icon  { color: #d97706; font-size: 1.1rem; flex-shrink:0; }
+
+    /* ── Example cards ── */
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    @media (max-width: 700px) {
+      .example-grid { grid-template-columns: 1fr; }
+    }
+    .example-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s;
+    }
+    .example-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,.12);
+    }
+    .example-card .example-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-bottom: 10px;
+    }
+    .example-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .example-card p {
+      font-size: .88rem;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .example-card .example-prompt {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .82rem;
+      line-height: 1.6;
+      position: relative;
+    }
+    .example-card .example-prompt .copy-btn-sm {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 1px 8px;
+      font-size: .68rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .example-card .example-prompt .copy-btn-sm:hover { background: #313244; }
+    .example-card .example-prompt .copy-btn-sm.copied { color: var(--code-green); border-color: var(--code-green); }
+
+    /* ── Output preview ── */
+    .output-preview {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+    .output-preview h5 {
+      font-size: .82rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .file-tree {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .85rem;
+      line-height: 1.8;
+    }
+    .file-tree .folder { color: #2563eb; font-weight: 600; }
+    .file-tree .file { color: var(--text); }
+
+    /* ── Footer ── */
+    .page-footer {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .82rem;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .page-footer a { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 24px 36px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-body, .card-header { padding: 16px; }
+      .step { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───────────── HERO ───────────── -->
+<div class="hero">
+  <div class="badge">Building Guide</div>
+  <h1>How to Build Your Homepage Using AI</h1>
+  <p>A step-by-step workflow for turning your CV into a live, published homepage using Visual Studio Code, Claude Code, Jekyll, and GitHub Pages.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <p style="text-align:center; margin-top:-18px; margin-bottom: 26px;">
+    <a href="installation.html"><strong>&larr; Installation Guide</strong></a>
+  </p>
+
+  <!-- ── Overview ── -->
+  <div class="section-title"><span class="icon">&#127760;</span> Overview</div>
+  <p class="section-sub">The idea is simple: give Claude Code your CV and a reference theme, and it builds, tests, and publishes a working Jekyll homepage for you.</p>
+
+  <div class="card">
+    <div class="card-body" style="text-align:center; padding: 30px;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; font-size: .95rem;">
+        <div style="background: var(--accent-light); border-radius: 10px; padding: 16px 20px; font-weight: 600; color: var(--accent-dark);">
+          &#128196; Your CV<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">a .pdf in an empty folder</span>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
+        <div style="background: #dbeafe; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #1e40af;">
+          &#128187; VS Code + Claude Code<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">builds the Jekyll site</span>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--text-light);">&rarr;</div>
+        <div style="background: #ecfdf5; border-radius: 10px; padding: 16px 20px; font-weight: 600; color: #065f46;">
+          &#127760; Live Homepage<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">published on GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Step-by-Step Workflow ── -->
+  <div class="section-title"><span class="icon">&#128736;</span> Step-by-Step Workflow</div>
+  <p class="section-sub">Follow these steps to build and publish your homepage.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <!-- Step 1 -->
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Create a project folder and add your CV</strong></p>
+            <p>Create an empty folder on your computer and place your CV inside it as a <code>.pdf</code> file. This is the only material Claude needs to get started &mdash; it will read your education, publications, teaching, and research interests directly from it.</p>
+
+            <div class="output-preview">
+              <h5>Example folder structure:</h5>
+              <div class="file-tree">
+                <span class="folder">my-homepage/</span><br>
+                &nbsp;&nbsp;&#9492;&#9472;&#9472; <span class="file">cv.pdf</span> &mdash; your CV<br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Create an empty GitHub repository</strong></p>
+            <p>On <a href="https://github.com/new" target="_blank">github.com/new</a>, create a new <strong>public</strong> repository named exactly <code>&lt;your-username&gt;.github.io</code> (e.g., <code>jsmith.github.io</code>). GitHub Pages only serves a repository at your root domain when it has this exact name.</p>
+            <div class="warn-box">
+              <span class="box-icon">&#9888;</span>
+              <span>If you already created the repository under a different name, that&rsquo;s fine &mdash; just tell Claude the repository&rsquo;s URL, and ask it to rename the repo for you using the GitHub CLI (<code>gh repo rename</code>).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Open the folder in VS Code and log in to the GitHub CLI</strong></p>
+            <p><strong>File</strong> &rarr; <strong>Open Folder...</strong> &rarr; select your <code>my-homepage</code> folder. Then open a terminal in VS Code and make sure you&rsquo;re authenticated:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'gh auth status')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">gh</span> auth status</code></pre>
+            </div>
+            <p>Then open the Claude Code extension panel in the sidebar.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <p><strong>Pick a Jekyll theme you like</strong></p>
+            <p>Browse <a href="http://jekyllthemes.org/" target="_blank">jekyllthemes.org</a> (or any Jekyll theme gallery) and copy the URL of a theme you like. You&rsquo;ll paste this into your prompt to Claude in the next step.</p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <p><strong>Give Claude the context, role, command, and output</strong></p>
+            <p>In the Claude Code panel, describe what you want built. Structuring your prompt into four parts &mdash; <strong>Context</strong>, <strong>Role</strong>, <strong>Command</strong>, and <strong>Output</strong> &mdash; helps Claude understand exactly what to build and how.</p>
+
+            <div class="prompt-block">
+              <h4>&#128221; Example Prompt Template</h4>
+
+              <div class="prompt-section">
+                <div class="prompt-label">Context</div>
+                <div class="prompt-content">
+                  I need to develop a homepage for my repository based on my CV.<br>
+                  My homepage URL is <code>https://github.com/&lt;username&gt;/&lt;username&gt;.github.io</code><br>
+                  Currently the homepage is empty (with a dummy README.md).<br>
+                  This folder includes my CV.<br>
+                  The homepage needs to be developed using Jekyll.<br>
+                  Please use the following template: <code>&lt;theme URL&gt;</code>
+                </div>
+              </div>
+
+              <div class="prompt-section">
+                <div class="prompt-label">Role</div>
+                <div class="prompt-content">You are a web developer who builds websites from a CV.</div>
+              </div>
+
+              <div class="prompt-section">
+                <div class="prompt-label">Command</div>
+                <div class="prompt-content">
+                  <ul>
+                    <li>Install all the requirements (e.g., Jekyll and Git) if not already installed.</li>
+                    <li>Develop the homepage using the CV and the specified template, on the provided GitHub repository.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="prompt-section">
+                <div class="prompt-label">Output</div>
+                <div class="prompt-content">
+                  A homepage with the following navigation bar:
+                  <ul>
+                    <li>About</li>
+                    <li>Members</li>
+                    <li>Research</li>
+                    <li>Publications</li>
+                    <li>Courses</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>Adjust the navigation bar to whatever sections make sense for you &mdash; e.g., a personal site might only need <strong>About</strong>, <strong>Publications</strong>, and <strong>Contact</strong>.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-content">
+            <p><strong>Let Claude build and test the site</strong></p>
+            <p>Claude will typically: read your CV, fetch and adapt the reference theme, write the Jekyll pages and layouts, run <code>bundle install</code> and <code>jekyll build</code>, and serve the site locally so it can check the result in a browser before you see it.</p>
+            <div class="info-box">
+              <span class="box-icon">&#8505;</span>
+              <span>If Claude reports a rendering issue (e.g., broken navigation, unstyled pages), just ask it to fix that specific issue &mdash; it can rebuild and re-check the page itself.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-content">
+            <p><strong>Review the site yourself</strong></p>
+            <p>Ask Claude to start a local preview server:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this, 'bundle exec jekyll serve')">Copy</button>
+              </div>
+              <pre><code><span class="c-cmd">bundle</span> exec jekyll serve</code></pre>
+            </div>
+            <p>Open <code>http://localhost:4000</code> in your browser and click through every page. If something looks off or you want text changed, describe it to Claude in plain language.</p>
+          </div>
+        </div>
+
+        <!-- Step 8 -->
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-content">
+            <p><strong>Push to GitHub and publish</strong></p>
+            <p>Once you&rsquo;re happy with the result, ask Claude to commit and push the changes:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="lang-tag">prompt</span>
+                <button class="copy-btn" onclick="copyCode(this, 'Commit these changes and push them to the repository.')">Copy</button>
+              </div>
+              <pre><code>Commit these changes and push them to the repository.</code></pre>
+            </div>
+            <p>GitHub Pages builds automatically after the push. Your homepage will be live at <code>https://&lt;username&gt;.github.io/</code> within a minute or two.</p>
+            <div class="tip-box">
+              <span class="box-icon">&#128161;</span>
+              <span>Ask Claude to check the build status with <code>gh api repos/&lt;username&gt;/&lt;username&gt;.github.io/pages/builds/latest</code> so you know the moment it&rsquo;s live.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Example Follow-up Requests ── -->
+  <div class="section-title"><span class="icon">&#128172;</span> Example Follow-up Requests</div>
+  <p class="section-sub">Once the first version is live, keep iterating with simple, direct requests.</p>
+
+  <div class="example-grid">
+
+    <div class="example-card">
+      <span class="example-tag">Add a Page</span>
+      <h4>Add a New Section</h4>
+      <p>Ask Claude to add a page and wire it into the navigation.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'Add a Talks page listing my invited talks from the CV, and add it to the navigation bar.')">Copy</button>
+        Add a Talks page listing my invited talks from the CV, and add it to the navigation bar.
+      </div>
+    </div>
+
+    <div class="example-card">
+      <span class="example-tag">Restyle</span>
+      <h4>Change the Look</h4>
+      <p>Ask Claude to adjust colors, fonts, or layout.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'I like the theme, but can you make the accent color dark green instead of blue, and widen the content area a bit?')">Copy</button>
+        I like the theme, but can you make the accent color dark green instead of blue, and widen the content area a bit?
+      </div>
+    </div>
+
+    <div class="example-card">
+      <span class="example-tag">Update Content</span>
+      <h4>Sync With a New CV</h4>
+      <p>Ask Claude to refresh the site after your CV changes.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'I updated cv.pdf with a new publication and a new talk. Please update the Publications and Talks pages to match.')">Copy</button>
+        I updated cv.pdf with a new publication and a new talk. Please update the Publications and Talks pages to match.
+      </div>
+    </div>
+
+    <div class="example-card">
+      <span class="example-tag">Fix a Bug</span>
+      <h4>Report a Visual Issue</h4>
+      <p>Describe what&rsquo;s wrong and where &mdash; Claude can check it in a browser itself.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'On the Publications page, the paper titles are not bold and the venue text overlaps the date. Please fix the styling.')">Copy</button>
+        On the Publications page, the paper titles are not bold and the venue text overlaps the date. Please fix the styling.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Tips for Effective Use ── -->
+  <div class="section-title"><span class="icon">&#127775;</span> Tips for a Smooth Build</div>
+  <p class="section-sub">A few things that make this workflow much more reliable.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div style="display: grid; gap: 18px;">
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #eef2ff; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4f46e5; font-size:.9rem;">1</div>
+          <div>
+            <strong>Use a repo named &lt;username&gt;.github.io</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">GitHub Pages only serves at your clean root URL (<code>https://&lt;username&gt;.github.io/</code>) when the repository has exactly this name. Any other name publishes under a sub-path instead.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #ecfdf5; display:flex; align-items:center; justify-content:center; font-weight:700; color:#059669; font-size:.9rem;">2</div>
+          <div>
+            <strong>Give Claude a real theme reference</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Pointing to an actual theme (its homepage or source repository) gives Claude a concrete look-and-feel and layout to adapt, rather than inventing one from scratch.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fef3c7; display:flex; align-items:center; justify-content:center; font-weight:700; color:#d97706; font-size:.9rem;">3</div>
+          <div>
+            <strong>Always review before publishing</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Ask Claude to build and serve the site locally first (<code>jekyll serve</code>) and check every page yourself before it pushes anything public.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fce7f3; display:flex; align-items:center; justify-content:center; font-weight:700; color:#db2777; font-size:.9rem;">4</div>
+          <div>
+            <strong>Iterate in small, specific requests</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Instead of "make it better," describe exactly what&rsquo;s wrong and where (page, section, color). Specific requests get fixed faster and more accurately.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #e0e7ff; display:flex; align-items:center; justify-content:center; font-weight:700; color:#3730a3; font-size:.9rem;">5</div>
+          <div>
+            <strong>Keep your CV as the single source of truth</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">When your CV changes, ask Claude to re-sync the site from it instead of hand-editing pages &mdash; this keeps everything consistent.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="page-footer">
+    <p><a href="installation.html">&larr; Installation Guide</a> &nbsp;&middot;&nbsp; <a href="/courses/ai_homepage/2026/">Back to Seminar Page</a></p>
+    <p style="margin-top:10px">PLX Lab &middot; DGIST &middot; Prof. Minseok Jeon &middot; 2026</p>
+  </div>
+
+</div>
+
+<!-- ── Scripts ── -->
+<script>
+function copyCode(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+
+function copyExample(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+</script>
+</body>
+</html>
