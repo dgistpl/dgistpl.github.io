@@ -29,6 +29,5 @@ author_profile: false
 + Course Overview: [lec0.pdf](slides/lec0.pdf)
 + Mathematical Preliminaries: [lec1.pdf](slides/lec1.pdf)
 + Languages and Grammars: [lec2.pdf](slides/lec2.pdf) [lecture2_review.pdf](slides/lecture2_review.pdf)
-+ Deterministic Finite Automata: [lec3.pdf](slides/lec3.pdf)
-+ Nondeterministic Finite Automata: [lec4.pdf](slides/lec4.pdf)
-+ ε-NFA: [lec5.pdf](slides/lec5.pdf)
++ Finite Automata (DFA, NFA, ε-NFA): [lec3.pdf](slides/lec3.pdf) [lec4.pdf](slides/lec4.pdf) [lec5.pdf](slides/lec5.pdf)
++ Regular Expressions: [lec6.pdf](slides/lec6.pdf) [lec7.pdf](slides/lec7.pdf)
