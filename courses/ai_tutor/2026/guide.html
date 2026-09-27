@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Build an AI Tutor Using AI</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f4f6f9;
+      --card:        #ffffff;
+      --text:        #1e2328;
+      --text-light:  #5a6370;
+      --accent:      #2563eb;
+      --accent-light:#dbeafe;
+      --accent-dark: #1d4ed8;
+      --code-bg:     #1e1e2e;
+      --code-text:   #cdd6f4;
+      --code-green:  #a6e3a1;
+      --border:      #e2e6eb;
+      --radius:      12px;
+      --shadow:      0 2px 12px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+      color: #fff;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 56px 40px 48px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.02em; }
+    .hero p  { font-size: 1.08rem; opacity: .88; max-width: 660px; margin: 0 auto; }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 44px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 1.3rem; }
+    .section-sub { color: var(--text-light); font-size: .92rem; margin-bottom: 20px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .card-body { padding: 20px 24px; }
+
+    /* ── Step list ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      counter-increment: step;
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content { padding-top: 6px; flex: 1; }
+    .step-content p { margin-bottom: 8px; }
+    .step-content strong { font-weight: 600; }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0 16px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: #181825;
+    }
+    .code-header .lang-tag {
+      font-size: .75rem;
+      color: #585b70;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .copy-btn:hover { background: #313244; border-color: #585b70; }
+    .copy-btn.copied { color: var(--code-green); border-color: var(--code-green); }
+    pre {
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: .85rem;
+      color: var(--code-text);
+      line-height: 1.7;
+    }
+
+    /* Inline code outside dark blocks */
+    p code, li code, span code {
+      background: #f1f1f5;
+      color: #d63384;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: .85em;
+    }
+
+    /* ── Prompt block ── */
+    .prompt-block {
+      background: #f8fafc;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .prompt-block h4 {
+      color: var(--accent);
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt-section { margin-bottom: 16px; }
+    .prompt-section:last-child { margin-bottom: 0; }
+    .prompt-label {
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+    .prompt-content {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+    .prompt-content ul { margin: 4px 0 4px 20px; }
+
+    /* ── Info / Tip / Warning boxes ── */
+    .info-box, .tip-box, .warn-box {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: .9rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .info-box  { background: #eef2ff; border: 1px solid #c7d2fe; }
+    .tip-box   { background: #ecfdf5; border: 1px solid #6ee7b7; }
+    .warn-box  { background: #fef3c7; border: 1px solid #fcd34d; }
+    .info-box .box-icon  { color: #4f46e5; font-size: 1.1rem; flex-shrink:0; }
+    .tip-box  .box-icon  { color: #059669; font-size: 1.1rem; flex-shrink:0; }
+    .warn-box .box-icon  { color: #d97706; font-size: 1.1rem; flex-shrink:0; }
+
+    /* ── Flow diagram ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: .95rem;
+    }
+    .flow .node {
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-weight: 600;
+    }
+    .flow .arrow { font-size: 1.4rem; color: var(--text-light); }
+
+    /* ── Principle grid ── */
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    @media (max-width: 700px) {
+      .example-grid { grid-template-columns: 1fr; }
+    }
+    .example-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s;
+    }
+    .example-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+    .example-card .example-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-bottom: 10px;
+    }
+    .example-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .example-card p { font-size: .88rem; color: var(--text-light); margin-bottom: 12px; }
+    .example-card .example-prompt {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .82rem;
+      line-height: 1.6;
+      position: relative;
+    }
+    .example-card .example-prompt .copy-btn-sm {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: 1px solid #45475a;
+      color: #bac2de;
+      border-radius: 5px;
+      padding: 1px 8px;
+      font-size: .68rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .example-card .example-prompt .copy-btn-sm:hover { background: #313244; }
+    .example-card .example-prompt .copy-btn-sm.copied { color: var(--code-green); border-color: var(--code-green); }
+
+    /* ── Footer ── */
+    .page-footer {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .82rem;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .page-footer a { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 24px 36px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-body { padding: 16px; }
+      .step { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───────────── HERO ───────────── -->
+<div class="hero">
+  <div class="badge">Building Guide</div>
+  <h1>How to Build an AI Tutor Using AI</h1>
+  <p>A single, carefully structured prompt is enough to have Claude Code build a full AI tutor web app for lecture slides &mdash; one that explains each slide out loud, answers questions, and never hallucinates facts.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <p style="text-align:center; margin-top:-18px; margin-bottom: 26px;">
+    <a href="installation.html">&larr; Installation Guide</a>
+  </p>
+
+  <!-- ── Overview ── -->
+  <div class="section-title"><span class="icon">&#127891;</span> Overview</div>
+  <p class="section-sub">The AI tutor sits between the instructor's slides and the student's screen: it reads a lecture deck once, then explains it and answers questions forever, without ever re-reading &mdash; or misreading &mdash; the original PDF.</p>
+
+  <div class="card">
+    <div class="card-body" style="text-align:center; padding: 30px;">
+      <div class="flow">
+        <div class="node" style="background: var(--accent-light); color: var(--accent-dark);">
+          &#128196; Lecture PDF<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">uploaded by instructor</span>
+        </div>
+        <div class="arrow">&rarr;</div>
+        <div class="node" style="background: #ede9fe; color: #6d28d9;">
+          &#129504; Skeleton Notes<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">structured facts, once</span>
+        </div>
+        <div class="arrow">&rarr;</div>
+        <div class="node" style="background: #ecfdf5; color: #065f46;">
+          &#127908; Explanation + Chat<br>
+          <span style="font-weight: 400; font-size: .82rem; color: var(--text-light);">pre-baked and live Q&amp;A</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── The Prompt ── -->
+  <div class="section-title"><span class="icon">&#128221;</span> The Prompt</div>
+  <p class="section-sub">Paste this directly into Claude Code in an empty project folder. Every bullet encodes a specific design decision &mdash; explained one by one below.</p>
+
+  <div class="prompt-block">
+    <h4>&#128172; Prompt to Claude Code</h4>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Goal</div>
+      <div class="prompt-content">
+        Build an AI tutor web app for lecture slides.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Core Flow</div>
+      <div class="prompt-content">
+        Instructors upload a lecture PDF into a course. Students enroll and open a lecture: the slide renders on the left, page by page; on the right, the AI streams a spoken-style explanation of that exact slide. Students can also ask it questions in a chat panel.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Anti-hallucination Design</div>
+      <div class="prompt-content">
+        Don't let the model read the raw slide when answering. First, turn every slide into a structured "skeleton note" (title, body, key facts, common misconceptions) using a vision-capable LLM call, once, at upload time. Every later explanation and every answer must be generated from these notes only &mdash; never the raw PDF &mdash; so the model can't invent facts, and the expensive step never repeats.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Pre-bake, Don't Generate Live</div>
+      <div class="prompt-content">
+        Write the slide-by-slide explanation for each lecture once (as one continuous conversation, so it reads like a real lecture), cache it, and replay it to every student for free. Only Q&amp;A is generated live, per question.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Progressive Disclosure</div>
+      <div class="prompt-content">
+        The tutor may discuss anything up to the slide the student is currently on, but must refuse to teach ahead &mdash; it just says which slide covers it.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Continuity Across Lectures</div>
+      <div class="prompt-content">
+        Summarize each lecture into a short "what this course has covered so far," fed into later lectures' explanations and Q&amp;A, so the tutor can connect ideas across weeks without re-reading every past deck.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Guardrails</div>
+      <div class="prompt-content">
+        Cap questions per day and per conversation; auto-detect and softly refuse off-topic questions, temporarily blocking repeat offenders; keep all limits admin-tunable and invisible to students until they're hit.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Access Control</div>
+      <div class="prompt-content">
+        Instructors own courses; students must be enrolled in a course to see any of its slides, explanations, or chats; add an admin role for usage/cost dashboards and account management.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <div class="prompt-label">Editability</div>
+      <div class="prompt-content">
+        Everything the AI generates (notes, explanations, summaries) should be viewable and hand-editable by the instructor, with old versions kept.
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="lang-tag">prompt &middot; copy verbatim</span>
+      <button class="copy-btn" onclick="copyCode(this, fullPrompt)">Copy</button>
+    </div>
+    <pre><code id="full-prompt-text">Build an AI tutor web app for lecture slides.
+
+- Instructors upload a lecture PDF into a course. Students enroll and open
+  a lecture: the slide renders on the left, page by page; on the right,
+  the AI streams a spoken-style explanation of that exact slide.
+  Students can also ask it questions in a chat panel.
+
+- Anti-hallucination design: don't let the model read the raw slide when
+  answering. First, turn every slide into a structured "skeleton note"
+  (title, body, key facts, common misconceptions) using a vision-capable
+  LLM call, once, at upload time. Every later explanation and every
+  answer must be generated from these notes only &mdash; never the raw PDF &mdash;
+  so the model can't invent facts, and the expensive step never repeats.
+
+- Pre-bake, don't generate live: write the slide-by-slide explanation for
+  each lecture once (as one continuous conversation, so it reads like a
+  real lecture), cache it, and replay it to every student for free.
+  Only Q&amp;A is generated live, per question.
+
+- Progressive disclosure: the tutor may discuss anything up to the
+  slide the student is currently on, but must refuse to teach ahead &mdash;
+  it just says which slide covers it.
+
+- Continuity across lectures: summarize each lecture into a short
+  "what this course has covered so far," fed into later lectures'
+  explanations and Q&amp;A, so the tutor can connect ideas across weeks
+  without re-reading every past deck.
+
+- Guardrails: cap questions per day and per conversation; auto-detect
+  and softly refuse off-topic questions, temporarily blocking repeat
+  offenders; keep all limits admin-tunable and invisible to students
+  until they're hit.
+
+- Access control: instructors own courses; students must be enrolled in
+  a course to see any of its slides, explanations, or chats; add an
+  admin role for usage/cost dashboards and account management.
+
+- Everything the AI generates (notes, explanations, summaries) should be
+  viewable and hand-editable by the instructor, with old versions kept.</code></pre>
+  </div>
+
+  <div class="tip-box">
+    <span class="box-icon">&#128161;</span>
+    <span>Hand this whole prompt to Claude Code in one message. It's detailed enough that Claude can plan the data model, the upload pipeline, and the chat UI on its own &mdash; you'll mostly be reviewing and steering after that.</span>
+  </div>
+
+  <!-- ── Design Principles Explained ── -->
+  <div class="section-title"><span class="icon">&#128736;</span> Why Each Bullet Is There</div>
+  <p class="section-sub">These aren't arbitrary requirements &mdash; each one closes a specific failure mode you'd hit if you just asked for "an AI tutor app."</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <p><strong>Skeleton notes stop hallucination at the source</strong></p>
+            <p>If the model re-reads the raw slide image every time it explains or answers, small misreadings compound and different answers can drift and contradict each other. Extracting a structured note <em>once</em>, at upload time, gives every later generation the same fixed set of facts to draw from &mdash; and gives the instructor one artifact to check for correctness instead of infinite live generations.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <p><strong>Pre-baking trades a one-time cost for free replay</strong></p>
+            <p>Generating a fresh explanation for every student who opens the same slide is wasteful and lets the same slide get explained differently to different students. Writing the lecture's explanation once, end-to-end, as a single conversation makes it read coherently like an actual lecture &mdash; and every student after the first gets it for free. Only genuinely per-student work (answering a specific question) should hit the model live.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <p><strong>Progressive disclosure protects the syllabus pace</strong></p>
+            <p>An unrestricted tutor will happily explain next week's material to a student who asks ahead, undercutting the instructor's pacing. Telling the model exactly which slide index the student is on, and instructing it to redirect ("that's covered in Lecture 5") rather than answer, keeps the tutor a supplement to the course &mdash; not a replacement for its structure.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <p><strong>Cross-lecture summaries give memory without re-reading everything</strong></p>
+            <p>Feeding the model every past deck on every request gets expensive and slow as a course grows. A short running summary &mdash; "what this course has covered so far" &mdash; is cheap to carry forward and is usually all the model needs to connect a new idea back to something taught three weeks ago.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <p><strong>Guardrails keep cost and misuse in check without punishing normal use</strong></p>
+            <p>Per-day and per-conversation question caps put a ceiling on API cost per student. Off-topic detection stops the chat from becoming a general-purpose assistant. Keeping the limits invisible until hit, and admin-tunable, means the product feels unrestricted to a student behaving normally, while still being controllable by whoever is paying the API bill.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-content">
+            <p><strong>Enrollment-based access control matches how courses actually work</strong></p>
+            <p>Slides, explanations, and chat history are course material &mdash; they should be gated the same way a real classroom is: instructors own their courses, students see only what they're enrolled in, and an admin role exists separately for anyone who needs usage and cost visibility across the whole system.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-content">
+            <p><strong>Editable, versioned AI output keeps the instructor in control</strong></p>
+            <p>AI-generated notes, explanations, and summaries will occasionally be wrong or phrased poorly. Making every generated artifact viewable and hand-editable &mdash; with old versions kept &mdash; means the instructor can correct a mistake once and have it stay fixed, instead of re-generating and hoping the model gets it right the second time.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Example Follow-up Requests ── -->
+  <div class="section-title"><span class="icon">&#128172;</span> Example Follow-up Requests</div>
+  <p class="section-sub">Once the first version is running, keep iterating with simple, direct requests.</p>
+
+  <div class="example-grid">
+
+    <div class="example-card">
+      <span class="example-tag">Refine Notes</span>
+      <h4>Fix a Skeleton Note</h4>
+      <p>Ask Claude to let instructors correct a specific extracted fact.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'On the skeleton note editor, add a diff view so I can see exactly what changed between versions of a note.')">Copy</button>
+        On the skeleton note editor, add a diff view so I can see exactly what changed between versions of a note.
+      </div>
+    </div>
+
+    <div class="example-card">
+      <span class="example-tag">Guardrails</span>
+      <h4>Tune the Limits</h4>
+      <p>Ask Claude to expose admin-tunable limits in a settings page.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'Add an admin settings page where I can set the daily question cap and off-topic block duration per course.')">Copy</button>
+        Add an admin settings page where I can set the daily question cap and off-topic block duration per course.
+      </div>
+    </div>
+
+    <div class="example-card">
+      <span class="example-tag">Access Control</span>
+      <h4>Add a Waitlist</h4>
+      <p>Ask Claude to change how students join a course.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'Instead of open enrollment, require instructor approval before a student can access a course.')">Copy</button>
+        Instead of open enrollment, require instructor approval before a student can access a course.
+      </div>
+    </div>
+
+    <div class="example-card">
+      <span class="example-tag">Analytics</span>
+      <h4>Surface Usage</h4>
+      <p>Ask Claude to extend the admin dashboard.</p>
+      <div class="example-prompt">
+        <button class="copy-btn-sm" onclick="copyExample(this, 'On the admin dashboard, add a chart of questions asked per lecture, so instructors can see which slides confuse students most.')">Copy</button>
+        On the admin dashboard, add a chart of questions asked per lecture, so instructors can see which slides confuse students most.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Tips ── -->
+  <div class="section-title"><span class="icon">&#127775;</span> Tips for a Smooth Build</div>
+  <p class="section-sub">A few things that make this workflow much more reliable.</p>
+
+  <div class="card">
+    <div class="card-body">
+      <div style="display: grid; gap: 18px;">
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #eef2ff; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4f46e5; font-size:.9rem;">1</div>
+          <div>
+            <strong>Ask Claude to build the pipeline before the UI</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Get PDF upload &rarr; skeleton note extraction &rarr; pre-baked explanation working end-to-end for one lecture first. A working pipeline is easier to debug than a full app with a broken core.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #ecfdf5; display:flex; align-items:center; justify-content:center; font-weight:700; color:#059669; font-size:.9rem;">2</div>
+          <div>
+            <strong>Read the skeleton notes yourself before trusting the explanations</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Since every later step depends on them, a bad note at upload time will quietly poison every explanation and answer generated from it. Spot-check a few slides after the first upload.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fef3c7; display:flex; align-items:center; justify-content:center; font-weight:700; color:#d97706; font-size:.9rem;">3</div>
+          <div>
+            <strong>Test progressive disclosure explicitly</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Ask the tutor a question about a later slide while on an earlier one, and confirm it redirects instead of answering. This is easy to get subtly wrong and easy to verify.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="flex-shrink:0; width:32px; height:32px; border-radius:50%; background: #fce7f3; display:flex; align-items:center; justify-content:center; font-weight:700; color:#db2777; font-size:.9rem;">4</div>
+          <div>
+            <strong>Iterate in small, specific requests</strong>
+            <p style="margin-top:4px; font-size:.9rem; color:var(--text-light);">Instead of "make the guardrails better," describe the exact behavior you want changed. Specific requests get fixed faster and more accurately.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="page-footer">
+    <p><a href="/courses/ai_tutor/2026/">&larr; Back to Seminar Page</a></p>
+    <p style="margin-top:10px">PLX Lab &middot; DGIST &middot; Prof. Minseok Jeon &middot; 2026</p>
+  </div>
+
+</div>
+
+<!-- ── Scripts ── -->
+<script>
+var fullPrompt = document.getElementById('full-prompt-text').textContent;
+
+function copyCode(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+
+function copyExample(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+}
+</script>
+</body>
+</html>

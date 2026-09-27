@@ -24,6 +24,8 @@ author_profile: false
 + [**AI-Generated Data Structure Course**](./ai_ds/2025/)
 
 ## Seminars
++ [**Building an AI Tutor with AI**](./ai_tutor/2026/)
+
 + [**Automating Routine Work with AI**](./work_automation/2026/)
 
 + [**Automated Lecture Notes and Slides Generation**](./claude_code/2026/)
