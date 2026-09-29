@@ -31,3 +31,4 @@ author_profile: false
 + Languages and Grammars: [lec2.pdf](slides/lec2.pdf) [lecture2_review.pdf](slides/lecture2_review.pdf)
 + Finite Automata (DFA, NFA, ε-NFA): [lec3.pdf](slides/lec3.pdf) [lec4.pdf](slides/lec4.pdf) [lec5.pdf](slides/lec5.pdf)
 + Regular Expressions: [lec6.pdf](slides/lec6.pdf) [lec7.pdf](slides/lec7.pdf)
++ Properties of Regular Languages: [lec8.pdf](slides/lec8.pdf)
