@@ -10,7 +10,7 @@ This seminar introduces how to use Claude Code, Anthropic's official CLI tool, f
 
 ### Seminar Information
 
-+ **Instructor:** [Minseok Jeon](/)
++ **Instructor:** [Minseok Jeon](/members/minseok.jeon/)
   + **Email:** [minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr)
 
 ---

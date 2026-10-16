@@ -10,7 +10,7 @@ This seminar introduces how to use **Visual Studio Code** with the **Claude Code
 
 ### Seminar Information
 
-+ **Instructor:** [Minseok Jeon](/)
++ **Instructor:** [Minseok Jeon](/members/minseok.jeon/)
   + **Email:** [minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr)
 
 ---

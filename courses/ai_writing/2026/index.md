@@ -10,7 +10,7 @@ This seminar introduces how to use **AI tools** (Visual Studio Code with the Cla
 
 ### Seminar Information
 
-+ **Instructor:** [Minseok Jeon](/)
++ **Instructor:** [Minseok Jeon](/members/minseok.jeon/)
   + **Email:** [minseok_jeon@dgist.ac.kr](mailto:minseok_jeon@dgist.ac.kr)
 
 ---

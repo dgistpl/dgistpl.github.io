@@ -7,7 +7,7 @@ author_profile: false
 
 ### Course Information
 
-+ **Instructor:** [Minseok Jeon (전민석)](/)
++ **Instructor:** [Minseok Jeon (전민석)](/members/minseok.jeon/)
   + **Office:** 614B, Science Library Bldg (과학도서관)
   + **Email:** [minseok_jeon@korea.ac.kr](mailto:minseok_jeon@korea.ac.kr)
 
