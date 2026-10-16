@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습 안내 | 기계학습 2026</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .task { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; margin: 14px 0; }
+    .task-title { font-weight: 600; margin-bottom: 4px; }
+    .task-title .pt { font-weight: 500; color: var(--text-light); font-size: .85rem; margin-left: 6px; }
+    .meta-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 12px; }
+    .meta-row span { font-size:.8rem; background:#f1f4f8; border:1px solid var(--border); border-radius:6px; padding:2px 10px; }
+    details.solution { margin: 10px 0 4px; border: 1px solid #6ee7b7; border-radius: 8px; background: var(--ok-bg); }
+    details.solution summary { cursor: pointer; padding: 8px 14px; font-weight: 600; font-size: .9rem; color: var(--ok); }
+    details.solution[open] summary { border-bottom: 1px solid #6ee7b7; }
+    details.solution .sol-body { padding: 4px 14px 12px; font-size: .9rem; }
+    details.solution .sol-body p { margin: 8px 0 4px; }
+    .output pre { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; }
+    .output code { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="back-btn" href="./">← 강의 홈으로</a>
+  <div class="badge">기계학습 2026 · 실습</div>
+  <h1>실습 안내</h1>
+  <p>강의에서 배운 핵심 알고리즘을 직접 구현해 봅니다. 총 2개의 실습이 있으며 모두 Jupyter 노트북으로 진행합니다.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <div class="toc">
+    <a href="#hw1">실습 1 · 경사하강법</a>
+    <a href="#hw2">실습 2 · 신경망</a>
+  </div>
+
+  <!-- ───────── HW1 ───────── -->
+  <div class="section-title" id="hw1">📈 실습 1 · 경사하강법으로 선형회귀 학습</div>
+  <div class="meta-row"><span>범위: 2 ~ 3주차</span><span>도구: NumPy, matplotlib</span></div>
+
+  <div class="card">
+    <div class="card-body">
+      <p>주택 면적으로 가격을 예측하는 선형회귀 모델 f(x) = wx + b를 경사하강법으로 학습합니다.</p>
+      <div class="code-block">
+        <div class="code-header"><span class="lang-tag">PYTHON · 데이터</span><button class="copy-btn" onclick="copyCode(this)">복사</button></div>
+        <pre><code>import numpy as np
+rng = np.random.default_rng(0)
+x = rng.uniform(0.5, 3.5, 50)              # 면적 (1000 feet²)
+y = 100 * x + 50 + rng.normal(0, 20, 50)   # 가격 ($1000)</code></pre>
+      </div>
+      <ul>
+        <li>비용함수 <code>compute_cost(x, y, w, b)</code>: J(w,b) = (1/2m) Σ (wx⁽ⁱ⁾ + b − y⁽ⁱ⁾)²</li>
+        <li>경사하강법 <code>gradient_descent(x, y, alpha, iters)</code>: w와 b를 <strong>동시 갱신</strong>합니다.</li>
+        <li>α = 0.1로 1000번 학습한 뒤 학습 곡선(J 대 반복 횟수)을 그리고, 1250 feet² 주택의 가격을 예측합니다.</li>
+      </ul>
+      <details class="solution">
+        <summary>정답 코드 보기</summary>
+        <div class="sol-body">
+          <div class="code-block">
+            <div class="code-header"><span class="lang-tag">PYTHON · 정답 (데이터 코드 다음에 실행)</span><button class="copy-btn" onclick="copyCode(this)">복사</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+
+def compute_cost(x, y, w, b):
+    m = x.shape[0]
+    f = w * x + b                          # 예측값
+    return np.sum((f - y) ** 2) / (2 * m)  # 제곱오차의 평균의 절반
+
+def gradient_descent(x, y, alpha, iters, w=0.0, b=0.0):
+    m = x.shape[0]
+    J_hist = []
+    for _ in range(iters):
+        err = w * x + b - y
+        dj_dw = np.sum(err * x) / m                     # 이전 w, b로 두 기울기를 먼저 계산
+        dj_db = np.sum(err) / m
+        w, b = w - alpha * dj_dw, b - alpha * dj_db     # 동시 갱신
+        J_hist.append(compute_cost(x, y, w, b))
+    return w, b, J_hist
+
+w, b, J_hist = gradient_descent(x, y, alpha=0.1, iters=1000)
+print(f"w = {w:.2f}, b = {b:.2f}")
+print(f"1250 feet² 예측 가격: ${(w * 1.25 + b) * 1000:,.0f}")
+
+plt.plot(J_hist)
+plt.xlabel("iteration"); plt.ylabel("J(w, b)"); plt.title("learning curve")
+plt.show()</code></pre>
+          </div>
+          <p><strong>실행 결과</strong></p>
+          <div class="output"><pre><code>w = 103.49, b = 43.40
+1250 feet² 예측 가격: $172,766</code></pre></div>
+          <p><strong>해설:</strong> 학습된 w ≈ 103, b ≈ 43은 데이터를 만든 값(100, 50)에 가깝습니다. 학습 곡선은 처음에 빠르게 내려간 뒤 평평해지며, 이는 경사하강법이 수렴했다는 뜻입니다.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ───────── HW2 ───────── -->
+  <div class="section-title" id="hw2">🧠 실습 2 · TensorFlow로 손글씨 숫자 분류</div>
+  <div class="meta-row"><span>범위: 7 ~ 10주차</span><span>도구: TensorFlow, scikit-learn</span></div>
+
+  <div class="card">
+    <div class="card-body">
+      <p>8×8 손글씨 숫자 이미지(0~9)를 분류하는 신경망을 학습합니다.</p>
+      <div class="code-block">
+        <div class="code-header"><span class="lang-tag">PYTHON · 시작 코드</span><button class="copy-btn" onclick="copyCode(this)">복사</button></div>
+        <pre><code>import numpy as np
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+
+X, y = load_digits(return_X_y=True)          # 8×8 = 64 픽셀, 숫자 0~9
+X = X / 16.0
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)</code></pre>
+      </div>
+      <ul>
+        <li>25(ReLU) → 15(ReLU) → 10(linear) 구조의 모델을 만들고, <code>SparseCategoricalCrossentropy(from_logits=True)</code>와 Adam(learning_rate = 0.001)으로 30 epoch 학습합니다.</li>
+        <li>테스트 정확도를 출력하고, 테스트 이미지 하나에 대해 <code>tf.nn.softmax</code>로 클래스별 확률과 예측한 숫자를 출력합니다.</li>
+      </ul>
+      <details class="solution">
+        <summary>정답 코드 보기</summary>
+        <div class="sol-body">
+          <div class="code-block">
+            <div class="code-header"><span class="lang-tag">PYTHON · 정답 (시작 코드 다음에 실행)</span><button class="copy-btn" onclick="copyCode(this)">복사</button></div>
+            <pre><code>tf.keras.utils.set_random_seed(0)            # 재현성
+
+model = Sequential([
+    Dense(25, activation="relu"),
+    Dense(15, activation="relu"),
+    Dense(10, activation="linear"),          # 출력은 logits
+])
+model.compile(loss=SparseCategoricalCrossentropy(from_logits=True),
+              optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+              metrics=["accuracy"])
+model.fit(X_train, y_train, epochs=30, verbose=0)
+
+loss, acc = model.evaluate(X_test, y_test, verbose=0)
+print(f"테스트 정확도: {acc:.3f}")
+
+# 출력층은 logits(z)를 내므로, 확률은 softmax를 직접 적용해 얻는다
+logits = model.predict(X_test[:1], verbose=0)
+probs = tf.nn.softmax(logits).numpy()
+print("확률:", np.round(probs, 3))
+print("예측:", probs.argmax(), "정답:", y_test[0])</code></pre>
+          </div>
+          <p><strong>실행 결과</strong> (TensorFlow 버전·환경에 따라 정확도가 조금 다를 수 있습니다)</p>
+          <div class="output"><pre><code>테스트 정확도: 0.956
+확률: [[0.    0.    0.999 0.001 0.    0.    0.    0.    0.    0.   ]]
+예측: 2 정답: 2</code></pre></div>
+          <p><strong>해설:</strong> 출력층을 <code>"linear"</code>로 두고 <code>from_logits=True</code>를 쓰면, TensorFlow가 소프트맥스와 log를 손실 안에서 한 번에 계산해 수치 오차를 줄입니다. 그래서 모델 출력은 확률이 아닌 logits이며, 확률이 필요하면 <code>tf.nn.softmax</code>를 적용합니다.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p><a href="./">← 강의 홈</a> &nbsp;·&nbsp; <a href="installation.html">개발 환경 설치</a> &nbsp;·&nbsp; <a href="quiz.html">종합 모의고사 →</a></p>
+    <p style="margin-top:10px">PLX Lab · DGIST · 전민석 · 2026</p>
+  </div>
+
+</div>
+
+<script>
+function copyCode(btn) {
+  const text = btn.closest('.code-block').querySelector('code').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '복사됨!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '복사'; btn.classList.remove('copied'); }, 1600);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>종합 모의고사 | 기계학습 2026</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .q-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px 20px; margin-bottom:16px; }
+    .q-card.correct { border-color:#6ee7b7; }
+    .q-card.wrong   { border-color:#fca5a5; }
+    .q-top { display:flex; gap:8px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
+    .q-num { font-weight:700; color:var(--accent); }
+    .q-ref { font-size:.74rem; color:var(--text-light); background:#f1f4f8; border-radius:6px; padding:1px 8px; }
+    .q-mark { margin-left:auto; font-weight:700; font-size:.9rem; }
+    .q-text { font-weight:500; margin-bottom:10px; }
+    .opt { display:flex; gap:10px; align-items:flex-start; padding:8px 12px; border:1px solid var(--border); border-radius:8px; margin-bottom:6px; cursor:pointer; }
+    .opt:hover { background:#f8fafc; }
+    .opt input { margin-top:5px; flex-shrink:0; }
+    .opt.is-answer { background:var(--ok-bg); border-color:#6ee7b7; }
+    .opt.is-wrong  { background:var(--bad-bg); border-color:#fca5a5; }
+    .explain { display:none; margin-top:10px; font-size:.9rem; background:#f8fafc; border-radius:8px; padding:10px 14px; border:1px dashed var(--border); }
+    .graded .explain { display:block; }
+    .graded .opt { cursor:default; }
+    .actions { display:flex; gap:10px; justify-content:center; margin:18px 0 6px; flex-wrap:wrap; }
+    .btn { border:none; border-radius:8px; padding:10px 22px; font-size:.95rem; font-weight:600; cursor:pointer; font-family:inherit; }
+    .btn-primary { background:var(--accent); color:#fff; }
+    .btn-primary:hover { background:var(--accent-dark); }
+    .btn-ghost { background:var(--card); color:var(--text); border:1px solid var(--border); }
+    .score {
+      display:none; text-align:center; margin:14px auto; max-width:420px; padding:14px;
+      border-radius:var(--radius); background:var(--card); border:1px solid var(--border); box-shadow:var(--shadow);
+    }
+    .score b { font-size:1.6rem; color:var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="back-btn" href="./">← 강의 홈으로</a>
+  <div class="badge">기계학습 2026 · 모의고사</div>
+  <h1>종합 모의고사</h1>
+  <p>강의 전체 내용에서 핵심을 뽑은 객관식 5문항입니다. 답을 고른 뒤 “채점하기”를 누르면 정답과 해설, 관련 강의 위치를 볼 수 있습니다.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <div id="quiz"></div>
+
+  <div class="score" id="score"></div>
+  <div class="actions">
+    <button class="btn btn-primary" id="gradeBtn">채점하기</button>
+    <button class="btn btn-ghost" id="resetBtn">다시 풀기</button>
+  </div>
+
+  <div class="page-footer">
+    <p><a href="./">← 강의 홈</a> &nbsp;·&nbsp; <a href="installation.html">개발 환경 설치</a> &nbsp;·&nbsp; <a href="assignment.html">실습 안내 →</a></p>
+    <p style="margin-top:10px">PLX Lab · DGIST · 전민석 · 2026</p>
+  </div>
+</div>
+
+<script>
+// r: 관련 강의(주차-차시), q: 문제, o: 보기, a: 정답 인덱스(0부터), e: 해설
+const Q = [
+{r:'2-2',q:'데이터 (1,1), (2,2), (3,3)과 b = 0인 모델 f(x) = wx에서 w = 0.5일 때 제곱오차 비용 J(w) = (1/2m) Σ (f(x⁽ⁱ⁾) − y⁽ⁱ⁾)²의 값은?',
+ o:['0','약 0.58','약 2.33','3.5'],
+ a:1,e:'오차는 −0.5, −1, −1.5 → 제곱합 0.25 + 1 + 2.25 = 3.5. J = 3.5 / (2·3) ≈ 0.58.'},
+{r:'5-3',q:'정규화 매개변수 λ를 매우 크게(예: 10¹⁰) 하면 어떻게 되는가?',
+ o:['과적합이 심해진다','모든 wⱼ ≈ 0이 되어 f ≈ b인 평평한 직선이 된다(과소적합)','b도 0이 된다','학습률이 자동으로 커진다'],
+ a:1,e:'페널티가 너무 커서 가중치가 0으로 밀려 거의 상수 모델이 됩니다(높은 편향). λ = 0이면 정규화가 꺼져 과적합이 될 수 있습니다. 관례상 b는 정규화하지 않습니다.'},
+{r:'10-1',q:'손글씨 숫자(0~9) 분류 신경망에서 수치적으로 더 정확한 학습을 위한 권장 설정은?',
+ o:['출력층 softmax + SparseCategoricalCrossentropy()','출력층 linear + SparseCategoricalCrossentropy(from_logits=True)','출력층 sigmoid + MeanSquaredError()','출력층 relu + BinaryCrossentropy()'],
+ a:1,e:'출력층은 logits(원시 z)를 내고, 손실 안에서 소프트맥스와 log를 함께 계산해 반올림·오버플로 오차를 줄입니다. 확률이 필요하면 tf.nn.softmax를 적용합니다.'},
+{r:'12-2',q:'혼동 행렬이 TP = 15, FP = 5, FN = 10, TN = 70일 때 정밀도와 재현율은?',
+ o:['정밀도 0.60, 재현율 0.75','정밀도 0.75, 재현율 0.60','정밀도 0.85, 재현율 0.75','정밀도 0.75, 재현율 0.88'],
+ a:1,e:'정밀도 = TP/(TP+FP) = 15/20 = 0.75, 재현율 = TP/(TP+FN) = 15/25 = 0.60.'},
+{r:'16-2',q:'화성 탐사선(보상: 상태1 = 100, 상태6 = 40, 나머지 0), 할인 계수 γ = 0.5에서 상태 4에서 시작해 항상 왼쪽으로 가면 이득(return)은?',
+ o:['100','50','25','12.5'],
+ a:3,e:'보상 순서 0(상태4), 0(3), 0(2), 100(1) → 0 + 0.5·0 + 0.25·0 + 0.125·100 = 12.5.'}
+];
+
+const quizEl = document.getElementById('quiz');
+const scoreEl = document.getElementById('score');
+let current = [];
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function load() {
+  // 보기 순서를 섞어 정답 위치를 예측할 수 없게 함 (perm[k] = k번째로 보여 줄 원래 보기 인덱스)
+  current = Q.map(q => ({ ...q, perm: shuffle(q.o.map((_, j) => j)) }));
+  scoreEl.style.display = 'none';
+  quizEl.innerHTML = current.map((q, i) => `
+    <div class="q-card" id="q${i}">
+      <div class="q-top">
+        <span class="q-num">Q${i + 1}.</span>
+        <span class="q-ref">${q.r.replace('-', '강-')}차시</span>
+        <span class="q-mark"></span>
+      </div>
+      <div class="q-text">${esc(q.q)}</div>
+      ${q.perm.map((j, k) => `
+        <label class="opt" data-j="${j}">
+          <input type="radio" name="q${i}" value="${j}">
+          <span>${String.fromCharCode(9312 + k)} ${esc(q.o[j])}</span>
+        </label>`).join('')}
+      <div class="explain"><strong>정답: ${String.fromCharCode(9312 + q.perm.indexOf(q.a))}</strong> — ${esc(q.e)}</div>
+    </div>`).join('');
+}
+
+function grade() {
+  let correct = 0;
+  current.forEach((q, i) => {
+    const card = document.getElementById('q' + i);
+    const sel = card.querySelector('input:checked');
+    const pick = sel ? +sel.value : -1;
+    card.classList.add('graded');
+    card.querySelectorAll('.opt').forEach(el => {
+      const j = +el.dataset.j;
+      if (j === q.a) el.classList.add('is-answer');
+      else if (j === pick) el.classList.add('is-wrong');
+    });
+    card.querySelectorAll('input').forEach(inp => inp.disabled = true);
+    const mark = card.querySelector('.q-mark');
+    if (pick === q.a) { correct++; card.classList.add('correct'); mark.textContent = '정답 ✓'; mark.style.color = 'var(--ok)'; }
+    else { card.classList.add('wrong'); mark.textContent = pick < 0 ? '미응답' : '오답 ✗'; mark.style.color = 'var(--bad)'; }
+  });
+  scoreEl.innerHTML = `점수 <b>${correct} / ${current.length}</b><br><span style="font-size:.88rem;color:var(--text-light)">틀린 문제는 표시된 강의 차시를 다시 복습하세요.</span>`;
+  scoreEl.style.display = 'block';
+  scoreEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+document.getElementById('gradeBtn').onclick = grade;
+document.getElementById('resetBtn').onclick = () => { load(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+load();
+</script>
+</body>
+</html>
