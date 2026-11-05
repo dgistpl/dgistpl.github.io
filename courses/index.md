@@ -9,8 +9,6 @@ author_profile: false
 ## Fall 2026
 + [**CSE205: Theory of Computation**](./cse205/2026/)
 
-+ [**기계학습 (Machine Learning)**](./ml/2026/)
-
 ## Spring 2026
 + [**CSE307: Programming Languages**](./cse307/2026/)
 
