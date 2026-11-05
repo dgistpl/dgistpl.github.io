@@ -1,0 +1,36 @@
+name: Update conference deadlines
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"   # every Monday 09:00 KST
+  workflow_dispatch:       # manual run from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Fetch ccf-deadlines
+        run: git clone --depth 1 https://github.com/ccfddl/ccf-deadlines "$RUNNER_TEMP/ccf-deadlines"
+
+      - name: Regenerate _data/conference_deadlines.yml
+        run: ruby scripts/update_conferences.rb "$RUNNER_TEMP/ccf-deadlines"
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- _data/conference_deadlines.yml; then
+            echo "No changes"; exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/conference_deadlines.yml
+          git commit -m "Update conference deadlines from ccf-deadlines"
+          git push

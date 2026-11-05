@@ -1,0 +1,235 @@
+# Conference deadline tracker configuration (/conferences/).
+#
+# Deadlines are pulled automatically from ccf-deadlines
+# (https://github.com/ccfddl/ccf-deadlines) by scripts/update_conferences.rb,
+# run weekly by .github/workflows/update-conferences.yml. The result is written
+# to _data/conference_deadlines.yml — do NOT edit that file by hand.
+#
+# infos:  venues to track. Add a venue here to start tracking it.
+#   tags            filter tags shown on the page
+#   bk21/kiise/rank Korean BK21 IF, KIISE grade, CORE rank (rank-id: CORE portal id, optional)
+#   ccfddl          path of the venue file under ccf-deadlines/conference/
+#   ccfddl_comment  only keep deadlines whose comment matches this regex (e.g. ESOP inside ETAPS)
+#
+# manual: hand-written editions, used for venues without ccfddl data or to
+#   override it (a manual entry replaces the ccfddl edition of the same venue).
+#   Deadlines are "YYYY-MM-DD HH:mm" in `timezone` (default AoE). "TBA" if unknown.
+
+infos:
+
+  POPL:
+    tags: [PL]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 82
+    ccfddl: SE/popl.yml
+
+  PLDI:
+    tags: [PL]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 84
+    ccfddl: SE/pldi.yml
+
+  OOPSLA:
+    tags: [PL]
+    bk21: 4
+    kiise: 최우수
+    rank: A
+    rank-id: 18
+    ccfddl: SE/oopsla.yml
+
+  CAV:
+    tags: [LOGIC, PL]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 331
+    ccfddl: CT/cav.yml
+
+  ASPLOS:
+    tags: [ARCH, PL]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 147
+    ccfddl: DS/asplos.yml
+
+  PPoPP:
+    tags: [PL]
+    bk21: 3
+    kiise: 최우수
+    rank: B
+    rank-id: 1691
+    ccfddl: DS/ppopp.yml
+
+  ICFP:
+    tags: [PL]
+    bk21: 2
+    kiise: 최우수
+    rank: A
+    rank-id: 1037
+    ccfddl: SE/icfp.yml
+
+  ECOOP:
+    tags: [PL]
+    bk21: 2
+    kiise: 우수
+    rank: A
+    rank-id: 488
+    ccfddl: SE/ecoop.yml
+
+  ESOP:
+    tags: [PL]
+    bk21: 2
+    kiise: 우수
+    rank: A
+    rank-id: 514
+    ccfddl: SE/etaps.yml
+    ccfddl_comment: ESOP
+
+  TACAS:
+    tags: [PL]
+    bk21: 2
+    kiise: 우수
+    rank: A
+    rank-id: 1818
+    ccfddl: SE/etaps.yml
+    ccfddl_comment: TACAS
+
+  CC:
+    tags: [PL]
+    bk21: 2
+    kiise: 우수
+    rank: B
+    rank-id: 936
+
+  SAS:
+    tags: [PL]
+    bk21: 1
+    kiise: 우수
+    rank: B
+    rank-id: 1763
+    ccfddl: SE/sas.yml
+
+  VMCAI:
+    tags: [PL]
+    bk21: "-"
+    kiise: 우수
+    rank: B
+    rank-id: 1847
+    ccfddl: SE/vmcai.yml
+
+  ICSE:
+    tags: [SE]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 1209
+    ccfddl: SE/icse.yml
+
+  FSE:
+    tags: [SE]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 52
+    ccfddl: SE/fse.yml
+
+  ASE:
+    tags: [SE]
+    bk21: 3
+    kiise: 최우수
+    rank: A*
+    rank-id: 279
+    ccfddl: SE/ase.yml
+
+  ISSTA:
+    tags: [SE]
+    bk21: 2
+    kiise: 최우수
+    rank: A
+    rank-id: 1412
+    ccfddl: SE/issta.yml
+
+  ICST:
+    tags: [SE]
+    bk21: 1
+    kiise: 우수
+    rank: A
+    rank-id: 1221
+    ccfddl: SE/icst.yml
+
+  CCS:
+    tags: [SEC]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 12
+    ccfddl: SC/ccs.yml
+
+  "S&P":
+    tags: [SEC]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    rank-id: 750
+    ccfddl: SC/sp.yml
+
+  "USENIX Security":
+    tags: [SEC]
+    bk21: 3
+    kiise: 최우수
+    rank: A*
+    rank-id: 1841
+    ccfddl: SC/uss.yml
+
+  NDSS:
+    tags: [SEC]
+    bk21: 2
+    kiise: 최우수
+    rank: A*
+    rank-id: 1840
+    ccfddl: SC/ndss.yml
+
+  ASIACCS:
+    tags: [SEC]
+    bk21: 1
+    kiise: 우수
+    rank: A
+    rank-id: 61
+    ccfddl: SC/asiaccs.yml
+
+  NeurIPS:
+    tags: [ML]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    ccfddl: AI/nips.yml
+
+  ICML:
+    tags: [ML]
+    bk21: 4
+    kiise: 최우수
+    rank: A*
+    ccfddl: AI/icml.yml
+
+  ICLR:
+    tags: [ML]
+    bk21: "-"
+    kiise: 최우수
+    rank: A*
+    ccfddl: AI/iclr.yml
+
+manual:
+
+  # Compiler Construction is not in ccf-deadlines.
+  - name: CC
+    year: 2026
+    link: https://conf.researchr.org/home/CC-2026
+    deadline:
+      - "2025-11-11 23:59"
+    date: Jan 31 - Feb 1
+    place: Sydney, Australia

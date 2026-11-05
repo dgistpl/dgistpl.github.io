@@ -175,6 +175,7 @@ exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
   - vendor
+  - scripts
   - .asset-cache
   - .bundle
   - .jekyll-assets-cache
