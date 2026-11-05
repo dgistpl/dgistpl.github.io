@@ -68,8 +68,6 @@ permalink: /research/
 Our research group aims to develop programming language technologies for addressing challenges in various computer science domains. We focus on designing domain-specific programming languages (DSLs) that can describe solutions to problems and developing program synthesis algorithms to automatically find these solutions.
 </p>
 
-See [Conference Deadlines](/conferences/) for submission deadlines of conferences relevant to our research.
-
 ## Research Areas
 
 <div class="research-area">
